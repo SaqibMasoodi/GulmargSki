@@ -14,13 +14,12 @@
                     borderRadius: { '4xl': '3rem', '5xl': '4rem' },
                     colors: {
                         wolf: {
-                            black: '#0f172a',   /* Deep Slate (Text) */
-                            dark: '#f1f5f9',    /* Snow White/Slate 100 (Backgrounds) */
-                            gray: '#cbd5e1',    /* Slate 300 (Borders) */
-                            light: '#64748b',   /* Slate 500 (Subtext) */
-                            white: '#ffffff',   /* Pure White */
-                            accent: '#0ea5e9',  /* Ice Blue */
-                            pine: '#115e59'     /* Deep Alpine Green */
+                            black: '#0a0a0a',
+                            dark: '#171717',
+                            gray: '#262626',
+                            light: '#f5f5f5',
+                            white: '#ffffff',
+                            accent: '#3b82f6'
                         }
                     }
                 }
@@ -29,8 +28,8 @@
     </script>
     <style>
         ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #404040; border-radius: 4px; }
         .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
         .delay-100 { animation-delay: 0.1s; }
@@ -47,12 +46,11 @@
             scrollbar-width: none;  /* Firefox */
         }
 
-        /* Custom Tab Styles - UPDATED FOR LIGHT THEME */
+        /* Custom Tab Styles */
         .tab-btn.active {
-            background-color: #0ea5e9; /* Ice Blue */
-            color: white;
-            border-color: #0ea5e9;
-            box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
+            background-color: white;
+            color: black;
+            border-color: white;
         }
         .tab-content {
             display: none;
@@ -67,63 +65,86 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-wolf-black antialiased selection:bg-wolf-accent selection:text-white">
+<body class="bg-wolf-black text-wolf-light antialiased selection:bg-white selection:text-wolf-black">
 
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-white/80 backdrop-blur-md border border-white/40 rounded-full px-6 py-4 flex justify-between items-center shadow-lg shadow-slate-200/50">
-        <div class="text-xl font-bold tracking-tighter text-slate-900 mr-4">WOLF<span class="text-wolf-accent">.ADV</span></div>
-        <div class="hidden md:flex items-center bg-slate-100 rounded-full p-1 mr-4 border border-slate-200">
-            <button class="px-4 py-1 rounded-full bg-white text-slate-900 text-xs font-bold shadow-sm ring-1 ring-black/5">WINTER</button>
-            <button class="px-4 py-1 rounded-full text-slate-400 text-xs font-bold hover:text-slate-600 transition-colors">SUMMER</button>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-wolf-black/90 backdrop-blur-md border border-white/10 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl">
+        <div class="text-xl font-bold tracking-tighter text-white mr-4">WOLF<span class="text-gray-400">.ADV</span></div>
+        <div class="hidden md:flex items-center bg-wolf-gray rounded-full p-1 mr-4 border border-white/5">
+            <button class="px-4 py-1 rounded-full bg-white text-wolf-black text-xs font-bold shadow-sm">WINTER</button>
+            <button class="px-4 py-1 rounded-full text-gray-400 text-xs font-bold hover:text-white transition-colors">SUMMER</button>
         </div>
-        <div class="hidden lg:flex space-x-6 text-sm font-medium text-slate-500">
-            <a href="#curriculum" class="hover:text-wolf-accent transition-colors">Curriculum</a>
-            <a href="#packages" class="hover:text-wolf-accent transition-colors">Packages</a>
-            <a href="#attractions" class="hover:text-wolf-accent transition-colors">Attractions</a>
-            <a href="#resort" class="hover:text-wolf-accent transition-colors">The Resort</a>
-            <a href="#accommodations" class="hover:text-wolf-accent transition-colors">Accommodations</a>
-            <a href="#contact" class="hover:text-wolf-accent transition-colors">Contact</a>
+        <div class="hidden lg:flex space-x-6 text-sm font-medium text-gray-300">
+            <a href="#curriculum" class="hover:text-white transition-colors">Curriculum</a>
+            <a href="#packages" class="hover:text-white transition-colors">Packages</a>
+            <a href="#attractions" class="hover:text-white transition-colors">Attractions</a>
+            <a href="#resort" class="hover:text-white transition-colors">The Resort</a>
+            <a href="stays.html" class="hover:text-white transition-colors">Accommodations</a>
+            <a href="#contact" class="hover:text-white transition-colors">Contact</a>
         </div>
-        <a href="#contact" class="bg-wolf-accent text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-sky-600 transition-transform hover:scale-105 ml-4 shadow-md shadow-sky-500/30">Book Now</a>
+        <a href="booking.html" class="bg-white text-wolf-black px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-200 transition-transform hover:scale-105 ml-4">Book Now</a>
     </nav>
 
-    <header class="relative h-[110vh] md:h-screen w-full bg-slate-200 rounded-b-[3rem] overflow-hidden flex items-center justify-center">
+    <header class="relative h-[110vh] md:h-screen w-full bg-wolf-dark rounded-b-[3rem] overflow-hidden flex items-center justify-center">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Gulmarg Alpine">
-            <div class="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-transparent to-slate-900/60"></div>
+            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-60 grayscale" alt="Gulmarg Skiing">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90"></div>
         </div>
 
         <div class="relative z-10 text-center max-w-5xl px-4 mt-20 flex flex-col items-center">
-            <div class="fade-in-up inline-block mb-4 px-4 py-1 border border-white/40 rounded-full bg-white/20 backdrop-blur-md text-xs uppercase tracking-widest text-white font-semibold shadow-sm">
-                Gulmarg, Kashmir &bull; 2,650m - 3,980m
+            
+            <div class="fade-in-up flex items-center gap-6 bg-wolf-black/60 backdrop-blur-md border border-white/10 px-6 py-3 rounded-full mb-8">
+                <div class="border-r border-white/10 pr-6 mr-2">
+                    <select id="weather-location" onchange="updateWeather()" class="bg-transparent text-gray-200 font-bold text-xs uppercase tracking-wider focus:outline-none cursor-pointer appearance-none">
+                        <option value="gulmarg" class="bg-wolf-black text-white">Gulmarg</option>
+                        <option value="pahalgam" class="bg-wolf-black text-white">Pahalgam</option>
+                        <option value="sonamarg" class="bg-wolf-black text-white">Sonamarg</option>
+                    </select>
+                </div>
+                
+                <div class="flex items-center gap-2 border-r border-white/10 pr-6">
+                    <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                    <div class="text-left">
+                        <p id="base-label" class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Base (2,650m)</p>
+                        <p id="base-temp" class="text-sm font-bold text-white">-5°C</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="text-left">
+                        <p id="summit-label" class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Summit (3,980m)</p>
+                        <p id="summit-temp" class="text-sm font-bold text-white">-12°C</p>
+                    </div>
+                </div>
             </div>
-            <h1 class="fade-in-up delay-100 text-5xl md:text-8xl font-extrabold tracking-tight leading-none mb-6 text-white drop-shadow-lg">
+
+            <h1 class="fade-in-up delay-100 text-5xl md:text-8xl font-extrabold tracking-tight leading-none mb-6 text-white">
                 CONQUER <br> THE HIMALAYAS
             </h1>
             
-            <div class="fade-in-up delay-300 w-full max-w-4xl bg-white/90 backdrop-blur-xl border border-white/50 rounded-3xl p-6 mt-8 shadow-2xl shadow-slate-900/20">
+            <div class="fade-in-up delay-300 w-full max-w-4xl bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 mt-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div class="text-left">
-                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">I am a...</label>
-                        <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-wolf-accent focus:ring-1 focus:ring-wolf-accent transition-all">
+                        <label class="block text-xs font-bold text-gray-300 mb-2 uppercase">I am a...</label>
+                        <select class="w-full bg-wolf-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white">
                             <option>Skier</option>
                             <option>Snowboarder</option>
                             <option>Non-Skier (Sightseeing)</option>
                         </select>
                     </div>
                     <div class="text-left">
-                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">Skill Level</label>
-                        <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-wolf-accent focus:ring-1 focus:ring-wolf-accent transition-all">
+                        <label class="block text-xs font-bold text-gray-300 mb-2 uppercase">Skill Level</label>
+                        <select class="w-full bg-wolf-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white">
                             <option>Beginner (First Time)</option>
                             <option>Intermediate</option>
                             <option>Expert (Backcountry)</option>
                         </select>
                     </div>
                     <div class="text-left">
-                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">Dates</label>
-                        <input type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-wolf-accent focus:ring-1 focus:ring-wolf-accent transition-all text-sm">
+                        <label class="block text-xs font-bold text-gray-300 mb-2 uppercase">Dates</label>
+                        <input type="date" class="w-full bg-wolf-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white text-sm">
                     </div>
                     <div class="flex items-end">
-                        <button class="w-full bg-wolf-accent text-white font-bold py-3 rounded-xl hover:bg-sky-600 transition-colors shadow-lg shadow-sky-500/20">
+                        <button class="w-full bg-white text-wolf-black font-bold py-3 rounded-xl hover:bg-gray-200 transition-colors">
                             Find My Pack
                         </button>
                     </div>
@@ -132,207 +153,333 @@
         </div>
     </header>
 
-    <section id="safety" class="py-16 px-4 bg-white">
-        <div class="max-w-7xl mx-auto border-b border-slate-100 pb-16">
+    <section id="safety" class="py-16 px-4 bg-wolf-black">
+        <div class="max-w-7xl mx-auto border-b border-white/10 pb-16">
             <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
                 <div class="flex items-start gap-4">
-                    <div class="p-3 bg-red-50 text-red-500 rounded-2xl ring-1 ring-red-100">
+                    <div class="p-3 bg-red-500/20 text-red-500 rounded-2xl">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-slate-800">Avalanche Safety</h3>
-                        <p class="text-sm text-slate-500">All guides carry beacons, shovels, and probes. Daily snowpack analysis provided.</p>
+                        <h3 class="font-bold text-lg text-white">Avalanche Safety</h3>
+                        <p class="text-sm text-gray-400">All guides carry beacons, shovels, and probes. Daily snowpack analysis provided.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <div class="p-3 bg-sky-50 text-wolf-accent rounded-2xl ring-1 ring-sky-100">
+                    <div class="p-3 bg-blue-500/20 text-blue-500 rounded-2xl">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-slate-800">Certified Guides</h3>
-                        <p class="text-sm text-slate-500">Our team consists of local experts and internationally certified heli-ski guides.</p>
+                        <h3 class="font-bold text-lg text-white">Certified Guides</h3>
+                        <p class="text-sm text-gray-400">Led by Shafqat (National-Level Skier) and Mubashir (Advanced Skier). We aren't just running a school; we're opening up our wild mountain playground to turn rookies into legends.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-4">
-                    <div class="p-3 bg-teal-50 text-teal-600 rounded-2xl ring-1 ring-teal-100">
+                    <div class="p-3 bg-green-500/20 text-green-500 rounded-2xl">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-slate-800">24/7 Support</h3>
-                        <p class="text-sm text-slate-500">From airport pickup to emergency evacuation, we are with you every step.</p>
+                        <h3 class="font-bold text-lg text-white">24/7 Support</h3>
+                        <p class="text-sm text-gray-400">From airport pickup to emergency evacuation, we are with you every step.</p>
                     </div>
                 </div>
             </div>
+            
+            <a href="policies.html#liability" class="text-xs text-gray-500 hover:text-white transition-colors underline decoration-gray-700 underline-offset-4 block text-center mt-8">
+                Read our Participant Liability Waiver & Safety Protocols →
+            </a>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-16 px-4 bg-wolf-black border-b border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-2">RIDER STORIES</h2>
+                <p class="text-gray-400 text-sm">Real experiences from the powder.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="bg-wolf-dark border border-white/5 p-6 rounded-3xl hover:border-white/10 transition-colors">
+                    <div class="flex gap-1 mb-4 text-yellow-500">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">"The guides knew exactly where to find fresh tracks even three days after the storm. Unforgettable experience."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-700"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">Rohan</p>
+                            <p class="text-xs text-gray-500">Mumbai, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-wolf-dark border border-white/5 p-6 rounded-3xl hover:border-white/10 transition-colors">
+                    <div class="flex gap-1 mb-4 text-yellow-500">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">"Safety was my biggest concern, but the lead guide made me feel totally secure. The rental gear was also top notch."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-700"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">Jessica</p>
+                            <p class="text-xs text-gray-500">London, UK</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-wolf-dark border border-white/5 p-6 rounded-3xl hover:border-white/10 transition-colors">
+                    <div class="flex gap-1 mb-4 text-yellow-500">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">"The logistics were flawless from Srinagar airport pickup to the drop-off. I didn't have to worry about a thing."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-700"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">Alex</p>
+                            <p class="text-xs text-gray-500">Melbourne, Australia</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="guides" class="py-16 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-2">MEET THE PACK</h2>
+            <p class="text-gray-400 text-sm">Guided by the best in the Himalayas.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-wolf-dark border border-white/5 rounded-3xl p-6 hover:border-white/20 transition-all group">
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?q=80&w=200&auto=format&fit=crop" class="w-16 h-16 rounded-full object-cover border-2 border-white/10" alt="Guide">
+                    <div>
+                        <h3 class="font-bold text-white text-lg">Shafqat</h3>
+                        <p class="text-gray-400 text-sm">Lead Guide</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-300 font-bold uppercase tracking-wider">National Skier</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-300 font-bold uppercase tracking-wider">WFR</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">A National-Level skier with deep knowledge of the backcountry. He leads the team with precision.</p>
+            </div>
+
+            <div class="bg-wolf-dark border border-white/5 rounded-3xl p-6 hover:border-white/20 transition-all group">
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="https://images.unsplash.com/photo-1534030347209-7147fd69a3f2?q=80&w=200&auto=format&fit=crop" class="w-16 h-16 rounded-full object-cover border-2 border-white/10" alt="Guide">
+                    <div>
+                        <h3 class="font-bold text-white text-lg">Mubashir</h3>
+                        <p class="text-gray-400 text-sm">Instructor</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-300 font-bold uppercase tracking-wider">Advanced Skier</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-300 font-bold uppercase tracking-wider">Technical</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">Specializing in technique correction and carving. Mubashir ensures you look as good as you feel on the slopes.</p>
+            </div>
+
+            <div class="bg-wolf-dark border border-white/5 rounded-3xl p-6 hover:border-white/20 transition-all group">
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=200&auto=format&fit=crop" class="w-16 h-16 rounded-full object-cover border-2 border-white/10" alt="Guide">
+                    <div>
+                        <h3 class="font-bold text-white text-lg">Local Team</h3>
+                        <p class="text-gray-400 text-sm">Expedition Support</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-300 font-bold uppercase tracking-wider">High Altitude</span>
+                    <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-gray-300 font-bold uppercase tracking-wider">Rescue Ops</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">Expert in high-altitude logistics and safety. The backbone of our operations in harsh storms.</p>
+            </div>
+
         </div>
     </section>
 
     <section id="schedule" class="py-16 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900 mb-2">SEASON SCHEDULE</h2>
-            <p class="text-slate-500 text-sm">Winter 2025-26 Batch Availability</p>
+            <h2 class="text-3xl font-bold text-white mb-2">SEASON SCHEDULE</h2>
+            <p class="text-gray-400 text-sm">Winter 2025-26 Batch Availability</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 hover:border-wolf-accent hover:shadow-xl hover:shadow-sky-100 transition-all">
-                <div class="flex justify-between items-start mb-6 border-b border-slate-100 pb-4">
+            <div class="bg-wolf-dark border border-white/5 rounded-3xl p-6 hover:border-white/20 transition-colors">
+                <div class="flex justify-between items-start mb-6 border-b border-white/10 pb-4">
                     <div>
-                        <h3 class="font-bold text-xl text-slate-800">DEC '25</h3>
-                        <span class="text-xs text-sky-500 uppercase tracking-wider font-semibold">Moderate Snow ❄️</span>
+                        <h3 class="font-bold text-xl text-white">DEC '25</h3>
+                        <span class="text-xs text-blue-400 uppercase tracking-wider">Moderate Snow ❄️</span>
                     </div>
                 </div>
                 <ul class="space-y-3">
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B01</span> <span>20 Dec – 25 Dec</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B02</span> <span>26 Dec – 31 Dec</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B01</span> <span>20 Dec – 25 Dec</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B02</span> <span>26 Dec – 31 Dec</span></li>
                 </ul>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 hover:border-wolf-accent hover:shadow-xl hover:shadow-sky-100 transition-all">
-                <div class="flex justify-between items-start mb-6 border-b border-slate-100 pb-4">
+            <div class="bg-wolf-dark border border-white/5 rounded-3xl p-6 hover:border-white/20 transition-colors">
+                <div class="flex justify-between items-start mb-6 border-b border-white/10 pb-4">
                     <div>
-                        <h3 class="font-bold text-xl text-slate-800">JAN '26</h3>
-                        <span class="text-xs text-sky-600 uppercase tracking-wider font-semibold">Good Snow ❄️❄️</span>
+                        <h3 class="font-bold text-xl text-white">JAN '26</h3>
+                        <span class="text-xs text-sky-400 uppercase tracking-wider">Good Snow ❄️❄️</span>
                     </div>
                 </div>
                 <ul class="space-y-3">
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B03</span> <span>01 Jan – 06 Jan</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B04</span> <span>07 Jan – 12 Jan</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B05</span> <span>13 Jan – 18 Jan</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B06</span> <span>19 Jan – 24 Jan</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B07</span> <span>25 Jan – 30 Jan</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B08</span> <span>31 Jan – 05 Feb</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B03</span> <span>01 Jan – 06 Jan</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B04</span> <span>07 Jan – 12 Jan</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B05</span> <span>13 Jan – 18 Jan</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B06</span> <span>19 Jan – 24 Jan</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B07</span> <span>25 Jan – 30 Jan</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B08</span> <span>31 Jan – 05 Feb</span></li>
                 </ul>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 relative overflow-hidden shadow-2xl shadow-slate-900/20">
-                <div class="absolute top-0 right-0 bg-wolf-accent text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">PRIME TIME</div>
+            <div class="bg-wolf-gray border border-white/20 rounded-3xl p-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-white text-black text-[10px] font-bold px-3 py-1 rounded-bl-xl">PRIME TIME</div>
                 <div class="flex justify-between items-start mb-6 border-b border-white/10 pb-4">
                     <div>
                         <h3 class="font-bold text-xl text-white">FEB '26</h3>
-                        <span class="text-xs text-sky-200 uppercase tracking-wider drop-shadow-md">Best Snow ❄️❄️❄️</span>
+                        <span class="text-xs text-white uppercase tracking-wider drop-shadow-md">Best Snow ❄️❄️❄️</span>
                     </div>
                 </div>
                 <ul class="space-y-3">
-                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-slate-500">B09</span> <span>06 Feb – 11 Feb</span></li>
-                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-slate-500">B10</span> <span>12 Feb – 17 Feb</span></li>
-                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-slate-500">B11</span> <span>18 Feb – 23 Feb</span></li>
-                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-slate-500">B12</span> <span>24 Feb – 29 Feb</span></li>
+                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-gray-400">B09</span> <span>06 Feb – 11 Feb</span></li>
+                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-gray-400">B10</span> <span>12 Feb – 17 Feb</span></li>
+                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-gray-400">B11</span> <span>18 Feb – 23 Feb</span></li>
+                    <li class="flex justify-between text-sm text-white font-medium"><span class="text-gray-400">B12</span> <span>24 Feb – 29 Feb</span></li>
                 </ul>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 hover:border-wolf-accent hover:shadow-xl hover:shadow-sky-100 transition-all">
-                <div class="flex justify-between items-start mb-6 border-b border-slate-100 pb-4">
+            <div class="bg-wolf-dark border border-white/5 rounded-3xl p-6 hover:border-white/20 transition-colors">
+                <div class="flex justify-between items-start mb-6 border-b border-white/10 pb-4">
                     <div>
-                        <h3 class="font-bold text-xl text-slate-800">MAR '26</h3>
-                        <span class="text-xs text-sky-600 uppercase tracking-wider font-semibold">Good Snow ❄️❄️</span>
+                        <h3 class="font-bold text-xl text-white">MAR '26</h3>
+                        <span class="text-xs text-sky-400 uppercase tracking-wider">Good Snow ❄️❄️</span>
                     </div>
                 </div>
                 <ul class="space-y-3">
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B13</span> <span>01 Mar – 06 Mar</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B14</span> <span>07 Mar – 12 Mar</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B15</span> <span>13 Mar – 18 Mar</span></li>
-                    <li class="flex justify-between text-sm text-slate-600"><span class="text-slate-400 font-medium">B16</span> <span>16 Mar – 21 Mar</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B13</span> <span>01 Mar – 06 Mar</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B14</span> <span>07 Mar – 12 Mar</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B15</span> <span>13 Mar – 18 Mar</span></li>
+                    <li class="flex justify-between text-sm text-gray-300"><span class="text-gray-500">B16</span> <span>16 Mar – 21 Mar</span></li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section id="curriculum" class="py-24 px-4 bg-wolf-dark border-t border-slate-200">
+    <section id="curriculum" class="py-24 px-4 bg-wolf-dark border-t border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
                 <div>
-                    <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">THE SYLLABUS</h2>
-                    <p class="text-slate-500">Master the mountain in 6 days.</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-2">THE SYLLABUS</h2>
+                    <p class="text-gray-400">Master the mountain in 6 days.</p>
                 </div>
-                <button class="bg-white hover:bg-slate-50 text-slate-900 px-6 py-2 rounded-full text-sm font-bold border border-slate-300 shadow-sm transition-colors">
+                <button class="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full text-sm font-bold border border-white/10 transition-colors">
                     Download PDF
                 </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:border-wolf-accent/50 transition-colors group">
+                <div class="bg-wolf-black p-8 rounded-3xl border border-white/5 hover:border-blue-500/50 transition-colors group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="bg-sky-50 text-wolf-accent text-xs font-bold px-3 py-1 rounded-full">DAY 01</span>
-                        <svg class="w-6 h-6 text-slate-300 group-hover:text-wolf-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <span class="bg-blue-500/20 text-blue-400 text-xs font-bold px-3 py-1 rounded-full">DAY 01</span>
+                        <svg class="w-6 h-6 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">Foundations</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Introduction & Gear</li>
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Balancing & Stance</li>
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Walking with skis</li>
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Side-stepping</li>
+                    <h3 class="text-xl font-bold text-white mb-4">Foundations</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex gap-3"><span class="text-blue-500">•</span>Introduction & Gear</li>
+                        <li class="flex gap-3"><span class="text-blue-500">•</span>Balancing & Stance</li>
+                        <li class="flex gap-3"><span class="text-blue-500">•</span>Walking with skis</li>
+                        <li class="flex gap-3"><span class="text-blue-500">•</span>Side-stepping</li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:border-wolf-accent/50 transition-colors group">
+                <div class="bg-wolf-black p-8 rounded-3xl border border-white/5 hover:border-blue-500/50 transition-colors group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">DAY 02</span>
-                        <svg class="w-6 h-6 text-slate-300 group-hover:text-wolf-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        <span class="bg-white/10 text-gray-300 text-xs font-bold px-3 py-1 rounded-full">DAY 02</span>
+                        <svg class="w-6 h-6 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">Motion</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Sliding on gentle slope</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Snow plough basics</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Basic swing</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Beginner control</li>
+                    <h3 class="text-xl font-bold text-white mb-4">Motion</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Sliding on gentle slope</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Snow plough basics</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Basic swing</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Beginner control</li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:border-wolf-accent/50 transition-colors group">
+                <div class="bg-wolf-black p-8 rounded-3xl border border-white/5 hover:border-blue-500/50 transition-colors group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">DAY 03</span>
-                        <svg class="w-6 h-6 text-slate-300 group-hover:text-wolf-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        <span class="bg-white/10 text-gray-300 text-xs font-bold px-3 py-1 rounded-full">DAY 03</span>
+                        <svg class="w-6 h-6 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">The Turn</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Snow plough Turn (L/R)</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Traverse</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Uphill swing</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Early linked turns</li>
+                    <h3 class="text-xl font-bold text-white mb-4">The Turn</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Snow plough Turn (L/R)</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Traverse</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Uphill swing</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Early linked turns</li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:border-wolf-accent/50 transition-colors group">
+                <div class="bg-wolf-black p-8 rounded-3xl border border-white/5 hover:border-blue-500/50 transition-colors group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">DAY 04</span>
-                        <svg class="w-6 h-6 text-slate-300 group-hover:text-wolf-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                        <span class="bg-white/10 text-gray-300 text-xs font-bold px-3 py-1 rounded-full">DAY 04</span>
+                        <svg class="w-6 h-6 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">Correction</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Side slip & Garland</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Longer runs</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Posture correction</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Confidence building</li>
+                    <h3 class="text-xl font-bold text-white mb-4">Correction</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Side slip & Garland</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Longer runs</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Posture correction</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Confidence building</li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:border-wolf-accent/50 transition-colors group">
+                <div class="bg-wolf-black p-8 rounded-3xl border border-white/5 hover:border-blue-500/50 transition-colors group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">DAY 05</span>
-                        <svg class="w-6 h-6 text-slate-300 group-hover:text-wolf-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <span class="bg-white/10 text-gray-300 text-xs font-bold px-3 py-1 rounded-full">DAY 05</span>
+                        <svg class="w-6 h-6 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">Flow State</h3>
-                    <ul class="space-y-3 text-sm text-slate-600">
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Linked snow plough turns</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Traverse + Stopping</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Phase-1 introduction</li>
-                        <li class="flex gap-3"><span class="text-slate-300">•</span>Advanced maneuvering</li>
+                    <h3 class="text-xl font-bold text-white mb-4">Flow State</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Linked snow plough turns</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Traverse + Stopping</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Phase-1 introduction</li>
+                        <li class="flex gap-3"><span class="text-gray-500">•</span>Advanced maneuvering</li>
                     </ul>
                 </div>
 
-                <div class="bg-slate-900 text-white p-8 rounded-3xl shadow-xl shadow-slate-900/10 group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-wolf-accent rounded-full blur-3xl -mr-12 -mt-12 opacity-50"></div>
+                <div class="bg-white text-wolf-black p-8 rounded-3xl shadow-lg shadow-white/5 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-100 rounded-full blur-3xl -mr-12 -mt-12"></div>
                     <div class="flex justify-between items-start mb-6 relative z-10">
-                        <span class="bg-white text-slate-900 text-xs font-bold px-3 py-1 rounded-full">DAY 06</span>
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="bg-black text-white text-xs font-bold px-3 py-1 rounded-full">DAY 06</span>
+                        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <h3 class="text-xl font-bold mb-4 relative z-10">Certification</h3>
                     <ul class="space-y-3 text-sm font-medium relative z-10">
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Final supervised run</li>
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Skill test (plough + turns)</li>
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Certification Handout</li>
-                        <li class="flex gap-3"><span class="text-wolf-accent">•</span>Photos & Video</li>
+                        <li class="flex gap-3"><span class="text-blue-600">•</span>Final supervised run</li>
+                        <li class="flex gap-3"><span class="text-blue-600">•</span>Skill test (plough + turns)</li>
+                        <li class="flex gap-3"><span class="text-blue-600">•</span>Certification Handout</li>
+                        <li class="flex gap-3"><span class="text-blue-600">•</span>Photos & Video</li>
                     </ul>
                 </div>
 
@@ -342,50 +489,60 @@
     
     <section id="resort" class="py-12 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold text-slate-900">THE MOUNTAIN</h2>
+            <h2 class="text-3xl font-bold text-white">THE MOUNTAIN</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-white border border-slate-200 p-8 rounded-3xl text-center hover:bg-slate-50 transition-colors group shadow-sm">
-                <div class="text-3xl md:text-5xl font-bold text-wolf-accent mb-2 group-hover:scale-110 transition-transform">3,980m</div>
-                <div class="text-slate-400 text-xs uppercase tracking-wider">Peak Elevation</div>
+            <div class="bg-wolf-dark border border-white/5 p-8 rounded-3xl text-center hover:bg-wolf-gray transition-colors group">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">3,980m</div>
+                <div class="text-gray-400 text-xs uppercase tracking-wider">Peak Elevation</div>
             </div>
-            <div class="bg-white border border-slate-200 p-8 rounded-3xl text-center hover:bg-slate-50 transition-colors group shadow-sm">
-                <div class="text-3xl md:text-5xl font-bold text-wolf-accent mb-2 group-hover:scale-110 transition-transform">14m</div>
-                <div class="text-slate-400 text-xs uppercase tracking-wider">Annual Snowfall</div>
+            <div class="bg-wolf-dark border border-white/5 p-8 rounded-3xl text-center hover:bg-wolf-gray transition-colors group">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">14m</div>
+                <div class="text-gray-400 text-xs uppercase tracking-wider">Annual Snowfall</div>
             </div>
-            <div class="bg-white border border-slate-200 p-8 rounded-3xl text-center hover:bg-slate-50 transition-colors group shadow-sm">
-                <div class="text-3xl md:text-5xl font-bold text-wolf-accent mb-2 group-hover:scale-110 transition-transform">17</div>
-                <div class="text-slate-400 text-xs uppercase tracking-wider">Powder Bowls</div>
+            <div class="bg-wolf-dark border border-white/5 p-8 rounded-3xl text-center hover:bg-wolf-gray transition-colors group">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">17</div>
+                <div class="text-gray-400 text-xs uppercase tracking-wider">Powder Bowls</div>
             </div>
-            <div class="bg-white border border-slate-200 p-8 rounded-3xl text-center hover:bg-slate-50 transition-colors group shadow-sm">
-                <div class="text-3xl md:text-5xl font-bold text-wolf-accent mb-2 group-hover:scale-110 transition-transform">1,330m</div>
-                <div class="text-slate-400 text-xs uppercase tracking-wider">Vertical Drop</div>
+            <div class="bg-wolf-dark border border-white/5 p-8 rounded-3xl text-center hover:bg-wolf-gray transition-colors group">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-2 group-hover:scale-110 transition-transform">1,330m</div>
+                <div class="text-gray-400 text-xs uppercase tracking-wider">Vertical Drop</div>
+            </div>
+        </div>
+
+        <div class="mt-8 w-full bg-wolf-dark border border-white/5 rounded-3xl overflow-hidden group hover:border-white/20 transition-all relative">
+            <div class="h-[400px] w-full overflow-hidden relative">
+                <img src="https://images.unsplash.com/photo-1517066928509-32247fb21727?q=80&w=2667&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80" alt="Trail Map">
+                <div class="absolute inset-0 bg-gradient-to-t from-wolf-dark/90 to-transparent"></div>
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-wolf-black/80 backdrop-blur-sm px-6 py-2 rounded-full border border-white/10">
+                    <p class="text-sm font-bold text-white uppercase tracking-widest">Official Gulmarg Powdertrac Map</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="attractions" class="py-24 px-4 bg-slate-100 border-y border-slate-200 relative">
+    <section id="attractions" class="py-24 px-4 bg-wolf-dark/50 border-y border-white/5 relative">
         <div class="max-w-7xl mx-auto">
             <div class="mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">ATTRACTIONS & RIDES</h2>
-                <p class="text-slate-500">Beyond the slopes. Explore the valley.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">ATTRACTIONS & RIDES</h2>
+                <p class="text-gray-400">Beyond the slopes. Explore the valley.</p>
             </div>
 
             <div class="flex flex-col lg:flex-row gap-8">
                 <div class="lg:w-1/4 flex flex-row lg:flex-col gap-3 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
-                    <button onclick="openTab(event, 'gondola')" class="tab-btn active text-left px-6 py-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 transition-all focus:outline-none flex items-center justify-between group min-w-[200px] lg:min-w-0">
+                    <button onclick="openTab(event, 'gondola')" class="tab-btn active text-left px-6 py-5 rounded-2xl bg-wolf-gray border border-white/10 hover:bg-wolf-gray/80 transition-all focus:outline-none flex items-center justify-between group min-w-[200px] lg:min-w-0">
                         <span class="font-bold text-lg">Gondola</span>
                         <svg class="w-5 h-5 opacity-50 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
-                    <button onclick="openTab(event, 'thrill')" class="tab-btn text-left px-6 py-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 transition-all focus:outline-none flex items-center justify-between group text-slate-400 min-w-[200px] lg:min-w-0">
+                    <button onclick="openTab(event, 'thrill')" class="tab-btn text-left px-6 py-5 rounded-2xl bg-wolf-gray border border-white/10 hover:bg-wolf-gray/80 transition-all focus:outline-none flex items-center justify-between group text-gray-400 min-w-[200px] lg:min-w-0">
                         <span class="font-bold text-lg">Snowmobile & ATV</span>
                         <svg class="w-5 h-5 opacity-50 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
-                    <button onclick="openTab(event, 'sightseeing')" class="tab-btn text-left px-6 py-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 transition-all focus:outline-none flex items-center justify-between group text-slate-400 min-w-[200px] lg:min-w-0">
+                    <button onclick="openTab(event, 'sightseeing')" class="tab-btn text-left px-6 py-5 rounded-2xl bg-wolf-gray border border-white/10 hover:bg-wolf-gray/80 transition-all focus:outline-none flex items-center justify-between group text-gray-400 min-w-[200px] lg:min-w-0">
                         <span class="font-bold text-lg">Sightseeing</span>
                         <svg class="w-5 h-5 opacity-50 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
-                    <button onclick="openTab(event, 'explore')" class="tab-btn text-left px-6 py-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 transition-all focus:outline-none flex items-center justify-between group text-slate-400 min-w-[200px] lg:min-w-0">
+                    <button onclick="openTab(event, 'explore')" class="tab-btn text-left px-6 py-5 rounded-2xl bg-wolf-gray border border-white/10 hover:bg-wolf-gray/80 transition-all focus:outline-none flex items-center justify-between group text-gray-400 min-w-[200px] lg:min-w-0">
                         <span class="font-bold text-lg">Beyond Gulmarg</span>
                         <svg class="w-5 h-5 opacity-50 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
@@ -394,61 +551,61 @@
                 <div class="lg:w-3/4 min-h-[500px]">
                     
                     <div id="gondola" class="tab-content active h-full">
-                        <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl shadow-slate-200/50 h-full relative overflow-hidden">
-                            <div class="absolute top-0 right-0 p-8 opacity-5">
-                                <svg class="w-32 h-32 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                        <div class="bg-wolf-black rounded-3xl p-8 border border-white/10 h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-8 opacity-10">
+                                <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
                             </div>
                             
-                            <h3 class="text-3xl font-bold text-slate-900 mb-2">The World's Second Highest Cable Car</h3>
-                            <p class="text-slate-500 mb-8 max-w-2xl">The highlight of any trip. Rise from the pine forests to the naked peaks in minutes.</p>
+                            <h3 class="text-3xl font-bold text-white mb-2">The World's Second Highest Cable Car</h3>
+                            <p class="text-gray-400 mb-8 max-w-2xl">The highlight of any trip. Rise from the pine forests to the naked peaks in minutes.</p>
                             
                             <div class="grid md:grid-cols-2 gap-6 relative z-10">
-                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-wolf-accent/30 transition-colors">
+                                <div class="bg-wolf-gray/50 p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-colors">
                                     <div class="flex justify-between items-center mb-4">
-                                        <h4 class="text-xl font-bold text-slate-800">Phase 1</h4>
-                                        <span class="text-xs bg-slate-200 text-slate-800 font-bold px-2 py-1 rounded">8,500 ft</span>
+                                        <h4 class="text-xl font-bold text-white">Phase 1</h4>
+                                        <span class="text-xs bg-white text-black font-bold px-2 py-1 rounded">8,500 ft</span>
                                     </div>
-                                    <p class="text-sm text-slate-500 mb-2 font-semibold">Gulmarg to Kongdoori</p>
-                                    <p class="text-sm text-slate-500 leading-relaxed">Takes you to a bowl-shaped valley where most beginner skiing happens. Features restaurants and snow parks.</p>
+                                    <p class="text-sm text-gray-400 mb-2 font-semibold">Gulmarg to Kongdoori</p>
+                                    <p class="text-sm text-gray-500 leading-relaxed">Takes you to a bowl-shaped valley where most beginner skiing happens. Features restaurants and snow parks.</p>
                                 </div>
 
-                                <div class="bg-slate-50 p-6 rounded-2xl border border-wolf-accent/20 hover:border-wolf-accent/50 transition-colors shadow-sm">
+                                <div class="bg-wolf-gray/50 p-6 rounded-2xl border border-blue-500/20 hover:border-blue-500/50 transition-colors">
                                     <div class="flex justify-between items-center mb-4">
-                                        <h4 class="text-xl font-bold text-slate-800">Phase 2</h4>
-                                        <span class="text-xs bg-wolf-accent text-white font-bold px-2 py-1 rounded">14,000 ft</span>
+                                        <h4 class="text-xl font-bold text-white">Phase 2</h4>
+                                        <span class="text-xs bg-blue-500 text-white font-bold px-2 py-1 rounded">14,000 ft</span>
                                     </div>
-                                    <p class="text-sm text-slate-500 mb-2 font-semibold">Kongdoori to Apharwat Peak</p>
-                                    <p class="text-sm text-slate-500 leading-relaxed">The main event. Breathtaking views of Nanga Parbat (9th highest mountain). <br><span class="text-red-500 text-xs mt-2 block">*Strictly for sightseeing or expert skiers. Weather dependent.</span></p>
+                                    <p class="text-sm text-gray-400 mb-2 font-semibold">Kongdoori to Apharwat Peak</p>
+                                    <p class="text-sm text-gray-500 leading-relaxed">The main event. Breathtaking views of Nanga Parbat (9th highest mountain). <br><span class="text-red-400 text-xs mt-2 block">*Strictly for sightseeing or expert skiers. Weather dependent.</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div id="thrill" class="tab-content h-full">
-                        <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl shadow-slate-200/50 h-full">
-                            <h3 class="text-3xl font-bold text-slate-900 mb-8">Adrenaline Without Skis</h3>
+                        <div class="bg-wolf-black rounded-3xl p-8 border border-white/10 h-full">
+                            <h3 class="text-3xl font-bold text-white mb-8">Adrenaline Without Skis</h3>
                             
                             <div class="flex flex-col gap-6">
-                                <div class="group relative overflow-hidden rounded-2xl border border-slate-200 aspect-video md:aspect-[21/9]">
-                                    <img src="https://images.unsplash.com/photo-1518047910903-8d3e230559eb?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Snowmobile">
-                                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/40 to-transparent p-6 flex flex-col justify-center">
+                                <div class="group relative overflow-hidden rounded-2xl border border-white/10 aspect-video md:aspect-[21/9]">
+                                    <img src="https://images.unsplash.com/photo-1518047910903-8d3e230559eb?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity" alt="Snowmobile">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent p-6 flex flex-col justify-center">
                                         <h4 class="text-2xl font-bold text-white mb-2">Snowmobiles</h4>
-                                        <p class="text-slate-200 max-w-md text-sm">High-speed motorized sleds. Zoom across vast frozen snowfields with a local operator. Fast, loud, and incredibly fun.</p>
+                                        <p class="text-gray-300 max-w-md text-sm">High-speed motorized sleds. Zoom across vast frozen snowfields with a local operator. Fast, loud, and incredibly fun.</p>
                                         <div class="mt-4 flex gap-2">
-                                            <span class="text-xs border border-white/50 text-white px-2 py-1 rounded backdrop-blur-sm">Speed</span>
-                                            <span class="text-xs border border-white/50 text-white px-2 py-1 rounded backdrop-blur-sm">Power</span>
+                                            <span class="text-xs border border-white/30 text-white px-2 py-1 rounded">Speed</span>
+                                            <span class="text-xs border border-white/30 text-white px-2 py-1 rounded">Power</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="group relative overflow-hidden rounded-2xl border border-slate-200 aspect-video md:aspect-[21/9]">
-                                    <img src="https://images.unsplash.com/photo-1621687720272-386623bd9e30?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="ATV">
-                                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/40 to-transparent p-6 flex flex-col justify-center">
+                                <div class="group relative overflow-hidden rounded-2xl border border-white/10 aspect-video md:aspect-[21/9]">
+                                    <img src="https://images.unsplash.com/photo-1621687720272-386623bd9e30?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity" alt="ATV">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent p-6 flex flex-col justify-center">
                                         <h4 class="text-2xl font-bold text-white mb-2">ATV (Quad Bikes)</h4>
-                                        <p class="text-slate-200 max-w-md text-sm">4x4 beasts with tire chains. Popular route: Tangmarg to Drung Waterfall or around Strawberry Valley.</p>
+                                        <p class="text-gray-300 max-w-md text-sm">4x4 beasts with tire chains. Popular route: Tangmarg to Drung Waterfall or around Strawberry Valley.</p>
                                         <div class="mt-4 flex gap-2">
-                                            <span class="text-xs border border-white/50 text-white px-2 py-1 rounded backdrop-blur-sm">Off-road</span>
-                                            <span class="text-xs border border-white/50 text-white px-2 py-1 rounded backdrop-blur-sm">Scenic</span>
+                                            <span class="text-xs border border-white/30 text-white px-2 py-1 rounded">Off-road</span>
+                                            <span class="text-xs border border-white/30 text-white px-2 py-1 rounded">Scenic</span>
                                         </div>
                                     </div>
                                 </div>
@@ -457,91 +614,94 @@
                     </div>
 
                     <div id="sightseeing" class="tab-content h-full">
-                        <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl shadow-slate-200/50 h-full">
-                            <h3 class="text-3xl font-bold text-slate-900 mb-2">Iconic Spots</h3>
-                            <p class="text-slate-500 mb-8">The "Must-Visit" locations for every traveler.</p>
+                        <div class="bg-wolf-black rounded-3xl p-8 border border-white/10 h-full">
+                            <h3 class="text-3xl font-bold text-white mb-2">Iconic Spots</h3>
+                            <p class="text-gray-400 mb-8">The "Must-Visit" locations for every traveler.</p>
                             
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                                    <div class="h-32 rounded-xl bg-slate-200 mb-4 overflow-hidden shadow-inner">
+                                <div class="bg-wolf-gray p-5 rounded-2xl border border-white/5">
+                                    <div class="h-32 rounded-xl bg-gray-800 mb-4 overflow-hidden">
                                         <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1740&auto=format&fit=crop" class="w-full h-full object-cover" alt="Waterfall">
                                     </div>
-                                    <h4 class="text-lg font-bold text-slate-900 mb-1">Drung Waterfall</h4>
-                                    <p class="text-xs text-slate-500">Famous in Jan/Feb. The water freezes solid creating a massive wall of icicles.</p>
+                                    <h4 class="text-lg font-bold text-white mb-1">Drung Waterfall</h4>
+                                    <p class="text-xs text-gray-400">Famous in Jan/Feb. The water freezes solid creating a massive wall of icicles.</p>
                                 </div>
                                 
-                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                                    <div class="h-32 rounded-xl bg-slate-200 mb-4 overflow-hidden shadow-inner">
+                                <div class="bg-wolf-gray p-5 rounded-2xl border border-white/5">
+                                    <div class="h-32 rounded-xl bg-gray-800 mb-4 overflow-hidden">
                                         <img src="https://images.unsplash.com/photo-1548625361-e88c6023d240?q=80&w=1939&auto=format&fit=crop" class="w-full h-full object-cover" alt="Church">
                                     </div>
-                                    <h4 class="text-lg font-bold text-slate-900 mb-1">St. Mary’s Church</h4>
-                                    <p class="text-xs text-slate-500">100+ year old Victorian church. Looks like a fairytale when covered in snow.</p>
+                                    <h4 class="text-lg font-bold text-white mb-1">St. Mary’s Church</h4>
+                                    <p class="text-xs text-gray-400">100+ year old Victorian church. Looks like a fairytale when covered in snow.</p>
                                 </div>
 
-                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                                    <div class="h-32 rounded-xl bg-slate-200 mb-4 overflow-hidden shadow-inner">
+                                <div class="bg-wolf-gray p-5 rounded-2xl border border-white/5">
+                                    <div class="h-32 rounded-xl bg-gray-800 mb-4 overflow-hidden">
                                         <img src="https://images.unsplash.com/photo-1566835706225-d72b22596001?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover" alt="Temple">
                                     </div>
-                                    <h4 class="text-lg font-bold text-slate-900 mb-1">Maharani Temple</h4>
-                                    <p class="text-xs text-slate-500">Red-roofed Shiva temple on a hillock. Visible from almost everywhere in the valley.</p>
+                                    <h4 class="text-lg font-bold text-white mb-1">Maharani Temple</h4>
+                                    <p class="text-xs text-gray-400">Red-roofed Shiva temple on a hillock. Visible from almost everywhere in the valley.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div id="explore" class="tab-content h-full">
-                        <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl shadow-slate-200/50 h-full flex flex-col justify-between">
+                        <div class="bg-wolf-black rounded-3xl p-8 border border-white/10 h-full flex flex-col justify-between">
                             <div>
-                                <h3 class="text-3xl font-bold text-slate-900 mb-6">Complete Your Itinerary</h3>
+                                <h3 class="text-3xl font-bold text-white mb-6">Complete Your Itinerary</h3>
                                 <div class="space-y-6">
                                     <div class="flex gap-4">
-                                        <div class="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold shrink-0 shadow-lg">DL</div>
+                                        <div class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center font-bold shrink-0">DL</div>
                                         <div>
-                                            <h4 class="text-xl font-bold text-slate-900">Srinagar (Dal Lake)</h4>
-                                            <p class="text-sm text-slate-500">2 hours away. The classic experience is a Shikara ride on the frozen lake and a Houseboat stay.</p>
+                                            <h4 class="text-xl font-bold text-white">Srinagar (Dal Lake)</h4>
+                                            <p class="text-sm text-gray-400">2 hours away. The classic experience is a Shikara ride on the frozen lake and a Houseboat stay.</p>
                                         </div>
                                     </div>
-                                    <div class="w-px h-8 bg-slate-200 ml-6"></div>
+                                    <div class="w-px h-8 bg-white/20 ml-6"></div>
                                     <div class="flex gap-4">
-                                        <div class="w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-900 flex items-center justify-center font-bold shrink-0 shadow-md">PH</div>
+                                        <div class="w-12 h-12 rounded-full bg-wolf-gray border border-white/20 text-white flex items-center justify-center font-bold shrink-0">PH</div>
                                         <div>
-                                            <h4 class="text-xl font-bold text-slate-900">Pahalgam</h4>
-                                            <p class="text-sm text-slate-500">"Valley of Shepherds." Famous for scenic rivers and pine forests. A softer vibe compared to the high-altitude desert.</p>
+                                            <h4 class="text-xl font-bold text-white">Pahalgam</h4>
+                                            <p class="text-sm text-gray-400">"Valley of Shepherds." Famous for scenic rivers and pine forests. A softer vibe compared to the high-altitude desert.</p>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-8 bg-gradient-to-r from-sky-50 to-white border border-sky-100 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4 shadow-sm">
-                <div class="bg-wolf-accent text-white p-2 rounded-lg shrink-0 shadow-md shadow-sky-200">
+            <div class="mt-8 bg-gradient-to-r from-blue-900/40 to-wolf-black border border-blue-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div class="bg-blue-500 text-white p-2 rounded-lg shrink-0">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="font-bold text-slate-900 uppercase tracking-wider text-sm mb-1">Pro Tip: Booking Essentials</h4>
-                    <p class="text-sm text-slate-500">If you book a package, ask if Gondola tickets are included. Tickets (especially Phase 2) sell out weeks in advance online. Getting them on the spot is nearly impossible.</p>
+                    <h4 class="font-bold text-white uppercase tracking-wider text-sm mb-1">Pro Tip: Booking Essentials</h4>
+                    <p class="text-sm text-gray-300">If you book a package, ask if Gondola tickets are included. Tickets (especially Phase 2) sell out weeks in advance online. Getting them on the spot is nearly impossible.</p>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <section id="accommodations" class="py-24 px-4 bg-slate-900 rounded-[3rem] mx-2 md:mx-6 my-12 shadow-2xl shadow-slate-900/30">
+    <section id="accommodations" class="py-24 px-4 bg-wolf-dark rounded-[3rem] mx-2 md:mx-6 my-12">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">STAY IN COMFORT</h2>
-                <p class="text-slate-400">Warm beds and hot meals after cold days.</p>
+                <p class="text-gray-400">Warm beds and hot meals after cold days.</p>
+                <a href="stays.html" class="inline-block mt-6 px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors">
+                    View All Resorts & Rooms →
+                </a>
             </div>
             
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="space-y-4">
                     <h3 class="text-2xl font-bold text-white mb-4">The Lodge</h3>
                     
-                    <div class="auto-slider relative h-96 w-full rounded-3xl overflow-hidden border border-white/10 group shadow-2xl">
+                    <div class="auto-slider relative h-96 w-full rounded-3xl overflow-hidden border border-white/10 group">
                         <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
                             <div class="min-w-full h-full relative">
                                 <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Hotel Room">
@@ -563,13 +723,13 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-400 text-sm mt-4">Centrally heated rooms with mountain views. 5-minute walk to the Gondola.</p>
+                    <p class="text-gray-400 text-sm mt-4">Centrally heated rooms with mountain views. 5-minute walk to the Gondola.</p>
                 </div>
 
                 <div class="space-y-4">
                     <h3 class="text-2xl font-bold text-white mb-4">Local Flavors</h3>
                     
-                    <div class="auto-slider relative h-96 w-full rounded-3xl overflow-hidden border border-white/10 group shadow-2xl">
+                    <div class="auto-slider relative h-96 w-full rounded-3xl overflow-hidden border border-white/10 group">
                         <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
                             <div class="min-w-full h-full relative">
                                 <img src="https://images.unsplash.com/photo-1606471191009-63994c53433b?q=80&w=927&auto=format&fit=crop" class="w-full h-full object-cover" alt="Kashmiri Wazwan">
@@ -591,7 +751,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-400 text-sm mt-4">Authentic Kashmiri Wazwan and continental comfort food to refuel.</p>
+                    <p class="text-gray-400 text-sm mt-4">Authentic Kashmiri Wazwan and continental comfort food to refuel.</p>
                 </div>
             </div>
         </div>
@@ -599,160 +759,193 @@
 
     <section id="packages" class="py-24 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-slate-900">PACKAGES</h2>
-            <p class="text-slate-500">Swipe to view all curated experiences.</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">PACKAGES</h2>
+            <p class="text-gray-400">Swipe to view all curated experiences.</p>
+        </div>
+
+        <div class="flex justify-end mb-6 px-4 md:px-0">
+            <div class="flex flex-col items-end">
+                <div class="relative">
+                    <select id="currency-selector" onchange="updateCurrency()" class="appearance-none bg-wolf-dark border border-white/20 text-white pl-4 pr-10 py-2 rounded-xl focus:outline-none hover:border-white/40 transition-colors text-sm font-bold cursor-pointer">
+                        <option value="INR" selected>INR (₹)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+                <p class="text-[10px] text-gray-500 mt-2">Rates are estimates for reference only. Final billing is in INR.</p>
+            </div>
         </div>
         
         <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide px-4 md:px-0">
             
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-slate-200 rounded-[2.5rem] p-8 hover:border-slate-400 transition-all flex flex-col shadow-lg shadow-slate-100">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Basic</h3>
-                <div class="text-xs text-slate-400 mb-4 uppercase tracking-wide">Backpacker Essentials</div>
-                <div class="text-4xl font-bold text-slate-900 mb-6">₹22,999<span class="text-lg text-slate-400 font-normal">/pp</span></div>
-                <ul class="space-y-3 mb-8 text-slate-500 text-sm flex-1">
-                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-slate-400 rounded-full mr-3 shrink-0"></span>Dormitory Accommodation</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-slate-200 rounded-full mr-3"></span>Standard Gear Rental</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-slate-200 rounded-full mr-3"></span>Gondola Pass (Phase 1)</li>
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-wolf-dark border border-white/5 rounded-[2.5rem] p-8 hover:border-white/20 transition-all flex flex-col">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Basic</h3>
+                <div class="text-xs text-gray-400 mb-4 uppercase tracking-wide">Backpacker Essentials</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    <span class="price-amount" data-inr="22999">₹22,999</span><span class="text-lg text-gray-500 font-normal">/pp</span>
+                </div>
+                <div class="text-xs text-green-400 font-bold mb-6">Save ~₹10k with our Two-Person Buddy Deal</div>
+                <ul class="space-y-3 mb-8 text-gray-400 text-sm flex-1">
+                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-gray-500 rounded-full mr-3 shrink-0"></span>Dormitory Accommodation</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Standard Gear Rental</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Gondola Pass (Phase 1)</li>
                 </ul>
-                <button class="w-full py-4 rounded-2xl border border-slate-200 text-slate-900 font-bold hover:bg-slate-50 transition-colors">Select</button>
+                <a href="booking.html" class="block w-full text-center py-4 rounded-2xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors">Book Now</a>
             </div>
 
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-sky-100 rounded-[2.5rem] p-8 hover:border-wolf-accent/50 transition-all flex flex-col shadow-xl shadow-sky-50">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Silver</h3>
-                <div class="text-xs text-wolf-accent mb-4 uppercase tracking-wide">Standard Choice</div>
-                <div class="text-4xl font-bold text-slate-900 mb-6">₹26,999<span class="text-lg text-slate-400 font-normal">/pp</span></div>
-                <ul class="space-y-3 mb-8 text-slate-500 text-sm flex-1">
-                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-wolf-accent rounded-full mr-3 shrink-0"></span>Poshwan Hotel / Gulmarg Ski Lodge</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-sky-100 rounded-full mr-3"></span>Standard Gear Rental</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-sky-100 rounded-full mr-3"></span>Certified Instructor</li>
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-wolf-dark border border-blue-500/20 rounded-[2.5rem] p-8 hover:border-blue-500/50 transition-all flex flex-col">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Silver</h3>
+                <div class="text-xs text-blue-400 mb-4 uppercase tracking-wide">Standard Choice</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    <span class="price-amount" data-inr="26999">₹26,999</span><span class="text-lg text-gray-500 font-normal">/pp</span>
+                </div>
+                <div class="text-xs text-green-400 font-bold mb-6">Save ~₹10k with our Two-Person Buddy Deal</div>
+                <ul class="space-y-3 mb-8 text-gray-400 text-sm flex-1">
+                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 shrink-0"></span><a href="stays.html" class="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-dotted">Poshwan Hotel / Gulmarg Ski Lodge</a></li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Standard Gear Rental</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Certified Instructor</li>
                 </ul>
-                <button class="w-full py-4 rounded-2xl border border-sky-100 text-wolf-accent font-bold hover:bg-sky-50 transition-colors">Select</button>
+                <a href="booking.html" class="block w-full text-center py-4 rounded-2xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors">Book Now</a>
             </div>
 
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-amber-100 rounded-[2.5rem] p-8 hover:border-amber-300/50 transition-all flex flex-col shadow-xl shadow-amber-50">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Gold</h3>
-                <div class="text-xs text-amber-500 mb-4 uppercase tracking-wide">Premium Comfort</div>
-                <div class="text-4xl font-bold text-slate-900 mb-6">₹34,999<span class="text-lg text-slate-400 font-normal">/pp</span></div>
-                <ul class="space-y-3 mb-8 text-slate-500 text-sm flex-1">
-                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-amber-400 rounded-full mr-3 shrink-0"></span>Hotel Affarwat / Hotel Welcome / Gulmarg Inn</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-amber-100 rounded-full mr-3"></span>Performance Gear</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-amber-100 rounded-full mr-3"></span>Meals Included</li>
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-wolf-dark border border-amber-500/20 rounded-[2.5rem] p-8 hover:border-amber-500/50 transition-all flex flex-col">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Gold</h3>
+                <div class="text-xs text-amber-400 mb-4 uppercase tracking-wide">Premium Comfort</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    <span class="price-amount" data-inr="34999">₹34,999</span><span class="text-lg text-gray-500 font-normal">/pp</span>
+                </div>
+                <div class="text-xs text-green-400 font-bold mb-6">Save ~₹10k with our Two-Person Buddy Deal</div>
+                <ul class="space-y-3 mb-8 text-gray-400 text-sm flex-1">
+                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-amber-400 rounded-full mr-3 shrink-0"></span><a href="stays.html" class="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-dotted">Hotel Affarwat / Hotel Welcome / Gulmarg Inn</a></li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Performance Gear</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Meals Included</li>
                 </ul>
-                <button class="w-full py-4 rounded-2xl border border-amber-100 text-amber-600 font-bold hover:bg-amber-50 transition-colors">Select</button>
+                <a href="booking.html" class="block w-full text-center py-4 rounded-2xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors">Book Now</a>
             </div>
 
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-emerald-100 rounded-[2.5rem] p-8 hover:border-emerald-300/50 transition-all flex flex-col shadow-xl shadow-emerald-50">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Diamond</h3>
-                <div class="text-xs text-emerald-600 mb-4 uppercase tracking-wide">Luxury Stay</div>
-                <div class="text-4xl font-bold text-slate-900 mb-6">₹44,999<span class="text-lg text-slate-400 font-normal">/pp</span></div>
-                <ul class="space-y-3 mb-8 text-slate-500 text-sm flex-1">
-                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3 shrink-0"></span>Hotel Royal Park / Zahgeer / Khaleel Palace</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-100 rounded-full mr-3"></span>Pro Gear Rental</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-emerald-100 rounded-full mr-3"></span>Private Guide</li>
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-wolf-dark border border-emerald-500/20 rounded-[2.5rem] p-8 hover:border-emerald-500/50 transition-all flex flex-col">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Diamond</h3>
+                <div class="text-xs text-emerald-400 mb-4 uppercase tracking-wide">Luxury Stay</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    <span class="price-amount" data-inr="44999">₹44,999</span><span class="text-lg text-gray-500 font-normal">/pp</span>
+                </div>
+                <div class="text-xs text-green-400 font-bold mb-6">Save ~₹10k with our Two-Person Buddy Deal</div>
+                <ul class="space-y-3 mb-8 text-gray-400 text-sm flex-1">
+                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-emerald-400 rounded-full mr-3 shrink-0"></span><a href="stays.html" class="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-dotted">Hotel Royal Park / Zahgeer / Khaleel Palace</a></li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Pro Gear Rental</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Private Guide</li>
                 </ul>
-                <button class="w-full py-4 rounded-2xl border border-emerald-100 text-emerald-700 font-bold hover:bg-emerald-50 transition-colors">Select</button>
+                <a href="booking.html" class="block w-full text-center py-4 rounded-2xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors">Book Now</a>
             </div>
 
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-indigo-100 rounded-[2.5rem] p-8 hover:border-indigo-300/50 transition-all flex flex-col shadow-xl shadow-indigo-50">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Platinum</h3>
-                <div class="text-xs text-indigo-500 mb-4 uppercase tracking-wide">Elite Experience</div>
-                <div class="text-4xl font-bold text-slate-900 mb-6">₹64,999<span class="text-lg text-slate-400 font-normal">/pp</span></div>
-                <ul class="space-y-3 mb-8 text-slate-500 text-sm flex-1">
-                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-indigo-400 rounded-full mr-3 shrink-0"></span>Hotel Royal Castle / Hilltop / Rosewood / Grand Mamtaz</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-indigo-100 rounded-full mr-3"></span>Full Gear & ATV Access</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-indigo-100 rounded-full mr-3"></span>All Meals & Beverages</li>
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-wolf-dark border border-indigo-500/20 rounded-[2.5rem] p-8 hover:border-indigo-500/50 transition-all flex flex-col">
+                <h3 class="text-xl font-bold text-gray-300 mb-1">Platinum</h3>
+                <div class="text-xs text-indigo-400 mb-4 uppercase tracking-wide">Elite Experience</div>
+                <div class="text-4xl font-bold text-white mb-2">
+                    <span class="price-amount" data-inr="64999">₹64,999</span><span class="text-lg text-gray-500 font-normal">/pp</span>
+                </div>
+                <div class="text-xs text-green-400 font-bold mb-6">Save ~₹10k with our Two-Person Buddy Deal</div>
+                <ul class="space-y-3 mb-8 text-gray-400 text-sm flex-1">
+                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-indigo-400 rounded-full mr-3 shrink-0"></span><a href="stays.html" class="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-dotted">Hotel Royal Castle / Hilltop / Rosewood / Grand Mamtaz</a></li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Full Gear & ATV Access</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>All Meals & Beverages</li>
                 </ul>
-                <button class="w-full py-4 rounded-2xl border border-indigo-100 text-indigo-600 font-bold hover:bg-indigo-50 transition-colors">Select</button>
+                <a href="booking.html" class="block w-full text-center py-4 rounded-2xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors">Book Now</a>
             </div>
 
-            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-slate-900 text-white rounded-[2.5rem] p-8 shadow-2xl shadow-slate-900/30 flex flex-col relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-wolf-accent text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">EXCLUSIVE</div>
-                <h3 class="text-xl font-bold text-slate-300 mb-1">VVIP</h3>
-                <div class="text-xs text-sky-400 mb-4 uppercase tracking-wide">The Royal Treatment</div>
-                <div class="text-4xl font-bold text-white mb-6">₹286,999<span class="text-lg text-slate-500 font-normal">/pp</span></div>
-                <ul class="space-y-3 mb-8 text-slate-400 text-sm flex-1 font-medium">
-                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-wolf-accent rounded-full mr-3 shrink-0"></span>Hotel Khyber (Himalayan Resort)</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-wolf-accent rounded-full mr-3"></span>Private Heliskiing Access</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-wolf-accent rounded-full mr-3"></span>Personal Concierge</li>
+            <div class="min-w-[85%] md:min-w-[350px] snap-center bg-white text-wolf-black rounded-[2.5rem] p-8 shadow-2xl shadow-white/10 flex flex-col relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-black text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">EXCLUSIVE</div>
+                <h3 class="text-xl font-bold text-gray-600 mb-1">VVIP</h3>
+                <div class="text-xs text-purple-600 mb-4 uppercase tracking-wide">The Royal Treatment</div>
+                <div class="text-4xl font-bold text-black mb-6">
+                    <span class="price-amount" data-inr="286999">₹286,999</span><span class="text-lg text-gray-400 font-normal">/pp</span>
+                </div>
+                <ul class="space-y-3 mb-8 text-gray-600 text-sm flex-1 font-medium">
+                    <li class="flex items-start"><span class="mt-1.5 w-1.5 h-1.5 bg-black rounded-full mr-3 shrink-0"></span><a href="stays.html" class="text-blue-600 hover:text-blue-800 underline underline-offset-2 decoration-dotted">Hotel Khyber (Himalayan Resort)</a></li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-black rounded-full mr-3"></span>Private Heliskiing Access</li>
+                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-black rounded-full mr-3"></span>Personal Concierge</li>
                 </ul>
-                <button class="w-full py-4 rounded-2xl bg-white text-slate-900 font-bold hover:bg-gray-100 transition-colors">Select Plan</button>
+                <a href="booking.html" class="block w-full text-center py-4 rounded-2xl bg-wolf-black text-white font-bold hover:bg-gray-800 transition-colors">Book Now</a>
             </div>
 
         </div>
     </section>
 
     <section id="logistics" class="py-16 px-4 max-w-5xl mx-auto">
-        <div class="bg-white rounded-[3rem] p-8 md:p-12 border border-slate-200 shadow-xl shadow-slate-100">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8">GETTING HERE</h2>
+        <div class="bg-wolf-gray rounded-[3rem] p-8 md:p-12 border border-white/5">
+            <h2 class="text-3xl font-bold text-white mb-8">GETTING HERE</h2>
             <div class="grid md:grid-cols-2 gap-12">
                 <div>
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="bg-slate-100 text-slate-900 p-2 rounded-lg border border-slate-200">
+                        <div class="bg-white text-black p-2 rounded-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">Fly to Srinagar (SXR)</h3>
+                        <h3 class="text-xl font-bold text-white">Fly to Srinagar (SXR)</h3>
                     </div>
-                    <p class="text-slate-500 mb-4">The nearest airport is Srinagar International Airport. Major airlines (Indigo, Air India, Vistara) operate daily flights from Delhi (1.5 hrs).</p>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-sky-100">
-                        <p class="text-xs text-wolf-accent uppercase font-bold">Tip</p>
-                        <p class="text-sm text-slate-600">Book a window seat on the left side (Delhi to Srinagar) for the best mountain views.</p>
+                    <p class="text-gray-400 mb-4">The nearest airport is Srinagar International Airport. Major airlines (Indigo, Air India, Vistara) operate daily flights from Delhi (1.5 hrs).</p>
+                    <div class="bg-wolf-black/50 p-4 rounded-xl border border-white/5">
+                        <p class="text-xs text-gray-500 uppercase">Tip</p>
+                        <p class="text-sm text-gray-300">Book a window seat on the left side (Delhi to Srinagar) for the best mountain views.</p>
                     </div>
                 </div>
                 <div>
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="bg-slate-100 text-slate-900 p-2 rounded-lg border border-slate-200">
+                        <div class="bg-white text-black p-2 rounded-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">The Drive Up</h3>
+                        <h3 class="text-xl font-bold text-white">The Drive Up</h3>
                     </div>
-                    <p class="text-slate-500 mb-4">Gulmarg is a 55km drive from the airport. We provide prepaid 4x4 SUVs with tire chains (mandatory in winter).</p>
-                    <ul class="text-sm text-slate-500 space-y-2">
-                        <li class="flex justify-between border-b border-slate-100 pb-2"><span>Distance</span> <span class="text-slate-900 font-semibold">55 KM</span></li>
-                        <li class="flex justify-between border-b border-slate-100 pb-2"><span>Time</span> <span class="text-slate-900 font-semibold">~2 Hours</span></li>
-                        <li class="flex justify-between"><span>Taxi Cost</span> <span class="text-slate-900 font-semibold">~₹3,000</span></li>
+                    <p class="text-gray-400 mb-4">Gulmarg is a 55km drive from the airport. Airport Pickup Available (Add-on). We can organize 4x4 SUVs with tire chains for you upon request.</p>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li class="flex justify-between border-b border-white/10 pb-2"><span>Distance</span> <span>55 KM</span></li>
+                        <li class="flex justify-between border-b border-white/10 pb-2"><span>Time</span> <span>~2 Hours</span></li>
+                        <li class="flex justify-between"><span>Taxi Cost</span> <span>~₹3,000</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-<footer id="contact" class="bg-white text-slate-900 rounded-t-[3rem] pt-24 pb-12 px-6 mt-12 border-t border-slate-200">
+<footer id="contact" class="bg-white text-wolf-black rounded-t-[3rem] pt-24 pb-12 px-6 mt-12">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
         <div class="col-span-1 md:col-span-2 pr-8">
-            <h2 class="text-3xl font-extrabold tracking-tighter mb-6">WOLF<span class="text-wolf-accent">.ADV</span></h2>
-            <p class="max-w-sm text-slate-500 mb-8 leading-relaxed">Experience the raw beauty of the Himalayas with certified guides, premium logistics, and local expertise.</p>
-            <div class="inline-flex items-center gap-2 border-b-2 border-slate-900 pb-1 font-bold cursor-pointer hover:text-wolf-accent hover:border-wolf-accent transition-all">
-                <span>Start Your Booking</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </div>
+            <h2 class="text-3xl font-extrabold tracking-tighter mb-6">WOLF<span class="text-gray-400">.ADV</span></h2>
+            <p class="max-w-sm text-gray-500 mb-8 leading-relaxed">Experience the raw beauty of the Himalayas with certified guides, premium logistics, and local expertise.</p>
+            <a href="booking.html" class="inline-block px-8 py-4 rounded-full bg-white text-wolf-black font-bold text-sm tracking-wide shadow-lg hover:bg-gray-200 transition-transform hover:scale-105 border border-gray-200">
+                Start Your Booking
+            </a>
         </div>
         
         <div>
             <h4 class="font-bold mb-6 text-lg">Explore</h4>
-            <ul class="space-y-4 text-slate-500 font-medium">
-                <li><a href="#packages" class="hover:text-wolf-accent transition-colors">Ski Packages</a></li>
-                <li><a href="#resort" class="hover:text-wolf-accent transition-colors">The Resort</a></li>
-                <li><a href="#attractions" class="hover:text-wolf-accent transition-colors">Local Attractions</a></li>
-                <li><a href="#" class="hover:text-wolf-accent transition-colors">Our Guides</a></li>
+            <ul class="space-y-4 text-gray-500 font-medium">
+                <li><a href="#packages" class="hover:text-black transition-colors">Ski Packages</a></li>
+                <li><a href="#resort" class="hover:text-black transition-colors">The Resort</a></li>
+                <li><a href="#attractions" class="hover:text-black transition-colors">Local Attractions</a></li>
+                <li><a href="#guides" class="hover:text-black transition-colors">Our Guides</a></li>
             </ul>
         </div>
         
         <div>
             <h4 class="font-bold mb-6 text-lg">Visit Us</h4>
-            <ul class="space-y-4 text-slate-500 font-medium">
+            <ul class="space-y-4 text-gray-500 font-medium">
                 <li>Near Gondola Base<br>Gulmarg, 193403</li>
                 <li>+91 9906 123 456</li>
                 <li>hello@wolf.com</li>
-                <li class="pt-2"><a href="#" class="text-wolf-accent font-bold hover:underline">Get Directions</a></li>
+                <li class="pt-2"><a href="#" class="text-black font-bold hover:underline">Get Directions</a></li>
             </ul>
         </div>
     </div>
     
-    <div class="max-w-7xl mx-auto pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
+    <div class="max-w-7xl mx-auto pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
         <p>© 2025 Wolf Adventure Gulmarg.</p>
         <div class="flex gap-6 mt-4 md:mt-0">
-            <a href="#" class="hover:text-slate-900 transition-colors">Privacy Policy</a>
-            <a href="#" class="hover:text-slate-900 transition-colors">Terms of Service</a>
+            <a href="policies.html#privacy" class="hover:text-black transition-colors">Privacy Policy</a>
+            <a href="policies.html#cancellations" class="hover:text-black transition-colors">Cancellation Policy</a>
+            <a href="policies.html#booking" class="hover:text-black transition-colors">Terms of Service</a>
         </div>
     </div>
 </footer>
@@ -789,7 +982,7 @@
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove("active");
                 // Reset styling for inactive tabs
-                tablinks[i].classList.add("text-slate-400");
+                tablinks[i].classList.add("text-gray-400");
                 tablinks[i].classList.remove("text-black");
             }
             
@@ -802,8 +995,77 @@
             }, 10);
             
             evt.currentTarget.classList.add("active");
-            evt.currentTarget.classList.remove("text-slate-400");
+            evt.currentTarget.classList.remove("text-gray-400");
             evt.currentTarget.classList.add("text-black");
+        }
+
+        // Currency Converter Logic
+        function updateCurrency() {
+            const selector = document.getElementById('currency-selector');
+            const currency = selector.value;
+            const priceElements = document.querySelectorAll('.price-amount');
+            
+            const rates = {
+                'INR': 1,
+                'USD': 85,
+                'EUR': 90
+            };
+
+            const symbols = {
+                'INR': '₹',
+                'USD': '$',
+                'EUR': '€'
+            };
+
+            priceElements.forEach(el => {
+                const basePrice = parseFloat(el.getAttribute('data-inr'));
+                let convertedPrice;
+
+                if (currency === 'INR') {
+                    convertedPrice = basePrice;
+                } else {
+                    convertedPrice = basePrice / rates[currency];
+                }
+
+                // Format with commas and no decimal places
+                const formattedPrice = Math.round(convertedPrice).toLocaleString();
+                el.textContent = `${symbols[currency]}${formattedPrice}`;
+            });
+        }
+
+        // Advanced Weather Widget
+        const weatherData = {
+            gulmarg: { 
+                base: "-5°C", 
+                summit: "-12°C",
+                baseLabel: "Base (2,650m)",
+                summitLabel: "Summit (3,980m)"
+            },
+            pahalgam: { 
+                base: "-2°C", 
+                summit: "-8°C",
+                baseLabel: "Base (2,130m)",
+                summitLabel: "Summit (3,400m)"
+            },
+            sonamarg: { 
+                base: "-8°C", 
+                summit: "-15°C",
+                baseLabel: "Base (2,800m)",
+                summitLabel: "Summit (4,100m)"
+            }
+        };
+
+        function updateWeather() {
+            const selector = document.getElementById('weather-location');
+            const location = selector.value;
+            const data = weatherData[location];
+
+            if (data) {
+                document.getElementById('base-temp').textContent = data.base;
+                document.getElementById('summit-temp').textContent = data.summit;
+                document.getElementById('base-label').textContent = data.baseLabel;
+                document.getElementById('summit-label').textContent = data.summitLabel;
+            }
         }
     </script>
 </body>

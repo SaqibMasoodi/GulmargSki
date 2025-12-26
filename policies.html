@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policies & Legal | Wolf Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    borderRadius: { '4xl': '3rem', '5xl': '4rem' },
+                    colors: {
+                        wolf: {
+                            black: '#0a0a0a',
+                            dark: '#171717',
+                            gray: '#262626',
+                            light: '#f5f5f5',
+                            white: '#ffffff',
+                            accent: '#3b82f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #404040; border-radius: 4px; }
+        
+        /* Hide scrollbar for mobile nav but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Smooth active state transition */
+        .nav-link { transition: all 0.3s ease; }
+        .nav-link.active { color: white; border-left-color: white; background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%); }
+    </style>
+</head>
+<body class="bg-wolf-black text-wolf-light antialiased selection:bg-white selection:text-wolf-black">
+
+    <header class="fixed top-0 w-full z-50 bg-wolf-black/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            
+            <div class="text-xl font-bold tracking-tighter text-white">
+                WOLF<span class="text-gray-500">.LEGAL</span>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-wolf-dark border border-white/5">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                    <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wide">Last Updated: Dec 24, 2025</span>
+                </div>
+
+                <a href="index.html" class="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                    <span class="text-sm font-bold hidden md:inline-block">Close</span>
+                    <div class="w-8 h-8 rounded-full bg-wolf-gray border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto pt-28 pb-24 px-4">
+        
+        <div class="lg:grid lg:grid-cols-4 gap-12">
+
+            <aside class="lg:col-span-1 mb-12 lg:mb-0">
+                <div class="sticky top-28">
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 hidden lg:block">Contents</p>
+                    
+                    <nav class="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-4 lg:gap-0 pb-4 lg:pb-0 scrollbar-hide border-b lg:border-b-0 border-white/10 lg:border-l lg:border-white/10">
+                        <a href="#booking" class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2 block text-sm font-medium text-gray-500 hover:text-gray-300 border-l-2 border-transparent">
+                            Booking & Payments
+                        </a>
+                        <a href="#cancellations" class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2 block text-sm font-medium text-gray-500 hover:text-gray-300 border-l-2 border-transparent">
+                            Cancellation Policy
+                        </a>
+                        <a href="#liability" class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2 block text-sm font-medium text-gray-500 hover:text-gray-300 border-l-2 border-transparent">
+                            Risk & Liability
+                        </a>
+                        <a href="#privacy" class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2 block text-sm font-medium text-gray-500 hover:text-gray-300 border-l-2 border-transparent">
+                            Privacy & Data
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <div class="lg:col-span-3 max-w-3xl space-y-24">
+
+                <section id="booking" class="scroll-mt-32">
+                    <h2 class="text-3xl font-bold text-white mb-6">Booking & Payments</h2>
+                    <div class="text-gray-400 space-y-4 leading-relaxed">
+                        <p>To secure your spot on any Wolf Adventure expedition, a deposit is required. We operate on a first-come, first-served basis due to limited capacity on the mountain and in our partner lodges.</p>
+                        
+                        <div class="bg-wolf-dark border border-white/5 rounded-3xl p-8 mt-6">
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">1</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Confirmation Deposit</h4>
+                                        <p class="text-sm">A <span class="text-white font-bold">50% advance payment</span> is required to confirm your booking. Until this deposit is received, your dates are not guaranteed.</p>
+                                    </div>
+                                </li>
+                                <li class="w-px h-8 bg-white/10 ml-4"></li>
+                                <li class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-wolf-gray border border-white/10 text-gray-300 flex items-center justify-center font-bold text-sm">2</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Final Balance</h4>
+                                        <p class="text-sm">The remaining 50% must be paid at least <span class="text-white font-bold">15 days prior to your arrival</span> in Gulmarg. Failure to pay the balance may result in cancellation.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="cancellations" class="scroll-mt-32">
+                    <h2 class="text-3xl font-bold text-white mb-6">Cancellation Policy</h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">We understand that plans change. However, due to the logistical complexity of high-altitude expeditions and hotel pre-bookings, our refund policy is strict.</p>
+                    
+                    <div class="overflow-hidden rounded-3xl border border-white/10">
+                        <table class="w-full text-left border-collapse bg-wolf-dark">
+                            <thead>
+                                <tr class="border-b border-white/10 bg-wolf-gray/50">
+                                    <th class="p-6 text-sm font-bold text-white uppercase tracking-wider">Timeframe</th>
+                                    <th class="p-6 text-sm font-bold text-white uppercase tracking-wider">Refund Eligibility</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr>
+                                    <td class="p-6 text-gray-300 font-medium">> 30 Days before arrival</td>
+                                    <td class="p-6 text-green-400 font-bold">90% Refund <span class="text-xs font-normal text-gray-500 ml-2">(10% processing fee)</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-6 text-gray-300 font-medium">15 - 30 Days before arrival</td>
+                                    <td class="p-6 text-yellow-400 font-bold">50% Refund</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-6 text-gray-300 font-medium">< 15 Days before arrival</td>
+                                    <td class="p-6 text-red-400 font-bold">No Refund</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">* All refunds are processed within 7-10 business days to the original payment method.</p>
+                </section>
+
+                <section id="liability" class="scroll-mt-32">
+                    <h2 class="text-3xl font-bold text-white mb-6">Risk & Liability Waiver</h2>
+                    
+                    <div class="bg-red-900/10 border border-red-500/20 rounded-3xl p-8 mb-8">
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-red-400 shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-200 mb-2">Extreme Sport Warning</h3>
+                                <p class="text-red-200/70 text-sm leading-relaxed">Skiing, snowboarding, and high-altitude trekking are classified as extreme sports. They carry inherent risks including, but not limited to, physical injury, avalanche, hypothermia, and equipment failure.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-invert text-gray-400 max-w-none text-sm leading-relaxed space-y-4">
+                        <p>By booking a package with Wolf Adventure, you acknowledge that you are voluntarily participating in these activities with knowledge of the dangers involved.</p>
+                        <p><strong>Wolf Adventure and its affiliates are not liable for:</strong></p>
+                        <ul class="list-disc pl-5 space-y-2 marker:text-gray-600">
+                            <li>Personal injury or death resulting from skiing/snowboarding accidents.</li>
+                            <li>Loss or damage of personal equipment (cameras, phones, ski gear).</li>
+                            <li>Delays or cancellations caused by "Acts of God" (heavy snowfall blocking roads, avalanche control, political unrest).</li>
+                        </ul>
+                        <p>We strongly recommend all guests purchase comprehensive <strong>Travel Insurance</strong> that specifically covers winter sports and emergency helicopter evacuation.</p>
+                    </div>
+                </section>
+
+                <section id="privacy" class="scroll-mt-32">
+                    <h2 class="text-3xl font-bold text-white mb-6">Privacy Policy</h2>
+                    <div class="text-gray-400 space-y-4 leading-relaxed text-sm">
+                        <p>Your privacy is important to us. This section outlines how we collect, use, and protect your data in compliance with standard GDPR regulations.</p>
+                        
+                        <h4 class="text-white font-bold text-base mt-6">Data Collection</h4>
+                        <p>We collect only the information necessary to process your booking and ensure your safety. This includes Name, Contact Details, Emergency Contacts, and Medical Conditions relevant to high-altitude exertion.</p>
+
+                        <h4 class="text-white font-bold text-base mt-6">Data Usage</h4>
+                        <p>We do not sell your data to third parties. Your information is shared strictly with:</p>
+                        <ul class="list-disc pl-5 space-y-2 marker:text-gray-600">
+                            <li>Hotel partners (for check-in verification).</li>
+                            <li>Transport providers (for pickup coordination).</li>
+                            <li>Medical teams (in case of emergency).</li>
+                        </ul>
+
+                        <h4 class="text-white font-bold text-base mt-6">Media Rights</h4>
+                        <p>Photos or videos taken by our guides during the trip may be used for Wolf Adventure marketing materials. If you prefer not to be photographed, please inform your lead guide on Day 1.</p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 bg-wolf-black py-12 text-center">
+        <p class="text-gray-600 text-sm">© 2025 Wolf Adventure Gulmarg. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Active when section is near top
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Remove active class from all
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        
+                        // Add active class to corresponding link
+                        const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                            // Scroll horizontal nav on mobile to keep active link in view
+                            activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
