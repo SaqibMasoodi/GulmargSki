@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Your Adventure | Wolf Adventure</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -14,12 +14,12 @@
                     colors: {
                         alpine: {
                             white: '#ffffff',
-                            off: '#f8fafc', // Slate 50
-                            ice: '#e0f2fe', // Sky 100
-                            blue: '#0ea5e9', // Sky 500
-                            deep: '#0f172a', // Slate 900
-                            text: '#334155', // Slate 700
-                            muted: '#94a3b8' // Slate 400
+                            off: '#f8fafc',
+                            ice: '#e0f2fe',
+                            blue: '#0ea5e9',
+                            deep: '#0f172a',
+                            text: '#334155',
+                            muted: '#94a3b8'
                         }
                     },
                     boxShadow: {
@@ -30,48 +30,9 @@
             }
         }
     </script>
-    <style>
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        
-        /* Custom Checkbox/Radio Styling for Cards */
-        .wolf-radio:checked + div {
-            border-color: #0ea5e9;
-            background-color: #f0f9ff; /* Sky 50 */
-            box-shadow: 0 0 0 1px #0ea5e9;
-        }
-        .wolf-radio:checked + div .radio-circle {
-            background-color: #0ea5e9;
-            border-color: #0ea5e9;
-            box-shadow: inset 0 0 0 2px white;
-        }
-        
-        /* Transition for sections */
-        .fade-enter {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .fade-enter-active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hidden-section {
-            display: none;
-        }
-
-        /* Checkbox Custom Toggle */
-        .toggle-checkbox:checked {
-            background-color: #0ea5e9;
-            border-color: #0ea5e9;
-        }
-        .toggle-checkbox:checked + div {
-            transform: translateX(100%);
-            border-color: white;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
 
@@ -88,6 +49,7 @@
     </nav>
 
     <div class="pt-32 pb-12 px-6 max-w-7xl mx-auto">
+        
         <div class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">BUILD YOUR TRIP</h1>
             <p class="text-slate-500 font-medium max-w-xl mx-auto">Customize your experience or choose a curated package designed by professionals.</p>
@@ -345,170 +307,6 @@
         </form>
     </div>
 
-    <script>
-        // --- 1. CONFIGURATION ---
-        const RATES = {
-            hotel: { none: 0, '3star': 3000, '4star': 6000, '5star': 15000 },
-            transport: { innova: 3000, tempo: 5000 },
-            gear: { none: 0, standard: 800, pro: 1500 },
-            extra: { gondola: 1100, atv: 2500 }
-        };
-
-        const PACKAGES = {
-            basic: { name: 'Basic Package', price: 22999 },
-            silver: { name: 'Silver Package', price: 26999 },
-            gold: { name: 'Gold Package', price: 34999 },
-            diamond: { name: 'Diamond Package', price: 44999 },
-            platinum: { name: 'Platinum Package', price: 64999 }
-        };
-
-        let currentMode = 'package'; // 'package' or 'custom'
-
-        // --- 2. MODE TOGGLING ---
-        function setMode(mode) {
-            currentMode = mode;
-            document.getElementById('input-mode').value = mode;
-
-            // Visual Switcher Styling
-            const highlighter = document.getElementById('switch-highlight');
-            const btnPackage = document.getElementById('btn-package');
-            const btnCustom = document.getElementById('btn-custom');
-
-            if (mode === 'package') {
-                highlighter.style.transform = 'translateX(0)';
-                // Updated classes for Light Mode
-                btnPackage.classList.replace('text-slate-500', 'text-slate-900');
-                btnCustom.classList.replace('text-slate-900', 'text-slate-500');
-                
-                // Show/Hide Sections
-                document.getElementById('section-package').classList.remove('hidden-section');
-                document.getElementById('section-custom').classList.add('hidden-section');
-            } else {
-                highlighter.style.transform = 'translateX(100%)';
-                highlighter.style.left = '6px'; // minor visual adjustment
-                // Updated classes for Light Mode
-                btnPackage.classList.replace('text-slate-900', 'text-slate-500');
-                btnCustom.classList.replace('text-slate-500', 'text-slate-900');
-
-                // Show/Hide Sections
-                document.getElementById('section-package').classList.add('hidden-section');
-                document.getElementById('section-custom').classList.remove('hidden-section');
-            }
-            updateCalculations();
-        }
-
-        function toggleTransportOptions() {
-            const isChecked = document.getElementById('transport-toggle').checked;
-            const options = document.getElementById('transport-options');
-            if (isChecked) {
-                options.classList.replace('hidden', 'grid');
-            } else {
-                options.classList.replace('grid', 'hidden');
-            }
-            updateCalculations();
-        }
-
-        // --- 3. CALCULATIONS & SUMMARY ---
-        function updateCalculations() {
-            const guests = parseInt(document.querySelector('select[name="guest_count"]').value) || 1;
-            const receiptDiv = document.getElementById('receipt-items');
-            let total = 0;
-            let html = '';
-
-            if (currentMode === 'package') {
-                const pkgKey = document.getElementById('package-select').value;
-                const pkg = PACKAGES[pkgKey];
-                total = pkg.price * guests;
-
-                // Updated classes for Light Mode Receipt
-                html += `<div class="flex justify-between text-slate-900 font-bold mb-2"><span>${pkg.name}</span><span>₹${pkg.price.toLocaleString()} x ${guests}</span></div>`;
-                html += `<div class="text-xs text-slate-500 pl-2">Includes: Hotel, Gear, Guide, Meals</div>`;
-            
-            } else {
-                // Custom Mode Logic
-                
-                // Hotel
-                const hotelType = document.querySelector('input[name="custom_hotel"]:checked').value;
-                const hotelPrice = RATES.hotel[hotelType] * 5; // Assuming 5 nights avg
-                if(hotelPrice > 0) {
-                    total += (hotelPrice * guests) / 2; // Assuming double occupancy roughly
-                    html += `<div class="flex justify-between text-slate-600"><span>Accommodation (Est.)</span><span>₹${((hotelPrice * guests)/2).toLocaleString()}</span></div>`;
-                }
-
-                // Transport
-                const transportCheck = document.getElementById('transport-toggle').checked;
-                if (transportCheck) {
-                    const transType = document.querySelector('input[name="custom_transport"]:checked').value;
-                    const transPrice = RATES.transport[transType] * 2; // Airport Pickup & Drop
-                    total += transPrice;
-                    html += `<div class="flex justify-between text-slate-600"><span>Transport (Round Trip)</span><span>₹${transPrice.toLocaleString()}</span></div>`;
-                }
-
-                // Gear
-                const gearType = document.querySelector('input[name="custom_gear"]:checked').value;
-                const gearPrice = RATES.gear[gearType] * 6; // 6 Days
-                if (gearPrice > 0) {
-                    total += gearPrice * guests;
-                    html += `<div class="flex justify-between text-slate-600"><span>Gear Rental (${gearType})</span><span>₹${(gearPrice * guests).toLocaleString()}</span></div>`;
-                }
-
-                // Extras
-                if (document.querySelector('input[name="extra_gondola"]').checked) {
-                    total += RATES.extra.gondola * guests;
-                    html += `<div class="flex justify-between text-slate-600"><span>Gondola Tkts</span><span>₹${(RATES.extra.gondola * guests).toLocaleString()}</span></div>`;
-                }
-                if (document.querySelector('input[name="extra_atv"]').checked) {
-                    total += RATES.extra.atv * guests;
-                    html += `<div class="flex justify-between text-slate-600"><span>ATV Ride</span><span>₹${(RATES.extra.atv * guests).toLocaleString()}</span></div>`;
-                }
-            }
-
-            receiptDiv.innerHTML = html;
-            document.getElementById('total-price-display').innerText = '₹' + total.toLocaleString();
-        }
-
-        // --- 4. SUBMISSION LOGIC ---
-        function handleHybridSubmit(e) {
-            e.preventDefault(); 
-
-            const form = document.getElementById('bookingForm');
-            const formData = new FormData(form);
-            const name = document.getElementById('contact_name').value;
-            if(!name) { alert("Please enter your name"); return; }
-
-            // Build WhatsApp Message
-            let msg = `*New Booking Request from Wolf Adventure*\n\n`;
-            msg += `👤 Name: ${formData.get('name')}\n`;
-            msg += `📅 Date: ${formData.get('arrival_date') || 'TBD'}\n`;
-            msg += `👥 Guests: ${formData.get('guest_count')}\n\n`;
-
-            if (currentMode === 'package') {
-                const pkg = PACKAGES[formData.get('package_tier')];
-                msg += `📦 *Selection: ${pkg.name}*\n`;
-                msg += `💰 Est. Total: ${document.getElementById('total-price-display').innerText}\n`;
-            } else {
-                msg += `🛠 *Custom Build Selection:*\n`;
-                msg += `- Hotel: ${formData.get('custom_hotel')}\n`;
-                if(document.getElementById('transport-toggle').checked) {
-                     msg += `- Transport: ${formData.get('custom_transport')}\n`;
-                }
-                msg += `- Gear: ${formData.get('custom_gear')}\n`;
-                if(formData.get('extra_gondola')) msg += `- Addon: Gondola\n`;
-                if(formData.get('extra_atv')) msg += `- Addon: ATV\n`;
-                msg += `\n💰 Est. Total: ${document.getElementById('total-price-display').innerText}\n`;
-            }
-
-            if(formData.get('notes')) {
-                msg += `\n📝 Note: ${formData.get('notes')}`;
-            }
-
-            // 2. Open WhatsApp
-            const waUrl = `https://wa.me/919906123456?text=${encodeURIComponent(msg)}`;
-            window.open(waUrl, '_blank');
-        }
-
-        // Initialize
-        updateCalculations();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

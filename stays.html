@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpine Sanctuaries | Wolf Adventure</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -14,14 +14,14 @@
                     colors: {
                         alpine: {
                             white: '#ffffff',
-                            off: '#f8fafc', // Slate 50
-                            ice: '#e0f2fe', // Sky 100
-                            blue: '#0ea5e9', // Sky 500
-                            deep: '#0f172a', // Slate 900
-                            text: '#334155', // Slate 700
-                            muted: '#94a3b8', // Slate 400
-                            gold: '#f59e0b', // Amber 500
-                            goldlight: '#fef3c7' // Amber 100
+                            off: '#f8fafc',
+                            ice: '#e0f2fe',
+                            blue: '#0ea5e9',
+                            deep: '#0f172a',
+                            text: '#334155',
+                            muted: '#94a3b8',
+                            gold: '#f59e0b', // Specific to Stays Page
+                            goldlight: '#fef3c7' // Specific to Stays Page
                         }
                     },
                     boxShadow: {
@@ -32,16 +32,9 @@
             }
         }
     </script>
-    <style>
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        
-        /* Utility: Hide scrollbar for horiz menus */
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-gold selection:text-white">
 
@@ -362,5 +355,6 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

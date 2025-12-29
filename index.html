@@ -2,6 +2,12 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Adventure | Gulmarg Ski Resort</title>
+    <link rel="stylesheet" href="style.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolf Adventure | Gulmarg Ski Resort</title>
@@ -48,112 +54,6 @@
         }
     </script>
     <style>
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-
-        /* Animation Classes */
-        .fade-in-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .delay-100 {
-            animation-delay: 0.1s;
-        }
-
-        .delay-200 {
-            animation-delay: 0.2s;
-        }
-
-        .delay-300 {
-            animation-delay: 0.3s;
-        }
-
-        /* Utility */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Tab Styles */
-        .tab-btn {
-            position: relative;
-        }
-
-        .tab-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background-color: #0ea5e9;
-            transition: width 0.3s ease;
-        }
-
-        .tab-btn.active::after {
-            width: 100%;
-        }
-
-        .tab-btn.active {
-            color: #0f172a;
-            background-color: #f1f5f9;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(5px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Image Filters */
-        .alpine-img {
-            filter: contrast(1.1) saturate(0.9) brightness(1.05);
-        }
-
         /* --- NEW SCHEDULE UTILITIES --- */
         /* Hide scrollbar completely but keep functionality */
         .no-scrollbar::-webkit-scrollbar {
@@ -261,7 +161,6 @@
                 <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070&auto=format&fit=crop"
                     class="w-full h-full object-cover" alt="Gulmarg Skiing">
             </video>
-
             <div class="absolute inset-0 z-10 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-transparent"></div>
             <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
         </div>
@@ -283,8 +182,8 @@
                             PEAKS</span>
                     </h1>
                     <p class="text-slate-200 text-lg md:text-xl font-medium max-w-lg leading-relaxed drop-shadow-md">
-                        Experience the raw, untouched powder of the Himalayas.
-                        Certified guides, premium logistics, and pure adrenaline.
+                        Experience the raw, untouched powder of the Himalayas. Certified guides, premium logistics, and
+                        pure adrenaline.
                     </p>
                 </div>
             </div>
@@ -376,7 +275,6 @@
     </header>
 
     <section id="safety" class="py-32 px-6 bg-slate-50 relative overflow-hidden">
-
         <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
             <svg class="absolute bottom-0 left-0 w-full h-[50%] text-slate-200 opacity-40 transform scale-150 origin-bottom"
                 viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
@@ -384,7 +282,6 @@
                     d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
                 </path>
             </svg>
-
             <svg class="absolute bottom-0 left-0 w-full h-[35%] text-slate-300 opacity-30" viewBox="0 0 1440 320"
                 preserveAspectRatio="none" fill="currentColor">
                 <path
@@ -407,9 +304,7 @@
                     class="group relative bg-white rounded-[2.5rem] p-8 pb-12 pt-0 border border-slate-100 shadow-xl shadow-slate-200/40 hover:-translate-y-2 transition-all duration-500">
                     <div
                         class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-red-50/80 transition-colors duration-500 leading-none select-none z-0 font-serif">
-                        A
-                    </div>
-
+                        A</div>
                     <div
                         class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-red-50 transition-colors duration-500">
                         <div
@@ -421,14 +316,12 @@
                             </svg>
                         </div>
                     </div>
-
                     <div class="relative z-10 text-center mt-8 px-4">
                         <h3 class="font-black text-2xl text-slate-900 mb-4 group-hover:text-red-600 transition-colors">
                             Avalanche Safety</h3>
                         <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-red-200 transition-colors"></div>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">
-                            All guides carry beacons, shovels, and probes. Daily snowpack analysis provided.
-                        </p>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">All guides carry beacons, shovels,
+                            and probes. Daily snowpack analysis provided.</p>
                     </div>
                 </div>
 
@@ -436,9 +329,7 @@
                     class="group relative bg-white rounded-[2.5rem] p-8 pb-12 pt-0 border border-slate-100 shadow-xl shadow-slate-200/40 hover:-translate-y-2 transition-all duration-500">
                     <div
                         class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-sky-50/80 transition-colors duration-500 leading-none select-none z-0 font-serif">
-                        C
-                    </div>
-
+                        C</div>
                     <div
                         class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-sky-50 transition-colors duration-500">
                         <div
@@ -449,15 +340,13 @@
                             </svg>
                         </div>
                     </div>
-
                     <div class="relative z-10 text-center mt-8 px-4">
                         <h3 class="font-black text-2xl text-slate-900 mb-4 group-hover:text-sky-600 transition-colors">
                             Certified Guides</h3>
                         <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-sky-200 transition-colors"></div>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">
-                            Led by Shafqat (National-Level Skier) and Mubashir (Advanced Skier). We aren't just running
-                            a school; we're opening up our wild mountain playground to turn rookies into legends.
-                        </p>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Led by Shafqat (National-Level
+                            Skier) and Mubashir (Advanced Skier). We aren't just running a school; we're opening up our
+                            wild mountain playground to turn rookies into legends.</p>
                     </div>
                 </div>
 
@@ -465,9 +354,7 @@
                     class="group relative bg-white rounded-[2.5rem] p-8 pb-12 pt-0 border border-slate-100 shadow-xl shadow-slate-200/40 hover:-translate-y-2 transition-all duration-500">
                     <div
                         class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-emerald-50/80 transition-colors duration-500 leading-none select-none z-0 font-serif">
-                        S
-                    </div>
-
+                        S</div>
                     <div
                         class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-emerald-50 transition-colors duration-500">
                         <div
@@ -479,19 +366,16 @@
                             </svg>
                         </div>
                     </div>
-
                     <div class="relative z-10 text-center mt-8 px-4">
                         <h3
                             class="font-black text-2xl text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">
                             24/7 Support</h3>
                         <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-emerald-200 transition-colors">
                         </div>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">
-                            From airport pickup to emergency evacuation, we are with you every step.
-                        </p>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">From airport pickup to emergency
+                            evacuation, we are with you every step.</p>
                     </div>
                 </div>
-
             </div>
 
             <div class="text-center mt-20">
@@ -524,11 +408,9 @@
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
                 <div class="lg:col-span-7 flex flex-col justify-center">
-
                     <div class="mb-8">
                         <span class="text-alpine-blue font-bold tracking-widest uppercase text-xs mb-2 block">The
                             Vanguard</span>
@@ -540,7 +422,6 @@
                     </div>
 
                     <div class="space-y-4">
-
                         <div
                             class="group flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-alpine-blue/30 hover:shadow-lg hover:shadow-alpine-blue/5 transition-all duration-300">
                             <div class="relative shrink-0">
@@ -564,9 +445,8 @@
                                             class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide">WFR</span>
                                     </div>
                                 </div>
-                                <p class="text-slate-500 text-xs leading-relaxed">
-                                    A National-Level skier with deep knowledge of the backcountry. He maps the daily
-                                    routes based on snowpack stability.
+                                <p class="text-slate-500 text-xs leading-relaxed">A National-Level skier with deep
+                                    knowledge of the backcountry. He maps the daily routes based on snowpack stability.
                                 </p>
                             </div>
                         </div>
@@ -589,10 +469,8 @@
                                             Specialist</span>
                                     </div>
                                 </div>
-                                <p class="text-slate-500 text-xs leading-relaxed">
-                                    Specializing in stance correction and carving mechanics. Mubashir ensures you look
-                                    as good as you feel on the slopes.
-                                </p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Specializing in stance correction and
+                                    carving mechanics. Mubashir ensures you look as good as you feel on the slopes.</p>
                             </div>
                         </div>
 
@@ -615,19 +493,15 @@
                                             class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide">Rescue</span>
                                     </div>
                                 </div>
-                                <p class="text-slate-500 text-xs leading-relaxed">
-                                    Expert in high-altitude logistics and safety. The backbone of our operations during
-                                    harsh storms and recovery.
-                                </p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Expert in high-altitude logistics and
+                                    safety. The backbone of our operations during harsh storms and recovery.</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div
                     class="lg:col-span-5 h-[550px] relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 shadow-2xl pause-on-hover">
-
                     <div
                         class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none">
                     </div>
@@ -636,7 +510,6 @@
                     </div>
 
                     <div class="animate-scroll-y w-full flex flex-col gap-3 p-3">
-
                         <div class="w-full h-56 rounded-xl overflow-hidden relative group">
                             <img src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?q=80&w=1000&auto=format&fit=crop"
                                 class="w-full h-full object-cover" alt="Ski Action">
@@ -655,7 +528,6 @@
                             <img src="https://images.unsplash.com/photo-1629219355799-2708b73289d6?q=80&w=1000&auto=format&fit=crop"
                                 class="w-full h-full object-cover" alt="Powder Day">
                         </div>
-
                         <div class="w-full h-56 rounded-xl overflow-hidden relative group">
                             <img src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?q=80&w=1000&auto=format&fit=crop"
                                 class="w-full h-full object-cover" alt="Ski Action">
@@ -674,7 +546,6 @@
                             <img src="https://images.unsplash.com/photo-1629219355799-2708b73289d6?q=80&w=1000&auto=format&fit=crop"
                                 class="w-full h-full object-cover" alt="Powder Day">
                         </div>
-
                     </div>
                 </div>
 
@@ -683,20 +554,15 @@
     </section>
 
     <section id="testimonials" class="py-24 px-6 bg-slate-50 relative overflow-hidden">
-
-        <div class="absolute inset-0 opacity-[0.03] pointer-events-none"
-            style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 24px 24px;">
-        </div>
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-dot-pattern"></div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 h-[600px]">
 
                 <div class="lg:col-span-3 relative rounded-[2.5rem] overflow-hidden group shadow-2xl">
                     <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?q=80&w=1000&auto=format&fit=crop"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         alt="Rider in Powder">
-
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent">
                     </div>
 
@@ -797,8 +663,7 @@
                                 <div class="w-10 h-10 rounded-full bg-slate-100"></div>
                                 <div>
                                     <p class="text-slate-900 font-bold text-sm">Sarah K.</p>
-                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wide">London, UK
-                                    </p>
+                                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wide">London, UK</p>
                                 </div>
                             </div>
                             <p class="text-slate-600 text-sm leading-relaxed mb-3">
@@ -837,9 +702,7 @@
 
     <section id="curriculum" class="py-24 px-6 bg-sky-200 font-sans relative overflow-hidden">
 
-        <div class="absolute inset-0 pointer-events-none opacity-20"
-            style="background-image: url('data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 64 64\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230369a1\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3C!-- Skis --%3E%3Cpath d=\'M8 12h2v12H8zM12 12h2v12h-2z\'/%3E%3C!-- Goggles --%3E%3Cpath d=\'M40 16c0-2.2 1.8-4 4-4h8c2.2 0 4 1.8 4 4v4H40v-4z\'/%3E%3C!-- Snowflake --%3E%3Cpath d=\'M12 44l-2 2 2 2-2 2 2 2h2v-2l2 2 2-2-2-2 2-2-2-2v2z\'/%3E%3C!-- Mountain --%3E%3Cpath d=\'M48 48l-6 10h12z\'/%3E%3C!-- Pole --%3E%3Cpath d=\'M24 24h1v10h-1z\'/%3E%3C/g%3E%3C/svg%3E');">
-        </div>
+        <div class="absolute inset-0 pointer-events-none opacity-20 bg-ski-pattern"></div>
 
         <div class="max-w-7xl mx-auto relative z-10">
 
@@ -864,7 +727,7 @@
                         <button onclick="switchDay(1)" id="nav-btn-1"
                             class="nav-btn group flex-1 flex items-center px-8 border-b border-slate-200 last:border-b-0 transition-colors focus:outline-none hover:bg-white bg-white">
                             <span
-                                class="text-lg font-black text-slate-300 w-10 group-hover:text-blue-600 transition-colors nav-num text-blue-600">01</span>
+                                class="text-lg font-black w-10 group-hover:text-blue-600 transition-colors nav-num text-blue-600">01</span>
                             <div class="flex flex-col items-start">
                                 <span
                                     class="text-sm font-bold text-slate-900 uppercase tracking-tight nav-title">Foundations</span>
@@ -938,29 +801,27 @@
                                 <h3 class="text-4xl md:text-5xl font-black text-slate-900 leading-none uppercase">
                                     Foundations<br>& Gear</h3>
                             </div>
-
                             <p class="text-slate-600 text-sm font-medium leading-relaxed mb-10 max-w-md">
                                 The journey begins. We focus on understanding your equipment, finding your balance on
                                 flat ground, and the essential mechanics of stance. No slopes yet, just connection with
                                 the snow.
                             </p>
-
                             <div class="space-y-3">
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Boot Fitting</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Boot Fitting</span>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Static Balance</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Static Balance</span>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Side Stepping</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Side Stepping</span>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Ski Geometry</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Ski Geometry</span>
                                 </div>
                             </div>
                         </div>
@@ -980,28 +841,26 @@
                                 <h3 class="text-4xl md:text-5xl font-black text-slate-900 leading-none uppercase">
                                     Motion<br>& Gravity</h3>
                             </div>
-
                             <p class="text-slate-600 text-sm font-medium leading-relaxed mb-10 max-w-md">
                                 Introduction to the gentle slope. You will learn to trust gravity and control your speed
                                 using the foundational "Snow Plough" technique.
                             </p>
-
                             <div class="space-y-3">
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Gentle Sliding</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Gentle Sliding</span>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Wedge Braking</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Wedge Braking</span>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Speed Control</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Speed Control</span>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="h-px w-4 bg-blue-600"></div>
-                                    <span class="text-xs font-bold text-slate-900 uppercase">Falling Safely</span>
+                                    <div class="h-px w-4 bg-blue-600"></div><span
+                                        class="text-xs font-bold text-slate-900 uppercase">Falling Safely</span>
                                 </div>
                             </div>
                         </div>
@@ -1170,55 +1029,6 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            function switchDay(dayNum) {
-                // 1. Reset all nav buttons (Sidebar)
-                const navBtns = document.querySelectorAll('.nav-btn');
-                navBtns.forEach(btn => {
-                    // Reset to Inactive state (Slate-50 bg, dim text)
-                    btn.classList.remove('bg-white');
-                    btn.classList.add('bg-slate-50', 'hover:bg-white');
-
-                    const num = btn.querySelector('.nav-num');
-                    const title = btn.querySelector('.nav-title');
-
-                    num.classList.remove('text-blue-600');
-                    num.classList.add('text-slate-300');
-
-                    title.classList.remove('text-slate-900');
-                    title.classList.add('text-slate-500');
-                });
-
-                // 2. Activate clicked button (White bg, Solid blue num)
-                const activeBtn = document.getElementById(`nav-btn-${dayNum}`);
-                activeBtn.classList.remove('bg-slate-50', 'hover:bg-white');
-                activeBtn.classList.add('bg-white');
-
-                const activeNum = activeBtn.querySelector('.nav-num');
-                const activeTitle = activeBtn.querySelector('.nav-title');
-
-                activeNum.classList.remove('text-slate-300');
-                activeNum.classList.add('text-blue-600');
-
-                activeTitle.classList.remove('text-slate-500');
-                activeTitle.classList.add('text-slate-900');
-
-                // 3. Switch Content Panels
-                const contents = document.querySelectorAll('.day-content');
-                contents.forEach(content => {
-                    content.classList.remove('opacity-100', 'pointer-events-auto');
-                    content.classList.add('opacity-0', 'pointer-events-none');
-                });
-
-                const activeContent = document.getElementById(`day-${dayNum}`);
-                activeContent.classList.remove('opacity-0', 'pointer-events-none');
-                activeContent.classList.add('opacity-100', 'pointer-events-auto');
-            }
-
-            // Init active state for Day 1
-            switchDay(1);
-        </script>
     </section>
 
     <section id="resort" class="py-16 px-6 bg-slate-50 font-sans">
@@ -1302,227 +1112,234 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var map = L.map('gulmarg-map', {
-                    scrollWheelZoom: false,
-                    zoomControl: false,
-                    attributionControl: false
-                }).setView([34.055, 74.38], 13);
-
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                    subdomains: 'abcd',
-                    maxZoom: 19
-                }).addTo(map);
-
-                L.control.zoom({ position: 'topright' }).addTo(map);
-            });
-        </script>
     </section>
 
-    <section id="attractions" class="py-24 px-6 bg-slate-50 border-b border-slate-200">
+    <section id="attractions" class="py-24 px-6 bg-slate-50 border-b border-slate-200 font-sans">
         <div class="max-w-7xl mx-auto">
+
             <div class="mb-12">
-                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4">ATTRACTIONS & RIDES</h2>
-                <p class="text-slate-500 font-medium">Beyond the slopes. Explore the valley.</p>
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">Valley
+                    Exploration</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase">Attractions &
+                    Rides</h2>
+                <div class="h-1 w-20 bg-slate-200 rounded-full"></div>
             </div>
-            <div class="flex flex-col lg:flex-row gap-12">
-                <div
-                    class="lg:w-1/4 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide border-b lg:border-b-0 lg:border-r border-slate-200 pr-4">
-                    <button onclick="openTab(event, 'gondola')"
-                        class="tab-btn active text-left px-4 py-4 rounded-xl hover:bg-white transition-all focus:outline-none flex items-center justify-between group min-w-[200px] lg:min-w-0">
-                        <span class="font-bold text-sm lg:text-base">Gondola</span>
+
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+                <div class="lg:w-1/4 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
+
+                    <button onclick="openTab(event, 'gondola')" id="defaultOpen"
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Gondola Cable Car</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </button>
+
                     <button onclick="openTab(event, 'thrill')"
-                        class="tab-btn text-left px-4 py-4 rounded-xl text-slate-500 hover:bg-white transition-all focus:outline-none flex items-center justify-between group min-w-[200px] lg:min-w-0">
-                        <span class="font-bold text-sm lg:text-base">Snowmobile & ATV</span>
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Snowmobile & ATV</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </button>
+
                     <button onclick="openTab(event, 'sightseeing')"
-                        class="tab-btn text-left px-4 py-4 rounded-xl text-slate-500 hover:bg-white transition-all focus:outline-none flex items-center justify-between group min-w-[200px] lg:min-w-0">
-                        <span class="font-bold text-sm lg:text-base">Sightseeing</span>
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Sightseeing</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </button>
+
                     <button onclick="openTab(event, 'explore')"
-                        class="tab-btn text-left px-4 py-4 rounded-xl text-slate-500 hover:bg-white transition-all focus:outline-none flex items-center justify-between group min-w-[200px] lg:min-w-0">
-                        <span class="font-bold text-sm lg:text-base">Beyond Gulmarg</span>
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Beyond Gulmarg</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
                     </button>
+
                 </div>
+
                 <div class="lg:w-3/4 min-h-[500px]">
-                    <div id="gondola" class="tab-content active h-full">
-                        <div class="bg-white rounded-2xl p-8 border border-slate-200 h-full shadow-sm">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-2">The World's Second Highest Cable Car</h3>
-                            <p class="text-slate-500 mb-8 max-w-2xl">The highlight of any trip. Rise from the pine
-                                forests to the naked peaks in minutes.</p>
+
+                    <div id="gondola" class="tab-content block h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-3 uppercase tracking-tight">World's 2nd
+                                Highest Cable Car</h3>
+                            <p class="text-slate-500 mb-8 font-medium leading-relaxed max-w-2xl">The highlight of any
+                                trip. Rise from the pine forests to the naked peaks in minutes.</p>
+
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div
-                                    class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-alpine-blue transition-colors">
+                                    class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors group">
                                     <div class="flex justify-between items-center mb-4">
-                                        <h4 class="text-lg font-bold text-slate-900">Phase 1</h4>
+                                        <h4 class="text-lg font-black text-slate-900 uppercase">Phase 1</h4>
                                         <span
                                             class="text-[10px] bg-slate-900 text-white font-bold px-2 py-1 rounded">8,500
                                             ft</span>
                                     </div>
-                                    <p class="text-xs text-slate-500 mb-2 font-bold uppercase tracking-wider">Gulmarg to
+                                    <p class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider">Gulmarg to
                                         Kongdoori</p>
-                                    <p class="text-sm text-slate-600 leading-relaxed">Takes you to a bowl-shaped valley
-                                        where most beginner skiing happens. Features restaurants and snow parks.</p>
+                                    <p class="text-sm text-slate-600 font-medium leading-relaxed">Takes you to a
+                                        bowl-shaped valley. Features restaurants, snow parks, and the main beginner
+                                        slopes.</p>
                                 </div>
                                 <div
-                                    class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:border-alpine-blue transition-colors relative overflow-hidden">
-                                    <div
-                                        class="absolute top-0 right-0 w-16 h-16 bg-alpine-blue/10 rounded-full -mr-8 -mt-8">
-                                    </div>
+                                    class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors relative overflow-hidden group">
                                     <div class="flex justify-between items-center mb-4 relative z-10">
-                                        <h4 class="text-lg font-bold text-slate-900">Phase 2</h4>
+                                        <h4 class="text-lg font-black text-slate-900 uppercase">Phase 2</h4>
                                         <span
-                                            class="text-[10px] bg-alpine-blue text-white font-bold px-2 py-1 rounded">14,000
+                                            class="text-[10px] bg-blue-600 text-white font-bold px-2 py-1 rounded">14,000
                                             ft</span>
                                     </div>
                                     <p
-                                        class="text-xs text-slate-500 mb-2 font-bold uppercase tracking-wider relative z-10">
-                                        Kongdoori to Apharwat Peak</p>
-                                    <p class="text-sm text-slate-600 leading-relaxed relative z-10">The main event.
-                                        Breathtaking views of Nanga Parbat (9th highest mountain). <br><span
-                                            class="text-red-500 font-semibold text-xs mt-2 block">*Strictly for
-                                            sightseeing or expert skiers. Weather dependent.</span></p>
+                                        class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider relative z-10">
+                                        To Apharwat Peak</p>
+                                    <p class="text-sm text-slate-600 font-medium leading-relaxed relative z-10">The main
+                                        event. Breathtaking views of Nanga Parbat. <br><span
+                                            class="text-red-500 font-bold text-xs mt-2 block">*Sightseeing or Experts
+                                            Only.</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="thrill" class="tab-content h-full">
-                        <div class="bg-white rounded-2xl p-8 border border-slate-200 h-full shadow-sm">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-8">Adrenaline Without Skis</h3>
+
+                    <div id="thrill" class="tab-content hidden h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tight">Adrenaline
+                                Without Skis</h3>
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div
-                                    class="group relative overflow-hidden rounded-2xl border border-slate-200 aspect-[4/3]">
+                                    class="group relative overflow-hidden rounded-xl border border-slate-200 aspect-[4/3]">
                                     <img src="https://images.unsplash.com/photo-1518047910903-8d3e230559eb?q=80&w=2070&auto=format&fit=crop"
                                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         alt="Snowmobile">
                                     <div
-                                        class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
-                                        <h4 class="text-xl font-bold text-white mb-2">Snowmobiles</h4>
-                                        <p class="text-slate-300 text-sm mb-3">High-speed motorized sleds. Zoom across
-                                            vast frozen snowfields with a local operator. Fast, loud, and incredibly
-                                            fun.</p>
-                                        <div class="flex gap-2">
-                                            <span
-                                                class="text-[10px] bg-white/20 text-white px-2 py-1 rounded backdrop-blur-sm">Speed</span>
-                                            <span
-                                                class="text-[10px] bg-white/20 text-white px-2 py-1 rounded backdrop-blur-sm">Power</span>
-                                        </div>
+                                        class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                                        <h4 class="text-xl font-bold text-white mb-1">Snowmobiles</h4>
+                                        <p class="text-slate-300 text-xs font-medium mb-3">High-speed motorized sleds.
+                                            Zoom across vast frozen snowfields.</p>
                                     </div>
                                 </div>
                                 <div
-                                    class="group relative overflow-hidden rounded-2xl border border-slate-200 aspect-[4/3]">
+                                    class="group relative overflow-hidden rounded-xl border border-slate-200 aspect-[4/3]">
                                     <img src="https://images.unsplash.com/photo-1621687720272-386623bd9e30?q=80&w=2070&auto=format&fit=crop"
                                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         alt="ATV">
                                     <div
-                                        class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
-                                        <h4 class="text-xl font-bold text-white mb-2">ATV (Quad Bikes)</h4>
-                                        <p class="text-slate-300 text-sm mb-3">4x4 beasts with tire chains. Popular
-                                            route: Tangmarg to Drung Waterfall or around Strawberry Valley.</p>
-                                        <div class="flex gap-2">
-                                            <span
-                                                class="text-[10px] bg-white/20 text-white px-2 py-1 rounded backdrop-blur-sm">Off-road</span>
-                                            <span
-                                                class="text-[10px] bg-white/20 text-white px-2 py-1 rounded backdrop-blur-sm">Scenic</span>
-                                        </div>
+                                        class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                                        <h4 class="text-xl font-bold text-white mb-1">ATV (Quad Bikes)</h4>
+                                        <p class="text-slate-300 text-xs font-medium mb-3">4x4 beasts with tire chains.
+                                            Explore Tangmarg to Drung.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="sightseeing" class="tab-content h-full">
-                        <div class="bg-white rounded-2xl p-8 border border-slate-200 h-full shadow-sm">
-                            <h3 class="text-2xl font-bold text-slate-900 mb-2">Iconic Spots</h3>
-                            <p class="text-slate-500 mb-8">The "Must-Visit" locations for every traveler.</p>
+
+                    <div id="sightseeing" class="tab-content hidden h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">Iconic Spots
+                            </h3>
+                            <p class="text-slate-500 mb-8 font-medium">The "Must-Visit" locations for every traveler.
+                            </p>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <div
+                                    class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all group">
                                     <div class="h-32 rounded-lg bg-slate-200 mb-4 overflow-hidden">
                                         <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1740&auto=format&fit=crop"
-                                            class="w-full h-full object-cover" alt="Waterfall">
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            alt="Waterfall">
                                     </div>
                                     <h4 class="text-lg font-bold text-slate-900 mb-1">Drung Waterfall</h4>
-                                    <p class="text-xs text-slate-500">Famous in Jan/Feb. The water freezes solid
-                                        creating a massive wall of icicles.</p>
+                                    <p class="text-xs text-slate-500 font-medium">Famous frozen waterfall (Jan/Feb).</p>
                                 </div>
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <div
+                                    class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all group">
                                     <div class="h-32 rounded-lg bg-slate-200 mb-4 overflow-hidden">
                                         <img src="https://images.unsplash.com/photo-1548625361-e88c6023d240?q=80&w=1939&auto=format&fit=crop"
-                                            class="w-full h-full object-cover" alt="Church">
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            alt="Church">
                                     </div>
                                     <h4 class="text-lg font-bold text-slate-900 mb-1">St. Mary’s Church</h4>
-                                    <p class="text-xs text-slate-500">100+ year old Victorian church. Looks like a
-                                        fairytale when covered in snow.</p>
+                                    <p class="text-xs text-slate-500 font-medium">100+ year old Victorian church.</p>
                                 </div>
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <div
+                                    class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all group">
                                     <div class="h-32 rounded-lg bg-slate-200 mb-4 overflow-hidden">
                                         <img src="https://images.unsplash.com/photo-1566835706225-d72b22596001?q=80&w=1974&auto=format&fit=crop"
-                                            class="w-full h-full object-cover" alt="Temple">
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            alt="Temple">
                                     </div>
                                     <h4 class="text-lg font-bold text-slate-900 mb-1">Maharani Temple</h4>
-                                    <p class="text-xs text-slate-500">Red-roofed Shiva temple on a hillock. Visible from
-                                        almost everywhere in the valley.</p>
+                                    <p class="text-xs text-slate-500 font-medium">Red-roofed Shiva temple on a hill.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="explore" class="tab-content h-full">
-                        <div
-                            class="bg-white rounded-2xl p-8 border border-slate-200 h-full shadow-sm flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-2xl font-bold text-slate-900 mb-6">Complete Your Itinerary</h3>
-                                <div class="space-y-8">
-                                    <div class="flex gap-6">
-                                        <div
-                                            class="w-16 h-16 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xl shrink-0">
-                                            DL</div>
-                                        <div>
-                                            <h4 class="text-xl font-bold text-slate-900">Srinagar (Dal Lake)</h4>
-                                            <p class="text-sm text-slate-600 mt-2">2 hours away. The classic experience
-                                                is a Shikara ride on the frozen lake and a Houseboat stay.</p>
-                                        </div>
+
+                    <div id="explore" class="tab-content hidden h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">Complete Your
+                                Itinerary</h3>
+                            <div class="space-y-8">
+                                <div class="flex gap-6 group">
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xl shrink-0 group-hover:bg-blue-600 transition-colors">
+                                        DL</div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-slate-900">Srinagar (Dal Lake)</h4>
+                                        <p class="text-sm text-slate-500 mt-2 font-medium">2 hours away. The classic
+                                            experience is a Shikara ride on the frozen lake and a Houseboat stay.</p>
                                     </div>
-                                    <div class="w-px h-8 bg-slate-200 ml-8"></div>
-                                    <div class="flex gap-6">
-                                        <div
-                                            class="w-16 h-16 rounded-full bg-white border-2 border-slate-200 text-slate-900 flex items-center justify-center font-bold text-xl shrink-0">
-                                            PH</div>
-                                        <div>
-                                            <h4 class="text-xl font-bold text-slate-900">Pahalgam</h4>
-                                            <p class="text-sm text-slate-600 mt-2">"Valley of Shepherds." Famous for
-                                                scenic rivers and pine forests. A softer vibe compared to the
-                                                high-altitude desert.</p>
-                                        </div>
+                                </div>
+                                <div class="w-px h-8 bg-slate-200 ml-8"></div>
+                                <div class="flex gap-6 group">
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-white border-2 border-slate-200 text-slate-900 flex items-center justify-center font-bold text-xl shrink-0 group-hover:border-blue-600 group-hover:text-blue-600 transition-colors">
+                                        PH</div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-slate-900">Pahalgam</h4>
+                                        <p class="text-sm text-slate-500 mt-2 font-medium">"Valley of Shepherds." Famous
+                                            for scenic rivers and pine forests.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
             <div
-                class="mt-8 bg-sky-50 border border-sky-100 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4">
-                <div class="bg-sky-500 text-white p-2 rounded-lg shrink-0">
+                class="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div class="bg-blue-600 text-white p-2 rounded-lg shrink-0 shadow-md">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="font-bold text-sky-900 uppercase tracking-wider text-xs mb-1">Pro Tip: Booking Essentials
-                    </h4>
-                    <p class="text-sm text-sky-800">If you book a package, ask if Gondola tickets are included. Tickets
-                        (especially Phase 2) sell out weeks in advance online. Getting them on the spot is nearly
-                        impossible.</p>
+                    <h4 class="font-bold text-blue-900 uppercase tracking-wider text-xs mb-1">Pro Tip: Booking
+                        Essentials</h4>
+                    <p class="text-sm text-blue-800 font-medium">If you book a package, ask if Gondola tickets are
+                        included. Tickets (especially Phase 2) sell out weeks in advance online.</p>
                 </div>
             </div>
+
         </div>
     </section>
 
     <section id="accommodations" class="py-24 px-6 bg-slate-900">
         <div class="max-w-7xl mx-auto">
+
             <div class="text-center mb-16 text-white">
                 <h2 class="text-3xl md:text-5xl font-black mb-4">STAY IN COMFORT</h2>
                 <p class="text-slate-400">Warm beds and hot meals after cold days.</p>
@@ -1531,9 +1348,12 @@
                     View All Resorts & Rooms →
                 </a>
             </div>
+
             <div class="grid md:grid-cols-2 gap-12">
+
                 <div class="space-y-6">
                     <h3 class="text-2xl font-bold text-white">The Lodge</h3>
+
                     <div
                         class="auto-slider relative h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 group">
                         <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
@@ -1563,11 +1383,14 @@
                             </div>
                         </div>
                     </div>
+
                     <p class="text-slate-400 text-sm leading-relaxed">Centrally heated rooms with mountain views.
                         5-minute walk to the Gondola.</p>
                 </div>
+
                 <div class="space-y-6">
                     <h3 class="text-2xl font-bold text-white">Local Flavors</h3>
+
                     <div
                         class="auto-slider relative h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 group">
                         <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
@@ -1597,18 +1420,22 @@
                             </div>
                         </div>
                     </div>
+
                     <p class="text-slate-400 text-sm leading-relaxed">Authentic Kashmiri Wazwan and continental comfort
                         food to refuel.</p>
                 </div>
+
             </div>
         </div>
     </section>
 
     <section id="packages" class="py-24 px-6 bg-white max-w-7xl mx-auto">
+
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-black mb-4 text-slate-900">PACKAGES</h2>
             <p class="text-slate-500">Swipe to view all curated experiences.</p>
         </div>
+
         <div class="flex justify-end mb-8 px-4 md:px-0">
             <div class="flex flex-col items-end">
                 <div class="relative">
@@ -1624,21 +1451,24 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-[10px] text-slate-400 mt-2">Rates are estimates for reference only. Final billing is in
-                    INR.</p>
+                <p class="text-[10px] text-slate-400 mt-2">Rates are estimates. Final billing in INR.</p>
             </div>
         </div>
-        <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory scrollbar-hide px-4 md:px-0">
+
+        <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory scrollbar-hide px-4 md:px-0 items-stretch">
+
             <div
                 class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all flex flex-col group">
                 <h3 class="text-2xl font-black text-slate-900 mb-1">Basic</h3>
                 <div class="text-xs text-slate-400 mb-6 uppercase tracking-widest font-bold">Backpacker Essentials</div>
+
                 <div class="text-4xl font-bold text-slate-900 mb-2">
                     <span class="price-amount" data-inr="22999">₹22,999</span><span
                         class="text-lg text-slate-400 font-normal">/pp</span>
                 </div>
                 <div class="text-xs text-emerald-600 font-bold mb-8 bg-emerald-50 px-3 py-1 rounded-full w-fit">Save
-                    ~₹10k with our Two-Person Buddy Deal</div>
+                    ~₹10k (Buddy Deal)</div>
+
                 <ul class="space-y-4 mb-8 text-slate-600 text-sm flex-1">
                     <li class="flex items-start"><span
                             class="mt-1.5 w-1.5 h-1.5 bg-slate-400 rounded-full mr-3 shrink-0"></span>Dormitory
@@ -1648,122 +1478,118 @@
                     <li class="flex items-center"><span
                             class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Gondola Pass (Phase 1)</li>
                 </ul>
+
                 <a href="booking.html"
                     class="block w-full text-center py-4 rounded-lg border-2 border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white transition-colors">Book
                     Now</a>
             </div>
+
             <div
                 class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all flex flex-col group relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-2 bg-alpine-blue"></div>
+
                 <h3 class="text-2xl font-black text-slate-900 mb-1">Silver</h3>
                 <div class="text-xs text-alpine-blue mb-6 uppercase tracking-widest font-bold">Standard Choice</div>
+
                 <div class="text-4xl font-bold text-slate-900 mb-2">
                     <span class="price-amount" data-inr="26999">₹26,999</span><span
                         class="text-lg text-slate-400 font-normal">/pp</span>
                 </div>
                 <div class="text-xs text-emerald-600 font-bold mb-8 bg-emerald-50 px-3 py-1 rounded-full w-fit">Save
-                    ~₹10k with our Two-Person Buddy Deal</div>
+                    ~₹10k (Buddy Deal)</div>
+
                 <ul class="space-y-4 mb-8 text-slate-600 text-sm flex-1">
-                    <li class="flex items-start"><span
-                            class="mt-1.5 w-1.5 h-1.5 bg-alpine-blue rounded-full mr-3 shrink-0"></span><a
-                            href="stays.html"
+                    <li class="flex items-start">
+                        <span class="mt-1.5 w-1.5 h-1.5 bg-alpine-blue rounded-full mr-3 shrink-0"></span>
+                        <a href="stays.html"
                             class="text-alpine-blue hover:text-sky-700 underline underline-offset-2 decoration-dotted font-semibold">Poshwan
-                            Hotel / Gulmarg Ski Lodge</a></li>
+                            / Ski Lodge</a>
+                    </li>
                     <li class="flex items-center"><span
                             class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Standard Gear Rental</li>
                     <li class="flex items-center"><span
                             class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Certified Instructor</li>
                 </ul>
+
                 <a href="booking.html"
-                    class="block w-full text-center py-4 rounded-lg bg-alpine-blue text-white font-bold hover:bg-sky-600 transition-colors shadow-lg shadow-alpine-blue/20">Book
+                    class="block w-full text-center py-4 rounded-lg border-2 border-alpine-blue text-alpine-blue font-bold hover:bg-alpine-blue hover:text-white transition-colors">Book
                     Now</a>
             </div>
+
             <div
                 class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all flex flex-col group">
                 <h3 class="text-2xl font-black text-slate-900 mb-1">Gold</h3>
                 <div class="text-xs text-amber-500 mb-6 uppercase tracking-widest font-bold">Premium Comfort</div>
+
                 <div class="text-4xl font-bold text-slate-900 mb-2">
                     <span class="price-amount" data-inr="34999">₹34,999</span><span
                         class="text-lg text-slate-400 font-normal">/pp</span>
                 </div>
                 <div class="text-xs text-emerald-600 font-bold mb-8 bg-emerald-50 px-3 py-1 rounded-full w-fit">Save
-                    ~₹10k with our Two-Person Buddy Deal</div>
+                    ~₹10k (Buddy Deal)</div>
+
                 <ul class="space-y-4 mb-8 text-slate-600 text-sm flex-1">
-                    <li class="flex items-start"><span
-                            class="mt-1.5 w-1.5 h-1.5 bg-amber-400 rounded-full mr-3 shrink-0"></span><a
-                            href="stays.html"
-                            class="text-alpine-blue hover:text-sky-700 underline underline-offset-2 decoration-dotted font-semibold">Hotel
-                            Affarwat / Hotel Welcome / Gulmarg Inn</a></li>
+                    <li class="flex items-start">
+                        <span class="mt-1.5 w-1.5 h-1.5 bg-amber-400 rounded-full mr-3 shrink-0"></span>
+                        <a href="stays.html"
+                            class="text-alpine-blue hover:text-sky-700 underline underline-offset-2 decoration-dotted font-semibold">Affarwat
+                            / Rosewood</a>
+                    </li>
                     <li class="flex items-center"><span
                             class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Performance Gear</li>
                     <li class="flex items-center"><span class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Meals
                         Included</li>
                 </ul>
+
                 <a href="booking.html"
                     class="block w-full text-center py-4 rounded-lg border-2 border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white transition-colors">Book
                     Now</a>
             </div>
+
             <div
                 class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all flex flex-col group">
                 <h3 class="text-2xl font-black text-slate-900 mb-1">Diamond</h3>
-                <div class="text-xs text-emerald-500 mb-6 uppercase tracking-widest font-bold">Luxury Stay</div>
+                <div class="text-xs text-indigo-500 mb-6 uppercase tracking-widest font-bold">Elite Experience</div>
+
                 <div class="text-4xl font-bold text-slate-900 mb-2">
                     <span class="price-amount" data-inr="44999">₹44,999</span><span
                         class="text-lg text-slate-400 font-normal">/pp</span>
                 </div>
                 <div class="text-xs text-emerald-600 font-bold mb-8 bg-emerald-50 px-3 py-1 rounded-full w-fit">Save
-                    ~₹10k with our Two-Person Buddy Deal</div>
+                    ~₹10k (Buddy Deal)</div>
+
                 <ul class="space-y-4 mb-8 text-slate-600 text-sm flex-1">
-                    <li class="flex items-start"><span
-                            class="mt-1.5 w-1.5 h-1.5 bg-emerald-400 rounded-full mr-3 shrink-0"></span><a
-                            href="stays.html"
-                            class="text-alpine-blue hover:text-sky-700 underline underline-offset-2 decoration-dotted font-semibold">Hotel
-                            Royal Park / Zahgeer / Khaleel Palace</a></li>
+                    <li class="flex items-start">
+                        <span class="mt-1.5 w-1.5 h-1.5 bg-indigo-400 rounded-full mr-3 shrink-0"></span>
+                        <a href="stays.html"
+                            class="text-alpine-blue hover:text-sky-700 underline underline-offset-2 decoration-dotted font-semibold">Royal
+                            Castle / Khyber</a>
+                    </li>
                     <li class="flex items-center"><span class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Pro
                         Gear Rental</li>
                     <li class="flex items-center"><span
                             class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Private Guide</li>
                 </ul>
+
                 <a href="booking.html"
                     class="block w-full text-center py-4 rounded-lg border-2 border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white transition-colors">Book
                     Now</a>
             </div>
-            <div
-                class="min-w-[85%] md:min-w-[350px] snap-center bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-2 transition-all flex flex-col group">
-                <h3 class="text-2xl font-black text-slate-900 mb-1">Platinum</h3>
-                <div class="text-xs text-indigo-500 mb-6 uppercase tracking-widest font-bold">Elite Experience</div>
-                <div class="text-4xl font-bold text-slate-900 mb-2">
-                    <span class="price-amount" data-inr="64999">₹64,999</span><span
-                        class="text-lg text-slate-400 font-normal">/pp</span>
-                </div>
-                <div class="text-xs text-emerald-600 font-bold mb-8 bg-emerald-50 px-3 py-1 rounded-full w-fit">Save
-                    ~₹10k with our Two-Person Buddy Deal</div>
-                <ul class="space-y-4 mb-8 text-slate-600 text-sm flex-1">
-                    <li class="flex items-start"><span
-                            class="mt-1.5 w-1.5 h-1.5 bg-indigo-400 rounded-full mr-3 shrink-0"></span><a
-                            href="stays.html"
-                            class="text-alpine-blue hover:text-sky-700 underline underline-offset-2 decoration-dotted font-semibold">Hotel
-                            Royal Castle / Hilltop / Rosewood / Grand Mamtaz</a></li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>Full
-                        Gear & ATV Access</li>
-                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-slate-900 rounded-full mr-3"></span>All
-                        Meals & Beverages</li>
-                </ul>
-                <a href="booking.html"
-                    class="block w-full text-center py-4 rounded-lg border-2 border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white transition-colors">Book
-                    Now</a>
-            </div>
+
             <div
                 class="min-w-[85%] md:min-w-[350px] snap-center bg-slate-900 text-white rounded-2xl p-8 shadow-2xl flex flex-col relative overflow-hidden">
                 <div
                     class="absolute top-0 right-0 bg-white text-slate-900 text-[10px] font-bold px-4 py-2 rounded-bl-xl uppercase tracking-widest">
                     EXCLUSIVE</div>
+
                 <h3 class="text-2xl font-black mb-1">VVIP</h3>
                 <div class="text-xs text-purple-400 mb-6 uppercase tracking-widest font-bold">The Royal Treatment</div>
+
                 <div class="text-4xl font-bold mb-8">
                     <span class="price-amount" data-inr="286999">₹286,999</span><span
                         class="text-lg text-slate-500 font-normal">/pp</span>
                 </div>
+
                 <ul class="space-y-4 mb-8 text-slate-300 text-sm flex-1 font-medium">
                     <li class="flex items-start"><span
                             class="mt-1.5 w-1.5 h-1.5 bg-white rounded-full mr-3 shrink-0"></span><a href="stays.html"
@@ -1774,10 +1600,12 @@
                     <li class="flex items-center"><span class="w-1.5 h-1.5 bg-white rounded-full mr-3"></span>Personal
                         Concierge</li>
                 </ul>
+
                 <a href="booking.html"
                     class="block w-full text-center py-4 rounded-lg bg-white text-slate-900 font-bold hover:bg-slate-200 transition-colors">Book
                     Now</a>
             </div>
+
         </div>
     </section>
 
@@ -1798,8 +1626,7 @@
                             <span class="font-mono text-sm font-bold" id="current-year-display">2026 Season</span>
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7">
-                                </path>
+                                    d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
 
@@ -1820,8 +1647,7 @@
                 </div>
 
                 <div class="flex-1 overflow-y-auto">
-                    <div id="grid-container">
-                    </div>
+                    <div id="grid-container"></div>
                 </div>
 
                 <div class="p-4 border-t border-slate-200">
@@ -1833,7 +1659,6 @@
                         <span class="text-slate-900" id="total-count">00 Batches</span>
                     </div>
                 </div>
-
             </aside>
 
             <section class="flex-[3] h-full bg-white border border-slate-200 rounded-2xl relative overflow-hidden">
@@ -1847,8 +1672,11 @@
 
     <section id="logistics" class="py-16 px-6 max-w-5xl mx-auto">
         <div class="bg-slate-50 rounded-2xl p-8 md:p-12 border border-slate-200">
+
             <h2 class="text-3xl font-black text-slate-900 mb-8">GETTING HERE</h2>
+
             <div class="grid md:grid-cols-2 gap-12">
+
                 <div>
                     <div class="flex items-center gap-4 mb-4">
                         <div class="bg-slate-900 text-white p-2 rounded-lg">
@@ -1862,18 +1690,23 @@
                     <p class="text-slate-500 mb-6 text-sm leading-relaxed">The nearest airport is Srinagar International
                         Airport. Major airlines (Indigo, Air India, Vistara) operate daily flights from Delhi (1.5 hrs).
                     </p>
+
                     <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
                         <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-1">Tip</p>
                         <p class="text-xs font-semibold text-slate-700">Book a window seat on the left side (Delhi to
                             Srinagar) for the best mountain views.</p>
                     </div>
                 </div>
+
                 <div>
                     <div class="flex items-center gap-4 mb-4">
                         <div class="bg-slate-900 text-white p-2 rounded-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 012-2v0m12 0a2 2 0 012 2v0m-2-2a2 2 0 00-1-1h-1">
+                                </path>
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900">The Drive Up</h3>
@@ -1881,6 +1714,7 @@
                     <p class="text-slate-500 mb-6 text-sm leading-relaxed">Gulmarg is a 55km drive from the airport.
                         Airport Pickup Available (Add-on). We can organize 4x4 SUVs with tire chains for you upon
                         request.</p>
+
                     <ul class="text-sm text-slate-600 space-y-2 font-medium">
                         <li class="flex justify-between border-b border-slate-200 pb-2"><span>Distance</span> <span>55
                                 KM</span></li>
@@ -1889,17 +1723,21 @@
                         <li class="flex justify-between"><span>Taxi Cost</span> <span>~₹3,000</span></li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </section>
 
     <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 px-6 mt-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+
             <div class="col-span-1 md:col-span-2 pr-8">
                 <h2 class="text-3xl font-black tracking-tighter mb-6">WOLF<span class="text-alpine-blue">.ADV</span>
                 </h2>
-                <p class="max-w-sm text-slate-400 mb-8 leading-relaxed text-sm">Experience the raw beauty of the
-                    Himalayas with certified guides, premium logistics, and local expertise.</p>
+                <p class="max-w-sm text-slate-400 mb-8 leading-relaxed text-sm">
+                    Experience the raw beauty of the Himalayas with certified guides, premium logistics, and local
+                    expertise.
+                </p>
                 <a href="booking.html"
                     class="inline-block px-8 py-3 rounded-md bg-white text-slate-900 font-bold text-sm hover:bg-alpine-blue hover:text-white transition-colors">
                     Start Your Booking
@@ -1922,8 +1760,9 @@
                     <li>Near Gondola Base<br>Gulmarg, 193403</li>
                     <li>+91 9906 123 456</li>
                     <li>hello@wolf.com</li>
-                    <li class="pt-2"><a href="#"
-                            class="text-white font-bold hover:text-alpine-blue transition-colors">Get Directions</a>
+                    <li class="pt-2">
+                        <a href="#" class="text-white font-bold hover:text-alpine-blue transition-colors">Get
+                            Directions</a>
                     </li>
                 </ul>
             </div>
@@ -1940,294 +1779,7 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Slider Logic
-            const sliders = document.querySelectorAll('.auto-slider');
-            sliders.forEach((slider) => {
-                const track = slider.querySelector('.slider-track');
-                const slides = track.children;
-                const slideCount = slides.length;
-                let currentIndex = 0;
-                setInterval(() => {
-                    currentIndex = (currentIndex + 1) % slideCount;
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }, 3000);
-            });
-        });
-
-        // Tab Logic for Attractions Section
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-
-            // Hide all tab content
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-                tabcontent[i].style.display = "none";
-            }
-
-            // Remove "active" class from all tab links
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-                // Reset styling for inactive tabs
-                tablinks[i].classList.add("text-slate-500");
-                tablinks[i].classList.remove("text-slate-900");
-            }
-
-            // Show the current tab, and add "active" class to the button that opened the tab
-            const activeContent = document.getElementById(tabName);
-            activeContent.style.display = "block";
-            // Small timeout to allow display block to apply before opacity transition
-            setTimeout(() => {
-                activeContent.classList.add("active");
-            }, 10);
-
-            evt.currentTarget.classList.add("active");
-            evt.currentTarget.classList.remove("text-slate-500");
-            evt.currentTarget.classList.add("text-slate-900");
-        }
-
-        // Currency Converter Logic
-        function updateCurrency() {
-            const selector = document.getElementById('currency-selector');
-            const currency = selector.value;
-            const priceElements = document.querySelectorAll('.price-amount');
-
-            const rates = {
-                'INR': 1,
-                'USD': 85,
-                'EUR': 90
-            };
-
-            const symbols = {
-                'INR': '₹',
-                'USD': '$',
-                'EUR': '€'
-            };
-
-            priceElements.forEach(el => {
-                const basePrice = parseFloat(el.getAttribute('data-inr'));
-                let convertedPrice;
-
-                if (currency === 'INR') {
-                    convertedPrice = basePrice;
-                } else {
-                    convertedPrice = basePrice / rates[currency];
-                }
-
-                // Format with commas and no decimal places
-                const formattedPrice = Math.round(convertedPrice).toLocaleString();
-                el.textContent = `${symbols[currency]}${formattedPrice}`;
-            });
-        }
-
-        // Advanced Weather Widget
-        const weatherData = {
-            gulmarg: {
-                base: "-5°C",
-                summit: "-12°C",
-                baseLabel: "Base (2,650m)",
-                summitLabel: "Summit (3,980m)"
-            },
-            pahalgam: {
-                base: "-2°C",
-                summit: "-8°C",
-                baseLabel: "Base (2,130m)",
-                summitLabel: "Summit (3,400m)"
-            },
-            sonamarg: {
-                base: "-8°C",
-                summit: "-15°C",
-                baseLabel: "Base (2,800m)",
-                summitLabel: "Summit (4,100m)"
-            }
-        };
-
-        function updateWeather() {
-            const selector = document.getElementById('weather-location');
-            const location = selector.value;
-            const data = weatherData[location];
-
-            if (data) {
-                document.getElementById('base-temp').textContent = data.base;
-                document.getElementById('summit-temp').textContent = data.summit;
-                document.getElementById('base-label').textContent = data.baseLabel;
-                document.getElementById('summit-label').textContent = data.summitLabel;
-            }
-        }
-
-        /* --- NEW SCHEDULE LOGIC --- */
-
-        // --- CONFIGURATION ---
-        const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-        // --- DATA GENERATION (SKI LOGIC) ---
-        const createBatches = (year, count) => {
-            return months.map((m, i) => ({
-                short: m,
-                long: fullMonths[i],
-                batches: Array.from({ length: count }, (_, b) => {
-                    // Cycle Levels
-                    const levels = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
-                    const level = levels[b % 3];
-
-                    // Simulate Inventory
-                    const spots = Math.floor(Math.random() * 6); // 0 to 5 spots
-
-                    return {
-                        id: `SKI-${year.toString().slice(2)}${(i + 1).toString().padStart(2, '0')}-${b + 1}`,
-                        date: `${(b * 4) + 2}-${(b * 4) + 6} ${m}`,
-                        level: level,
-                        price: level === 'BEGINNER' ? '₹15k' : (level === 'INTERMEDIATE' ? '₹18k' : '₹22k'),
-                        spots: spots,
-                        status: spots === 0 ? 'SOLD OUT' : 'OPEN'
-                    };
-                })
-            }));
-        };
-
-        // Database Simulation
-        const db = {
-            2026: createBatches(2026, 8), // 8 Batches per card
-            2025: createBatches(2025, 8)
-        };
-
-        let currentYear = 2026;
-        let observer;
-
-        // --- RENDER LOGIC ---
-
-        function render(year) {
-            const data = db[year];
-
-            // Update Footer Count
-            const total = data.reduce((acc, curr) => acc + curr.batches.length, 0);
-            document.getElementById('total-count').innerText = `${total} BATCHES`;
-
-            // 1. Render Cards (Display Panel) - STRICT MINIMAL REDESIGN
-            // Adjusted height to h-[500px] to match package cards.
-            document.getElementById('cards-container').innerHTML = data.map((d, i) => `
-                <article id="card-${i}" class="snap-item shrink-0 w-[88vw] md:w-[400px] h-full bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col relative group overflow-hidden hover:shadow-lg transition-all duration-300">
-                    <div class="p-6 border-b border-slate-100">
-                        <h2 class="text-4xl font-black text-slate-900 tracking-tighter">${d.long}</h2>
-                    </div>
-                    <div class="flex-1 overflow-y-auto no-scrollbar bg-white p-6 pt-4 space-y-4">
-                        ${d.batches.map(batch => `
-                            <div class="flex flex-col gap-1 pb-4 border-b border-slate-50 last:border-0 last:pb-0">
-                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${batch.id}</span>
-                                <span class="text-xl font-bold text-slate-900">${batch.date}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </article>
-            `).join('');
-
-            // 2. Render Grid (Control Panel) - GRID OVERHAUL
-            // Converted list to a grid-cols-3 layout with gaps
-            const gridContainer = document.getElementById('grid-container');
-            gridContainer.className = "grid grid-cols-3 gap-2 p-4"; // Apply grid styling here
-
-            gridContainer.innerHTML = data.map((d, i) => `
-                <button onclick="scrollToIndex(${i})" id="btn-${i}" class="h-10 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center uppercase tracking-widest bg-slate-50 text-slate-400 border border-transparent hover:bg-slate-100">
-                    ${d.short}
-                </button>
-            `).join('');
-
-            setupObserver();
-        }
-
-        // --- BOOKING LOGIC (WHATSAPP) ---
-        function bookBatch(id, level, date) {
-            const phoneNumber = "919900000000";
-
-            const message = `Hi, I am interested in booking a Ski Course with Wolf Adventure.
-            
-Batch ID: ${id}
-Level: ${level}
-Dates: ${date}
-
-Is this slot available?`;
-
-            // Detect mobile to use correct WA link
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const baseUrl = isMobile ? "https://api.whatsapp.com/send" : "https://web.whatsapp.com/send";
-            const url = `${baseUrl}?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-
-            window.open(url, '_blank');
-        }
-
-        // --- NAVIGATION & UI LOGIC ---
-
-        function toggleDropdown() {
-            const menu = document.getElementById('year-dropdown');
-            if (menu.classList.contains('open')) {
-                menu.classList.remove('open');
-                menu.classList.add('closed');
-                setTimeout(() => menu.classList.add('hidden'), 150);
-            } else {
-                menu.classList.remove('hidden');
-                setTimeout(() => { menu.classList.remove('closed'); menu.classList.add('open'); }, 10);
-            }
-        }
-
-        function selectYear(year) {
-            currentYear = year;
-            document.getElementById('current-year-display').innerText = `${year} Season`;
-            toggleDropdown();
-            render(year);
-        }
-
-        function scrollToIndex(index) {
-            const card = document.getElementById(`card-${index}`);
-            if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-        }
-
-        // --- SCROLL SYNC (Observer) ---
-
-        function updateActiveButton(index) {
-            // Reset all buttons to inactive grid state
-            document.querySelectorAll('#grid-container button').forEach(btn => {
-                btn.className = "h-10 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center uppercase tracking-widest bg-slate-50 text-slate-400 border border-transparent hover:bg-slate-100";
-            });
-
-            // Activate current button (High Contrast Panel Style)
-            const btn = document.getElementById(`btn-${index}`);
-            if (btn) {
-                btn.className = "h-10 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center uppercase tracking-widest bg-slate-900 text-white shadow-md scale-105";
-            }
-        }
-
-        function setupObserver() {
-            if (observer) observer.disconnect();
-
-            observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.id.split('-')[1];
-                        updateActiveButton(id);
-                    }
-                });
-            }, { root: document.getElementById('cards-container'), threshold: 0.6 });
-
-            document.querySelectorAll('.snap-item').forEach(card => observer.observe(card));
-        }
-
-        // Init Schedule Logic (Delay slightly to ensure DOM is ready)
-        setTimeout(() => {
-            render(2026);
-        }, 100);
-
-        // Close dropdown on outside click
-        window.addEventListener('click', (e) => {
-            const d = document.getElementById('year-dropdown');
-            const t = document.getElementById('year-trigger');
-            if (t && d && !t.contains(e.target) && !d.contains(e.target) && d.classList.contains('open')) toggleDropdown();
-        });
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
