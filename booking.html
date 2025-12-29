@@ -36,16 +36,24 @@
 </head>
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black tracking-tighter text-alpine-deep flex items-center gap-2">
-                WOLF<span class="text-alpine-blue">.ADV</span>
-            </a>
-            <a href="index.html" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-alpine-blue transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Back to Home
-            </a>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl">
+        <a href="index.html" class="text-xl font-black tracking-tighter text-alpine-deep mr-4">WOLF<span class="text-alpine-blue">.ADV</span></a>
+
+        <div class="hidden md:flex items-center bg-slate-100 rounded-full p-1 mr-4 border border-slate-200">
+            <button class="px-4 py-1 rounded-full bg-white text-alpine-deep text-xs font-bold shadow-sm ring-1 ring-black/5 uppercase tracking-wide">WINTER</button>
+            <button class="px-4 py-1 rounded-full text-slate-400 text-xs font-bold hover:text-slate-600 transition-colors uppercase tracking-wide">SUMMER</button>
         </div>
+
+        <div class="hidden lg:flex space-x-6 text-sm font-semibold text-slate-500">
+            <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
+            <a href="index.html#packages" class="hover:text-alpine-blue transition-colors">Packages</a>
+            <a href="index.html#attractions" class="hover:text-alpine-blue transition-colors">Attractions</a>
+            <a href="index.html#resort" class="hover:text-alpine-blue transition-colors">The Resort</a>
+            <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
+            <a href="index.html#contact" class="hover:text-alpine-blue transition-colors">Contact</a>
+        </div>
+
+        <a href="booking.html" class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 ml-4 shadow-lg shadow-alpine-deep/20">Book Now</a>
     </nav>
 
     <div class="pt-32 pb-12 px-6 max-w-7xl mx-auto">

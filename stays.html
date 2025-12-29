@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpine Sanctuaries | Wolf Adventure</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -32,31 +33,44 @@
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-gold selection:text-white">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black tracking-tighter text-alpine-deep flex items-center gap-2">
-                WOLF<span class="text-alpine-blue">.ADV</span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-500">
-                <a href="index.html" class="hover:text-alpine-deep transition-colors">Home</a>
-                <span class="text-slate-300">/</span>
-                <span class="text-alpine-gold font-bold">Sanctuaries</span>
-            </div>
+    <nav
+        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl">
+        <a href="index.html" class="text-xl font-black tracking-tighter text-alpine-deep mr-4">WOLF<span
+                class="text-alpine-blue">.ADV</span></a>
 
-            <a href="booking.html" class="bg-alpine-deep text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-alpine-blue transition-all shadow-lg shadow-alpine-deep/20">Book Now</a>
+        <div class="hidden md:flex items-center bg-slate-100 rounded-full p-1 mr-4 border border-slate-200">
+            <button
+                class="px-4 py-1 rounded-full bg-white text-alpine-deep text-xs font-bold shadow-sm ring-1 ring-black/5 uppercase tracking-wide">WINTER</button>
+            <button
+                class="px-4 py-1 rounded-full text-slate-400 text-xs font-bold hover:text-slate-600 transition-colors uppercase tracking-wide">SUMMER</button>
         </div>
+
+        <div class="hidden lg:flex space-x-6 text-sm font-semibold text-slate-500">
+            <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
+            <a href="index.html#packages" class="hover:text-alpine-blue transition-colors">Packages</a>
+            <a href="index.html#attractions" class="hover:text-alpine-blue transition-colors">Attractions</a>
+            <a href="index.html#resort" class="hover:text-alpine-blue transition-colors">The Resort</a>
+            <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
+            <a href="index.html#contact" class="hover:text-alpine-blue transition-colors">Contact</a>
+        </div>
+
+        <a href="booking.html"
+            class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 ml-4 shadow-lg shadow-alpine-deep/20">Book
+            Now</a>
     </nav>
 
     <header class="relative h-[60vh] w-full overflow-hidden flex items-end pb-20 justify-center mt-20">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1518602164578-cd0074062767?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover brightness-[0.85] contrast-[1.1]" alt="Warm Cabin Interior">
+            <img src="https://images.unsplash.com/photo-1518602164578-cd0074062767?q=80&w=2670&auto=format&fit=crop"
+                class="w-full h-full object-cover brightness-[0.85] contrast-[1.1]" alt="Warm Cabin Interior">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
         </div>
 
@@ -66,23 +80,28 @@
             </h1>
             <p class="text-lg md:text-xl text-slate-200 font-medium max-w-2xl mx-auto leading-relaxed">
                 Warmth. Recovery. Proximity. <br>
-                <span class="text-white font-bold border-b-2 border-amber-400 inline-block pb-1 mt-2">5 minutes from the Gondola.</span>
+                <span class="text-white font-bold border-b-2 border-amber-400 inline-block pb-1 mt-2">5 minutes from the
+                    Gondola.</span>
             </p>
         </div>
     </header>
 
     <div class="sticky top-20 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 py-4 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 flex gap-3 overflow-x-auto scrollbar-hide justify-start md:justify-center">
-            <a href="#silver" class="whitespace-nowrap px-6 py-2 rounded-full border border-slate-200 text-sm font-bold text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-all bg-white">
+            <a href="#silver"
+                class="whitespace-nowrap px-6 py-2 rounded-full border border-slate-200 text-sm font-bold text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-all bg-white">
                 Silver (Lodge)
             </a>
-            <a href="#gold" class="whitespace-nowrap px-6 py-2 rounded-full border border-amber-200 text-sm font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 transition-all shadow-sm">
+            <a href="#gold"
+                class="whitespace-nowrap px-6 py-2 rounded-full border border-amber-200 text-sm font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 transition-all shadow-sm">
                 Gold (Resort)
             </a>
-            <a href="#platinum" class="whitespace-nowrap px-6 py-2 rounded-full border border-slate-200 text-sm font-bold text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-all bg-white">
+            <a href="#platinum"
+                class="whitespace-nowrap px-6 py-2 rounded-full border border-slate-200 text-sm font-bold text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-all bg-white">
                 Platinum (Palace)
             </a>
-            <a href="#dining" class="whitespace-nowrap px-6 py-2 rounded-full border border-slate-200 text-sm font-bold text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-all bg-white">
+            <a href="#dining"
+                class="whitespace-nowrap px-6 py-2 rounded-full border border-slate-200 text-sm font-bold text-slate-600 hover:text-slate-900 hover:border-slate-400 transition-all bg-white">
                 Half-Board Fuel
             </a>
         </div>
@@ -91,189 +110,279 @@
     <main class="max-w-7xl mx-auto px-6 py-20 space-y-24">
 
         <section id="silver" class="scroll-mt-40">
-            <div class="flex flex-col lg:flex-row gap-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-card hover:shadow-xl transition-all group">
-                
+            <div
+                class="flex flex-col lg:flex-row gap-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-card hover:shadow-xl transition-all group">
+
                 <div class="lg:w-[55%] space-y-4">
                     <div class="h-64 lg:h-[28rem] rounded-2xl overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Standard Room">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            alt="Standard Room">
                         <div class="absolute top-6 left-6">
-                            <span class="px-3 py-1.5 rounded-md bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold border border-white/20 uppercase tracking-wider shadow-sm">Base Camp Vibe</span>
+                            <span
+                                class="px-3 py-1.5 rounded-md bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold border border-white/20 uppercase tracking-wider shadow-sm">Base
+                                Camp Vibe</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:w-[45%] flex flex-col justify-center p-4">
                     <div class="flex justify-between items-center mb-6">
-                        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider">Included in Silver</span>
+                        <span
+                            class="px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider">Included
+                            in Silver</span>
                     </div>
-                    
-                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-3 tracking-tight">Poshwan Hotel & Gulmarg Ski Lodge</h2>
-                    
+
+                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-3 tracking-tight">Poshwan Hotel &
+                        Gulmarg Ski Lodge</h2>
+
                     <div class="inline-flex items-center gap-2 mb-8">
-                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        <div
+                            class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
                             <span>🚙 5 Min Shuttle Included</span>
                         </div>
                     </div>
 
                     <p class="text-slate-600 mb-8 leading-relaxed text-sm">
-                        No-nonsense comfort. Clean, heated rooms with heavy blankets. Perfect for the skier who spends 90% of the day on the mountain and just needs a solid recharge.
+                        No-nonsense comfort. Clean, heated rooms with heavy blankets. Perfect for the skier who spends
+                        90% of the day on the mountain and just needs a solid recharge.
                     </p>
 
                     <div class="grid grid-cols-2 gap-4 mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-alpine-blue border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Central Heating</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-alpine-blue border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Electric Blankets</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-alpine-blue border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Hot Water (AM/PM)</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-alpine-blue border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Heated Boot Room</span>
                         </div>
                     </div>
 
-                    <a href="booking.html" class="w-full text-center py-4 rounded-lg bg-slate-900 text-white font-bold hover:bg-alpine-blue transition-colors shadow-lg shadow-slate-900/20">Book This Stay</a>
+                    <a href="booking.html"
+                        class="w-full text-center py-4 rounded-lg bg-slate-900 text-white font-bold hover:bg-alpine-blue transition-colors shadow-lg shadow-slate-900/20">Book
+                        This Stay</a>
                 </div>
             </div>
         </section>
 
         <section id="gold" class="scroll-mt-40">
-            <div class="flex flex-col lg:flex-row gap-8 bg-white border-2 border-amber-100 rounded-3xl p-6 shadow-glow hover:border-amber-300 transition-all group relative overflow-hidden">
-                
-                <div class="absolute top-0 right-0 w-96 h-96 bg-amber-50 rounded-full blur-[100px] pointer-events-none opacity-50"></div>
+            <div
+                class="flex flex-col lg:flex-row gap-8 bg-white border-2 border-amber-100 rounded-3xl p-6 shadow-glow hover:border-amber-300 transition-all group relative overflow-hidden">
+
+                <div
+                    class="absolute top-0 right-0 w-96 h-96 bg-amber-50 rounded-full blur-[100px] pointer-events-none opacity-50">
+                </div>
 
                 <div class="lg:w-[55%] space-y-4 relative z-10">
                     <div class="h-64 lg:h-[28rem] rounded-2xl overflow-hidden relative shadow-md">
-                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Premium Room">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            alt="Premium Room">
                         <div class="absolute top-6 left-6">
-                            <span class="px-3 py-1.5 rounded-md bg-amber-500 text-white text-xs font-bold shadow-md uppercase tracking-wider">Most Popular</span>
+                            <span
+                                class="px-3 py-1.5 rounded-md bg-amber-500 text-white text-xs font-bold shadow-md uppercase tracking-wider">Most
+                                Popular</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:w-[45%] flex flex-col justify-center p-4 relative z-10">
                     <div class="flex justify-between items-center mb-6">
-                        <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-wider border border-amber-100">Included in Gold</span>
+                        <span
+                            class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-wider border border-amber-100">Included
+                            in Gold</span>
                     </div>
-                    
-                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-3 tracking-tight">Hotel Mama Palace & Welcome Hotel</h2>
-                    
+
+                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-3 tracking-tight">Hotel Mama Palace &
+                        Welcome Hotel</h2>
+
                     <div class="inline-flex items-center gap-2 mb-8">
-                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <div
+                            class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
                             <span>🚶 3 Min Walk to Lift</span>
                         </div>
                     </div>
 
                     <p class="text-slate-600 mb-8 leading-relaxed text-sm">
-                        Wood-paneled heritage charm. Massive windows framing Apharwat peak. This is where the pros stay to be close to the action without sacrificing an ounce of comfort.
+                        Wood-paneled heritage charm. Massive windows framing Apharwat peak. This is where the pros stay
+                        to be close to the action without sacrificing an ounce of comfort.
                     </p>
 
                     <div class="grid grid-cols-2 gap-4 mb-8 bg-amber-50/50 p-6 rounded-2xl border border-amber-100">
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-amber-500 border border-amber-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-800">Full Radiators</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-amber-500 border border-amber-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
+                                    </path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-800">24/7 Hot Water</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-amber-500 border border-amber-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                    </path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-800">Private Balcony</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-amber-500 border border-amber-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-800">Pro Boot Dryers</span>
                         </div>
                     </div>
 
-                    <a href="booking.html" class="w-full text-center py-4 rounded-lg bg-amber-500 text-white font-bold hover:bg-amber-600 hover:scale-[1.02] transition-all shadow-lg shadow-amber-500/30">Book This Stay</a>
+                    <a href="booking.html"
+                        class="w-full text-center py-4 rounded-lg bg-amber-500 text-white font-bold hover:bg-amber-600 hover:scale-[1.02] transition-all shadow-lg shadow-amber-500/30">Book
+                        This Stay</a>
                 </div>
             </div>
         </section>
 
         <section id="platinum" class="scroll-mt-40">
-            <div class="flex flex-col lg:flex-row gap-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-card hover:shadow-xl transition-all group">
-                
+            <div
+                class="flex flex-col lg:flex-row gap-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-card hover:shadow-xl transition-all group">
+
                 <div class="lg:w-[55%] space-y-4">
                     <div class="h-64 lg:h-[28rem] rounded-2xl overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Luxury Room">
+                        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            alt="Luxury Room">
                         <div class="absolute top-6 left-6">
-                            <span class="px-3 py-1.5 rounded-md bg-slate-900 text-white text-xs font-bold uppercase tracking-wider shadow-lg">World Class</span>
+                            <span
+                                class="px-3 py-1.5 rounded-md bg-slate-900 text-white text-xs font-bold uppercase tracking-wider shadow-lg">World
+                                Class</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:w-[45%] flex flex-col justify-center p-4">
                     <div class="flex justify-between items-center mb-6">
-                        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider">Included in Platinum</span>
+                        <span
+                            class="px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-wider">Included
+                            in Platinum</span>
                     </div>
-                    
-                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-3 tracking-tight">The Khyber Himalayan Resort</h2>
-                    
+
+                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 mb-3 tracking-tight">The Khyber Himalayan
+                        Resort</h2>
+
                     <div class="inline-flex items-center gap-2 mb-8">
-                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-purple-50 border border-purple-100 text-purple-700 text-xs font-bold">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        <div
+                            class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-purple-50 border border-purple-100 text-purple-700 text-xs font-bold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
                             <span>⛷️ Ski-in / Ski-out</span>
                         </div>
                     </div>
 
                     <p class="text-slate-600 mb-8 leading-relaxed text-sm">
-                        Gulmarg's only 5-star property. Experience the world-famous L'Occitane Spa and heated indoor pool with glass walls facing the forest after your ride.
+                        Gulmarg's only 5-star property. Experience the world-famous L'Occitane Spa and heated indoor
+                        pool with glass walls facing the forest after your ride.
                     </p>
 
                     <div class="grid grid-cols-2 gap-4 mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-purple-600 border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Climate Control</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-purple-600 border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Heated Indoor Pool</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-purple-600 border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z">
+                                    </path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Spa & Wellness</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="p-2 bg-white rounded-lg text-purple-600 border border-slate-100 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
                             </div>
                             <span class="text-xs font-bold text-slate-700">Private Concierge</span>
                         </div>
                     </div>
 
-                    <a href="booking.html" class="w-full text-center py-4 rounded-lg bg-slate-900 text-white font-bold hover:bg-alpine-blue transition-colors shadow-lg shadow-slate-900/20">Book This Stay</a>
+                    <a href="booking.html"
+                        class="w-full text-center py-4 rounded-lg bg-slate-900 text-white font-bold hover:bg-alpine-blue transition-colors shadow-lg shadow-slate-900/20">Book
+                        This Stay</a>
                 </div>
             </div>
         </section>
@@ -282,30 +391,47 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl lg:text-5xl font-black text-slate-900 mb-4 tracking-tight">HALF-BOARD FUEL</h2>
                 <div class="w-20 h-1 bg-amber-400 mx-auto mb-6"></div>
-                <p class="text-slate-500 font-medium">Breakfast & Dinner are <span class="text-amber-600 font-bold bg-amber-50 px-1 rounded">INCLUDED</span> in all packages.</p>
+                <p class="text-slate-500 font-medium">Breakfast & Dinner are <span
+                        class="text-amber-600 font-bold bg-amber-50 px-1 rounded">INCLUDED</span> in all packages.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="relative rounded-3xl overflow-hidden group h-96 shadow-card hover:shadow-2xl transition-all">
-                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=2671&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90" alt="Kashmiri Food">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 flex flex-col justify-end">
+                <div
+                    class="relative rounded-3xl overflow-hidden group h-96 shadow-card hover:shadow-2xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=2671&auto=format&fit=crop"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90"
+                        alt="Kashmiri Food">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 flex flex-col justify-end">
                         <h3 class="text-2xl font-bold text-white mb-2">Authentic Wazwan Dinner</h3>
-                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">Rich, warming mutton curries (Rogan Josh), Gushtaba (meatballs in yogurt), and fragrant saffron rice. We ensure you recover calories.</p>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">Rich, warming mutton curries (Rogan
+                            Josh), Gushtaba (meatballs in yogurt), and fragrant saffron rice. We ensure you recover
+                            calories.</p>
                         <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold shadow-sm">Included</span>
-                            <span class="px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-md text-xs font-bold border border-white/20">Halal</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold shadow-sm">Included</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-md text-xs font-bold border border-white/20">Halal</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative rounded-3xl overflow-hidden group h-96 shadow-card hover:shadow-2xl transition-all">
-                    <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90" alt="Breakfast">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 flex flex-col justify-end">
+                <div
+                    class="relative rounded-3xl overflow-hidden group h-96 shadow-card hover:shadow-2xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=2070&auto=format&fit=crop"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-90"
+                        alt="Breakfast">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 flex flex-col justify-end">
                         <h3 class="text-2xl font-bold text-white mb-2">Power Breakfast</h3>
-                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">Eggs to order, hot porridge, local Girda bread with butter, and endless cups of steaming Kahwa tea to start your day.</p>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">Eggs to order, hot porridge, local Girda
+                            bread with butter, and endless cups of steaming Kahwa tea to start your day.</p>
                         <div class="flex gap-2">
-                            <span class="px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold shadow-sm">Included</span>
-                            <span class="px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-md text-xs font-bold border border-white/20">7:00 AM - 10:00 AM</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold shadow-sm">Included</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-white/20 text-white backdrop-blur-md text-xs font-bold border border-white/20">7:00
+                                AM - 10:00 AM</span>
                         </div>
                     </div>
                 </div>
@@ -317,35 +443,42 @@
     <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 px-6 mt-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
             <div class="col-span-1 md:col-span-2 pr-8">
-                <h2 class="text-3xl font-black tracking-tighter mb-6">WOLF<span class="text-alpine-blue">.ADV</span></h2>
-                <p class="max-w-sm text-slate-400 mb-8 leading-relaxed text-sm">Experience the raw beauty of the Himalayas with certified guides, premium logistics, and local expertise.</p>
-                <a href="booking.html" class="inline-block px-8 py-3 rounded-md bg-white text-slate-900 font-bold text-sm hover:bg-alpine-blue hover:text-white transition-colors">
+                <h2 class="text-3xl font-black tracking-tighter mb-6">WOLF<span class="text-alpine-blue">.ADV</span>
+                </h2>
+                <p class="max-w-sm text-slate-400 mb-8 leading-relaxed text-sm">Experience the raw beauty of the
+                    Himalayas with certified guides, premium logistics, and local expertise.</p>
+                <a href="booking.html"
+                    class="inline-block px-8 py-3 rounded-md bg-white text-slate-900 font-bold text-sm hover:bg-alpine-blue hover:text-white transition-colors">
                     Start Your Booking
                 </a>
             </div>
-            
+
             <div>
                 <h4 class="font-bold mb-6 text-lg">Explore</h4>
                 <ul class="space-y-4 text-slate-400 text-sm font-medium">
                     <li><a href="index.html#packages" class="hover:text-white transition-colors">Ski Packages</a></li>
                     <li><a href="stays.html" class="hover:text-white transition-colors">Accommodations</a></li>
-                    <li><a href="index.html#attractions" class="hover:text-white transition-colors">Local Attractions</a></li>
+                    <li><a href="index.html#attractions" class="hover:text-white transition-colors">Local
+                            Attractions</a></li>
                     <li><a href="index.html#guides" class="hover:text-white transition-colors">Our Guides</a></li>
                 </ul>
             </div>
-            
+
             <div>
                 <h4 class="font-bold mb-6 text-lg">Visit Us</h4>
                 <ul class="space-y-4 text-slate-400 text-sm font-medium">
                     <li>Near Gondola Base<br>Gulmarg, 193403</li>
                     <li>+91 9906 123 456</li>
                     <li>hello@wolf.com</li>
-                    <li class="pt-2"><a href="#" class="text-white font-bold hover:text-alpine-blue transition-colors">Get Directions</a></li>
+                    <li class="pt-2"><a href="#"
+                            class="text-white font-bold hover:text-alpine-blue transition-colors">Get Directions</a>
+                    </li>
                 </ul>
             </div>
         </div>
-        
-        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-medium">
+
+        <div
+            class="max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-medium">
             <p>© 2025 Wolf Adventure Gulmarg.</p>
             <div class="flex gap-6 mt-4 md:mt-0">
                 <a href="policies.html#privacy" class="hover:text-white transition-colors">Privacy Policy</a>
@@ -357,4 +490,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
