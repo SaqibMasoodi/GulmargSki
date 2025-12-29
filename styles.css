@@ -136,6 +136,33 @@ td { vertical-align: top; }
     border-color: white;
 }
 
-
 .animate-scroll-y { animation: scrollY 30s linear infinite; }
 .pause-on-hover:hover .animate-scroll-y { animation-play-state: paused; }
+
+/* --- PACKAGES PAGE UTILITIES --- */
+
+/* Horizontal Snap Scroll */
+.snap-x { 
+    scroll-snap-type: x mandatory; 
+}
+.snap-center { 
+    scroll-snap-align: center; 
+}
+
+/* Modal Popup Animations */
+.modal { 
+    transition: opacity 0.3s ease, visibility 0.3s ease; 
+    opacity: 0; 
+    visibility: hidden; 
+}
+.modal.open { 
+    opacity: 1; 
+    visibility: visible; 
+}
+.modal-content { 
+    transform: scale(0.95); 
+    transition: transform 0.3s ease; 
+}
+.modal.open .modal-content { 
+    transform: scale(1); 
+}

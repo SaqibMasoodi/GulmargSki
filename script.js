@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- 1. RESORT MAP LOGIC ---
-    if(document.getElementById('gulmarg-map')) {
+    if (document.getElementById('gulmarg-map')) {
         var map = L.map('gulmarg-map', {
             scrollWheelZoom: false,
             zoomControl: false,
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliders = document.querySelectorAll('.auto-slider');
     sliders.forEach((slider) => {
         const track = slider.querySelector('.slider-track');
-        if(track) {
+        if (track) {
             const slides = track.children;
             const slideCount = slides.length;
             let currentIndex = 0;
@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. ATTRACTIONS TAB LOGIC (Init) ---
     const defaultOpen = document.getElementById("defaultOpen");
-    if(defaultOpen) defaultOpen.click();
+    if (defaultOpen) defaultOpen.click();
 
     // --- 4. SCHEDULE LOGIC (Init) ---
     // Delay slightly to ensure DOM is fully painted
     setTimeout(() => {
-        if(typeof render === 'function') render(2026);
+        if (typeof render === 'function') render(2026);
     }, 100);
 
     // Close dropdown on outside click
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- POLICIES PAGE: TABLE OF CONTENTS ---
     const policyNavLinks = document.querySelectorAll('.nav-link');
-    
+
     if (policyNavLinks.length > 0) {
         const sections = document.querySelectorAll('section');
         const observerOptions = {
@@ -73,47 +73,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sections.forEach(section => observer.observe(section));
     }
+    // --- AUTO-HIGHLIGHT ACTIVE NAV LINK ---
+    function highlightActiveLink() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('#main-nav a'); // targets links in your specific nav
+
+        navLinks.forEach(link => {
+            // 1. Get the 'href' of the link (e.g., "packages.html")
+            const linkPath = link.getAttribute('href');
+
+            // 2. Check if the current browser URL contains this link
+            // (We use 'includes' because your path might be /wolf-adventure/packages.html)
+            if (currentPath.includes(linkPath) && linkPath !== 'index.html' && linkPath !== '#') {
+
+                // Add your "Active" styles (Blue Text)
+                link.classList.add('text-alpine-blue', 'font-bold');
+                link.classList.remove('text-slate-500');
+
+            } else if (currentPath.endsWith('/') || currentPath.endsWith('index.html')) {
+                // Special case for Homepage to avoid highlighting everything
+                if (linkPath === 'index.html') {
+                    // You might not want to highlight 'Home' if you use a logo, 
+                    // but if you had a text link, this is where you'd do it.
+                }
+            }
+        });
+    }
+
+    // Run on load
+    highlightActiveLink();
 });
 
 // --- GLOBAL FUNCTIONS (Must be outside DOMContentLoaded to be accessible by onclick) ---
 
 // 1. CURRICULUM SWITCHER
+// --- NEW CURRICULUM LOGIC (Master the Mountain) ---
+
 function switchDay(dayNum) {
-    // Reset buttons
-    const navBtns = document.querySelectorAll('.nav-btn');
-    navBtns.forEach(btn => {
-        btn.classList.remove('bg-white');
-        btn.classList.add('bg-slate-50', 'hover:bg-white');
-        const num = btn.querySelector('.nav-num');
+    // 1. Reset ALL buttons to "Inactive" state
+    const allBtns = document.querySelectorAll('.nav-btn');
+    allBtns.forEach(btn => {
+        const circle = btn.querySelector('.nav-circle');
+        const card = btn.querySelector('.nav-card');
         const title = btn.querySelector('.nav-title');
-        num.classList.remove('text-blue-600');
-        num.classList.add('text-slate-300');
-        title.classList.remove('text-slate-900');
-        title.classList.add('text-slate-500');
+
+        // Reset Circle (Gray border, gray text, white bg)
+        circle.className = "nav-circle w-14 h-14 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center transition-all duration-300 group-hover:border-blue-600 group-hover:text-blue-600 text-slate-400 font-black text-xl shadow-sm";
+
+        // Reset Card (Gray border, no ring)
+        card.classList.remove('border-blue-600', 'ring-1', 'ring-blue-600', 'shadow-md');
+        card.classList.add('border-slate-200', 'shadow-sm');
+
+        // Reset Title (Black text)
+        title.classList.remove('text-blue-600');
+        title.classList.add('text-slate-900');
     });
 
-    // Activate button
+    // 2. Set ACTIVE button style
     const activeBtn = document.getElementById(`nav-btn-${dayNum}`);
-    if(activeBtn) {
-        activeBtn.classList.remove('bg-slate-50', 'hover:bg-white');
-        activeBtn.classList.add('bg-white');
-        activeBtn.querySelector('.nav-num').classList.replace('text-slate-300', 'text-blue-600');
-        activeBtn.querySelector('.nav-title').classList.replace('text-slate-500', 'text-slate-900');
+    if (activeBtn) {
+        const circle = activeBtn.querySelector('.nav-circle');
+        const card = activeBtn.querySelector('.nav-card');
+        const title = activeBtn.querySelector('.nav-title');
+
+        // Active Circle (Blue bg, white text)
+        circle.className = "nav-circle w-14 h-14 rounded-full bg-blue-600 border-2 border-blue-600 flex items-center justify-center transition-all duration-300 text-white font-black text-xl shadow-md scale-110";
+
+        // Active Card (Blue border, blue ring)
+        card.classList.remove('border-slate-200', 'shadow-sm');
+        card.classList.add('border-blue-600', 'ring-1', 'ring-blue-600', 'shadow-md');
+
+        // Active Title (Blue text)
+        title.classList.remove('text-slate-900');
+        title.classList.add('text-blue-600');
     }
 
-    // Switch Content
-    const contents = document.querySelectorAll('.day-content');
-    contents.forEach(content => {
-        content.classList.remove('opacity-100', 'pointer-events-auto');
-        content.classList.add('opacity-0', 'pointer-events-none');
+    // 3. Switch Content Panel (Fade Effect)
+    const allContent = document.querySelectorAll('.day-content');
+    allContent.forEach(content => {
+        content.classList.remove('opacity-100', 'relative', 'z-10');
+        content.classList.add('opacity-0', 'absolute', 'z-0', 'pointer-events-none');
     });
 
     const activeContent = document.getElementById(`day-${dayNum}`);
-    if(activeContent) {
-        activeContent.classList.remove('opacity-0', 'pointer-events-none');
-        activeContent.classList.add('opacity-100', 'pointer-events-auto');
+    if (activeContent) {
+        activeContent.classList.remove('opacity-0', 'absolute', 'z-0', 'pointer-events-none');
+        activeContent.classList.add('opacity-100', 'relative', 'z-10');
     }
 }
+
+// Initialize Day 1 on Load
+document.addEventListener('DOMContentLoaded', () => {
+    switchDay(1);
+});
 
 // 2. ATTRACTIONS TABS
 const activeClasses = ['bg-white', 'text-blue-600', 'shadow-sm', 'border-slate-200', 'border-l-blue-600'];
@@ -132,11 +184,11 @@ function openTab(evt, tabName) {
         btn.classList.remove(...activeClasses);
         btn.classList.add(...inactiveClasses);
         const icon = btn.querySelector("svg");
-        if(icon) icon.classList.add("opacity-0");
+        if (icon) icon.classList.add("opacity-0");
     }
 
     const activeContent = document.getElementById(tabName);
-    if(activeContent) {
+    if (activeContent) {
         activeContent.style.display = "block";
         setTimeout(() => activeContent.classList.add("active"), 10);
     }
@@ -145,16 +197,15 @@ function openTab(evt, tabName) {
     activeBtn.classList.remove(...inactiveClasses);
     activeBtn.classList.add(...activeClasses);
     const activeIcon = activeBtn.querySelector("svg");
-    if(activeIcon) activeIcon.classList.remove("opacity-0");
+    if (activeIcon) activeIcon.classList.remove("opacity-0");
 }
 
 // 3. CURRENCY CONVERTER
 function updateCurrency() {
     const selector = document.getElementById('currency-selector');
     const currency = selector.value;
-    const priceElements = document.querySelectorAll('.price-amount');
-    const rates = { 'INR': 1, 'USD': 85, 'EUR': 90 };
-    const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€' };
+    const priceElements = document.querySelectorAll('.price-display');
+    const rates = { 'INR': 1, 'USD': 85, 'EUR': 90 }; const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€' };
 
     priceElements.forEach(el => {
         const basePrice = parseFloat(el.getAttribute('data-inr'));
@@ -291,11 +342,12 @@ const RATES = {
 };
 
 const PACKAGES = {
-    basic: { name: 'Basic Package', price: 22999 },
-    silver: { name: 'Silver Package', price: 26999 },
-    gold: { name: 'Gold Package', price: 34999 },
-    diamond: { name: 'Diamond Package', price: 44999 },
-    platinum: { name: 'Platinum Package', price: 64999 }
+    // UPDATED TO MATCH HTML PRICES (29 Dec 2025)
+    basic: { name: 'Basic Package', price: 23999 },    // Was 22999
+    silver: { name: 'Silver Package', price: 34999 },  // Was 26999 (Big difference!)
+    gold: { name: 'Gold Package', price: 37999 },      // Was 34999
+    diamond: { name: 'Diamond Package', price: 49999 },// Was 44999
+    platinum: { name: 'Platinum Package', price: 95999 }// Was 64999
 };
 
 let currentMode = 'package'; // 'package' or 'custom'
@@ -304,7 +356,7 @@ let currentMode = 'package'; // 'package' or 'custom'
 function setMode(mode) {
     currentMode = mode;
     const inputMode = document.getElementById('input-mode');
-    if(inputMode) inputMode.value = mode;
+    if (inputMode) inputMode.value = mode;
 
     // Visual Switcher Styling
     const highlighter = document.getElementById('switch-highlight');
@@ -315,12 +367,12 @@ function setMode(mode) {
         highlighter.style.transform = 'translateX(0)';
         btnPackage.classList.replace('text-slate-500', 'text-slate-900');
         btnCustom.classList.replace('text-slate-900', 'text-slate-500');
-        
+
         document.getElementById('section-package').classList.remove('hidden-section');
         document.getElementById('section-custom').classList.add('hidden-section');
     } else {
         highlighter.style.transform = 'translateX(100%)';
-        highlighter.style.left = '6px'; 
+        highlighter.style.left = '6px';
         btnPackage.classList.replace('text-slate-900', 'text-slate-500');
         btnCustom.classList.replace('text-slate-500', 'text-slate-900');
 
@@ -345,7 +397,7 @@ function toggleTransportOptions() {
 // 3. Dynamic Price Calculation
 function updateCalculations() {
     // Only run if we are on the booking page
-    if(!document.getElementById('bookingForm')) return;
+    if (!document.getElementById('bookingForm')) return;
 
     const guests = parseInt(document.querySelector('select[name="guest_count"]').value) || 1;
     const receiptDiv = document.getElementById('receipt-items');
@@ -359,18 +411,18 @@ function updateCalculations() {
 
         html += `<div class="flex justify-between text-slate-900 font-bold mb-2"><span>${pkg.name}</span><span>₹${pkg.price.toLocaleString()} x ${guests}</span></div>`;
         html += `<div class="text-xs text-slate-500 pl-2">Includes: Hotel, Gear, Guide, Meals</div>`;
-    
+
     } else {
         // Custom Mode Logic
-        
+
         // Hotel
         const hotelElement = document.querySelector('input[name="custom_hotel"]:checked');
-        if(hotelElement) {
+        if (hotelElement) {
             const hotelType = hotelElement.value;
             const hotelPrice = RATES.hotel[hotelType] * 5; // Avg 5 nights
-            if(hotelPrice > 0) {
+            if (hotelPrice > 0) {
                 total += (hotelPrice * guests) / 2; // Double occupancy assumption
-                html += `<div class="flex justify-between text-slate-600"><span>Accommodation (Est.)</span><span>₹${((hotelPrice * guests)/2).toLocaleString()}</span></div>`;
+                html += `<div class="flex justify-between text-slate-600"><span>Accommodation (Est.)</span><span>₹${((hotelPrice * guests) / 2).toLocaleString()}</span></div>`;
             }
         }
 
@@ -378,7 +430,7 @@ function updateCalculations() {
         const transportCheck = document.getElementById('transport-toggle').checked;
         if (transportCheck) {
             const transElement = document.querySelector('input[name="custom_transport"]:checked');
-            if(transElement) {
+            if (transElement) {
                 const transType = transElement.value;
                 const transPrice = RATES.transport[transType] * 2; // Round trip
                 total += transPrice;
@@ -388,7 +440,7 @@ function updateCalculations() {
 
         // Gear
         const gearElement = document.querySelector('input[name="custom_gear"]:checked');
-        if(gearElement) {
+        if (gearElement) {
             const gearType = gearElement.value;
             const gearPrice = RATES.gear[gearType] * 6; // 6 Days
             if (gearPrice > 0) {
@@ -414,12 +466,12 @@ function updateCalculations() {
 
 // 4. WhatsApp Form Submission
 function handleHybridSubmit(e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const form = document.getElementById('bookingForm');
     const formData = new FormData(form);
     const name = document.getElementById('contact_name').value;
-    if(!name) { alert("Please enter your name"); return; }
+    if (!name) { alert("Please enter your name"); return; }
 
     // Build WhatsApp Message
     let msg = `*New Booking Request from Wolf Adventure*\n\n`;
@@ -434,16 +486,16 @@ function handleHybridSubmit(e) {
     } else {
         msg += `🛠 *Custom Build Selection:*\n`;
         msg += `- Hotel: ${formData.get('custom_hotel')}\n`;
-        if(document.getElementById('transport-toggle').checked) {
-             msg += `- Transport: ${formData.get('custom_transport')}\n`;
+        if (document.getElementById('transport-toggle').checked) {
+            msg += `- Transport: ${formData.get('custom_transport')}\n`;
         }
         msg += `- Gear: ${formData.get('custom_gear')}\n`;
-        if(formData.get('extra_gondola')) msg += `- Addon: Gondola\n`;
-        if(formData.get('extra_atv')) msg += `- Addon: ATV\n`;
+        if (formData.get('extra_gondola')) msg += `- Addon: Gondola\n`;
+        if (formData.get('extra_atv')) msg += `- Addon: ATV\n`;
         msg += `\n💰 Est. Total: ${document.getElementById('total-price-display').innerText}\n`;
     }
 
-    if(formData.get('notes')) {
+    if (formData.get('notes')) {
         msg += `\n📝 Note: ${formData.get('notes')}`;
     }
 
@@ -454,7 +506,44 @@ function handleHybridSubmit(e) {
 
 // Initialization Event
 document.addEventListener('DOMContentLoaded', () => {
-    if(document.getElementById('bookingForm')) {
+    if (document.getElementById('bookingForm')) {
         updateCalculations();
     }
 });
+
+// --- MOBILE MENU LOGIC ---
+function toggleMobileMenu() {
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const body = document.body;
+
+    // Check if menu is currently open
+    const isOpen = overlay.classList.contains('opacity-100');
+
+    if (!isOpen) {
+        // OPEN MENU
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.classList.add('opacity-100', 'pointer-events-auto');
+
+        // Switch Icon to X
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+
+        // Prevent background scrolling
+        body.style.overflow = 'hidden';
+    } else {
+        // CLOSE MENU
+        overlay.classList.remove('opacity-100', 'pointer-events-auto');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+
+        // Switch Icon back to Hamburger
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+
+        // Restore scrolling
+        body.style.overflow = 'auto';
+    }
+}
+
+

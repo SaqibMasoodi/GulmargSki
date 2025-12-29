@@ -36,25 +36,42 @@
 </head>
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
 
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl">
-        <a href="index.html" class="text-xl font-black tracking-tighter text-alpine-deep mr-4">WOLF<span class="text-alpine-blue">.ADV</span></a>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300" id="main-nav">
 
-        <div class="hidden md:flex items-center bg-slate-100 rounded-full p-1 mr-4 border border-slate-200">
-            <button class="px-4 py-1 rounded-full bg-white text-alpine-deep text-xs font-bold shadow-sm ring-1 ring-black/5 uppercase tracking-wide">WINTER</button>
-            <button class="px-4 py-1 rounded-full text-slate-400 text-xs font-bold hover:text-slate-600 transition-colors uppercase tracking-wide">SUMMER</button>
-        </div>
+        <a href="index.html" class="text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">WOLF<span class="text-alpine-blue">.ADV</span></a>
 
-        <div class="hidden lg:flex space-x-6 text-sm font-semibold text-slate-500">
-            <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
-            <a href="index.html#packages" class="hover:text-alpine-blue transition-colors">Packages</a>
-            <a href="index.html#attractions" class="hover:text-alpine-blue transition-colors">Attractions</a>
+        <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
             <a href="index.html#resort" class="hover:text-alpine-blue transition-colors">The Resort</a>
+            <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
             <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
+            <a href="packages.html" class="hover:text-alpine-blue transition-colors">Packages</a>
             <a href="index.html#contact" class="hover:text-alpine-blue transition-colors">Contact</a>
         </div>
 
-        <a href="booking.html" class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 ml-4 shadow-lg shadow-alpine-deep/20">Book Now</a>
+        <div class="flex items-center gap-3 z-50 relative">
+            <a href="booking.html" class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book Now</a>
+            
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
     </nav>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center">
+        <ul class="text-center space-y-8">
+            <li><a href="index.html#resort" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">The Resort</a></li>
+            <li><a href="index.html#curriculum" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Curriculum</a></li>
+            <li><a href="stays.html" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Accommodations</a></li>
+            <li><a href="packages.html" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Packages</a></li>
+            <li><a href="index.html#contact" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Contact Us</a></li>
+            <li>
+                <a href="booking.html" class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold shadow-xl">Book Your Trip</a>
+            </li>
+        </ul>
+    </div>
 
     <div class="pt-32 pb-12 px-6 max-w-7xl mx-auto">
         
