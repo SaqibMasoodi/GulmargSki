@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Adventure | Gulmarg Ski Resort</title>
+    <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Adventure | Gulmarg Ski Resort</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        alpine: {
+                            white: '#ffffff',
+                            off: '#f8fafc', // Slate 50
+                            ice: '#e0f2fe', // Sky 100
+                            blue: '#0ea5e9', // Sky 500
+                            deep: '#0f172a', // Slate 900
+                            text: '#334155', // Slate 700
+                            muted: '#94a3b8' // Slate 400
+                        },
+                        // New Schedule Section Colors (Updated to Slate Palette)
+                        bg: '#020617',       /* Slate 950 */
+                        panel: '#0f172a',    /* Slate 900 */
+                        surface: '#1e293b',  /* Slate 800 */
+                        border: '#334155',   /* Slate 700 */
+                        subtle: '#475569',   /* Slate 600 */
+                        muted: '#94a3b8',    /* Slate 400 */
+                    },
+                    boxShadow: {
+                        'ice': '0 4px 14px 0 rgba(14, 165, 233, 0.15)',
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- NEW SCHEDULE UTILITIES --- */
+        /* Hide scrollbar completely but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Solid Snap Logic */
+        .snap-container {
+            scroll-snap-type: x mandatory;
+        }
+
+        .snap-item {
+            scroll-snap-align: center;
+        }
+
+        /* Custom Dropdown Animation */
+        .dropdown-menu {
+            transform-origin: top;
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s linear;
+        }
+
+        .dropdown-menu.hidden {
+            display: none;
+        }
+
+        .dropdown-menu.closed {
+            transform: scaleY(0.95);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .dropdown-menu.open {
+            transform: scaleY(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Table Styles */
+        td {
+            vertical-align: top;
+        }
+
+        /* Vertical Marquee Animation */
+        @keyframes scrollY {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .animate-scroll-y {
+            animation: scrollY 30s linear infinite;
+        }
+
+        .pause-on-hover:hover .animate-scroll-y {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+
+<body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
+
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300"
+        id="main-nav">
+
+        <a href="index.html"
+            class="text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">WOLF<span
+                class="text-alpine-blue">.ADV</span></a>
+
+        <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
+            <a href="index.html#resort" class="hover:text-alpine-blue transition-colors">The Resort</a>
+            <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
+            <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
+            <a href="packages.html" class="hover:text-alpine-blue transition-colors">Packages</a>
+            <a href="index.html#contact" class="hover:text-alpine-blue transition-colors">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-3 z-50 relative">
+            <a href="booking.html"
+                class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book
+                Now</a>
+
+            <button onclick="toggleMobileMenu()"
+                class="lg:hidden p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu-overlay"
+        class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center">
+        <ul class="text-center space-y-8">
+            <li><a href="index.html#resort" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">The Resort</a>
+            </li>
+            <li><a href="index.html#curriculum" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Curriculum</a>
+            </li>
+            <li><a href="stays.html" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Accommodations</a>
+            </li>
+            <li><a href="packages.html" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Packages</a>
+            </li>
+            <li><a href="index.html#contact" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Contact Us</a>
+            </li>
+            <li>
+                <a href="booking.html"
+                    class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold shadow-xl">Book
+                    Your Trip</a>
+            </li>
+        </ul>
+    </div>
+
+    <header class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-slate-900">
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop playsinline preload="auto"
+                poster="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070&auto=format&fit=crop"
+                class="w-full h-full object-cover">
+                <source
+                    src="https://assets.mixkit.co/videos/preview/mixkit-snow-covered-mountains-and-trees-during-winter-42442-large.mp4"
+                    type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070&auto=format&fit=crop"
+                    class="w-full h-full object-cover" alt="Gulmarg Skiing">
+            </video>
+            <div class="absolute inset-0 z-10 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-transparent"></div>
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative z-20 w-full max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end pb-16 mt-20">
+
+            <div class="lg:col-span-7 flex flex-col justify-end h-full pb-4">
+                <div class="fade-in-up">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span
+                            class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]"></span>
+                        <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] font-mono">Live
+                            Conditions • Good Visibility</span>
+                    </div>
+                    <h1
+                        class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] text-white mb-6 drop-shadow-2xl">
+                        CONQUER <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-white">THE
+                            PEAKS</span>
+                    </h1>
+                    <p class="text-slate-200 text-lg md:text-xl font-medium max-w-lg leading-relaxed drop-shadow-md">
+                        Experience the raw, untouched powder of the Himalayas. Certified guides, premium logistics, and
+                        pure adrenaline.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 fade-in-up delay-300 flex flex-col justify-end">
+                <div
+                    class="bg-slate-950/75 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-2xl ring-1 ring-white/10 relative overflow-hidden group">
+
+                    <div
+                        class="absolute -top-20 -right-20 w-40 h-40 bg-sky-500/20 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-500/30 transition-colors duration-500">
+                    </div>
+
+                    <div class="flex justify-between items-start mb-8 border-b border-white/10 pb-6 relative z-10">
+                        <div class="w-full">
+                            <label
+                                class="text-[10px] uppercase tracking-widest text-sky-300/80 font-bold mb-2 flex items-center gap-2">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                Current Outpost
+                            </label>
+
+                            <div class="relative w-full group/select">
+                                <select id="weather-location" onchange="updateWeather()"
+                                    class="appearance-none bg-transparent text-4xl font-black text-white w-full pr-10 focus:outline-none cursor-pointer border-none p-0 hover:text-sky-200 transition-colors">
+                                    <option value="gulmarg" class="bg-slate-950 text-white py-2">Gulmarg</option>
+                                    <option value="pahalgam" class="bg-slate-950 text-white py-2">Pahalgam</option>
+                                    <option value="sonamarg" class="bg-slate-950 text-white py-2">Sonamarg</option>
+                                </select>
+
+                                <div
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 group-hover/select:text-white transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 relative z-10">
+                        <div
+                            class="p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group/card">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Base
+                                    Camp</span>
+                                <svg class="w-4 h-4 text-slate-500 group-hover/card:text-sky-400 transition-colors"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                                </svg>
+                            </div>
+                            <div class="flex items-baseline gap-1">
+                                <span id="base-temp"
+                                    class="text-4xl font-mono font-medium text-white tracking-tighter">-5°</span>
+                                <span class="text-sm text-slate-500 font-bold transform -translate-y-4">C</span>
+                            </div>
+                            <div id="base-label" class="text-[10px] text-sky-300/60 font-mono mt-1">2,650m ASL</div>
+                        </div>
+
+                        <div
+                            class="p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group/card">
+                            <div class="flex items-center justify-between mb-3">
+                                <span
+                                    class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Summit</span>
+                                <svg class="w-4 h-4 text-slate-500 group-hover/card:text-sky-400 transition-colors"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                            <div class="flex items-baseline gap-1">
+                                <span id="summit-temp"
+                                    class="text-4xl font-mono font-medium text-white tracking-tighter">-12°</span>
+                                <span class="text-sm text-slate-500 font-bold transform -translate-y-4">C</span>
+                            </div>
+                            <div id="summit-label" class="text-[10px] text-sky-300/60 font-mono mt-1">3,980m ASL</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="safety" class="py-24 px-6 bg-sky-50/50 bg-noise relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
+            <svg class="absolute bottom-0 left-0 w-full h-[50%] text-slate-200 opacity-40 transform scale-150 origin-bottom"
+                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
+                <path
+                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+            <svg class="absolute bottom-0 left-0 w-full h-[35%] text-slate-300 opacity-30" viewBox="0 0 1440 320"
+                preserveAspectRatio="none" fill="currentColor">
+                <path
+                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-24">
+                <span class="text-alpine-blue font-bold tracking-widest uppercase text-xs mb-3 block">Non-Negotiable
+                    Standards</span>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">SAFETY PROTOCOLS</h2>
+                <div class="w-24 h-1.5 bg-slate-900 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+
+                <div
+                    class="group relative bg-slate-50 rounded-[2.5rem] p-8 pb-12 pt-0 border-2 border-slate-300 shadow-xl shadow-slate-200/40 hover:-translate-y-3 hover:bg-white hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-200 transition-all duration-300 ease-out">
+                    <div
+                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-red-50/50 transition-colors duration-500 leading-none select-none z-0 font-serif">
+                        A</div>
+                    <div
+                        class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-red-100 group-hover:shadow-red-200 transition-all duration-500">
+                        <div
+                            class="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative z-10 text-center mt-8 px-4">
+                        <h3 class="font-black text-2xl text-slate-900 mb-4 group-hover:text-red-600 transition-colors">
+                            Avalanche Safety</h3>
+                        <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-red-500 transition-colors"></div>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed group-hover:text-slate-600">All
+                            guides carry beacons, shovels,
+                            and probes. Daily snowpack analysis provided.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative bg-slate-50 rounded-[2.5rem] p-8 pb-12 pt-0 border-2 border-slate-300 shadow-xl shadow-slate-200/40 hover:-translate-y-3 hover:bg-white hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-200 transition-all duration-300 ease-out">
+                    <div
+                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-sky-50/50 transition-colors duration-500 leading-none select-none z-0 font-serif">
+                        C</div>
+                    <div
+                        class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-sky-100 group-hover:shadow-sky-200 transition-all duration-500">
+                        <div
+                            class="w-16 h-16 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-500">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative z-10 text-center mt-8 px-4">
+                        <h3 class="font-black text-2xl text-slate-900 mb-4 group-hover:text-sky-600 transition-colors">
+                            Certified Guides</h3>
+                        <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-sky-500 transition-colors"></div>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed group-hover:text-slate-600">Led by
+                            Shafqat (National-Level
+                            Skier) and Mubashir (Advanced Skier). We aren't just running a school; we're opening up our
+                            wild mountain playground.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="group relative bg-slate-50 rounded-[2.5rem] p-8 pb-12 pt-0 border-2 border-slate-300 shadow-xl shadow-slate-200/40 hover:-translate-y-3 hover:bg-white hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-200 transition-all duration-300 ease-out">
+                    <div
+                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-emerald-50/50 transition-colors duration-500 leading-none select-none z-0 font-serif">
+                        S</div>
+                    <div
+                        class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-emerald-100 group-hover:shadow-emerald-200 transition-all duration-500">
+                        <div
+                            class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-500">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative z-10 text-center mt-8 px-4">
+                        <h3
+                            class="font-black text-2xl text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">
+                            24/7 Support</h3>
+                        <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-emerald-500 transition-colors">
+                        </div>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed group-hover:text-slate-600">From
+                            airport pickup to emergency
+                            evacuation, we are with you every step.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-20">
+                <a href="policies.html#liability"
+                    class="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-alpine-blue transition-colors uppercase tracking-widest border-b border-transparent hover:border-alpine-blue pb-1">
+                    <span>Read our Participant Liability Waiver & Safety Protocols</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="guides" class="py-24 px-6 bg-white relative overflow-hidden border-y border-slate-200">
+
+        <div
+            class="absolute top-0 left-0 w-full h-[40%] pointer-events-none select-none overflow-hidden z-0 transform rotate-180">
+            <svg class="absolute bottom-0 left-0 w-full h-full text-white opacity-60 transform scale-150 origin-bottom"
+                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
+                <path
+                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+            <svg class="absolute bottom-0 left-0 w-full h-[70%] text-slate-50 opacity-50" viewBox="0 0 1440 320"
+                preserveAspectRatio="none" fill="currentColor">
+                <path
+                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-full h-[40%] pointer-events-none select-none overflow-hidden z-0">
+            <svg class="absolute bottom-0 left-0 w-full h-full text-white opacity-60 transform scale-150 origin-bottom"
+                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
+                <path
+                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+            <svg class="absolute bottom-0 left-0 w-full h-[70%] text-slate-50 opacity-50" viewBox="0 0 1440 320"
+                preserveAspectRatio="none" fill="currentColor">
+                <path
+                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                <div class="lg:col-span-7 flex flex-col justify-center">
+                    <div class="mb-8">
+                        <span class="text-alpine-blue font-bold tracking-widest uppercase text-xs mb-2 block">The
+                            Vanguard</span>
+                        <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">MEET THE PACK</h2>
+                        <p class="text-slate-500 mt-3 text-base leading-relaxed max-w-lg">
+                            Certified experts who have spent their lives mapping these peaks. They teach you to read the
+                            mountain.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div
+                            class="group flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-xl bg-slate-50 border-2 border-slate-300 hover:-translate-y-2 hover:bg-white hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300 cursor-default">
+                            <div class="relative shrink-0">
+                                <div
+                                    class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    <img src="images/home/guides/shafqat.jpg"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        alt="Shafqat">
+                                </div>
+                                <div
+                                    class="absolute -bottom-1 -right-1 bg-alpine-blue text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white">
+                                    LEAD</div>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                                    <h3
+                                        class="text-lg font-black text-slate-900 group-hover:text-sky-600 transition-colors">
+                                        Shafqat</h3>
+                                    <div class="flex gap-1 justify-center sm:justify-start">
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">National
+                                            Skier</span>
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">WFR</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-500 text-xs leading-relaxed group-hover:text-slate-600">A
+                                    National-Level skier with deep
+                                    knowledge of the backcountry. He maps the daily routes based on snowpack stability.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-xl bg-slate-50 border-2 border-slate-300 hover:-translate-y-2 hover:bg-white hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300 cursor-default">
+                            <div class="relative shrink-0">
+                                <div
+                                    class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    <img src="images/home/guides/mubashir.jpg"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        alt="Mubashir">
+                                </div>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                                    <h3
+                                        class="text-lg font-black text-slate-900 group-hover:text-sky-600 transition-colors">
+                                        Mubashir</h3>
+                                    <div class="flex gap-1 justify-center sm:justify-start">
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Tech
+                                            Specialist</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-500 text-xs leading-relaxed group-hover:text-slate-600">
+                                    Specializing in stance correction and
+                                    carving mechanics. Mubashir ensures you look as good as you feel on the slopes.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-xl bg-slate-50 border-2 border-slate-300 hover:-translate-y-2 hover:bg-white hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300 cursor-default">
+                            <div class="relative shrink-0">
+                                <div
+                                    class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    <img src="images/home/guides/support.jpg"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        alt="Local Team">
+                                </div>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                                    <h3
+                                        class="text-lg font-black text-slate-900 group-hover:text-sky-600 transition-colors">
+                                        Support Unit</h3>
+                                    <div class="flex gap-1 justify-center sm:justify-start">
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Logistics</span>
+                                        <span
+                                            class="px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Rescue</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-500 text-xs leading-relaxed group-hover:text-slate-600">Expert in
+                                    high-altitude logistics and
+                                    safety. The backbone of our operations during harsh storms and recovery.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="lg:col-span-5 h-[550px] relative rounded-2xl overflow-hidden bg-slate-50 border-2 border-slate-300 shadow-2xl pause-on-hover">
+                    <div
+                        class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none">
+                    </div>
+
+                    <div class="animate-scroll-y w-full flex flex-col gap-3 p-3">
+                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-1.jpg" class="w-full h-full object-cover"
+                                alt="Ski Action">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="w-full h-72 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-2.jpg" class="w-full h-full object-cover"
+                                alt="Instructor Teaching">
+                        </div>
+                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-3.jpg" class="w-full h-full object-cover"
+                                alt="Group Shot">
+                        </div>
+                        <div class="w-full h-64 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-4.jpg" class="w-full h-full object-cover"
+                                alt="Powder Day">
+                        </div>
+                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-5.jpg" class="w-full h-full object-cover"
+                                alt="Ski Action">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                        <div class="w-full h-72 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-6.jpg" class="w-full h-full object-cover"
+                                alt="Instructor Teaching">
+                        </div>
+                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-7.jpg" class="w-full h-full object-cover"
+                                alt="Group Shot">
+                        </div>
+                        <div class="w-full h-64 rounded-xl overflow-hidden relative group">
+                            <img src="images/home/guides/carousel-8.jpg" class="w-full h-full object-cover"
+                                alt="Powder Day">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 px-6 bg-sky-50/80 bg-noise relative overflow-hidden">
+
+        <div
+            class="absolute top-0 left-0 w-full h-[150px] md:h-[200px] pointer-events-none select-none overflow-hidden z-0 transform rotate-180">
+            <svg class="absolute bottom-0 left-0 w-full h-full text-white transform scale-x-150 origin-bottom"
+                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
+                <path fill-opacity="1"
+                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+
+        <div
+            class="absolute bottom-0 left-0 w-full h-[150px] md:h-[200px] pointer-events-none select-none overflow-hidden z-0">
+            <svg class="absolute bottom-0 left-0 w-full h-full text-white transform scale-x-150 origin-bottom"
+                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
+                <path fill-opacity="1"
+                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-dot-pattern z-0"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 h-[600px]">
+
+                <div class="lg:col-span-3 relative rounded-[2.5rem] overflow-hidden group shadow-2xl">
+                    <img src="images/home/curriculum/content-1.jpg"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Rider in Powder">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent">
+                    </div>
+
+                    <div class="absolute inset-0 flex flex-col justify-end p-10 md:p-12">
+                        <div class="mb-6 text-amber-400 flex gap-1">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-serif font-medium text-white mb-8 leading-snug italic">
+                            "The guides knew exactly where to find fresh tracks even three days after the storm.
+                            Unforgettable experience."
+                        </h3>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-full bg-slate-200 border-2 border-white/50"></div>
+                            <div>
+                                <p class="text-white font-bold text-lg">Rohan</p>
+                                <p class="text-xs uppercase text-slate-300 font-bold tracking-widest">Mumbai, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 flex flex-col h-full">
+                    <div class="mb-6 flex justify-between items-end px-2">
+                        <div>
+                            <span
+                                class="text-alpine-blue font-bold tracking-widest uppercase text-xs block mb-1">Community</span>
+                            <h2 class="text-2xl font-black text-slate-900">Recent Stories</h2>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                            <div class="w-1.5 h-1.5 rounded-full bg-alpine-blue"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 overflow-y-auto p-4 space-y-6 no-scrollbar">
+
+                        <div
+                            class="group bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-sm hover:-translate-y-2 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 group-hover:border-sky-200 transition-colors">
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-slate-900 font-bold text-sm group-hover:text-sky-600 transition-colors">
+                                        Alex</p>
+                                    <p
+                                        class="text-[10px] text-slate-400 font-bold uppercase tracking-wide group-hover:text-sky-400 transition-colors">
+                                        Melbourne,
+                                        Australia</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                "The logistics were flawless from Srinagar airport pickup to the drop-off. I didn't have
+                                to worry about a thing."
+                            </p>
+                            <div class="flex text-amber-400 gap-0.5">
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-sm hover:-translate-y-2 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 group-hover:border-sky-200 transition-colors">
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-slate-900 font-bold text-sm group-hover:text-sky-600 transition-colors">
+                                        Sarah K.</p>
+                                    <p
+                                        class="text-xs text-slate-400 font-bold uppercase tracking-wide group-hover:text-sky-400 transition-colors">
+                                        London, UK</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                "The guides knew exactly where to find fresh tracks. Unforgettable experience."
+                            </p>
+                            <div class="flex text-amber-400 gap-0.5">
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="curriculum" class="py-24 px-6 relative overflow-hidden border-y border-slate-200">
+        <div class="absolute inset-0 z-0">
+            <img src="images/home/curriculum/bg-curriculum.jpg" class="w-full h-full object-cover"
+                alt="Curriculum Background">
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">From Zero to
+                        Hero</span>
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter uppercase">06 Day
+                        Curriculum</h2>
+                </div>
+                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">
+                    <span class="material-symbols-outlined text-slate-400 text-sm">landscape</span>
+                    <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">Gulmarg, Kashmir</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+                <div class="lg:col-span-4 flex flex-col relative space-y-4">
+                    <!-- Vertical Track Line (Hidden on mobile, visible on lg) -->
+                    <!-- Removed static line to allow for cleaner "floating" look -->
+
+                    <!-- Day 1 -->
+                    <div onclick="switchDay(1)" id="nav-btn-1"
+                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-blue-500/0 hover:border-sky-200/50 bg-blue-600 shadow-xl shadow-blue-900/20 relative overflow-hidden">
+
+                        <div
+                            class="nav-number w-12 h-12 rounded-full bg-white/20 flex items-center justify-center font-black text-white text-lg transition-all duration-500">
+                            1
+                        </div>
+
+                        <div class="flex-1 transition-transform duration-500">
+                            <h3 class="nav-title font-bold text-white text-lg leading-tight">Foundations</h3>
+                            <p class="nav-subtitle text-xs font-bold text-blue-100 tracking-wide uppercase mt-0.5">Day
+                                01</p>
+                        </div>
+
+                        <div class="nav-arrow opacity-100 translate-x-0 transition-all duration-500 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Day 2 -->
+                    <div onclick="switchDay(2)" id="nav-btn-2"
+                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
+
+                        <div
+                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
+                            2
+                        </div>
+
+                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
+                            <h3
+                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
+                                Motion</h3>
+                            <p
+                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
+                                Day 02</p>
+                        </div>
+
+                        <div
+                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Day 3 -->
+                    <div onclick="switchDay(3)" id="nav-btn-3"
+                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
+
+                        <div
+                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
+                            3
+                        </div>
+
+                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
+                            <h3
+                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
+                                The Turn</h3>
+                            <p
+                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
+                                Day 03</p>
+                        </div>
+
+                        <div
+                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Day 4 -->
+                    <div onclick="switchDay(4)" id="nav-btn-4"
+                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
+
+                        <div
+                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
+                            4
+                        </div>
+
+                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
+                            <h3
+                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
+                                Correction</h3>
+                            <p
+                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
+                                Day 04</p>
+                        </div>
+
+                        <div
+                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Day 5 -->
+                    <div onclick="switchDay(5)" id="nav-btn-5"
+                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
+
+                        <div
+                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
+                            5
+                        </div>
+
+                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
+                            <h3
+                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
+                                Flow State</h3>
+                            <p
+                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
+                                Day 05</p>
+                        </div>
+
+                        <div
+                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Day 6 -->
+                    <div onclick="switchDay(6)" id="nav-btn-6"
+                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
+
+                        <div
+                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
+                            6
+                        </div>
+
+                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
+                            <h3
+                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
+                                Certification</h3>
+                            <p
+                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
+                                Day 06</p>
+                        </div>
+
+                        <div
+                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 relative">
+                    <!-- Absolute container to prevent grid stretching from content side -->
+                    <!-- We want the list to drive height, so we use absolute positioning on desktop if needed, 
+                         or strict max-height matching. 
+                         Grid stretch makes them equal height. We just need to ensure content doesn't push it. -->
+
+                    <div id="day-1"
+                        class="day-content relative h-full w-full opacity-100 transition-opacity duration-500">
+                        <div
+                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
+                            <!-- Image Section (Fixed Height) -->
+                            <div class="relative h-48 md:h-56 w-full shrink-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                                </div>
+                                <img src="images/home/curriculum/content-2.jpg" class="w-full h-full object-cover"
+                                    alt="Day 1">
+                                <div class="absolute bottom-0 left-0 p-8 z-20">
+                                    <span
+                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
+                                        01 Focus</span>
+                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Foundations &
+                                        Gear</h2>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Content Section -->
+                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
+                                    <div class="flex-1">
+                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                            Overview</h3>
+                                        <p class="text-slate-500 text-sm leading-relaxed">
+                                            The journey begins. We focus on understanding your equipment, finding your
+                                            balance on flat ground, and the essential mechanics of stance. No slopes
+                                            yet, just connection with the snow.
+                                        </p>
+                                    </div>
+                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
+                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                            <div class="flex justify-between items-center mb-1.5">
+                                                <span
+                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
+                                                <span
+                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
+                                                    1</span>
+                                            </div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                                <div class="h-full bg-blue-600 w-[20%] rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
+                                                <span class="font-black text-sm text-slate-900">4 Hrs</span>
+                                            </div>
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
+                                                <span class="font-black text-sm text-slate-900">Flat</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 shrink-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                1</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Boot Fitting</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                2</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Static Balance</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                3</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Side Stepping</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                4</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Ski Geometry</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-2"
+                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
+                        <div
+                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
+                            <!-- Image Section (Fixed Height) -->
+                            <div class="relative h-48 md:h-56 w-full shrink-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                                </div>
+                                <img src="images/home/curriculum/content-3.jpg" class="w-full h-full object-cover"
+                                    alt="Day 2">
+                                <div class="absolute bottom-0 left-0 p-8 z-20">
+                                    <span
+                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
+                                        02 Focus</span>
+                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Motion &
+                                        Gravity</h2>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Content Section -->
+                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
+                                    <div class="flex-1">
+                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                            Overview</h3>
+                                        <p class="text-slate-500 text-sm leading-relaxed">
+                                            Introduction to the gentle slope. You will learn to trust gravity and
+                                            control your speed using the foundational "Snow Plough" technique.
+                                        </p>
+                                    </div>
+                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
+                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                            <div class="flex justify-between items-center mb-1.5">
+                                                <span
+                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
+                                                <span
+                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
+                                                    1+</span>
+                                            </div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                                <div class="h-full bg-blue-600 w-[30%] rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
+                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
+                                            </div>
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
+                                                <span class="font-black text-sm text-slate-900">Green</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 shrink-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                1</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Gentle Sliding</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                2</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Wedge Braking</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                3</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Speed Control</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                4</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Falling Safely</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-3"
+                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
+                        <div
+                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
+                            <!-- Image Section (Fixed Height) -->
+                            <div class="relative h-48 md:h-56 w-full shrink-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                                </div>
+                                <img src="images/home/curriculum/content-4.jpg" class="w-full h-full object-cover"
+                                    alt="Day 3">
+                                <div class="absolute bottom-0 left-0 p-8 z-20">
+                                    <span
+                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
+                                        03 Focus</span>
+                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">The Art of the
+                                        Turn</h2>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Content Section -->
+                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
+                                    <div class="flex-1">
+                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                            Overview</h3>
+                                        <p class="text-slate-500 text-sm leading-relaxed">
+                                            We break the straight line. You will learn to initiate turns, transferring
+                                            weight from one ski to the other to change direction effectively.
+                                        </p>
+                                    </div>
+                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
+                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                            <div class="flex justify-between items-center mb-1.5">
+                                                <span
+                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
+                                                <span
+                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
+                                                    2</span>
+                                            </div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                                <div class="h-full bg-blue-600 w-[45%] rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
+                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
+                                            </div>
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
+                                                <span class="font-black text-sm text-slate-900">Blue</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 shrink-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                1</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Wedge Turns</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                2</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Traversing</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                3</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Uphill Stop</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                4</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Weight Shift</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-4"
+                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
+                        <div
+                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
+                            <!-- Image Section (Fixed Height) -->
+                            <div class="relative h-48 md:h-56 w-full shrink-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                                </div>
+                                <img src="images/home/curriculum/content-5.jpg" class="w-full h-full object-cover"
+                                    alt="Day 4">
+                                <div class="absolute bottom-0 left-0 p-8 z-20">
+                                    <span
+                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
+                                        04 Focus</span>
+                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Posture &
+                                        Correction</h2>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Content Section -->
+                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
+                                    <div class="flex-1">
+                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                            Overview</h3>
+                                        <p class="text-slate-500 text-sm leading-relaxed">
+                                            Building confidence through repetition. We analyze your stance, correct bad
+                                            habits, and introduce longer runs on varied terrain.
+                                        </p>
+                                    </div>
+                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
+                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                            <div class="flex justify-between items-center mb-1.5">
+                                                <span
+                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
+                                                <span
+                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
+                                                    2+</span>
+                                            </div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                                <div class="h-full bg-blue-600 w-[60%] rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
+                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
+                                            </div>
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
+                                                <span class="font-black text-sm text-slate-900">Blue</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 shrink-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                1</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Side Slipping</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                2</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Garland Drills</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                3</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Linked Turns</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                4</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Video Analysis</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-5"
+                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
+                        <div
+                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
+                            <!-- Image Section (Fixed Height) -->
+                            <div class="relative h-48 md:h-56 w-full shrink-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                                </div>
+                                <img src="images/home/curriculum/content-6.jpg" class="w-full h-full object-cover"
+                                    alt="Day 5">
+                                <div class="absolute bottom-0 left-0 p-8 z-20">
+                                    <span
+                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
+                                        05 Focus</span>
+                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Entering Flow
+                                        State</h2>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Content Section -->
+                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
+                                    <div class="flex-1">
+                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                            Overview</h3>
+                                        <p class="text-slate-500 text-sm leading-relaxed">
+                                            Linking turns fluidly. You move from mechanical thinking to feeling the
+                                            rhythm of the mountain, introducing parallel concepts.
+                                        </p>
+                                    </div>
+                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
+                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                            <div class="flex justify-between items-center mb-1.5">
+                                                <span
+                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
+                                                <span
+                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
+                                                    3</span>
+                                            </div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                                <div class="h-full bg-blue-600 w-[80%] rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
+                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
+                                            </div>
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
+                                                <span class="font-black text-sm text-slate-900">Red</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 shrink-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                1</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Rhythm Control</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                2</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Pole Planting</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                3</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Stem Turns</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                4</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Parallel Intro</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-6"
+                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
+                        <div
+                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
+                            <!-- Image Section (Fixed Height) -->
+                            <div class="relative h-48 md:h-56 w-full shrink-0">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
+                                </div>
+                                <img src="images/home/curriculum/content-7.jpg" class="w-full h-full object-cover"
+                                    alt="Day 6">
+                                <div class="absolute bottom-0 left-0 p-8 z-20">
+                                    <span
+                                        class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Graduation</span>
+                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Certification
+
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
+                                    <div class="flex-1">
+                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                            Overview</h3>
+                                        <p class="text-slate-500 text-sm leading-relaxed">
+                                            The final run. Demonstrate your control and technique on the upper slopes to
+                                            earn your certificate and join the Wolf Adventure alumni.
+                                        </p>
+                                    </div>
+                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
+                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                            <div class="flex justify-between items-center mb-1.5">
+                                                <span
+                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
+                                                <span
+                                                    class="text-[10px] font-bold text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded">Level
+                                                    4</span>
+                                            </div>
+                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                                <div class="h-full bg-emerald-500 w-[100%] rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
+                                                <span class="font-black text-sm text-slate-900">Full Day</span>
+                                            </div>
+                                            <div
+                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
+                                                <span
+                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
+                                                <span class="font-black text-sm text-slate-900">Black</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-1 shrink-0">
+                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                1</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Supervised Run</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                2</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Style Check</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                3</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Certification</h4>
+                                        </div>
+                                        <div
+                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
+                                            <div
+                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
+                                                4</div>
+                                            <h4 class="font-bold text-xs text-slate-900">Graduation</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resort" class="py-16 px-6 bg-slate-50 font-sans">
+        <div class="max-w-6xl mx-auto">
+
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">Terrain
+                        Analysis</span>
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight uppercase">The Mountain
+                    </h2>
+                </div>
+                <div
+                    class="hidden md:flex items-center gap-2 bg-white px-3 py-1.5 rounded border border-slate-200 shadow-sm mb-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Satellite Live</span>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-lg border border-slate-200 flex flex-col md:flex-row h-auto md:h-[480px]">
+
+                <div class="w-full md:w-[55%] relative bg-slate-100 h-[300px] md:h-full group">
+                    <div id="gulmarg-map" class="absolute inset-0 w-full h-full z-0 focus:outline-none grayscale-[20%]">
+                    </div>
+
+                    <div class="absolute inset-4 pointer-events-none z-10 opacity-30">
+                        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-slate-900"></div>
+                        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-slate-900"></div>
+                        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-slate-900"></div>
+                        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-slate-900"></div>
+                    </div>
+
+                    <div
+                        class="absolute bottom-4 left-4 z-10 bg-slate-900/90 text-white px-2 py-1 text-[9px] font-bold tracking-widest rounded">
+                        34.0494° N, 74.3887° E
+                    </div>
+                </div>
+
+                <div class="w-full md:w-[45%] bg-white grid grid-cols-2">
+
+                    <div
+                        class="border-b border-r border-slate-100 p-8 flex flex-col justify-center hover:bg-slate-50 transition-colors group">
+                        <span
+                            class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 group-hover:text-blue-600">Peak
+                            Elevation</span>
+                        <div class="text-3xl lg:text-4xl font-black text-slate-900">
+                            3,980<span class="text-lg font-bold text-slate-300 ml-1 group-hover:text-blue-300">m</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="border-b border-slate-100 p-8 flex flex-col justify-center hover:bg-slate-50 transition-colors group">
+                        <span
+                            class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 group-hover:text-blue-600">Vertical
+                            Drop</span>
+                        <div class="text-3xl lg:text-4xl font-black text-slate-900">
+                            1,330<span class="text-lg font-bold text-slate-300 ml-1 group-hover:text-blue-300">m</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="border-r border-slate-100 p-8 flex flex-col justify-center hover:bg-slate-50 transition-colors group">
+                        <span
+                            class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 group-hover:text-blue-600">Annual
+                            Snow</span>
+                        <div class="text-3xl lg:text-4xl font-black text-slate-900">
+                            14<span class="text-lg font-bold text-slate-300 ml-1 group-hover:text-blue-300">m</span>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col justify-center hover:bg-slate-50 transition-colors group">
+                        <span
+                            class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 group-hover:text-blue-600">Powder
+                            Bowls</span>
+                        <div class="text-3xl lg:text-4xl font-black text-slate-900">
+                            17<span class="text-lg font-bold text-slate-300 ml-1 group-hover:text-blue-300">zones</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="attractions" class="py-24 px-6 bg-slate-100 font-sans border-t border-slate-300">
+        <div class="max-w-7xl mx-auto">
+
+            <div class="mb-12">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">Valley
+                    Exploration</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight uppercase">Attractions &
+                    Rides</h2>
+                <div class="h-1 w-20 bg-slate-200 rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+                <div class="lg:w-1/4 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
+
+                    <button onclick="openTab(event, 'gondola')" id="defaultOpen"
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Gondola Cable Car</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <button onclick="openTab(event, 'thrill')"
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Snowmobile & ATV</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <button onclick="openTab(event, 'sightseeing')"
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Sightseeing</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <button onclick="openTab(event, 'explore')"
+                        class="tab-btn w-full text-left px-5 py-4 rounded-lg font-bold text-sm transition-all duration-200 flex items-center justify-between group min-w-[200px] lg:min-w-0 border border-l-4">
+                        <span>Beyond Gulmarg</span>
+                        <svg class="w-4 h-4 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                </div>
+
+                <div class="lg:w-3/4 min-h-[500px]">
+
+                    <div id="gondola" class="tab-content block h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-3 uppercase tracking-tight">World's 2nd
+                                Highest Cable Car</h3>
+                            <p class="text-slate-500 mb-8 font-medium leading-relaxed max-w-2xl">The highlight of any
+                                trip. Rise from the pine forests to the naked peaks in minutes.</p>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div
+                                    class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors group">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h4 class="text-lg font-black text-slate-900 uppercase">Phase 1</h4>
+                                        <span
+                                            class="text-[10px] bg-slate-900 text-white font-bold px-2 py-1 rounded">8,500
+                                            ft</span>
+                                    </div>
+                                    <p class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider">Gulmarg to
+                                        Kongdoori</p>
+                                    <p class="text-sm text-slate-600 font-medium leading-relaxed">Takes you to a
+                                        bowl-shaped valley. Features restaurants, snow parks, and the main beginner
+                                        slopes.</p>
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-6 rounded-xl border border-slate-200 hover:border-blue-400 transition-colors relative overflow-hidden group">
+                                    <div class="flex justify-between items-center mb-4 relative z-10">
+                                        <h4 class="text-lg font-black text-slate-900 uppercase">Phase 2</h4>
+                                        <span
+                                            class="text-[10px] bg-blue-600 text-white font-bold px-2 py-1 rounded">14,000
+                                            ft</span>
+                                    </div>
+                                    <p
+                                        class="text-xs text-blue-600 mb-3 font-bold uppercase tracking-wider relative z-10">
+                                        To Apharwat Peak</p>
+                                    <p class="text-sm text-slate-600 font-medium leading-relaxed relative z-10">The main
+                                        event. Breathtaking views of Nanga Parbat. <br><span
+                                            class="text-red-500 font-bold text-xs mt-2 block">*Sightseeing or Experts
+                                            Only.</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="thrill" class="tab-content hidden h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-8 uppercase tracking-tight">Adrenaline
+                                Without Skis</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div
+                                    class="group relative overflow-hidden rounded-xl border border-slate-200 aspect-[4/3]">
+                                    <img src="images/home/attractions/gondola.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        alt="Snowmobile">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                                        <h4 class="text-xl font-bold text-white mb-1">Snowmobiles</h4>
+                                        <p class="text-slate-300 text-xs font-medium mb-3">High-speed motorized sleds.
+                                            Zoom across vast frozen snowfields.</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="group relative overflow-hidden rounded-xl border border-slate-200 aspect-[4/3]">
+                                    <img src="images/home/attractions/snowmobile.jpg"
+                                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        alt="ATV">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                                        <h4 class="text-xl font-bold text-white mb-1">ATV (Quad Bikes)</h4>
+                                        <p class="text-slate-300 text-xs font-medium mb-3">4x4 beasts with tire chains.
+                                            Explore Tangmarg to Drung.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sightseeing" class="tab-content hidden h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">Iconic Spots
+                            </h3>
+                            <p class="text-slate-500 mb-8 font-medium">The "Must-Visit" locations for every traveler.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div
+                                    class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all group">
+                                    <div class="h-32 rounded-lg bg-slate-200 mb-4 overflow-hidden">
+                                        <img src="images/home/attractions/waterfall.jpg"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            alt="Waterfall">
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-1">Drung Waterfall</h4>
+                                    <p class="text-xs text-slate-500 font-medium">Famous frozen waterfall (Jan/Feb).</p>
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all group">
+                                    <div class="h-32 rounded-lg bg-slate-200 mb-4 overflow-hidden">
+                                        <img src="images/home/attractions/church.jpg"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            alt="Church">
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-1">St. Mary’s Church</h4>
+                                    <p class="text-xs text-slate-500 font-medium">100+ year old Victorian church.</p>
+                                </div>
+                                <div
+                                    class="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all group">
+                                    <div class="h-32 rounded-lg bg-slate-200 mb-4 overflow-hidden">
+                                        <img src="images/home/attractions/temple.jpg"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            alt="Temple">
+                                    </div>
+                                    <h4 class="text-lg font-bold text-slate-900 mb-1">Maharani Temple</h4>
+                                    <p class="text-xs text-slate-500 font-medium">Red-roofed Shiva temple on a hill.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="explore" class="tab-content hidden h-full">
+                        <div class="bg-white rounded-xl p-8 lg:p-10 border border-slate-200 h-full shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-6 uppercase tracking-tight">Complete Your
+                                Itinerary</h3>
+                            <div class="space-y-8">
+                                <div class="flex gap-6 group">
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xl shrink-0 group-hover:bg-blue-600 transition-colors">
+                                        DL</div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-slate-900">Srinagar (Dal Lake)</h4>
+                                        <p class="text-sm text-slate-500 mt-2 font-medium">2 hours away. The classic
+                                            experience is a Shikara ride on the frozen lake and a Houseboat stay.</p>
+                                    </div>
+                                </div>
+                                <div class="w-px h-8 bg-slate-200 ml-8"></div>
+                                <div class="flex gap-6 group">
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-white border-2 border-slate-200 text-slate-900 flex items-center justify-center font-bold text-xl shrink-0 group-hover:border-blue-600 group-hover:text-blue-600 transition-colors">
+                                        PH</div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-slate-900">Pahalgam</h4>
+                                        <p class="text-sm text-slate-500 mt-2 font-medium">"Valley of Shepherds." Famous
+                                            for scenic rivers and pine forests.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div
+                class="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div class="bg-blue-600 text-white p-2 rounded-lg shrink-0 shadow-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-blue-900 uppercase tracking-wider text-xs mb-1">Pro Tip: Booking
+                        Essentials</h4>
+                    <p class="text-sm text-blue-800 font-medium">If you book a package, ask if Gondola tickets are
+                        included. Tickets (especially Phase 2) sell out weeks in advance online.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="accommodations" class="py-24 px-6 bg-slate-900">
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16 text-white">
+                <h2 class="text-3xl md:text-5xl font-black mb-4">STAY IN COMFORT</h2>
+                <p class="text-slate-400">Warm beds and hot meals after cold days.</p>
+                <a href="stays.html"
+                    class="inline-block mt-8 px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-slate-900 transition-colors">
+                    View All Resorts & Rooms →
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-white">The Lodge</h3>
+
+                    <div
+                        class="auto-slider relative h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
+                            <div class="min-w-full h-full relative">
+                                <img src="images/home/stays_teaser/stay-1.jpg" class="w-full h-full object-cover"
+                                    alt="Hotel Room">
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
+                                    <span class="text-white font-bold text-xl">Luxury Rooms</span>
+                                </div>
+                            </div>
+                            <div class="min-w-full h-full relative">
+                                <img src="images/home/stays_teaser/stay-2.jpg" class="w-full h-full object-cover"
+                                    alt="Fireplace">
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
+                                    <span class="text-white font-bold text-xl">Cozy Fireplaces</span>
+                                </div>
+                            </div>
+                            <div class="min-w-full h-full relative">
+                                <img src="images/home/stays_teaser/stay-3.jpg" class="w-full h-full object-cover"
+                                    alt="Lobby">
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
+                                    <span class="text-white font-bold text-xl">Grand Lobby</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">Centrally heated rooms with mountain views.
+                        5-minute walk to the Gondola.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-white">Local Flavors</h3>
+
+                    <div
+                        class="auto-slider relative h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 group">
+                        <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
+                            <div class="min-w-full h-full relative">
+                                <img src="images/home/stays_teaser/food-1.jpg" class="w-full h-full object-cover"
+                                    alt="Kashmiri Wazwan">
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
+                                    <span class="text-white font-bold text-xl">Authentic Wazwan</span>
+                                </div>
+                            </div>
+                            <div class="min-w-full h-full relative">
+                                <img src="images/home/stays_teaser/food-2.jpg" class="w-full h-full object-cover"
+                                    alt="Kahwa Tea">
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
+                                    <span class="text-white font-bold text-xl">Hot Kahwa</span>
+                                </div>
+                            </div>
+                            <div class="min-w-full h-full relative">
+                                <img src="images/home/stays_teaser/food-3.jpg" class="w-full h-full object-cover"
+                                    alt="Dining">
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
+                                    <span class="text-white font-bold text-xl">Fine Dining</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">Authentic Kashmiri Wazwan and continental comfort
+                        food to refuel.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-alpine-blue relative overflow-hidden group">
+
+        <div
+            class="absolute inset-0 bg-slate-900 mix-blend-multiply opacity-50 transition-opacity group-hover:opacity-40">
+        </div>
+        <img src="images/home/cta/bg.jpg"
+            class="absolute inset-0 w-full h-full object-cover -z-10 grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+            alt="Ski Group">
+
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold uppercase tracking-widest mb-6">
+                Limited Spots Available
+            </span>
+            <h2 class="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-tight">
+                READY TO RIDE?<br>
+                <span class="text-sky-300">2026 BATCHES OPEN.</span>
+            </h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="packages.html"
+                    class="px-8 py-4 bg-white text-slate-900 font-black rounded-full hover:bg-sky-50 transition-all transform hover:-translate-y-1 shadow-xl flex items-center justify-center gap-2">
+                    View Dates & Prices
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="booking.html"
+                    class="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center justify-center">
+                    Start Custom Build
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="logistics" class="py-16 px-6 max-w-5xl mx-auto">
+        <div class="bg-slate-50 rounded-2xl p-8 md:p-12 border border-slate-200">
+
+            <h2 class="text-3xl font-black text-slate-900 mb-8">GETTING HERE</h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-slate-900 text-white p-2 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Fly to Srinagar (SXR)</h3>
+                    </div>
+                    <p class="text-slate-500 mb-6 text-sm leading-relaxed">The nearest airport is Srinagar International
+                        Airport. Major airlines (Indigo, Air India, Vistara) operate daily flights from Delhi (1.5 hrs).
+                    </p>
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                        <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-1">Tip</p>
+                        <p class="text-xs font-semibold text-slate-700">Book a window seat on the left side (Delhi to
+                            Srinagar) for the best mountain views.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-slate-900 text-white p-2 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 012-2v0m12 0a2 2 0 012 2v0m-2-2a2 2 0 00-1-1h-1">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">The Drive Up</h3>
+                    </div>
+                    <p class="text-slate-500 mb-6 text-sm leading-relaxed">Gulmarg is a 55km drive from the airport.
+                        Airport Pickup Available (Add-on). We can organize 4x4 SUVs with tire chains for you upon
+                        request.</p>
+
+                    <ul class="text-sm text-slate-600 space-y-2 font-medium">
+                        <li class="flex justify-between border-b border-slate-200 pb-2"><span>Distance</span> <span>55
+                                KM</span></li>
+                        <li class="flex justify-between border-b border-slate-200 pb-2"><span>Time</span> <span>~2
+                                Hours</span></li>
+                        <li class="flex justify-between"><span>Taxi Cost</span> <span>~₹3,000</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 px-6 mt-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+
+            <div class="col-span-1 md:col-span-2 pr-8">
+                <h2 class="text-3xl font-black tracking-tighter mb-6">WOLF<span class="text-alpine-blue">.ADV</span>
+                </h2>
+                <p class="max-w-sm text-slate-400 mb-8 leading-relaxed text-sm">
+                    Experience the raw beauty of the Himalayas with certified guides, premium logistics, and local
+                    expertise.
+                </p>
+                <a href="booking.html"
+                    class="inline-block px-8 py-3 rounded-md bg-white text-slate-900 font-bold text-sm hover:bg-alpine-blue hover:text-white transition-colors">
+                    Start Your Booking
+                </a>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-lg">Explore</h4>
+                <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                    <li><a href="#packages" class="hover:text-white transition-colors">Ski Packages</a></li>
+                    <li><a href="#resort" class="hover:text-white transition-colors">The Resort</a></li>
+                    <li><a href="#attractions" class="hover:text-white transition-colors">Local Attractions</a></li>
+                    <li><a href="#guides" class="hover:text-white transition-colors">Our Guides</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-lg">Visit Us</h4>
+                <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                    <li>Near Gondola Base<br>Gulmarg, 193403</li>
+                    <li>+91 9906 123 456</li>
+                    <li>hello@wolf.com</li>
+                    <li class="pt-2">
+                        <a href="#" class="text-white font-bold hover:text-alpine-blue transition-colors">Get
+                            Directions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            class="max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-medium">
+            <p>© 2025 Wolf Adventure Gulmarg.</p>
+            <div class="flex gap-6 mt-4 md:mt-0">
+                <a href="policies.html#privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="policies.html#cancellations" class="hover:text-white transition-colors">Cancellation Policy</a>
+                <a href="policies.html#booking" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,280 @@
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Animation Classes */
+.fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+/* Utility */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Tab Styles */
+.tab-btn {
+    position: relative;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #0ea5e9;
+    transition: width 0.3s ease;
+}
+
+.tab-btn.active::after {
+    width: 100%;
+}
+
+.tab-btn.active {
+    color: #0f172a;
+    background-color: #f1f5f9;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Image Filters */
+.alpine-img {
+    filter: contrast(1.1) saturate(0.9) brightness(1.05);
+}
+
+/* --- NEW SCHEDULE UTILITIES --- */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.snap-container {
+    scroll-snap-type: x mandatory;
+}
+
+.snap-item {
+    scroll-snap-align: center;
+}
+
+/* Custom Dropdown Animation */
+.dropdown-menu {
+    transform-origin: top;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s linear;
+}
+
+.dropdown-menu.hidden {
+    display: none;
+}
+
+.dropdown-menu.closed {
+    transform: scaleY(0.95);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dropdown-menu.open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Table Styles */
+td {
+    vertical-align: top;
+}
+
+.bg-dot-pattern {
+    background-image: radial-gradient(#94a3b8 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.bg-ski-pattern {
+    background-image: url('data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 64 64\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230369a1\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3C!-- Skis --%3E%3Cpath d=\'M8 12h2v12H8zM12 12h2v12h-2z\'/%3E%3C!-- Goggles --%3E%3Cpath d=\'M40 16c0-2.2 1.8-4 4-4h8c2.2 0 4 1.8 4 4v4H40v-4z\'/%3E%3C!-- Snowflake --%3E%3Cpath d=\'M12 44l-2 2 2 2-2 2 2 2h2v-2l2 2 2-2-2-2 2-2-2-2v2z\'/%3E%3C!-- Mountain --%3E%3Cpath d=\'M48 48l-6 10h12z\'/%3E%3C!-- Pole --%3E%3Cpath d=\'M24 24h1v10h-1z\'/%3E%3C/g%3E%3C/svg%3E');
+}
+
+/* Vertical Marquee Animation */
+@keyframes scrollY {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* --- POLICIES PAGE STYLES --- */
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-link.active {
+    color: #0f172a;
+    font-weight: 600;
+    border-left-color: #0ea5e9;
+    background: linear-gradient(90deg, #f0f9ff 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* --- BOOKING PAGE STYLES --- */
+
+/* Custom Radio Card Selection */
+.wolf-radio:checked+div {
+    border-color: #0ea5e9;
+    background-color: #f0f9ff;
+    /* Sky 50 */
+    box-shadow: 0 0 0 1px #0ea5e9;
+}
+
+.wolf-radio:checked+div .radio-circle {
+    background-color: #0ea5e9;
+    border-color: #0ea5e9;
+    box-shadow: inset 0 0 0 2px white;
+}
+
+/* Section Transitions */
+.fade-enter {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden-section {
+    display: none;
+}
+
+/* Custom Toggle Switch */
+.toggle-checkbox:checked {
+    background-color: #0ea5e9;
+    border-color: #0ea5e9;
+}
+
+.toggle-checkbox:checked+div {
+    transform: translateX(100%);
+    border-color: white;
+}
+
+.animate-scroll-y {
+    animation: scrollY 30s linear infinite;
+}
+
+.pause-on-hover:hover .animate-scroll-y {
+    animation-play-state: paused;
+}
+
+/* --- PACKAGES PAGE UTILITIES --- */
+
+/* Horizontal Snap Scroll */
+.snap-x {
+    scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+    scroll-snap-align: center;
+}
+
+/* Modal Popup Animations */
+.modal {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal.open .modal-content {
+    transform: scale(1);
+}
+
+/* Texture Utilities */
+.bg-noise {
+    position: relative;
+}
+
+.bg-noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
