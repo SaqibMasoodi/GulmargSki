@@ -387,13 +387,51 @@ const PACKAGE_ACCOMMODATIONS = {
     'platinum': 'Premium Suite + Private Butler'
 };
 
-function updateAccommodation() {
+function updateCalculations() {
     const pkgSelect = document.getElementById('package-select');
-    const display = document.getElementById('accommodation-display');
+    const guestSelect = document.getElementById('guest-count');
+    const accSelect = document.getElementById('accommodation-select'); // New select element
 
-    if (pkgSelect && display) {
-        const selectedPkg = pkgSelect.value;
-        display.value = PACKAGE_ACCOMMODATIONS[selectedPkg] || 'Standard Lodge';
+    // Update Accommodation based on Package (Smart Default)
+    if (pkgSelect && accSelect) {
+        accSelect.value = pkgSelect.value;
+    }
+
+    // Price Calculation
+    if (pkgSelect && guestSelect) {
+        const option = pkgSelect.options[pkgSelect.selectedIndex];
+        const price = parseInt(option.getAttribute('data-price')) || 0;
+        const guests = parseInt(guestSelect.value) || 1;
+
+        const total = price * guests;
+
+        // Update UI
+        document.getElementById('summary-base-price').innerText = '₹' + price.toLocaleString();
+        document.getElementById('summary-guests').innerText = 'x ' + guests;
+        document.getElementById('summary-total').innerText = '₹' + total.toLocaleString();
+    }
+}
+
+function updateIDLabel() {
+    const type = document.getElementById('id-type').value;
+    const input = document.querySelector('input[name="id_number"]');
+    const label = document.getElementById('id-number-label');
+
+    if (type === 'Aadhaar') {
+        label.innerText = 'Aadhaar Number';
+        input.placeholder = 'XXXX XXXX XXXX';
+    } else if (type === 'PAN') {
+        label.innerText = 'PAN Number';
+        input.placeholder = 'ABCDE1234F';
+    } else if (type === 'Passport') {
+        label.innerText = 'Passport Number';
+        input.placeholder = 'A1234567';
+    } else if (type === 'License') {
+        label.innerText = 'License Number';
+        input.placeholder = 'DL-1420110012345';
+    } else {
+        label.innerText = 'ID Number';
+        input.placeholder = 'Enter ID Number';
     }
 }
 
@@ -415,21 +453,25 @@ function submitBooking(e) {
     msg += `Name: ${formData.get('name')}\n`;
     msg += `Email: ${formData.get('email')}\n`;
     msg += `Phone: ${formData.get('phone')}\n`;
-    msg += `Location: ${formData.get('location')}\n`;
-    msg += `Age: ${formData.get('age')}\n\n`;
+    msg += `Age: ${formData.get('age')}\n`;
+    msg += `Address: ${formData.get('addr_line1')}, ${formData.get('addr_line2') ? formData.get('addr_line2') + ', ' : ''}${formData.get('city')}, ${formData.get('state')}, ${formData.get('country')} - ${formData.get('zip')}\n`;
+    msg += `ID: ${formData.get('id_type')} (${formData.get('id_number')})\n\n`;
 
     // 2. Package
-    msg += `📦 *Package Selection*\n`;
+    msg += `📦 *Package & Price*\n`;
     msg += `Tier: ${formData.get('package').toUpperCase()}\n`;
-    msg += `Guests: ${formData.get('guests')}\n\n`;
+    msg += `Guests: ${formData.get('guests')}\n`;
+    msg += `Total Est: ${document.getElementById('summary-total').innerText}\n\n`;
 
     // 3. Schedule
     msg += `📅 *Schedule*\n`;
     msg += `Start Date: ${formData.get('date')}\n\n`;
 
     // 4. Stay
+    const accSelect = document.getElementById('accommodation-select');
+    const accText = accSelect.options[accSelect.selectedIndex].text;
     msg += `🏠 *Accommodation*\n`;
-    msg += `Assigned: ${document.getElementById('accommodation-display').value}\n\n`;
+    msg += `Selected: ${accText}\n\n`;
 
     // 5. Safety
     const medical = formData.get('medical');
@@ -441,17 +483,26 @@ function submitBooking(e) {
     const notes = formData.get('notes');
     if (notes) msg += `📝 Notes: ${notes}\n`;
 
+    // Show Confirmation on Screen
+    const btn = e.target; // The button clicked
+    const confirmMsg = document.getElementById('confirmation-msg');
+
     // Open WhatsApp
     const waUrl = `https://wa.me/916005806856?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
+
+    // Show message after a brief delay
+    setTimeout(() => {
+        if (confirmMsg) confirmMsg.classList.remove('hidden');
+        if (btn) btn.classList.add('hidden'); // Hide button to prevent double submit
+    }, 1000);
 }
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
     const pkgSelect = document.getElementById('package-select');
     if (pkgSelect) {
-        pkgSelect.addEventListener('change', updateAccommodation);
-        updateAccommodation(); // Run once on load
+        updateCalculations(); // Run once on load
     }
 });
 

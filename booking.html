@@ -97,215 +97,344 @@
         </ul>
     </div>
 
-    <div class="pt-32 pb-12 px-6 max-w-3xl mx-auto">
+    <div class="pt-32 pb-12 px-6 max-w-7xl mx-auto">
 
         <div class="text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">BOOK YOUR TRIP</h1>
-            <p class="text-slate-500 font-medium max-w-xl mx-auto">Fill out the form below to secure your spot. We'll
+            <p class="text-slate-500 font-medium max-w-xl mx-auto">Fill out the form below. We'll generate a quote and
                 confirm availability instantly via WhatsApp.</p>
         </div>
 
-        <form id="bookingForm" class="space-y-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
 
-            <!-- 1. Customer Details -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h3
-                    class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                    <span
-                        class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
-                    Customer Details
-                </h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Full
-                            Name</label>
-                        <input type="text" name="name"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                            placeholder="John Doe" required>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Email
-                            Address</label>
-                        <input type="email" name="email"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                            placeholder="john@example.com" required>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Phone
-                            (WhatsApp)</label>
-                        <input type="tel" name="phone"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                            placeholder="+91 ..." required>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Country /
-                            City</label>
-                        <input type="text" name="location"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                            placeholder="Mumbai, India" required>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Age</label>
-                        <input type="number" name="age"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                            placeholder="25" required>
-                    </div>
-                </div>
-            </div>
+            <!-- LEFT COLUMN: FORM -->
+            <form id="bookingForm" class="lg:col-span-2 space-y-8">
 
-            <!-- 2. Package Selection -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h3
-                    class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                    <span
-                        class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
-                    Package Selection
-                </h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Select
-                            Package</label>
-                        <select id="package-select" name="package"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
-                            <option value="basic">Basic Package</option>
-                            <option value="silver" selected>Silver Package</option>
-                            <option value="gold">Gold Package</option>
-                            <option value="diamond">Diamond Package</option>
-                            <option value="platinum">Platinum Package</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label
-                            class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Participants</label>
-                        <select name="guests"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
-                            <option value="1">1 Person</option>
-                            <option value="2">2 People</option>
-                            <option value="3">3 People</option>
-                            <option value="4">4 People</option>
-                            <option value="5">5+ Group</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+                <!-- 1. Customer Details -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                        Customer Details
+                    </h3>
 
-            <!-- 3. Schedule -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h3
-                    class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                    <span
-                        class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
-                    Schedule
-                </h3>
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Preferred Start
-                        Date</label>
-                    <input type="date" name="date"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                        required>
-                </div>
-            </div>
-
-            <!-- 4. Accommodation -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h3
-                    class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                    <span
-                        class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
-                    Accommodation
-                </h3>
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Assigned
-                        Stay</label>
-                    <input type="text" id="accommodation-display"
-                        class="w-full bg-slate-100 border border-slate-200 rounded-lg px-4 py-3 text-slate-500 font-medium cursor-not-allowed"
-                        value="Poshwan / Ski Lodge (Based on Silver Package)" readonly>
-                    <p class="text-xs text-slate-400 mt-2">*Accommodation is linked to your selected package.</p>
-                </div>
-            </div>
-
-            <!-- 5. Safety & Emergency -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h3
-                    class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                    <span
-                        class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
-                    Safety & Emergency
-                </h3>
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Medical
-                            Conditions (Optional)</label>
-                        <input type="text" name="medical"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                            placeholder="Allergies, asthma, etc.">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Full
+                                Name</label>
+                            <input type="text" name="name"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Email
+                                Address</label>
+                            <input type="email" name="email"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="john@example.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Phone
+                                (WhatsApp)</label>
+                            <input type="tel" name="phone"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="+91 ..." required>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Age</label>
+                            <input type="number" name="age"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="25" required>
+                        </div>
                     </div>
+
+                    <!-- Address Section -->
+                    <h4 class="text-sm font-bold text-slate-900 mb-4 mt-8 border-t border-slate-100 pt-4">Address
+                        Details</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Address
+                                Line 1</label>
+                            <input type="text" name="addr_line1"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="123 Main St" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Address
+                                Line 2 (Optional)</label>
+                            <input type="text" name="addr_line2"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="Apt 4B">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">City</label>
+                                <input type="text" name="city"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                    required>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">State
+                                    / Province</label>
+                                <input type="text" name="state"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                    required>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Country</label>
+                                <input type="text" name="country"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Zip
+                                    / Postal</label>
+                                <input type="text" name="zip"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Identity Section -->
+                    <h4 class="text-sm font-bold text-slate-900 mb-4 mt-8 border-t border-slate-100 pt-4">Identity
+                        Verification <span class="text-xs font-normal text-slate-500 uppercase ml-2">(One ID per
+                            Booking)</span></h4>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label
-                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Emergency
-                                Contact Name</label>
-                            <input type="text" name="emergency_name"
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Identity
+                                Proof Type</label>
+                            <select id="id-type" name="id_type" onchange="updateIDLabel()"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
+                                <option value="Aadhaar">Aadhaar Card</option>
+                                <option value="PAN">PAN Card</option>
+                                <option value="Passport">Passport</option>
+                                <option value="License">Driving License</option>
+                                <option value="Other">Other (International)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label id="id-number-label"
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Aadhaar
+                                Number</label>
+                            <input type="text" name="id_number"
                                 class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                                required>
+                                placeholder="XXXX XXXX XXXX" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Package Selection -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                        Package & Schedule
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Select
+                                Package</label>
+                            <select id="package-select" name="package" onchange="updateCalculations()"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
+                                <option value="basic" data-price="22999">Basic Package (₹22,999)</option>
+                                <option value="silver" data-price="26999" selected>Silver Package (₹26,999)</option>
+                                <option value="gold" data-price="34999">Gold Package (₹34,999)</option>
+                                <option value="diamond" data-price="44999">Diamond Package (₹44,999)</option>
+                                <option value="platinum" data-price="64999">Platinum Package (₹64,999)</option>
+                            </select>
                         </div>
                         <div>
                             <label
-                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Emergency
-                                Phone</label>
-                            <input type="tel" name="emergency_phone"
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Participants</label>
+                            <select id="guest-count" name="guests" onchange="updateCalculations()"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 People</option>
+                                <option value="3">3 People</option>
+                                <option value="4">4 People</option>
+                                <option value="5">5 People</option>
+                                <option value="6">6 People</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Preferred
+                                Start Date</label>
+                            <input type="date" name="date"
                                 class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
                                 required>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 6. Preferences -->
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                <h3
-                    class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                    <span
-                        class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">6</span>
-                    Preferences
-                </h3>
-                <div class="space-y-6">
+                <!-- 3. Accommodation -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+                        Accommodation
+                    </h3>
                     <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Skill
-                            Level</label>
-                        <select name="skill"
+                        <label
+                            class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Accommodation
+                            Option</label>
+                        <select id="accommodation-select" name="accommodation"
                             class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
-                            <option value="Beginner">Beginner (First time)</option>
-                            <option value="Intermediate">Intermediate (Can turn & stop)</option>
-                            <option value="Advanced">Advanced (Black runs / Off-piste)</option>
+                            <option value="basic">Dormitory / Hostel</option>
+                            <option value="silver" selected>3-Star Hotel / Lodge</option>
+                            <option value="gold">4-Star Hotel</option>
+                            <option value="diamond">5-Star Luxury</option>
                         </select>
+                        <p class="text-xs text-slate-400 mt-2">*Recommendations updated based on package selection.</p>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Special
-                            Requests / Notes</label>
-                        <textarea name="notes" rows="3"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"></textarea>
+                </div>
+
+                <!-- 4. Safety & Emergency -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                        Safety & Emergency
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Medical
+                                Conditions (Optional)</label>
+                            <input type="text" name="medical"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                placeholder="Allergies, asthma, etc.">
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Emergency
+                                    Contact Name</label>
+                                <input type="text" name="emergency_name"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                    required>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Emergency
+                                    Phone</label>
+                                <input type="tel" name="emergency_phone"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                    required>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- 5. Preferences & Consent -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
+                        Final Details
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Skill
+                                Level</label>
+                            <select name="skill"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer">
+                                <option value="Beginner">Beginner (First time)</option>
+                                <option value="Intermediate">Intermediate (Can turn & stop)</option>
+                                <option value="Advanced">Advanced (Black runs / Off-piste)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Special
+                                Requests / Notes</label>
+                            <textarea name="notes" rows="3"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"></textarea>
+                        </div>
+                        <div class="flex flex-col md:flex-row items-center gap-4 pt-4 border-t border-slate-100">
+                            <input type="checkbox" id="terms" required
+                                class="w-5 h-5 rounded border-slate-300 text-alpine-blue focus:ring-alpine-blue cursor-pointer">
+                            <label for="terms" class="text-sm text-slate-600 cursor-pointer">
+                                I agree to the <a href="policies.html"
+                                    class="text-alpine-blue font-bold hover:underline">Terms & Conditions</a> and
+                                understand that skiing involves inherent risks.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- RIGHT COLUMN: PRICE SUMMARY SIDEBAR -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-24 space-y-4">
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-floating">
+                        <h3 class="text-lg font-bold text-slate-900 mb-6">Price Summary</h3>
+
+                        <div class="space-y-3 mb-6 text-sm border-b border-slate-100 pb-6">
+                            <div class="flex justify-between text-slate-600">
+                                <span>Base Package</span>
+                                <span id="summary-base-price">₹0</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>Accommodation</span>
+                                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded text-slate-500">Included</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>Participants</span>
+                                <span id="summary-guests">x 1</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>Taxes & Fees</span>
+                                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded text-slate-500">Included</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-end mb-6">
+                            <span class="text-slate-400 font-bold uppercase text-[10px] tracking-widest mb-1">Total
+                                Estimate</span>
+                            <span id="summary-total" class="text-3xl font-black text-slate-900">₹0</span>
+                        </div>
+
+                        <button onclick="submitBooking(event)"
+                            class="w-full bg-alpine-blue text-white font-bold text-lg py-4 rounded-xl hover:bg-sky-600 transition-all shadow-lg shadow-alpine-blue/25 flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                            </svg>
+                            Confirm via WhatsApp
+                        </button>
+                    </div>
+
+                    <!-- Confirmation Message (Hidden) -->
+                    <div id="confirmation-msg"
+                        class="hidden bg-green-50 border border-green-200 rounded-2xl p-6 text-center">
+                        <div
+                            class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold text-green-800 mb-2">Request Sent!</h4>
+                        <p class="text-sm text-green-700">We've opened WhatsApp to finalize your booking. We'll be in
+                            touch shortly!</p>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- 7. Consent -->
-            <div
-                class="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-4">
-                <input type="checkbox" id="terms" required
-                    class="w-5 h-5 rounded border-slate-300 text-alpine-blue focus:ring-alpine-blue cursor-pointer">
-                <label for="terms" class="text-sm text-slate-600 cursor-pointer">
-                    I agree to the <a href="policies.html" class="text-alpine-blue font-bold hover:underline">Terms &
-                        Conditions</a> and understand that skiing involves inherent risks.
-                </label>
-            </div>
-
-            <button type="submit" onclick="submitBooking(event)"
-                class="w-full bg-alpine-deep text-white font-black text-xl py-5 rounded-2xl hover:bg-alpine-blue transition-all shadow-xl shadow-alpine-deep/20 hover:shadow-alpine-blue/30 transform hover:-translate-y-1">
-                Submit Request via WhatsApp
-            </button>
-
-        </form>
+        </div>
     </div>
 
     <script src="script.js"></script>
