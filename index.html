@@ -16,18 +16,37 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
+                        display: ["'Plus Jakarta Sans'", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
                     },
                     colors: {
+                        primary: "#0f172a",
+                        accent: "#0ea5e9",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#020617",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e293b",
                         alpine: {
                             white: '#ffffff',
                             off: '#f8fafc', // Slate 50
@@ -47,7 +66,10 @@
                     },
                     boxShadow: {
                         'ice': '0 4px 14px 0 rgba(14, 165, 233, 0.15)',
-                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(14, 165, 233, 0.3)',
+                        'inner-glow': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
                     }
                 }
             }
@@ -63,6 +85,11 @@
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+
+        .sidebar-scroll-mask {
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
         }
 
         /* Solid Snap Logic */
@@ -122,7 +149,7 @@
     </style>
 </head>
 
-<body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
+<body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white font-display">
 
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300"
         id="main-nav">
@@ -448,339 +475,273 @@
         </div>
     </section>
 
-    <section id="guides" class="py-24 px-6 bg-white relative overflow-hidden border-y border-slate-200">
+    <section id="guides"
+        class="py-24 px-4 md:px-8 bg-surface-light dark:bg-surface-dark transition-colors duration-300">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-12 max-w-2xl">
+                <span class="text-accent font-bold text-xs tracking-widest uppercase mb-2 block">The Vanguard</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
+                    Expert Guides for <br class="hidden md:block" /> Every Slope
+                </h1>
+                <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                    Certified experts who have spent their lives mapping these peaks. Select an instructor to view their
+                    profile and book a session tailored to your skills.
+                </p>
+            </div>
 
-        <div
-            class="absolute top-0 left-0 w-full h-[40%] pointer-events-none select-none overflow-hidden z-0 transform rotate-180">
-            <svg class="absolute bottom-0 left-0 w-full h-full text-white opacity-60 transform scale-150 origin-bottom"
-                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
-                <path
-                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-            <svg class="absolute bottom-0 left-0 w-full h-[70%] text-slate-50 opacity-50" viewBox="0 0 1440 320"
-                preserveAspectRatio="none" fill="currentColor">
-                <path
-                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-        </div>
-
-        <div class="absolute bottom-0 left-0 w-full h-[40%] pointer-events-none select-none overflow-hidden z-0">
-            <svg class="absolute bottom-0 left-0 w-full h-full text-white opacity-60 transform scale-150 origin-bottom"
-                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
-                <path
-                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-            <svg class="absolute bottom-0 left-0 w-full h-[70%] text-slate-50 opacity-50" viewBox="0 0 1440 320"
-                preserveAspectRatio="none" fill="currentColor">
-                <path
-                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-        </div>
-
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-
-                <div class="lg:col-span-7 flex flex-col justify-center">
-                    <div class="mb-8">
-                        <span class="text-alpine-blue font-bold tracking-widest uppercase text-xs mb-2 block">The
-                            Vanguard</span>
-                        <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">MEET THE PACK</h2>
-                        <p class="text-slate-500 mt-3 text-base leading-relaxed max-w-lg">
-                            Certified experts who have spent their lives mapping these peaks. They teach you to read the
-                            mountain.
-                        </p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-auto lg:h-[600px]">
+                <!-- Sidebar -->
+                <aside
+                    class="lg:col-span-3 flex flex-col h-full bg-surface-light dark:bg-surface-dark rounded-3xl p-4 shadow-soft border border-slate-100 dark:border-slate-800">
+                    <!-- Filter Toggles -->
+                    <div class="bg-slate-100 dark:bg-slate-800 p-1 rounded-full flex mb-4 relative shrink-0">
+                        <div id="filter-indicator"
+                            class="w-1/2 bg-white dark:bg-slate-600 rounded-full shadow-sm absolute left-1 top-1 bottom-1 transition-all duration-300">
+                        </div>
+                        <button onclick="setCategory('ski')"
+                            class="flex-1 text-center py-2 text-xs font-bold text-slate-900 dark:text-white z-10 relative transition-colors duration-300">Ski</button>
+                        <button onclick="setCategory('board')"
+                            class="flex-1 text-center py-2 text-xs font-medium text-slate-500 dark:text-slate-400 z-10 relative hover:text-slate-700 dark:hover:text-slate-200 transition-colors">Board</button>
                     </div>
 
-                    <!-- Toggle Control -->
-                    <div class="flex justify-center mb-6">
+                    <!-- List Container -->
+                    <div class="flex-1 flex flex-col min-h-0 relative">
+                        <!-- Up Arrow -->
                         <div
-                            class="bg-slate-100/80 backdrop-blur-lg p-1 rounded-full inline-flex border border-slate-200 shadow-inner gap-1">
-                            <button onclick="toggleSpecialists('ski')" id="ski-btn"
-                                class="px-6 py-2 text-xs font-bold rounded-full transition-all duration-300 bg-white shadow-sm text-slate-900 ring-1 ring-slate-900/5">
-                                Skiing
-                            </button>
-                            <button onclick="toggleSpecialists('board')" id="board-btn"
-                                class="px-6 py-2 text-xs font-bold rounded-full transition-all duration-300 text-slate-500 hover:text-slate-900">
-                                Snowboarding
+                            class="w-full flex justify-center pb-2 pt-1 shrink-0 z-10 bg-gradient-to-b from-surface-light dark:from-surface-dark to-transparent">
+                            <button onclick="scrollGuides('up')"
+                                class="group w-full mx-2 py-2 flex items-center justify-center bg-slate-50 dark:bg-slate-800 hover:bg-accent dark:hover:bg-accent text-slate-400 hover:text-white dark:text-slate-500 rounded-xl transition-all duration-300 shadow-sm border border-slate-100 dark:border-slate-700 hover:border-accent dark:hover:border-accent hover:shadow-glow transform active:scale-95">
+                                <span
+                                    class="material-symbols-rounded text-xl group-hover:-translate-y-0.5 transition-transform">keyboard_arrow_up</span>
                             </button>
                         </div>
-                    </div>
 
-                    <script>
-                        function toggleSpecialists(type) {
-                            const skiSec = document.getElementById('ski-section');
-                            const boardSec = document.getElementById('board-section');
-                            const skiBtn = document.getElementById('ski-btn');
-                            const boardBtn = document.getElementById('board-btn');
-
-                            if (type === 'ski') {
-                                // Show Ski
-                                skiSec.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-                                skiSec.classList.add('opacity-100', 'visible', 'translate-y-0');
-
-                                // Hide Board
-                                boardSec.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                                boardSec.classList.add('opacity-0', 'invisible', 'translate-y-4');
-
-                                // Update Buttons
-                                skiBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-900', 'ring-1', 'ring-slate-900/5');
-                                skiBtn.classList.remove('text-slate-500', 'hover:text-slate-900');
-
-                                boardBtn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900', 'ring-1', 'ring-slate-900/5');
-                                boardBtn.classList.add('text-slate-500', 'hover:text-slate-900');
-                            } else {
-                                // Hide Ski
-                                skiSec.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                                skiSec.classList.add('opacity-0', 'invisible', 'translate-y-4');
-
-                                // Show Board
-                                boardSec.classList.remove('opacity-0', 'invisible', 'translate-y-4');
-                                boardSec.classList.add('opacity-100', 'visible', 'translate-y-0');
-
-                                // Update Buttons
-                                boardBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-900', 'ring-1', 'ring-slate-900/5');
-                                boardBtn.classList.remove('text-slate-500', 'hover:text-slate-900');
-
-                                skiBtn.classList.remove('bg-white', 'shadow-sm', 'text-slate-900', 'ring-1', 'ring-slate-900/5');
-                                skiBtn.classList.add('text-slate-500', 'hover:text-slate-900');
-                            }
-                        }
-                    </script>
-
-                    <div class="grid grid-cols-1 min-h-[350px]">
-                        <div id="ski-section"
-                            class="col-start-1 row-start-1 w-full transition-all duration-500 ease-out transform opacity-100 visible translate-y-0 z-10 bg-white">
-                            <h3
-                                class="text-lg font-black text-slate-900 mb-3 border-b border-slate-200 pb-2 flex items-center gap-2">
-                                <svg class="w-5 h-5 text-alpine-blue" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                                Skiing Specialists
-                            </h3>
-                            <div class="space-y-3">
-                                <div
-                                    class="group flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-white hover:border-sky-500 hover:shadow-lg hover:shadow-sky-100 transition-all duration-300 cursor-default">
-                                    <div class="relative shrink-0">
-                                        <div
-                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                                            <img src="images/home/guides/shafqat.jpg"
-                                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                alt="Shafqat">
-                                        </div>
-                                        <div
-                                            class="absolute -bottom-1 -right-1 bg-alpine-blue text-white text-[8px] font-bold px-1.5 py-0 rounded-full border border-white">
-                                            LEAD</div>
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
-                                            <h3
-                                                class="text-sm font-black text-slate-900 group-hover:text-sky-600 transition-colors">
-                                                Shafqat</h3>
-                                            <div class="flex gap-1 justify-center sm:justify-start">
-                                                <span
-                                                    class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">National
-                                                    Skier</span>
-                                                <span
-                                                    class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">WFR</span>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-slate-500 text-[10px] leading-relaxed group-hover:text-slate-600">
-                                            A
-                                            National-Level skier with deep knowledge of the backcountry. He maps the
-                                            daily routes based on snowpack stability.</p>
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="group flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-white hover:border-sky-500 hover:shadow-lg hover:shadow-sky-100 transition-all duration-300 cursor-default">
-                                    <div class="relative shrink-0">
-                                        <div
-                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                                            <img src="images/home/guides/mubashir.jpg"
-                                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                alt="Mubashir">
-                                        </div>
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
-                                            <h3
-                                                class="text-sm font-black text-slate-900 group-hover:text-sky-600 transition-colors">
-                                                Mubashir</h3>
-                                            <div class="flex gap-1 justify-center sm:justify-start">
-                                                <span
-                                                    class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Tech
-                                                    Specialist</span>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-slate-500 text-[10px] leading-relaxed group-hover:text-slate-600">
-                                            Specializing in stance correction and carving mechanics. Mubashir ensures
-                                            you look as good as you feel on the slopes.</p>
-                                    </div>
-                                </div>
-
-                                <!-- New Female Ski Instructor -->
-                                <div
-                                    class="group flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-white hover:border-sky-500 hover:shadow-lg hover:shadow-sky-100 transition-all duration-300 cursor-default">
-                                    <div class="relative shrink-0">
-                                        <div
-                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                                            <img src="images/home/guides/carousel-6.jpg"
-                                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                alt="Alya">
-                                        </div>
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
-                                            <h3
-                                                class="text-sm font-black text-slate-900 group-hover:text-sky-600 transition-colors">
-                                                Alya</h3>
-                                            <div class="flex gap-1 justify-center sm:justify-start">
-                                                <span
-                                                    class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Instructor</span>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-slate-500 text-[10px] leading-relaxed group-hover:text-slate-600">
-                                            Patient and encouraging, Alya specializes in building confidence for
-                                            beginners and intermediates on challenging terrain.</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Scrollable List -->
+                        <div id="guides-list"
+                            class="flex-1 overflow-y-auto no-scrollbar space-y-3 px-2 py-2 scroll-smooth">
+                            <!-- Items injected via JS -->
                         </div>
 
-                        <div id="board-section"
-                            class="col-start-1 row-start-1 w-full transition-all duration-500 ease-out transform opacity-0 invisible translate-y-4 z-10">
-                            <h3
-                                class="text-lg font-black text-slate-900 mb-3 border-b border-slate-200 pb-2 flex items-center gap-2">
-                                <svg class="w-5 h-5 text-alpine-blue" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                                </svg>
-                                Snowboarding Specialists
-                            </h3>
-                            <div class="space-y-3">
-                                <!-- New Snowboard Guide 1 -->
-                                <div
-                                    class="group flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-white hover:border-sky-500 hover:shadow-lg hover:shadow-sky-100 transition-all duration-300 cursor-default">
-                                    <div class="relative shrink-0">
-                                        <div
-                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                                            <img src="images/home/guides/carousel-2.jpg"
-                                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                alt="Zain">
-                                        </div>
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
-                                            <h3
-                                                class="text-sm font-black text-slate-900 group-hover:text-sky-600 transition-colors">
-                                                Zain</h3>
-                                            <div class="flex gap-1 justify-center sm:justify-start">
-                                                <span
-                                                    class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Lead
-                                                    Boarder</span>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-slate-500 text-[10px] leading-relaxed group-hover:text-slate-600">
-                                            A
-                                            master of the single plank. Zain reads the mountain differently, finding
-                                            lines that skiers often miss.</p>
-                                    </div>
-                                </div>
-
-                                <!-- New Snowboard Guide 2 -->
-                                <div
-                                    class="group flex flex-col sm:flex-row items-center sm:items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-white hover:border-sky-500 hover:shadow-lg hover:shadow-sky-100 transition-all duration-300 cursor-default">
-                                    <div class="relative shrink-0">
-                                        <div
-                                            class="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                                            <img src="images/home/guides/carousel-4.jpg"
-                                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                alt="Aryan">
-                                        </div>
-                                    </div>
-                                    <div class="text-center sm:text-left">
-                                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
-                                            <h3
-                                                class="text-sm font-black text-slate-900 group-hover:text-sky-600 transition-colors">
-                                                Aryan</h3>
-                                            <div class="flex gap-1 justify-center sm:justify-start">
-                                                <span
-                                                    class="px-1.5 py-0.5 rounded text-[8px] font-bold bg-slate-200 text-slate-600 uppercase tracking-wide group-hover:bg-sky-100 group-hover:text-sky-700 transition-colors">Freestyle</span>
-                                            </div>
-                                        </div>
-                                        <p
-                                            class="text-slate-500 text-[10px] leading-relaxed group-hover:text-slate-600">
-                                            Bring your park skills to the backcountry. Aryan specializes in jumps,
-                                            drops, and natural features.</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Down Arrow -->
+                        <div
+                            class="w-full flex justify-center pt-2 pb-1 shrink-0 z-10 bg-gradient-to-t from-surface-light dark:from-surface-dark to-transparent">
+                            <button onclick="scrollGuides('down')"
+                                class="group w-full mx-2 py-2 flex items-center justify-center bg-slate-50 dark:bg-slate-800 hover:bg-accent dark:hover:bg-accent text-slate-400 hover:text-white dark:text-slate-500 rounded-xl transition-all duration-300 shadow-sm border border-slate-100 dark:border-slate-700 hover:border-accent dark:hover:border-accent hover:shadow-glow transform active:scale-95">
+                                <span
+                                    class="material-symbols-rounded text-xl group-hover:translate-y-0.5 transition-transform">keyboard_arrow_down</span>
+                            </button>
                         </div>
                     </div>
-                </div>
+                </aside>
 
-                <div
-                    class="lg:col-span-5 h-[550px] relative rounded-2xl overflow-hidden bg-slate-50 border-2 border-slate-300 shadow-2xl pause-on-hover">
-                    <div
-                        class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none">
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none">
-                    </div>
-
-                    <div class="animate-scroll-y w-full flex flex-col gap-3 p-3">
-                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-1.jpg" class="w-full h-full object-cover"
-                                alt="Ski Action">
-                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors">
-                            </div>
-                        </div>
-                        <div class="w-full h-72 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-2.jpg" class="w-full h-full object-cover"
-                                alt="Instructor Teaching">
-                        </div>
-                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-3.jpg" class="w-full h-full object-cover"
-                                alt="Group Shot">
-                        </div>
-                        <div class="w-full h-64 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-4.jpg" class="w-full h-full object-cover"
-                                alt="Powder Day">
-                        </div>
-                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-5.jpg" class="w-full h-full object-cover"
-                                alt="Ski Action">
-                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors">
-                            </div>
-                        </div>
-                        <div class="w-full h-72 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-6.jpg" class="w-full h-full object-cover"
-                                alt="Instructor Teaching">
-                        </div>
-                        <div class="w-full h-56 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-7.jpg" class="w-full h-full object-cover"
-                                alt="Group Shot">
-                        </div>
-                        <div class="w-full h-64 rounded-xl overflow-hidden relative group">
-                            <img src="images/home/guides/carousel-8.jpg" class="w-full h-full object-cover"
-                                alt="Powder Day">
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Main Content -->
+                <article id="guide-detail"
+                    class="lg:col-span-9 bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-soft border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row h-full transition-all duration-500">
+                    <!-- Detail content injected via JS -->
+                </article>
             </div>
         </div>
+
+        <script>
+            const guidesData = [
+                {
+                    id: 1,
+                    category: 'ski',
+                    name: "Shafqat",
+                    role: "Alpine Lead",
+                    subRole: "National Skier | WFR Certified",
+                    bio: "A National-Level skier with deep knowledge of the backcountry. He maps the daily routes based on snowpack stability and weather patterns, ensuring the safest and most exhilarating descents for intermediate to expert skiers.",
+                    tags: ["Backcountry", "Safety", "Navigation"],
+                    image: "images/home/guides/shafqat.jpg", // Ensure path is correct
+                    stars: 5,
+                    selectedLabel: "Selected"
+                },
+                {
+                    id: 2,
+                    category: 'ski',
+                    name: "Mubashir",
+                    role: "Tech Specialist",
+                    subRole: "Stance & Mechanics",
+                    bio: "Specializing in stance correction and carving mechanics. Mubashir ensures you look as good as you feel on the slopes.",
+                    tags: ["Carving", "Stance", "Mechanics"],
+                    image: "images/home/guides/mubashir.jpg",
+                    stars: 5,
+                    selectedLabel: "Backcountry Expert"
+                },
+                {
+                    id: 3,
+                    category: 'ski',
+                    name: "Alya",
+                    role: "Freestyle Coach",
+                    subRole: "Confidence Building",
+                    bio: "Patient and encouraging, Alya specializes in building confidence for beginners and intermediates on challenging terrain.",
+                    tags: ["Beginners", "Confidence", "Terrain"],
+                    image: "images/home/guides/carousel-6.jpg",
+                    stars: 4,
+                    selectedLabel: "Freestyle Coach"
+                },
+                {
+                    id: 4,
+                    category: 'board',
+                    name: "Zain",
+                    role: "Orion Lead",
+                    subRole: "Freeride & Lines",
+                    bio: "A master of the single plank. Zain reads the mountain differently, finding lines that skiers often miss.",
+                    tags: ["Snowboard", "Freeride", "Lines"],
+                    image: "images/home/guides/carousel-2.jpg",
+                    stars: 5,
+                    selectedLabel: "Junior Instructor"
+                },
+                {
+                    id: 5,
+                    category: 'board',
+                    name: "Kamran",
+                    role: "Safety Guide",
+                    subRole: "Risk Management",
+                    bio: "With years of experience in mountain safety, Kamran ensures every expedition is secure.",
+                    tags: ["Safety", "Risk", "Support"],
+                    image: null, // No image, use initials
+                    initials: "KA",
+                    stars: 5,
+                    selectedLabel: "Safety Guide"
+                }
+            ];
+
+            let currentCategory = 'ski';
+            let activeGuideId = 1;
+
+            function setCategory(cat) {
+                currentCategory = cat;
+
+                // Update indicator animation
+                const indicator = document.getElementById('filter-indicator');
+                if (cat === 'ski') {
+                    indicator.style.transform = 'translateX(0)';
+                } else {
+                    indicator.style.transform = 'translateX(100%)';
+                }
+
+                // Auto-select first in category
+                const first = guidesData.find(g => g.category === cat);
+                if (first) activeGuideId = first.id;
+
+                renderList();
+                renderDetail();
+            }
+
+            function setActiveGuide(id) {
+                activeGuideId = id;
+                renderList();
+                renderDetail();
+            }
+
+            function scrollGuides(direction) {
+                const list = document.getElementById('guides-list');
+                const scrollAmount = 100;
+                if (direction === 'up') list.scrollTop -= scrollAmount;
+                else list.scrollTop += scrollAmount;
+            }
+
+            function renderList() {
+                const list = document.getElementById('guides-list');
+                const filtered = guidesData.filter(g => g.category === currentCategory);
+
+                list.innerHTML = filtered.map(g => {
+                    const isActive = g.id === activeGuideId;
+
+                    // Template for Image Avatar
+                    let avatarHTML = '';
+                    if (g.image) {
+                        avatarHTML = `
+                            <div class="relative shrink-0">
+                                ${isActive ? `
+                                <div class="relative p-[2px] rounded-full bg-gradient-to-tr from-cyan-400 to-blue-600 shadow-glow">
+                                    <div class="bg-white dark:bg-slate-900 p-[2px] rounded-full">
+                                        <img src="${g.image}" alt="${g.name}" class="w-12 h-12 rounded-full object-cover">
+                                    </div>
+                                </div>
+                                <div class="absolute right-0 bottom-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full z-10"></div>
+                                ` : `
+                                <div class="w-14 h-14 rounded-full overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 border-2 border-slate-200 dark:border-slate-700 group-hover:border-slate-300 dark:group-hover:border-slate-500">
+                                    <img src="${g.image}" alt="${g.name}" class="w-full h-full object-cover">
+                                </div>
+                                `}
+                            </div>
+                        `;
+                    } else {
+                        // Initials Avatar
+                        avatarHTML = `
+                            <div class="relative shrink-0">
+                                <div class="w-14 h-14 rounded-full overflow-hidden ${isActive ? 'bg-gradient-to-tr from-cyan-400 to-blue-600 text-white shadow-glow' : 'bg-slate-200 dark:bg-slate-700 grayscale group-hover:grayscale-0 text-slate-400'} flex items-center justify-center transition-all duration-500 border-2 ${isActive ? 'border-transparent' : 'border-slate-200 dark:border-slate-700'}">
+                                    <span class="text-xs font-bold">${g.initials}</span>
+                                </div>
+                                ${isActive ? '<div class="absolute right-0 bottom-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full z-10"></div>' : ''}
+                            </div>
+                        `;
+                    }
+
+                    return `
+                        <div onclick="setActiveGuide(${g.id})" class="group cursor-pointer flex items-center gap-4 p-2 rounded-2xl transition-all shadow-sm ${isActive ? 'bg-slate-50 dark:bg-slate-800/50 border border-accent/20 dark:border-accent/20' : 'hover:bg-slate-50 dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700'}">
+                            ${avatarHTML}
+                            <div class="flex flex-col ${isActive ? '' : 'opacity-60 group-hover:opacity-100 transition-opacity'}">
+                                <span class="text-sm font-${isActive ? 'bold' : 'semibold'} text-slate-${isActive ? '900' : '700'} dark:text-${isActive ? 'white' : 'slate-300'} ${!isActive ? 'group-hover:text-slate-900 dark:group-hover:text-white' : ''}">${g.name}</span>
+                                <span class="text-[10px] ${isActive ? 'font-semibold tracking-wide text-accent uppercase' : 'text-slate-500 dark:text-slate-400'}">${g.selectedLabel}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            function renderDetail() {
+                const container = document.getElementById('guide-detail');
+                const g = guidesData.find(i => i.id === activeGuideId);
+                if (!g) return;
+
+                // Stars logic
+                const starHTML = Array(5).fill(0).map((_, i) => `<span class="material-symbols-rounded fill-current text-[20px] ${i < g.stars ? '' : 'text-slate-300'}">star</span>`).join('');
+
+                // Image logic (Main)
+                const imageHTML = g.image ?
+                    `<img src="${g.image}" alt="${g.name} Portrait" class="absolute inset-0 w-full h-full object-cover animate-fade-in">` :
+                    `<div class="absolute inset-0 w-full h-full bg-slate-800 flex items-center justify-center text-white text-9xl font-bold opacity-10 animate-fade-in">${g.initials}</div>`;
+
+                container.innerHTML = `
+                    <div class="flex-1 p-8 md:p-12 flex flex-col justify-center animate-fade-in">
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="px-3 py-1 bg-sky-50 dark:bg-sky-900/30 text-accent text-xs font-bold tracking-wider uppercase rounded-md border border-sky-100 dark:border-sky-800">${g.role}</span>
+                            <div class="flex text-amber-400 text-lg">
+                                ${starHTML}
+                            </div>
+                        </div>
+                        <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-2">${g.name}</h2>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium mb-6">${g.subRole}</p>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+                            ${g.bio}
+                        </p>
+                        <div class="mb-10">
+                            <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3 block">Focus Areas</span>
+                            <div class="flex flex-wrap gap-3">
+                                ${g.tags.map(t => `<span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <button class="bg-primary hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group w-full sm:w-auto justify-center">
+                                Book Session with ${g.name}
+                                <span class="material-symbols-rounded group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-[45%] h-64 md:h-full relative overflow-hidden">
+                        ${imageHTML}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent md:bg-gradient-to-l md:from-transparent md:to-black/10 opacity-60"></div>
+                    </div>
+                `;
+            }
+
+            // Init
+            renderList();
+            renderDetail();
+        </script>
     </section>
 
     <section id="testimonials" class="py-24 px-6 bg-sky-50/80 bg-noise relative overflow-hidden">
