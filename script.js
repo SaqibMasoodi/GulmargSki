@@ -229,10 +229,10 @@ const weatherData = {
 
 // -- Custom Dropdown Logic --
 function toggleWeatherDropdown(event) {
-    if(event) event.stopPropagation();
+    if (event) event.stopPropagation();
     const menu = document.getElementById('weather-dropdown-menu');
     const arrow = document.getElementById('weather-arrow');
-    
+
     if (menu.classList.contains('hidden')) {
         // Open
         menu.classList.remove('hidden');
@@ -253,7 +253,7 @@ function toggleWeatherDropdown(event) {
 function selectWeather(location, label) {
     // 1. Update UI Text
     document.getElementById('selected-weather').textContent = label;
-    
+
     // 2. Update Weather Data
     const data = weatherData[location];
     if (data) {
@@ -271,7 +271,7 @@ function selectWeather(location, label) {
 window.addEventListener('click', (e) => {
     const menu = document.getElementById('weather-dropdown-menu');
     const btn = document.getElementById('weather-dropdown-btn');
-    
+
     if (menu && !menu.classList.contains('hidden') && !btn.contains(e.target) && !menu.contains(e.target)) {
         toggleWeatherDropdown();
     }
@@ -379,218 +379,80 @@ function setupObserver() {
     document.querySelectorAll('.snap-item').forEach(card => observer.observe(card));
 }
 // --- BOOKING PAGE LOGIC ---
-
-// Configuration Constants
-const RATES = {
-    hotel: { none: 0, '3star': 3000, '4star': 6000, '5star': 15000 },
-    transport: { innova: 3000, tempo: 5000 },
-    gear: { none: 0, standard: 800, pro: 1500 },
-    extra: { gondola: 1100, atv: 2500 }
+const PACKAGE_ACCOMMODATIONS = {
+    'basic': 'Dormitory / Hostel Bed',
+    'silver': '3-Star Hotel / Lodge (Poshwan)',
+    'gold': '4-Star Hotel (Grand Mumtaz)',
+    'diamond': '5-Star Luxury (Khyber)',
+    'platinum': 'Premium Suite + Private Butler'
 };
 
-const PACKAGES = {
-    // UPDATED TO MATCH HTML PRICES (29 Dec 2025)
-    basic: { name: 'Basic Package', price: 23999 },    // Was 22999
-    silver: { name: 'Silver Package', price: 34999 },  // Was 26999 (Big difference!)
-    gold: { name: 'Gold Package', price: 37999 },      // Was 34999
-    diamond: { name: 'Diamond Package', price: 49999 },// Was 44999
-    platinum: { name: 'Platinum Package', price: 95999 }// Was 64999
-};
+function updateAccommodation() {
+    const pkgSelect = document.getElementById('package-select');
+    const display = document.getElementById('accommodation-display');
 
-let currentMode = 'package'; // 'package' or 'custom'
-
-// 1. Mode Toggling (Packages vs Custom)
-function setMode(mode) {
-    currentMode = mode;
-    const inputMode = document.getElementById('input-mode');
-    if (inputMode) inputMode.value = mode;
-
-    // Visual Switcher Styling
-    const highlighter = document.getElementById('switch-highlight');
-    const btnPackage = document.getElementById('btn-package');
-    const btnCustom = document.getElementById('btn-custom');
-
-    if (mode === 'package') {
-        highlighter.style.transform = 'translateX(0)';
-        btnPackage.classList.replace('text-slate-500', 'text-slate-900');
-        btnCustom.classList.replace('text-slate-900', 'text-slate-500');
-
-        document.getElementById('section-package').classList.remove('hidden-section');
-        document.getElementById('section-custom').classList.add('hidden-section');
-    } else {
-        highlighter.style.transform = 'translateX(100%)';
-        highlighter.style.left = '6px';
-        btnPackage.classList.replace('text-slate-900', 'text-slate-500');
-        btnCustom.classList.replace('text-slate-500', 'text-slate-900');
-
-        document.getElementById('section-package').classList.add('hidden-section');
-        document.getElementById('section-custom').classList.remove('hidden-section');
+    if (pkgSelect && display) {
+        const selectedPkg = pkgSelect.value;
+        display.value = PACKAGE_ACCOMMODATIONS[selectedPkg] || 'Standard Lodge';
     }
-    updateCalculations();
 }
 
-// 2. Transport Toggle Logic
-function toggleTransportOptions() {
-    const isChecked = document.getElementById('transport-toggle').checked;
-    const options = document.getElementById('transport-options');
-    if (isChecked) {
-        options.classList.replace('hidden', 'grid');
-    } else {
-        options.classList.replace('grid', 'hidden');
-    }
-    updateCalculations();
-}
-
-// 3. Dynamic Price Calculation
-function updateCalculations() {
-    // Only run if we are on the booking page
-    if (!document.getElementById('bookingForm')) return;
-
-    const guests = parseInt(document.querySelector('select[name="guest_count"]').value) || 1;
-    const receiptDiv = document.getElementById('receipt-items');
-    let total = 0;
-    let html = '';
-
-    if (currentMode === 'package') {
-        const pkgKey = document.getElementById('package-select').value;
-        const pkg = PACKAGES[pkgKey];
-        total = pkg.price * guests;
-
-        html += `<div class="flex justify-between text-slate-900 font-bold mb-2"><span>${pkg.name}</span><span>₹${pkg.price.toLocaleString()} x ${guests}</span></div>`;
-        html += `<div class="text-xs text-slate-500 pl-2">Includes: Hotel, Gear, Guide, Meals</div>`;
-
-    } else {
-        // Custom Mode Logic
-
-        // Hotel
-        const hotelElement = document.querySelector('input[name="custom_hotel"]:checked');
-        if (hotelElement) {
-            const hotelType = hotelElement.value;
-            const hotelPrice = RATES.hotel[hotelType] * 5; // Avg 5 nights
-            if (hotelPrice > 0) {
-                total += (hotelPrice * guests) / 2; // Double occupancy assumption
-                html += `<div class="flex justify-between text-slate-600"><span>Accommodation (Est.)</span><span>₹${((hotelPrice * guests) / 2).toLocaleString()}</span></div>`;
-            }
-        }
-
-        // Transport
-        const transportCheck = document.getElementById('transport-toggle').checked;
-        if (transportCheck) {
-            const transElement = document.querySelector('input[name="custom_transport"]:checked');
-            if (transElement) {
-                const transType = transElement.value;
-                const transPrice = RATES.transport[transType] * 2; // Round trip
-                total += transPrice;
-                html += `<div class="flex justify-between text-slate-600"><span>Transport (Round Trip)</span><span>₹${transPrice.toLocaleString()}</span></div>`;
-            }
-        }
-
-        // Gear
-        const gearElement = document.querySelector('input[name="custom_gear"]:checked');
-        if (gearElement) {
-            const gearType = gearElement.value;
-            const gearPrice = RATES.gear[gearType] * 6; // 6 Days
-            if (gearPrice > 0) {
-                total += gearPrice * guests;
-                html += `<div class="flex justify-between text-slate-600"><span>Gear Rental (${gearType})</span><span>₹${(gearPrice * guests).toLocaleString()}</span></div>`;
-            }
-        }
-
-        // Extras
-        if (document.querySelector('input[name="extra_gondola"]').checked) {
-            total += RATES.extra.gondola * guests;
-            html += `<div class="flex justify-between text-slate-600"><span>Gondola Tkts</span><span>₹${(RATES.extra.gondola * guests).toLocaleString()}</span></div>`;
-        }
-        if (document.querySelector('input[name="extra_atv"]').checked) {
-            total += RATES.extra.atv * guests;
-            html += `<div class="flex justify-between text-slate-600"><span>ATV Ride</span><span>₹${(RATES.extra.atv * guests).toLocaleString()}</span></div>`;
-        }
-    }
-
-    receiptDiv.innerHTML = html;
-    document.getElementById('total-price-display').innerText = '₹' + total.toLocaleString();
-}
-
-// 4. WhatsApp Form Submission
-function handleHybridSubmit(e) {
+function submitBooking(e) {
     e.preventDefault();
 
-    const form = document.getElementById('bookingForm');
+    const form = document.querySelector('form');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
     const formData = new FormData(form);
-    const name = document.getElementById('contact_name').value;
-    if (!name) { alert("Please enter your name"); return; }
 
-    // Build WhatsApp Message
     let msg = `*New Booking Request from Wolf Adventure*\n\n`;
-    msg += `👤 Name: ${formData.get('name')}\n`;
-    msg += `📅 Date: ${formData.get('arrival_date') || 'TBD'}\n`;
-    msg += `👥 Guests: ${formData.get('guest_count')}\n\n`;
 
-    if (currentMode === 'package') {
-        const pkg = PACKAGES[formData.get('package_tier')];
-        msg += `📦 *Selection: ${pkg.name}*\n`;
-        msg += `💰 Est. Total: ${document.getElementById('total-price-display').innerText}\n`;
-    } else {
-        msg += `🛠 *Custom Build Selection:*\n`;
-        msg += `- Hotel: ${formData.get('custom_hotel')}\n`;
-        if (document.getElementById('transport-toggle').checked) {
-            msg += `- Transport: ${formData.get('custom_transport')}\n`;
-        }
-        msg += `- Gear: ${formData.get('custom_gear')}\n`;
-        if (formData.get('extra_gondola')) msg += `- Addon: Gondola\n`;
-        if (formData.get('extra_atv')) msg += `- Addon: ATV\n`;
-        msg += `\n💰 Est. Total: ${document.getElementById('total-price-display').innerText}\n`;
-    }
+    // 1. Customer
+    msg += `👤 *Customer Details*\n`;
+    msg += `Name: ${formData.get('name')}\n`;
+    msg += `Email: ${formData.get('email')}\n`;
+    msg += `Phone: ${formData.get('phone')}\n`;
+    msg += `Location: ${formData.get('location')}\n`;
+    msg += `Age: ${formData.get('age')}\n\n`;
 
-    if (formData.get('notes')) {
-        msg += `\n📝 Note: ${formData.get('notes')}`;
-    }
+    // 2. Package
+    msg += `📦 *Package Selection*\n`;
+    msg += `Tier: ${formData.get('package').toUpperCase()}\n`;
+    msg += `Guests: ${formData.get('guests')}\n\n`;
+
+    // 3. Schedule
+    msg += `📅 *Schedule*\n`;
+    msg += `Start Date: ${formData.get('date')}\n\n`;
+
+    // 4. Stay
+    msg += `🏠 *Accommodation*\n`;
+    msg += `Assigned: ${document.getElementById('accommodation-display').value}\n\n`;
+
+    // 5. Safety
+    const medical = formData.get('medical');
+    if (medical) msg += `🏥 Medical: ${medical}\n`;
+    msg += `🆘 Emergency: ${formData.get('emergency_name')} (${formData.get('emergency_phone')})\n\n`;
+
+    // 6. Preferences
+    msg += `⛷️ Skill: ${formData.get('skill')}\n`;
+    const notes = formData.get('notes');
+    if (notes) msg += `📝 Notes: ${notes}\n`;
 
     // Open WhatsApp
     const waUrl = `https://wa.me/916005806856?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
 }
 
-// Initialization Event
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('bookingForm')) {
-        updateCalculations();
+    const pkgSelect = document.getElementById('package-select');
+    if (pkgSelect) {
+        pkgSelect.addEventListener('change', updateAccommodation);
+        updateAccommodation(); // Run once on load
     }
 });
-
-// --- MOBILE MENU LOGIC ---
-function toggleMobileMenu() {
-    const overlay = document.getElementById('mobile-menu-overlay');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
-    const body = document.body;
-
-    // Check if menu is currently open
-    const isOpen = overlay.classList.contains('opacity-100');
-
-    if (!isOpen) {
-        // OPEN MENU
-        overlay.classList.remove('opacity-0', 'pointer-events-none');
-        overlay.classList.add('opacity-100', 'pointer-events-auto');
-
-        // Switch Icon to X
-        menuIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-
-        // Prevent background scrolling
-        body.style.overflow = 'hidden';
-    } else {
-        // CLOSE MENU
-        overlay.classList.remove('opacity-100', 'pointer-events-auto');
-        overlay.classList.add('opacity-0', 'pointer-events-none');
-
-        // Switch Icon back to Hamburger
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-
-        // Restore scrolling
-        body.style.overflow = 'auto';
-    }
-}
 
 
