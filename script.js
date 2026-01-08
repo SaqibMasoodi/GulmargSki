@@ -227,9 +227,34 @@ const weatherData = {
     sonamarg: { base: "-8°C", summit: "-15°C", baseLabel: "Base (2,800m)", summitLabel: "Summit (4,100m)" }
 };
 
-function updateWeather() {
-    const selector = document.getElementById('weather-location');
-    const location = selector.value;
+// -- Custom Dropdown Logic --
+function toggleWeatherDropdown(event) {
+    if(event) event.stopPropagation();
+    const menu = document.getElementById('weather-dropdown-menu');
+    const arrow = document.getElementById('weather-arrow');
+    
+    if (menu.classList.contains('hidden')) {
+        // Open
+        menu.classList.remove('hidden');
+        setTimeout(() => {
+            menu.classList.remove('opacity-0', 'scale-y-95');
+            menu.classList.add('opacity-100', 'scale-y-100');
+        }, 10);
+        arrow.classList.add('rotate-180');
+    } else {
+        // Close
+        menu.classList.remove('opacity-100', 'scale-y-100');
+        menu.classList.add('opacity-0', 'scale-y-95');
+        setTimeout(() => menu.classList.add('hidden'), 200);
+        arrow.classList.remove('rotate-180');
+    }
+}
+
+function selectWeather(location, label) {
+    // 1. Update UI Text
+    document.getElementById('selected-weather').textContent = label;
+    
+    // 2. Update Weather Data
     const data = weatherData[location];
     if (data) {
         document.getElementById('base-temp').textContent = data.base;
@@ -237,7 +262,23 @@ function updateWeather() {
         document.getElementById('base-label').textContent = data.baseLabel;
         document.getElementById('summit-label').textContent = data.summitLabel;
     }
+
+    // 3. Close Dropdown
+    toggleWeatherDropdown();
 }
+
+// Close dropdown when clicking outside
+window.addEventListener('click', (e) => {
+    const menu = document.getElementById('weather-dropdown-menu');
+    const btn = document.getElementById('weather-dropdown-btn');
+    
+    if (menu && !menu.classList.contains('hidden') && !btn.contains(e.target) && !menu.contains(e.target)) {
+        toggleWeatherDropdown();
+    }
+});
+
+// Remove old updateWeather function as it's replaced by selectWeather
+// function updateWeather() { ... }
 
 // 5. SCHEDULE LOGIC
 const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];

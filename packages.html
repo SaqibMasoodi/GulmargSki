@@ -154,9 +154,22 @@
             </div>
         </section>
 
-        <section class="w-full pb-16 px-4 md:px-10">
-            <div
-                class="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto pb-10 pt-4 px-2 items-stretch h-auto">
+        <section class="w-full pb-16 px-4 md:px-10 relative group/scroll">
+
+            <!-- Left Scroll Button -->
+            <button onclick="scrollPackages(-1)"
+                class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-xl border border-slate-100 text-slate-900 hover:bg-alpine-blue hover:text-white transition-all duration-300 opacity-0 group-hover/scroll:opacity-100 hidden md:block">
+                <span class="material-icons-outlined">chevron_left</span>
+            </button>
+
+            <!-- Right Scroll Button -->
+            <button onclick="scrollPackages(1)"
+                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-xl border border-slate-100 text-slate-900 hover:bg-alpine-blue hover:text-white transition-all duration-300 opacity-0 group-hover/scroll:opacity-100 hidden md:block">
+                <span class="material-icons-outlined">chevron_right</span>
+            </button>
+
+            <div id="packages-container"
+                class="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-10 pt-4 px-2 items-stretch h-auto scroll-smooth">
 
                 <div
                     class="group relative flex h-full min-w-[320px] snap-center flex-col rounded-2xl bg-white border border-slate-200 p-5 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -606,6 +619,22 @@
 
         function closeModal() {
             document.getElementById('modal-overlay').classList.remove('open');
+        }
+
+        function scrollPackages(direction) {
+            const container = document.getElementById('packages-container');
+            if (container) {
+                // Get the width of the first card + gap (24px)
+                const card = container.querySelector('div');
+                const cardWidth = card ? card.offsetWidth : 320;
+                const gap = 24; // gap-6 is 1.5rem = 24px
+                const scrollAmount = (cardWidth + gap) * direction;
+
+                container.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
         }
 
         // --- 2. SCHEDULE LOGIC (CALENDAR VIEW) ---
