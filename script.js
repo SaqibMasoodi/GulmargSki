@@ -390,7 +390,7 @@ const PACKAGE_ACCOMMODATIONS = {
 function updateCalculations() {
     const pkgSelect = document.getElementById('package-select');
     const guestSelect = document.getElementById('guest-count');
-    const accSelect = document.getElementById('accommodation-select'); // New select element
+    const accSelect = document.getElementById('accommodation-select');
 
     // Update Accommodation based on Package (Smart Default)
     if (pkgSelect && accSelect) {
@@ -403,12 +403,40 @@ function updateCalculations() {
         const price = parseInt(option.getAttribute('data-price')) || 0;
         const guests = parseInt(guestSelect.value) || 1;
 
-        const total = price * guests;
+        let total = price * guests;
+        let discount = 0;
+        let discountText = '';
+
+        // Discount Logic
+        if (guests === 2) {
+            discount = total * 0.05; // 5% for couples
+            discountText = '5% (Couple)';
+        } else if (guests >= 3 && guests <= 4) {
+            discount = total * 0.10; // 10% for small groups
+            discountText = '10% (Small Group)';
+        } else if (guests >= 5) {
+            discount = total * 0.15; // 15% for large groups
+            discountText = '15% (Big Squad)';
+        }
+
+        const finalTotal = total - discount;
 
         // Update UI
         document.getElementById('summary-base-price').innerText = '₹' + price.toLocaleString();
         document.getElementById('summary-guests').innerText = 'x ' + guests;
-        document.getElementById('summary-total').innerText = '₹' + total.toLocaleString();
+
+        // Handle Discount UI
+        const discountRow = document.getElementById('discount-row');
+        const discountSpan = document.getElementById('summary-discount');
+
+        if (discount > 0) {
+            discountRow.classList.remove('hidden');
+            discountSpan.innerText = `-₹${Math.round(discount).toLocaleString()} (${discountText})`;
+        } else {
+            discountRow.classList.add('hidden');
+        }
+
+        document.getElementById('summary-total').innerText = '₹' + Math.round(finalTotal).toLocaleString();
     }
 }
 
@@ -459,8 +487,21 @@ function submitBooking(e) {
 
     // 2. Package
     msg += `📦 *Package & Price*\n`;
+    const guests = parseInt(formData.get('guests'));
+    let discountInfo = '';
+    if (guests === 2) discountInfo = ' (5% Off)';
+    else if (guests >= 3 && guests <= 4) discountInfo = ' (10% Off)';
+    else if (guests >= 5) discountInfo = ' (15% Off)';
+
     msg += `Tier: ${formData.get('package').toUpperCase()}\n`;
-    msg += `Guests: ${formData.get('guests')}\n`;
+    msg += `Guests: ${guests}${discountInfo}\n`;
+
+    // Check if discount is applied by looking at UI (simpler than recalculating)
+    const discountRow = document.getElementById('discount-row');
+    if (!discountRow.classList.contains('hidden')) {
+        msg += `Discount: ${document.getElementById('summary-discount').innerText}\n`;
+    }
+
     msg += `Total Est: ${document.getElementById('summary-total').innerText}\n\n`;
 
     // 3. Schedule
@@ -502,7 +543,7 @@ function submitBooking(e) {
 document.addEventListener('DOMContentLoaded', () => {
     const pkgSelect = document.getElementById('package-select');
     if (pkgSelect) {
-        updateCalculations(); // Run once on load
+        updateCalculations();
     }
 });
 
