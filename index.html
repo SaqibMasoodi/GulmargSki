@@ -475,9 +475,9 @@
         </div>
     </section>
 
-    <section id="guides"
-        class="py-24 px-4 md:px-8 bg-surface-light dark:bg-surface-dark transition-colors duration-300">
-        <div class="max-w-6xl mx-auto">
+    <section id="guides" class="py-24 w-full bg-surface-light dark:bg-surface-dark transition-colors duration-300">
+        <!-- Container matching Nav Bar alignment -->
+        <div class="w-[95%] max-w-7xl mx-auto px-6">
             <div class="mb-12 max-w-2xl">
                 <span class="text-accent font-bold text-xs tracking-widest uppercase mb-2 block">The Vanguard</span>
                 <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
@@ -489,32 +489,25 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-auto lg:h-[600px]">
-                <!-- Sidebar -->
+            <!-- Flex container for alignment -->
+            <div class="flex flex-col lg:flex-row gap-8 h-auto lg:h-[600px]">
+                <!-- Sidebar: Fixed Width -->
                 <aside
-                    class="lg:col-span-3 flex flex-col h-full bg-surface-light dark:bg-surface-dark rounded-3xl p-4 shadow-soft border border-slate-100 dark:border-slate-800">
+                    class="w-full lg:w-80 shrink-0 flex flex-col h-full bg-surface-light dark:bg-surface-dark rounded-3xl p-4 shadow-soft border border-slate-100 dark:border-slate-800">
                     <!-- Filter Toggles -->
                     <div class="bg-slate-100 dark:bg-slate-800 p-1 rounded-full flex mb-4 relative shrink-0">
                         <div id="filter-indicator"
-                            class="w-1/2 bg-white dark:bg-slate-600 rounded-full shadow-sm absolute left-1 top-1 bottom-1 transition-all duration-300">
+                            class="w-[calc(50%-0.25rem)] bg-white dark:bg-slate-600 rounded-full shadow-sm absolute left-1 top-1 bottom-1 transition-all duration-300 z-0">
                         </div>
-                        <button onclick="setCategory('ski')"
-                            class="flex-1 text-center py-2 text-xs font-bold text-slate-900 dark:text-white z-10 relative transition-colors duration-300">Ski</button>
-                        <button onclick="setCategory('board')"
-                            class="flex-1 text-center py-2 text-xs font-medium text-slate-500 dark:text-slate-400 z-10 relative hover:text-slate-700 dark:hover:text-slate-200 transition-colors">Board</button>
+                        <button type="button" onclick="setCategory('ski')"
+                            class="flex-1 text-center py-2 text-xs font-bold text-slate-900 dark:text-white z-10 relative transition-colors duration-300 focus:outline-none">Ski</button>
+                        <button type="button" onclick="setCategory('board')"
+                            class="flex-1 text-center py-2 text-xs font-medium text-slate-500 dark:text-slate-400 z-10 relative hover:text-slate-700 dark:hover:text-slate-200 transition-colors focus:outline-none">Board</button>
                     </div>
 
                     <!-- List Container -->
                     <div class="flex-1 flex flex-col min-h-0 relative">
-                        <!-- Up Arrow -->
-                        <div
-                            class="w-full flex justify-center pb-2 pt-1 shrink-0 z-10 bg-gradient-to-b from-surface-light dark:from-surface-dark to-transparent">
-                            <button onclick="scrollGuides('up')"
-                                class="group w-full mx-2 py-2 flex items-center justify-center bg-slate-50 dark:bg-slate-800 hover:bg-accent dark:hover:bg-accent text-slate-400 hover:text-white dark:text-slate-500 rounded-xl transition-all duration-300 shadow-sm border border-slate-100 dark:border-slate-700 hover:border-accent dark:hover:border-accent hover:shadow-glow transform active:scale-95">
-                                <span
-                                    class="material-symbols-rounded text-xl group-hover:-translate-y-0.5 transition-transform">keyboard_arrow_up</span>
-                            </button>
-                        </div>
+
 
                         <!-- Scrollable List -->
                         <div id="guides-list"
@@ -522,28 +515,21 @@
                             <!-- Items injected via JS -->
                         </div>
 
-                        <!-- Down Arrow -->
-                        <div
-                            class="w-full flex justify-center pt-2 pb-1 shrink-0 z-10 bg-gradient-to-t from-surface-light dark:from-surface-dark to-transparent">
-                            <button onclick="scrollGuides('down')"
-                                class="group w-full mx-2 py-2 flex items-center justify-center bg-slate-50 dark:bg-slate-800 hover:bg-accent dark:hover:bg-accent text-slate-400 hover:text-white dark:text-slate-500 rounded-xl transition-all duration-300 shadow-sm border border-slate-100 dark:border-slate-700 hover:border-accent dark:hover:border-accent hover:shadow-glow transform active:scale-95">
-                                <span
-                                    class="material-symbols-rounded text-xl group-hover:translate-y-0.5 transition-transform">keyboard_arrow_down</span>
-                            </button>
-                        </div>
+
                     </div>
                 </aside>
 
-                <!-- Main Content -->
+                <!-- Main Content: Fluid Width -->
                 <article id="guide-detail"
-                    class="lg:col-span-9 bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-soft border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row h-full transition-all duration-500">
+                    class="flex-1 bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-soft border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row h-full transition-all duration-500">
                     <!-- Detail content injected via JS -->
                 </article>
             </div>
         </div>
 
         <script>
-            const guidesData = [
+            // Renamed data variable to ensure no conflicts
+            const instructorsData = [
                 {
                     id: 1,
                     category: 'ski',
@@ -552,7 +538,7 @@
                     subRole: "National Skier | WFR Certified",
                     bio: "A National-Level skier with deep knowledge of the backcountry. He maps the daily routes based on snowpack stability and weather patterns, ensuring the safest and most exhilarating descents for intermediate to expert skiers.",
                     tags: ["Backcountry", "Safety", "Navigation"],
-                    image: "images/home/guides/shafqat.jpg", // Ensure path is correct
+                    image: "images/home/guides/shafqat.jpg",
                     stars: 5,
                     selectedLabel: "Selected"
                 },
@@ -600,20 +586,22 @@
                     subRole: "Risk Management",
                     bio: "With years of experience in mountain safety, Kamran ensures every expedition is secure.",
                     tags: ["Safety", "Risk", "Support"],
-                    image: null, // No image, use initials
+                    image: null,
                     initials: "KA",
                     stars: 5,
                     selectedLabel: "Safety Guide"
                 }
             ];
 
-            let currentCategory = 'ski';
-            let activeGuideId = 1;
+            // Initialize State
+            let currentFilter = 'ski';
+            let activeInstructorId = 1;
 
-            function setCategory(cat) {
-                currentCategory = cat;
+            // Global functions for HTML access
+            window.setCategory = function (cat) {
+                currentFilter = cat;
 
-                // Update indicator animation
+                // Update indicator visual
                 const indicator = document.getElementById('filter-indicator');
                 if (cat === 'ski') {
                     indicator.style.transform = 'translateX(0)';
@@ -621,35 +609,38 @@
                     indicator.style.transform = 'translateX(100%)';
                 }
 
-                // Auto-select first in category
-                const first = guidesData.find(g => g.category === cat);
-                if (first) activeGuideId = first.id;
+                // Default to first instructor in new category
+                const first = instructorsData.find(g => g.category === cat);
+                if (first) activeInstructorId = first.id;
+                else activeInstructorId = null;
 
-                renderList();
-                renderDetail();
+                renderInstructorList();
+                renderInstructorDetail();
             }
 
-            function setActiveGuide(id) {
-                activeGuideId = id;
-                renderList();
-                renderDetail();
+            window.setActiveGuide = function (id) {
+                activeInstructorId = id;
+                renderInstructorList();
+                renderInstructorDetail();
             }
 
-            function scrollGuides(direction) {
+            window.scrollGuides = function (direction) {
                 const list = document.getElementById('guides-list');
                 const scrollAmount = 100;
                 if (direction === 'up') list.scrollTop -= scrollAmount;
                 else list.scrollTop += scrollAmount;
             }
 
-            function renderList() {
+            function renderInstructorList() {
                 const list = document.getElementById('guides-list');
-                const filtered = guidesData.filter(g => g.category === currentCategory);
+                if (!list) return;
+
+                const filtered = instructorsData.filter(g => g.category === currentFilter);
 
                 list.innerHTML = filtered.map(g => {
-                    const isActive = g.id === activeGuideId;
+                    const isActive = g.id === activeInstructorId;
 
-                    // Template for Image Avatar
+                    // Avatar HTML Construction
                     let avatarHTML = '';
                     if (g.image) {
                         avatarHTML = `
@@ -669,7 +660,6 @@
                             </div>
                         `;
                     } else {
-                        // Initials Avatar
                         avatarHTML = `
                             <div class="relative shrink-0">
                                 <div class="w-14 h-14 rounded-full overflow-hidden ${isActive ? 'bg-gradient-to-tr from-cyan-400 to-blue-600 text-white shadow-glow' : 'bg-slate-200 dark:bg-slate-700 grayscale group-hover:grayscale-0 text-slate-400'} flex items-center justify-center transition-all duration-500 border-2 ${isActive ? 'border-transparent' : 'border-slate-200 dark:border-slate-700'}">
@@ -681,7 +671,7 @@
                     }
 
                     return `
-                        <div onclick="setActiveGuide(${g.id})" class="group cursor-pointer flex items-center gap-4 p-2 rounded-2xl transition-all shadow-sm ${isActive ? 'bg-slate-50 dark:bg-slate-800/50 border border-accent/20 dark:border-accent/20' : 'hover:bg-slate-50 dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700'}">
+                        <div onclick="setActiveGuide(${g.id})" role="button" class="group cursor-pointer flex items-center gap-4 p-2 rounded-2xl transition-all shadow-sm ${isActive ? 'bg-slate-50 dark:bg-slate-800/50 border border-accent/20 dark:border-accent/20' : 'hover:bg-slate-50 dark:hover:bg-slate-800 border border-transparent hover:border-slate-200 dark:hover:border-slate-700'}">
                             ${avatarHTML}
                             <div class="flex flex-col ${isActive ? '' : 'opacity-60 group-hover:opacity-100 transition-opacity'}">
                                 <span class="text-sm font-${isActive ? 'bold' : 'semibold'} text-slate-${isActive ? '900' : '700'} dark:text-${isActive ? 'white' : 'slate-300'} ${!isActive ? 'group-hover:text-slate-900 dark:group-hover:text-white' : ''}">${g.name}</span>
@@ -692,10 +682,15 @@
                 }).join('');
             }
 
-            function renderDetail() {
+            function renderInstructorDetail() {
                 const container = document.getElementById('guide-detail');
-                const g = guidesData.find(i => i.id === activeGuideId);
-                if (!g) return;
+                if (!container) return;
+
+                const g = instructorsData.find(i => i.id === activeInstructorId);
+                if (!g) {
+                    container.innerHTML = '<div class="p-8 text-center w-full">Select an instructor</div>';
+                    return;
+                }
 
                 // Stars logic
                 const starHTML = Array(5).fill(0).map((_, i) => `<span class="material-symbols-rounded fill-current text-[20px] ${i < g.stars ? '' : 'text-slate-300'}">star</span>`).join('');
@@ -725,7 +720,7 @@
                             </div>
                         </div>
                         <div>
-                            <button class="bg-primary hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group w-full sm:w-auto justify-center">
+                            <button type="button" class="bg-primary hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group w-full sm:w-auto justify-center">
                                 Book Session with ${g.name}
                                 <span class="material-symbols-rounded group-hover:translate-x-1 transition-transform">arrow_forward</span>
                             </button>
@@ -738,9 +733,9 @@
                 `;
             }
 
-            // Init
-            renderList();
-            renderDetail();
+            // Initial Render
+            // Ensure DOM is ready (though script is at end of body)
+            setCategory('ski');
         </script>
     </section>
 
