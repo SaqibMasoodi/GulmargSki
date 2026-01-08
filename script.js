@@ -168,43 +168,175 @@ function switchDay(dayNum) {
     }
 }
 
-// Initialize Day 1 on Load
+// Initialize Day 1 and Attractions on Load
 document.addEventListener('DOMContentLoaded', () => {
-    switchDay(1);
+    if (typeof switchDay === 'function') switchDay(1); // Legacy Curriculum
+    if (typeof setAttraction === 'function') setAttraction('gondola'); // New Attractions
 });
 
-// 2. ATTRACTIONS TABS
-const activeClasses = ['bg-white', 'text-blue-600', 'shadow-sm', 'border-slate-200', 'border-l-blue-600'];
-const inactiveClasses = ['text-slate-500', 'hover:bg-white', 'hover:text-slate-900', 'border-transparent', 'hover:border-slate-200', 'hover:border-l-slate-300', 'border-l-transparent'];
+// 2. ATTRACTIONS LOGIC (Sidebar Layout)
+const attractionsData = [
+    {
+        id: 'gondola',
+        title: 'Gondola Cable Car',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>',
+        content: `
+            <div class="p-8 lg:p-10 h-full flex flex-col">
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-3 uppercase tracking-tight">World's 2nd Highest Cable Car</h3>
+                <p class="text-slate-500 dark:text-slate-400 mb-8 font-medium leading-relaxed max-w-2xl">The highlight of any trip. Rise from the pine forests to the naked peaks in minutes.</p>
 
-function openTab(evt, tabName) {
-    const tabContents = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = "none";
-        tabContents[i].classList.remove("active");
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors group">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase">Phase 1</h4>
+                            <span class="text-[10px] bg-slate-900 text-white font-bold px-2 py-1 rounded">8,500 ft</span>
+                        </div>
+                        <p class="text-xs text-blue-600 dark:text-blue-400 mb-3 font-bold uppercase tracking-wider">Gulmarg to Kongdoori</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">Takes you to a bowl-shaped valley. Features restaurants, snow parks, and the main beginner slopes.</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors relative overflow-hidden group">
+                        <div class="flex justify-between items-center mb-4 relative z-10">
+                            <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase">Phase 2</h4>
+                            <span class="text-[10px] bg-blue-600 text-white font-bold px-2 py-1 rounded">14,000 ft</span>
+                        </div>
+                        <p class="text-xs text-blue-600 dark:text-blue-400 mb-3 font-bold uppercase tracking-wider relative z-10">To Apharwat Peak</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">The main event. Breathtaking views of Nanga Parbat. <br><span class="text-red-500 font-bold text-xs mt-2 block">*Sightseeing or Experts Only.</span></p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 'thrill',
+        title: 'Snowmobile & ATV',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>', // Changed icon to lightning/bolt for thrill
+        content: `
+            <div class="p-8 lg:p-10 h-full flex flex-col">
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-8 uppercase tracking-tight">Adrenaline Without Skis</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 aspect-[4/3]">
+                        <img src="images/home/attractions/gondola.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Snowmobile">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                            <h4 class="text-xl font-bold text-white mb-1">Snowmobiles</h4>
+                            <p class="text-slate-300 text-xs font-medium mb-3">High-speed motorized sleds. Zoom across vast frozen snowfields.</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 aspect-[4/3]">
+                        <img src="images/home/attractions/snowmobile.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="ATV">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                            <h4 class="text-xl font-bold text-white mb-1">ATV (Quad Bikes)</h4>
+                            <p class="text-slate-300 text-xs font-medium mb-3">4x4 beasts with tire chains. Explore Tangmarg to Drung.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 'sightseeing',
+        title: 'Sightseeing',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>', // Home/Landmark icon
+        content: `
+            <div class="p-8 lg:p-10 h-full flex flex-col">
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tight">Iconic Spots</h3>
+                <p class="text-slate-500 dark:text-slate-400 mb-8 font-medium">The "Must-Visit" locations for every traveler.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group">
+                        <div class="h-32 rounded-lg bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden">
+                            <img src="images/home/attractions/waterfall.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Waterfall">
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Drung Waterfall</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Famous frozen waterfall (Jan/Feb).</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group">
+                        <div class="h-32 rounded-lg bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden">
+                            <img src="images/home/attractions/church.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Church">
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">St. Mary’s Church</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">100+ year old Victorian church.</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group">
+                        <div class="h-32 rounded-lg bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden">
+                            <img src="images/home/attractions/temple.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Temple">
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Maharani Temple</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Red-roofed Shiva temple on a hill.</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: 'explore',
+        title: 'Beyond Gulmarg',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>', // Map pin
+        content: `
+            <div class="p-8 lg:p-10 h-full flex flex-col">
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">Complete Your Itinerary</h3>
+                <div class="space-y-8">
+                    <div class="flex gap-6 group">
+                        <div class="w-16 h-16 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xl shrink-0 group-hover:bg-blue-600 transition-colors">DL</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Srinagar (Dal Lake)</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">2 hours away. The classic experience is a Shikara ride on the frozen lake and a Houseboat stay.</p>
+                        </div>
+                    </div>
+                    <div class="w-px h-8 bg-slate-200 dark:bg-slate-700 ml-8"></div>
+                    <div class="flex gap-6 group">
+                        <div class="w-16 h-16 rounded-full bg-white border-2 border-slate-200 dark:border-slate-700 text-slate-900 flex items-center justify-center font-bold text-xl shrink-0 group-hover:border-blue-600 group-hover:text-blue-600 transition-colors">PH</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pahalgam</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">"Valley of Shepherds." Famous for scenic rivers and pine forests.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
     }
+];
 
-    const tabLinks = document.getElementsByClassName("tab-btn");
-    for (let i = 0; i < tabLinks.length; i++) {
-        const btn = tabLinks[i];
-        btn.classList.remove(...activeClasses);
-        btn.classList.add(...inactiveClasses);
-        const icon = btn.querySelector("svg");
-        if (icon) icon.classList.add("opacity-0");
-    }
+let activeAttractionId = 'gondola';
 
-    const activeContent = document.getElementById(tabName);
-    if (activeContent) {
-        activeContent.style.display = "block";
-        setTimeout(() => activeContent.classList.add("active"), 10);
-    }
+function renderAttractionsList() {
+    const listContainer = document.getElementById('attractions-list');
+    if (!listContainer) return;
 
-    const activeBtn = evt.currentTarget;
-    activeBtn.classList.remove(...inactiveClasses);
-    activeBtn.classList.add(...activeClasses);
-    const activeIcon = activeBtn.querySelector("svg");
-    if (activeIcon) activeIcon.classList.remove("opacity-0");
+    listContainer.innerHTML = attractionsData.map(item => {
+        const isActive = item.id === activeAttractionId;
+        const baseClasses = "w-full text-left px-5 py-4 rounded-2xl font-bold text-sm transition-all duration-300 flex items-center justify-between group border-2";
+        const activeClasses = isActive
+            ? "bg-slate-900 text-white border-slate-900 shadow-md"
+            : "bg-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900 border-transparent hover:border-slate-200";
+
+        return `
+            <button onclick="setAttraction('${item.id}')" class="${baseClasses} ${activeClasses}">
+                <span class="tracking-wide">${item.title}</span>
+                <svg class="w-5 h-5 ${isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-blue-500'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    ${item.icon}
+                </svg>
+            </button>
+        `;
+    }).join('');
 }
+
+function renderAttractionDetail() {
+    const detailContainer = document.getElementById('attraction-detail');
+    if (!detailContainer) return;
+
+    const attraction = attractionsData.find(a => a.id === activeAttractionId);
+    if (!attraction) return;
+
+    // Fade out effect could be added here similar to curriculum
+    detailContainer.innerHTML = attraction.content;
+}
+
+function setAttraction(id) {
+    activeAttractionId = id;
+    renderAttractionsList();
+    renderAttractionDetail();
+}
+
+// 3. CURRENCY CONVERTER
 
 // 3. CURRENCY CONVERTER
 function updateCurrency() {
