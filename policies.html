@@ -38,9 +38,12 @@
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
 
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300" id="main-nav">
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300"
+        id="main-nav">
 
-        <a href="index.html" class="text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">WOLF<span class="text-alpine-blue">.ADV</span></a>
+        <a href="index.html"
+            class="text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">WOLF<span
+                class="text-alpine-blue">.ADV</span></a>
 
         <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
             <a href="index.html#resort" class="hover:text-alpine-blue transition-colors">The Resort</a>
@@ -51,26 +54,44 @@
         </div>
 
         <div class="flex items-center gap-3 z-50 relative">
-            <a href="booking.html" class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book Now</a>
-            
-            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
+            <a href="booking.html"
+                class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book
+                Now</a>
+
+            <button onclick="toggleMobileMenu()"
+                class="lg:hidden p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
     </nav>
 
-    <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center">
+    <div id="mobile-menu-overlay"
+        class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center">
         <ul class="text-center space-y-8">
-            <li><a href="index.html#resort" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">The Resort</a></li>
-            <li><a href="index.html#curriculum" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Curriculum</a></li>
-            <li><a href="stays.html" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Accommodations</a></li>
-            <li><a href="packages.html" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Packages</a></li>
-            <li><a href="index.html#contact" onclick="toggleMobileMenu()" class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Contact Us</a></li>
+            <li><a href="index.html#resort" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">The Resort</a>
+            </li>
+            <li><a href="index.html#curriculum" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Curriculum</a>
+            </li>
+            <li><a href="stays.html" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Accommodations</a>
+            </li>
+            <li><a href="packages.html" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Packages</a>
+            </li>
+            <li><a href="index.html#contact" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Contact Us</a>
+            </li>
             <li>
-                <a href="booking.html" class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold shadow-xl">Book Your Trip</a>
+                <a href="booking.html"
+                    class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold shadow-xl">Book
+                    Your Trip</a>
             </li>
         </ul>
     </div>
@@ -96,6 +117,10 @@
                         <a href="#liability"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
                             Risk & Liability
+                        </a>
+                        <a href="#compliance"
+                            class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
+                            Client & Compliance
                         </a>
                         <a href="#privacy"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
@@ -211,6 +236,37 @@
                         <p>We strongly recommend all guests purchase comprehensive <strong class="text-slate-900">Travel
                                 Insurance</strong> that specifically covers winter sports and emergency helicopter
                             evacuation.</p>
+                    </div>
+                </section>
+
+                <section id="compliance" class="scroll-mt-32">
+                    <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Client & Compliance</h2>
+
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-8">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Liability Release Form</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed max-w-md">
+                                    All guests are required to sign a liability waiver before participating. Please
+                                    download the PDF, sign it, and bring a physical copy on your arrival.
+                                </p>
+                            </div>
+                            <a href="#"
+                                class="group relative flex items-center gap-3 px-8 py-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-alpine-blue hover:-translate-y-0.5 transition-all duration-300">
+                                <div
+                                    class="p-2 rounded-full bg-slate-100 text-slate-600 group-hover:bg-alpine-blue group-hover:text-white transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-left">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Download
+                                        PDF</p>
+                                    <span class="block text-slate-900 font-bold">Liability Waiver</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </section>
 
