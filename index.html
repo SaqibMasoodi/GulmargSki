@@ -15,7 +15,7 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -72,6 +72,24 @@
                         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
                         'glow': '0 0 15px rgba(14, 165, 233, 0.3)',
                         'inner-glow': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
                     }
                 }
             }
@@ -157,6 +175,37 @@
 
         .pause-on-hover:hover .animate-scroll-y {
             animation-play-state: paused;
+        }
+    </style>
+    <style type="text/tailwindcss">
+        .gallery-card {
+            @apply relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-700 ease-out;
+        }
+        .gallery-card:hover {
+            @apply z-20 shadow-2xl shadow-sky-500/20 scale-[1.02];
+        }
+        .gallery-card img {
+            @apply transition-transform duration-700 ease-in-out w-full h-full object-cover;
+        }
+        .gallery-card:hover img {
+            @apply scale-110 rotate-1;
+        }
+        .gallery-card::after {
+            content: '';
+            @apply absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-60 transition-opacity duration-500;
+        }
+        .gallery-card:hover::after {
+            @apply opacity-90;
+        }
+        .nav-link-custom {
+            @apply relative text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300;
+        }
+        .nav-link-custom::after {
+            content: '';
+            @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300;
+        }
+        .nav-link-custom:hover::after {
+            @apply w-full;
         }
     </style>
 </head>
@@ -2739,94 +2788,257 @@
         </div>
     </section>
 
-    <section id="accommodations" class="py-24 px-6 bg-slate-900">
+    <section id="accommodations" class="py-24 px-6 bg-white font-sans">
         <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">Hospitality</span>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight uppercase">Stay Your Way</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto mb-8">We partner with Gulmarg’s top-rated accommodations
+                    to suit your budget and style.</p>
 
-            <div class="text-center mb-16 text-white">
-                <h2 class="text-3xl md:text-5xl font-black mb-4">STAY IN COMFORT</h2>
-                <p class="text-slate-400">Warm beds and hot meals after cold days.</p>
-                <a href="stays.html"
-                    class="inline-block mt-8 px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-slate-900 transition-colors">
-                    View All Resorts & Rooms →
-                </a>
+                <!-- Partner Trust Strip (Moved to Top) -->
+                <div
+                    class="inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-4 py-4 px-8 bg-slate-50 rounded-2xl border border-slate-100">
+                    <span
+                        class="text-slate-400 font-bold uppercase tracking-widest text-[10px] w-full md:w-auto">Official
+                        Partners:</span>
+                    <a href="https://khyberhotels.com" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-800 font-bold font-display uppercase tracking-tight hover:text-blue-600 transition-colors">The
+                        Khyber</a>
+                    <a href="https://hilltophotels.in" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-800 font-bold font-display uppercase tracking-tight hover:text-blue-600 transition-colors">Hilltop</a>
+                    <a href="https://grandmumtazgulmarg.com" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-800 font-bold font-display uppercase tracking-tight hover:text-blue-600 transition-colors">Grand
+                        Mumtaz</a>
+                    <a href="https://hotelroyalpark.net" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-800 font-bold font-display uppercase tracking-tight hover:text-blue-600 transition-colors">Royal
+                        Park</a>
+                    <a href="https://therosewoodhotel.com" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-800 font-bold font-display uppercase tracking-tight hover:text-blue-600 transition-colors">Rosewood</a>
+                    <a href="https://welcomehotelsgr.com/gulmarg" target="_blank" rel="noopener noreferrer"
+                        class="text-slate-800 font-bold font-display uppercase tracking-tight hover:text-blue-600 transition-colors">Welcome</a>
+                </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12">
-
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold text-white">The Lodge</h3>
-
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Card 1: The "Rider" Tier -->
+                <div
+                    class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <img src="images/home/stays_teaser/stay-3.jpg"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        alt="Dormitory Bunk">
                     <div
-                        class="auto-slider relative h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 group">
-                        <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
-                            <div class="min-w-full h-full relative">
-                                <img src="images/home/stays_teaser/stay-1.jpg" class="w-full h-full object-cover"
-                                    alt="Hotel Room">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
-                                    <span class="text-white font-bold text-xl">Luxury Rooms</span>
-                                </div>
-                            </div>
-                            <div class="min-w-full h-full relative">
-                                <img src="images/home/stays_teaser/stay-2.jpg" class="w-full h-full object-cover"
-                                    alt="Fireplace">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
-                                    <span class="text-white font-bold text-xl">Cozy Fireplaces</span>
-                                </div>
-                            </div>
-                            <div class="min-w-full h-full relative">
-                                <img src="images/home/stays_teaser/stay-3.jpg" class="w-full h-full object-cover"
-                                    alt="Lobby">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
-                                    <span class="text-white font-bold text-xl">Grand Lobby</span>
-                                </div>
-                            </div>
-                        </div>
+                        class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-90">
                     </div>
 
-                    <p class="text-slate-400 text-sm leading-relaxed">Centrally heated rooms with mountain views.
-                        5-minute walk to the Gondola.</p>
-                </div>
-
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold text-white">Local Flavors</h3>
-
+                    <!-- Hover Price Overlay -->
                     <div
-                        class="auto-slider relative h-[400px] w-full rounded-2xl overflow-hidden border border-white/10 group">
-                        <div class="slider-track flex h-full transition-transform duration-700 ease-in-out">
-                            <div class="min-w-full h-full relative">
-                                <img src="images/home/stays_teaser/food-1.jpg" class="w-full h-full object-cover"
-                                    alt="Kashmiri Wazwan">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
-                                    <span class="text-white font-bold text-xl">Authentic Wazwan</span>
-                                </div>
-                            </div>
-                            <div class="min-w-full h-full relative">
-                                <img src="images/home/stays_teaser/food-2.jpg" class="w-full h-full object-cover"
-                                    alt="Kahwa Tea">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
-                                    <span class="text-white font-bold text-xl">Hot Kahwa</span>
-                                </div>
-                            </div>
-                            <div class="min-w-full h-full relative">
-                                <img src="images/home/stays_teaser/food-3.jpg" class="w-full h-full object-cover"
-                                    alt="Dining">
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent">
-                                    <span class="text-white font-bold text-xl">Fine Dining</span>
-                                </div>
-                            </div>
-                        </div>
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span
+                            class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-6 py-3 rounded-full shadow-xl whitespace-nowrap transform scale-90 group-hover:scale-100 transition-transform">
+                            Packages from ₹18,500
+                        </span>
                     </div>
 
-                    <p class="text-slate-400 text-sm leading-relaxed">Authentic Kashmiri Wazwan and continental comfort
-                        food to refuel.</p>
+                    <div
+                        class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500 z-10">
+                        <span
+                            class="bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block shadow-lg">Best
+                            Value</span>
+                        <h3 class="text-white text-3xl font-bold font-display uppercase italic mb-2">Budget & Essentials
+                        </h3>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">Clean, cozy, and social. Perfect for
+                            those who spend all day on the slopes and just need a warm bed.</p>
+                        <div class="pt-4 border-t border-white/10">
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wide">Includes: <span
+                                    class="text-white font-normal capitalize">Dormitories, Poshwan, Ski Lodge</span></p>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Card 2: The "Comfort" Tier -->
+                <div
+                    class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-sky-500/20 transform md:-translate-y-4">
+                    <img src="images/home/stays_teaser/stay-1.jpg"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        alt="Comfort Room">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-90">
+                    </div>
+
+                    <!-- Popular Badge -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <span
+                            class="bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">star</span> Most Popular
+                        </span>
+                    </div>
+
+                    <!-- Hover Price Overlay -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span
+                            class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-6 py-3 rounded-full shadow-xl whitespace-nowrap transform scale-90 group-hover:scale-100 transition-transform">
+                            Packages from ₹28,999
+                        </span>
+                    </div>
+
+                    <div
+                        class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500 z-10">
+                        <h3 class="text-white text-3xl font-bold font-display uppercase italic mb-2">Premium Comfort
+                        </h3>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">Private rooms with modern amenities,
+                            heating, and great views. The perfect balance of luxury and value.</p>
+                        <div class="pt-4 border-t border-white/10">
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wide">Includes: <span
+                                    class="text-white font-normal capitalize">Royal Park, Mama Palace, Welcome</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: The "Luxury" Tier -->
+                <div
+                    class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
+                    <img src="images/home/stays_teaser/stay-2.jpg"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        alt="Luxury Hotel">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-90">
+                    </div>
+
+                    <!-- Hover Price Overlay -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span
+                            class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-6 py-3 rounded-full shadow-xl whitespace-nowrap transform scale-90 group-hover:scale-100 transition-transform">
+                            Packages from ₹65,000
+                        </span>
+                    </div>
+
+                    <div
+                        class="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500 z-10">
+                        <span
+                            class="bg-slate-800 border border-slate-700 text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block shadow-lg">Exclusive
+                            Experience</span>
+                        <h3 class="text-white text-3xl font-bold font-display uppercase italic mb-2">Elite Luxury</h3>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">World-class hospitality at Gulmarg's
+                            iconic hotels. Experience spa recovery, fine dining, and prime locations.</p>
+                        <div class="pt-4 border-t border-white/10">
+                            <p class="text-slate-400 text-xs font-bold uppercase tracking-wide">Includes: <span
+                                    class="text-white font-normal capitalize">The Khyber, Hilltop, Grand Mumtaz</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- CTA -->
+            <div class="text-center">
+                <a href="stays.html"
+                    class="inline-flex items-center justify-center px-10 py-4 rounded-full bg-slate-900 text-white font-bold uppercase tracking-widest hover:bg-blue-600 shadow-lg shadow-blue-900/10 hover:shadow-blue-600/20 transition-all transform hover:-translate-y-1">
+                    Compare All Accommodation Tiers
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW GALLERY SECTION (AUTO SCROLL) -->
+    <section class="py-24 bg-slate-50 font-sans border-t border-slate-200 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 mb-12">
+            <div>
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">Visual Journey</span>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight uppercase">Gallery</h2>
+            </div>
+        </div>
+
+        <div
+            class="relative w-full flex gap-6 overflow-hidden py-8 bg-white/50 backdrop-blur-sm border-y border-slate-100">
+            <!-- First scrolling track -->
+            <div
+                class="flex min-w-full shrink-0 items-center justify-around gap-6 animate-[scroll_40s_linear_infinite]">
+                <img class="h-64 w-96 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpeO0Ll_8tAi4Mr2YEfysjMpFSaIoIpwC_Gp1XbbCiJUfUZRxdf6zdFdQcchI0tIOvU6bPdGbWac5QisumFdhenXQaEQsqwZGSAUsYfOOfZ_igphY5eMAgPJtOKQ1OIKvuF66rCyix7F7OnuFo0SddnQG233ZW_seAFD_p7IJpde7v1TtKfEi_fY0BlsexCodgY7nuc1rwJz2dm0aFik7ClGUUMV3f6Pipu7631UpMiu8ICN_hA2uOFYSCEl5hs5I-WhaDbcLuOXs"
+                    alt="Skiing Powder" />
+                <img class="h-64 w-64 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX5oUe76i3OdeFgEWf3PO1_LHkHXPv3vy-tBOwoSNHP3qW4kLk3ouptJDu8umo1V_px3W4OTBhssXykIA0wfUXwRPir1mgC_4PYE4hjqYUyYs0p1rXoU14z4atg2IJl0HYnaVKqOHAkWjqGmE1Lb_goLXX1BsyUTfgjvwZit7WooRBRtLW4Jrm00Vuts2nsjxUp6H1vH64TKqbYX0v2i5w7hVBxdEKMMqqYC9KoRiOTmIgPtJvIW9g6oou7eSJGC6nRurzCOsCqhs"
+                    alt="Big Air" />
+                <img class="h-64 w-96 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7GrfeOyPO09mkimZ6gSBh5uDLmt1QO2uoS_Bm5USZDT0pOTg5BC0Xuq2l-zdsv-2P5Z_51RcekGK0VyMuwCyKGM7iYyCiVKLkGFOPJx-PIfmFJmwY2vHw3zpOt3sGjwzC4T9VDC_syqWz57EInTKvfAq9bDDx6YtftTBU8nhG7rcGOulYUq85BBmqOvEgglaUHatZ9tZPbUBowF94kjKg9wNGsupMJQk9fQdFYb7dZZHn2F8tnwv99y53hOzmKNErJftT6el_CoU"
+                    alt="Mountain Peak" />
+                <img class="h-64 w-72 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuARYoXFaZzHP62X9CUfe2RsgTXc_OaBuJ1VTwmiNnsgZBvcPZ5qP1E-y3kMSOUCs1NDa4DsLU8_I3QptVwgbWN078KZ-GMnAn-nZf-PB06JRhfstXApYbHtCD3QS-BYmfqYIOeTC1xLJsH-z81mSR5i0gIUUO5YWILUFtiUt8moud8DUgwgfdtgPpauUp05c7pq5w4CcFZWO48UukanVJR6ztwm4j5jQ6uGMrAUbjVBmB_58a2JQT_AMvz5nywnKuE3FeNFS3e95bs"
+                    alt="Cabin" />
+                <img class="h-64 w-96 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHVBoOELeiQCBS0T8tzhndR_tFRnb32M1zYvXapQXD4NmXrOdhJy4FtqZFjmfzPawPkB2NbGUHbMCK3EhdSEsy_OLOR6nj12R-CdKBku37vXB1ksga5pZBxy4rW04mapJ2cxTRmGsOLbH3zMVWoaoKNgLSjCSIAtuSrctsZVftIa6AH_yqlFy_i5xjh1jnm38Oc906X4Cm2pZpDWpW1hmvv6I-9KI4IAjQjdtI1SxTmJlSNlABEeC_BLElqWvU965M2gZhg_B_oVk"
+                    alt="Vast Range" />
+                <img class="h-64 w-80 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr7YsCxAtZLFRn2Ok8Jdo1xD9S2E57IlSwgySzf3fgj64Q2-uJDiaEax5sz4M7PFiNQ2UuvybqhXlWYa2MsJ7adx4iuQXL47h9btqMnJV64dXbcfDNdQr0WdvdDGqOJYIg0F2WyGCrzYw3kaa1dcVIwg3d7W9PubSnFzMYxNK9FawHyyp7aZ21_GbkZBnUfwMwK9Ie8sWGYtwMoDgE7yj5BOPrDA46ijaZ21OwkpgVr7yPEFduOZmQXmbBUZprGu3CgvaT19cH4po"
+                    alt="Ascending" />
+            </div>
+            <!-- Duplicate track for seamless loop -->
+            <div class="flex min-w-full shrink-0 items-center justify-around gap-6 animate-[scroll_40s_linear_infinite]"
+                aria-hidden="true">
+                <img class="h-64 w-96 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpeO0Ll_8tAi4Mr2YEfysjMpFSaIoIpwC_Gp1XbbCiJUfUZRxdf6zdFdQcchI0tIOvU6bPdGbWac5QisumFdhenXQaEQsqwZGSAUsYfOOfZ_igphY5eMAgPJtOKQ1OIKvuF66rCyix7F7OnuFo0SddnQG233ZW_seAFD_p7IJpde7v1TtKfEi_fY0BlsexCodgY7nuc1rwJz2dm0aFik7ClGUUMV3f6Pipu7631UpMiu8ICN_hA2uOFYSCEl5hs5I-WhaDbcLuOXs"
+                    alt="Skiing Powder" />
+                <img class="h-64 w-64 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX5oUe76i3OdeFgEWf3PO1_LHkHXPv3vy-tBOwoSNHP3qW4kLk3ouptJDu8umo1V_px3W4OTBhssXykIA0wfUXwRPir1mgC_4PYE4hjqYUyYs0p1rXoU14z4atg2IJl0HYnaVKqOHAkWjqGmE1Lb_goLXX1BsyUTfgjvwZit7WooRBRtLW4Jrm00Vuts2nsjxUp6H1vH64TKqbYX0v2i5w7hVBxdEKMMqqYC9KoRiOTmIgPtJvIW9g6oou7eSJGC6nRurzCOsCqhs"
+                    alt="Big Air" />
+                <img class="h-64 w-96 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7GrfeOyPO09mkimZ6gSBh5uDLmt1QO2uoS_Bm5USZDT0pOTg5BC0Xuq2l-zdsv-2P5Z_51RcekGK0VyMuwCyKGM7iYyCiVKLkGFOPJx-PIfmFJmwY2vHw3zpOt3sGjwzC4T9VDC_syqWz57EInTKvfAq9bDDx6YtftTBU8nhG7rcGOulYUq85BBmqOvEgglaUHatZ9tZPbUBowF94kjKg9wNGsupMJQk9fQdFYb7dZZHn2F8tnwv99y53hOzmKNErJftT6el_CoU"
+                    alt="Mountain Peak" />
+                <img class="h-64 w-72 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuARYoXFaZzHP62X9CUfe2RsgTXc_OaBuJ1VTwmiNnsgZBvcPZ5qP1E-y3kMSOUCs1NDa4DsLU8_I3QptVwgbWN078KZ-GMnAn-nZf-PB06JRhfstXApYbHtCD3QS-BYmfqYIOeTC1xLJsH-z81mSR5i0gIUUO5YWILUFtiUt8moud8DUgwgfdtgPpauUp05c7pq5w4CcFZWO48UukanVJR6ztwm4j5jQ6uGMrAUbjVBmB_58a2JQT_AMvz5nywnKuE3FeNFS3e95bs"
+                    alt="Cabin" />
+                <img class="h-64 w-96 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHVBoOELeiQCBS0T8tzhndR_tFRnb32M1zYvXapQXD4NmXrOdhJy4FtqZFjmfzPawPkB2NbGUHbMCK3EhdSEsy_OLOR6nj12R-CdKBku37vXB1ksga5pZBxy4rW04mapJ2cxTRmGsOLbH3zMVWoaoKNgLSjCSIAtuSrctsZVftIa6AH_yqlFy_i5xjh1jnm38Oc906X4Cm2pZpDWpW1hmvv6I-9KI4IAjQjdtI1SxTmJlSNlABEeC_BLElqWvU965M2gZhg_B_oVk"
+                    alt="Vast Range" />
+                <img class="h-64 w-80 object-cover rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr7YsCxAtZLFRn2Ok8Jdo1xD9S2E57IlSwgySzf3fgj64Q2-uJDiaEax5sz4M7PFiNQ2UuvybqhXlWYa2MsJ7adx4iuQXL47h9btqMnJV64dXbcfDNdQr0WdvdDGqOJYIg0F2WyGCrzYw3kaa1dcVIwg3d7W9PubSnFzMYxNK9FawHyyp7aZ21_GbkZBnUfwMwK9Ie8sWGYtwMoDgE7yj5BOPrDA46ijaZ21OwkpgVr7yPEFduOZmQXmbBUZprGu3CgvaT19cH4po"
+                    alt="Ascending" />
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION (LIGHT THEME) -->
+    <section class="py-10 bg-white border-b border-slate-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0">
+                <div class="flex items-center gap-4 group cursor-default">
+                    <div
+                        class="p-3 bg-slate-100 rounded-2xl border border-slate-200 group-hover:border-sky-500/50 transition-colors">
+                        <span class="material-symbols-outlined text-sky-500 text-2xl">photo_camera</span>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-slate-900">2.5k+</h4>
+                        <p class="text-slate-500 text-xs uppercase tracking-wider">Shots Taken</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-12 bg-slate-200"></div>
+                <div class="flex items-center gap-4 group cursor-default">
+                    <div
+                        class="p-3 bg-slate-100 rounded-2xl border border-slate-200 group-hover:border-emerald-500/50 transition-colors">
+                        <span class="material-symbols-outlined text-emerald-600 text-2xl">landscape</span>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-slate-900">12</h4>
+                        <p class="text-slate-500 text-xs uppercase tracking-wider">Peaks Conquered</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-12 bg-slate-200"></div>
+                <div class="flex items-center gap-4 group cursor-default">
+                    <div
+                        class="p-3 bg-slate-100 rounded-2xl border border-slate-200 group-hover:border-red-500/50 transition-colors">
+                        <span class="material-symbols-outlined text-red-500 text-2xl">groups</span>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-slate-900">500+</h4>
+                        <p class="text-slate-500 text-xs uppercase tracking-wider">Adventurers</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
