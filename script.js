@@ -579,288 +579,92 @@ function setupObserver() {
     document.querySelectorAll('.snap-item').forEach(card => observer.observe(card));
 }
 // --- BOOKING PAGE LOGIC ---
-const PACKAGE_ACCOMMODATIONS = {
-    'basic': 'Dormitory / Hostel Bed',
-    'silver': '3-Star Hotel / Lodge (Poshwan)',
-    'gold': '4-Star Hotel (Grand Mumtaz)',
-    'diamond': '5-Star Luxury (Khyber)',
-    'platinum': 'Premium Suite + Private Butler'
-};
 
-function updateCalculations() {
-    const pkgSelect = document.getElementById('package-select');
-    const guestSelect = document.getElementById('guest-count');
-    const accSelect = document.getElementById('accommodation-select');
-
-    // Update Accommodation based on Package (Smart Default)
-    if (pkgSelect && accSelect) {
-        accSelect.value = pkgSelect.value;
-    }
-
-    // Price Calculation
-    if (pkgSelect && guestSelect) {
-        const option = pkgSelect.options[pkgSelect.selectedIndex];
-        const price = parseInt(option.getAttribute('data-price')) || 0;
-        const guests = parseInt(guestSelect.value) || 1;
-
-        let total = price * guests;
-        let discount = 0;
-        let discountText = '';
-
-        // Discount Logic
-        if (guests === 2) {
-            discount = total * 0.05; // 5% for couples
-            discountText = '5% (Couple)';
-        } else if (guests >= 3 && guests <= 4) {
-            discount = total * 0.10; // 10% for small groups
-            discountText = '10% (Small Group)';
-        } else if (guests >= 5) {
-            discount = total * 0.15; // 15% for large groups
-            discountText = '15% (Big Squad)';
-        }
-
-        const finalTotal = total - discount;
-
-        // Update UI
-        document.getElementById('summary-base-price').innerText = '₹' + price.toLocaleString();
-        document.getElementById('summary-guests').innerText = 'x ' + guests;
-
-        // Handle Discount UI
-        const discountRow = document.getElementById('discount-row');
-        const discountSpan = document.getElementById('summary-discount');
-
-        if (discount > 0) {
-            discountRow.classList.remove('hidden');
-            discountSpan.innerText = `-₹${Math.round(discount).toLocaleString()} (${discountText})`;
-        } else {
-            discountRow.classList.add('hidden');
-        }
-
-        document.getElementById('summary-total').innerText = '₹' + Math.round(finalTotal).toLocaleString();
-    }
-}
-
-function updateIDLabel() {
-    const type = document.getElementById('id-type').value;
-    const input = document.querySelector('input[name="id_number"]');
-    const label = document.getElementById('id-number-label');
-
-    if (type === 'Aadhaar') {
-        label.innerText = 'Aadhaar Number';
-        input.placeholder = 'XXXX XXXX XXXX';
-    } else if (type === 'PAN') {
-        label.innerText = 'PAN Number';
-        input.placeholder = 'ABCDE1234F';
-    } else if (type === 'Passport') {
-        label.innerText = 'Passport Number';
-        input.placeholder = 'A1234567';
-    } else if (type === 'License') {
-        label.innerText = 'License Number';
-        input.placeholder = 'DL-1420110012345';
-    } else {
-        label.innerText = 'ID Number';
-        input.placeholder = 'Enter ID Number';
-    }
+// Helper to access Alpine Data
+function getAlpineData() {
+    const el = document.querySelector('[x-data]');
+    return el && el._x_dataStack ? el._x_dataStack[0] : null;
 }
 
 function submitBooking(e) {
     e.preventDefault();
 
     const form = document.querySelector('form');
+    // Ensure validity of standard inputs
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
 
     const formData = new FormData(form);
-    const googleFormData = new URLSearchParams();
+    const alpineData = getAlpineData();
 
-    // --- GOOGLE FORM MAPPING (CORRECTED) ---
+    if (!alpineData) {
+        alert("System Error: Could not retrieve calculator data. Please refresh and try again.");
+        return;
+    }
 
-    // 1. Customer Details
-    googleFormData.append('entry.907087383', formData.get('name'));         // Full Name
-    googleFormData.append('entry.769361365', formData.get('email'));        // Email
-    googleFormData.append('entry.409862271', formData.get('phone'));        // Phone
-    googleFormData.append('entry.1792314048', formData.get('age'));         // Age
-    googleFormData.append('entry.164837835', formData.get('addr_line1'));   // Address Line 1
-    googleFormData.append('entry.1053105882', formData.get('addr_line2') || ''); // Address Line 2
-    googleFormData.append('entry.1023735076', formData.get('city'));        // City
-    googleFormData.append('entry.686629071', formData.get('state'));        // State
-    googleFormData.append('entry.765320628', formData.get('country'));      // Country
-    googleFormData.append('entry.100638151', formData.get('zip'));          // ZIP
-
-    // 2. Identity (Corrected IDs)
-    // ID Type: Value needs to map to specific options: "Aadhaar Card", "PAN Card", "Passport (International Guests)", "Other"
-    const idTypeMap = {
-        'Aadhaar': 'Aadhaar Card',
-        'PAN': 'PAN Card',
-        'Passport': 'Passport (International Guests)',
-        'License': 'Other', // Form doesn't have License, map to Other
-        'Other': 'Other'
+    // 2. Package / Tier Map
+    const tierMap = {
+        'dorm': 'Basic (Dorm)',
+        '2star': 'Silver (2-Star)',
+        '3star_low': 'Gold (3-Star)',
+        '3star_high': 'Diamond (3-Star High)',
+        '4star_low': 'Platinum (4-Star)',
+        '4star_high': 'Platinum+ (4-Star High)',
+        '5star': 'Royal (5-Star)'
     };
-    googleFormData.append('entry.828150114', idTypeMap[formData.get('id_type')] || 'Other');
-
-    // Identity Number (Found correct ID from analysis: 21627150)
-    googleFormData.append('entry.21627150', formData.get('id_number'));
-
-    // 3. Package (Corrected Logic)
-    // Form Options: "Silver Package (₹26,999)", "Gold Package", "Platinum Package"
-    // HTML has prices in text. we need to match exactly.
-    const pkgSelect = document.getElementById('package-select');
-    const pkgText = pkgSelect.options[pkgSelect.selectedIndex].text;
-
-    // Map HTML text to Form text if needed, or send as is if it matches
-    // HTML: "Silver Package (₹26,999)" -> Form: "Silver Package (₹26,999)" (Match)
-    // HTML: "Gold Package (₹34,999)" -> Form: "Gold Package" (Mismatch - strip price)
-    // HTML: "Platinum Package (₹64,999)" -> Form: "Platinum Package" (Mismatch)
-    let pkgValue = pkgText;
-    if (pkgValue.includes('Gold')) pkgValue = 'Gold Package';
-    if (pkgValue.includes('Platinum')) pkgValue = 'Platinum Package';
-    // Diamond/Basic not in form, fallback to nearest or ignore? 
-    // Assuming UI keeps user within compatible choices, or map Diamond -> Platinum?
-    if (pkgValue.includes('Diamond')) pkgValue = 'Platinum Package';
-    if (pkgValue.includes('Basic')) pkgValue = 'Silver Package (₹26,999)'; // Fallback
-
-    googleFormData.append('entry.2001348355', pkgValue);
-
-    // 4. Participants
-    // Form Options: "1 Person", "2 People", "3 People", "4+ People custom number"
-    const guests = formData.get('guests');
-    let guestStr = guests === '1' ? '1 Person' : `${guests} People`;
-    if (parseInt(guests) >= 4) guestStr = '4+ People custom number';
-    googleFormData.append('entry.81046661', guestStr);
-
-    // 5. Accommodation
-    // Form Options: "3-Star Hotel / Lodge", "4-Star Hotel", "5-Star Hotel"
-    const accSelect = document.getElementById('accommodation-select');
-    let accText = accSelect.options[accSelect.selectedIndex].text;
-    // Map HTML to Form
-    if (accText.includes('5-Star')) accText = '5-Star Hotel';
-    if (accText.includes('Dormitory')) accText = '3-Star Hotel / Lodge'; // Fallback
-    googleFormData.append('entry.2085276688', accText);
-
-    // 6. Date
+    const tierName = tierMap[alpineData.selectedTier] || alpineData.selectedTier;
+    const hotel = formData.get('hotel') || 'Not Selected';
     const dateVal = formData.get('date'); // YYYY-MM-DD
-    if (dateVal) {
-        const [year, month, day] = dateVal.split('-');
-        googleFormData.append('entry.74114105_year', year);
-        googleFormData.append('entry.74114105_month', month);
-        googleFormData.append('entry.74114105_day', day);
-    }
 
-    // 7. Safety & Emergency (Corrected IDs)
-    googleFormData.append('entry.1931752260', formData.get('medical') || '');
-    // Emergency Name (Correct ID: 310389481)
-    googleFormData.append('entry.310389481', formData.get('emergency_name'));
-    // Emergency Phone (Correct ID: 987056831)
-    googleFormData.append('entry.987056831', formData.get('emergency_phone'));
+    // --- WHATSAPP MESSAGE ---
+    let msg = `*New Booking Request from Skigulmarg.com*\n\n`;
 
-    // 8. Skill Level
-    // Form Options: "Beginner (First time)", "Intermediate", "Advanced"
-    const skillSelect = form.querySelector('select[name="skill"]');
-    let skillText = skillSelect.options[skillSelect.selectedIndex].text;
-    // HTML: "Intermediate (Can turn & stop)" -> Form: "Intermediate"
-    // HTML: "Advanced (Black runs / Off-piste)" -> Form: "Advanced"
-    if (skillText.startsWith('Intermediate')) skillText = 'Intermediate';
-    if (skillText.startsWith('Advanced')) skillText = 'Advanced';
-    googleFormData.append('entry.1187223216', skillText);
-
-    // 9. Notes & Terms
-    // Notes (Correct ID: 643087917)
-    googleFormData.append('entry.643087917', formData.get('notes') || '');
-
-    // Terms Checkbox (Correct ID: 937062308) - Required Value match
-    googleFormData.append('entry.937062308', 'I agree to the Terms & Conditions and understand that skiing involves inherent risks.');
-
-
-    // --- WHATSAPP MESSAGE GENERATION ---
-    let msg = `*New Booking Request from Wolf Adventure*\n\n`;
-
-    // 1. Customer
-    msg += `👤 *Customer Details*\n`;
+    msg += `👤 *Customer*\n`;
     msg += `Name: ${formData.get('name')}\n`;
-    msg += `Email: ${formData.get('email')}\n`;
     msg += `Phone: ${formData.get('phone')}\n`;
-    msg += `Address: ${formData.get('city')}, ${formData.get('country')}\n\n`;
+    msg += `Loc: ${formData.get('city')}, ${formData.get('country')}\n\n`;
 
-    // 2. Package
-    const guestsNum = parseInt(guests);
-    let discountInfo = '';
-    if (guestsNum === 2) discountInfo = ' (5% Off)';
-    else if (guestsNum >= 3 && guestsNum <= 4) discountInfo = ' (10% Off)';
-    else if (guestsNum >= 5) discountInfo = ' (15% Off)';
+    msg += `🏔 *Trip Details*\n`;
+    msg += `Pack: ${tierName}\n`;
+    msg += `People: ${alpineData.people}\n`;
+    msg += `Duration: ${alpineData.days} Days\n`;
+    msg += `Start: ${dateVal}\n\n`;
 
-    msg += `📦 *Package & Price*\n`;
-    msg += `Tier: ${pkgText}\n`;
-    msg += `Guests: ${guestsNum}${discountInfo}\n`;
-    msg += `Total Est: ${document.getElementById('summary-total').innerText}\n\n`;
+    msg += `🏨 *Stay*\n`;
+    msg += `Hotel: ${hotel}\n`;
+    msg += `Rooms: ${alpineData.rooms.triple}T + ${alpineData.rooms.double}D + ${alpineData.rooms.single}S\n\n`;
 
-    msg += `📅 *Start Date*: ${dateVal}\n`;
-    msg += `🏠 *Accommodation*: ${accText}\n`;
+    msg += `⛷ *Instructor*\n`;
+    msg += `Mode: ${formData.get('instructorMode') === 'dedicated' ? 'Dedicated (1:1)' : 'Shared Group'}\n\n`;
 
-    // --- SUBMISSION LOGIC ---
+    // Get total from UI or calculate
+    const totalEl = document.getElementById('summary-total');
+    msg += `💰 *Total Estimate*: ${totalEl ? totalEl.innerText : 'Pending'}\n`;
 
-    const submitBtn = e.target;
-    // Change button text to indicate processing
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = 'Processing...';
-    submitBtn.disabled = true;
+    // Encode and redirect
+    const waNumber = "919682136128"; // Replace with actual number if different
+    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 
-    // Google Form URL
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeLj8F2h25_-BjeAPrAZFQDugmUgOT1lRlb1v4juNB3wjZnPA/formResponse';
-
-    fetch(GOOGLE_FORM_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: googleFormData
-    }).then(() => {
-        // --- SUCCESS HANDLER ---
-
-        // 1. Hide Form
-        const formContainer = document.querySelector('.lg\\:col-span-2'); // The form column
-        // Actually, let's hide the specific form element or its container to be safe. 
-        // The HTML structure has a form with id="bookingForm".
-        if (form) form.style.display = 'none';
-
-        // 2. Show Confirmation
-        const confirmMsg = document.getElementById('confirmation-msg');
-        if (confirmMsg) {
-            confirmMsg.classList.remove('hidden');
-            // Move it out of the sidebar if needed, or if it's already in the sidebar, user might want it more visible?
-            // The request says "show the confirmation message section". Existing HTML has it in the sidebar. 
-            // Ideally we might want to scroll to it or make it more prominent, but strictly following instructions: "show the confirmation message section".
-        }
-
-        // 3. Open WhatsApp
-        const waUrl = `https://wa.me/916005806856?text=${encodeURIComponent(msg)}`;
-        window.open(waUrl, '_blank');
-
-        // Restore button state (though form is hidden now)
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-
-    }).catch((err) => {
-        console.error('Submission Error:', err);
-        alert('There was an error submitting the form. Proceeding to WhatsApp.');
-
-        // Fallback: Open WhatsApp anyway
-        const waUrl = `https://wa.me/916005806856?text=${encodeURIComponent(msg)}`;
-        window.open(waUrl, '_blank');
-
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    });
-}
-
-// Initialization
-document.addEventListener('DOMContentLoaded', () => {
-    const pkgSelect = document.getElementById('package-select');
-    if (pkgSelect) {
-        updateCalculations();
+    // Show confirmation UI
+    const summaryCard = document.querySelector('.shadow-floating');
+    if (summaryCard) {
+        summaryCard.innerHTML = `
+            <div class="text-center py-10">
+                 <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Redirecting to WhatsApp...</h3>
+                <p class="text-slate-500">Please send the pre-filled message to confirm your booking.</p>
+                <a href="${url}" class="inline-block mt-4 text-alpine-blue font-bold hover:underline">Click here if not redirected</a>
+            </div>
+        `;
     }
-});
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 1500);
+}
 
 
