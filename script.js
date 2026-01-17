@@ -637,7 +637,11 @@ function submitBooking(e) {
     msg += `Rooms: ${alpineData.rooms.triple}T + ${alpineData.rooms.double}D + ${alpineData.rooms.single}S\n\n`;
 
     msg += `⛷ *Instructor*\n`;
-    msg += `Mode: ${formData.get('instructorMode') === 'dedicated' ? 'Dedicated (1:1)' : 'Shared Group'}\n\n`;
+    const instrMode = formData.get('instructorMode') === 'dedicated' ? 'Dedicated (1:1)' : 'Shared Group';
+    const instrTier = alpineData.tripType === 'ski_only' ? (alpineData.selectedInstructionTier === 'low' ? 'Standard' : 'Premium') : 'Linked to Stay';
+    msg += `Mode: ${instrMode}\n`;
+    if (alpineData.tripType === 'ski_only') msg += `Tier: ${instrTier}\n\n`;
+    else msg += `Tier: Included with Stay\n\n`;
 
     // Get total from UI or calculate
     const totalEl = document.getElementById('summary-total');
@@ -681,7 +685,8 @@ const hotelsData = [
         features: ["Dormitory Style", "Budget Friendly", "Basic Amenities"],
         description: "Affordable dormitory stay. Perfect for solo travelers on a budget.",
         image: "images/stays/silver-room.jpg",
-        groupKey: "Dormitory"
+        groupKey: "Dormitory",
+        website: null
     },
     // 2-Star
     {
@@ -693,7 +698,8 @@ const hotelsData = [
         features: ["Private Rooms", "Shared Options", "Heated Rooms"],
         description: "Comfortable budget stay with private and shared room options.",
         image: "images/stays/silver-room.jpg",
-        groupKey: "2-Star"
+        groupKey: "2-Star",
+        website: null
     },
     {
         category: "2-Star",
@@ -704,7 +710,8 @@ const hotelsData = [
         features: ["Private Rooms", "Shared Options", "Heated Rooms"],
         description: "Comfortable budget stay with private and shared room options.",
         image: "images/stays/silver-room.jpg",
-        groupKey: "2-Star"
+        groupKey: "2-Star",
+        website: null
     },
     // 3-Star Standard
     {
@@ -716,7 +723,8 @@ const hotelsData = [
         features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
         description: "Quality mid-range accommodation with excellent hospitality.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Standard)"
+        groupKey: "3-Star (Standard)",
+        website: null
     },
     {
         category: "3-Star",
@@ -727,7 +735,8 @@ const hotelsData = [
         features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
         description: "Quality mid-range accommodation with excellent hospitality.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Standard)"
+        groupKey: "3-Star (Standard)",
+        website: null
     },
     {
         category: "3-Star",
@@ -738,7 +747,8 @@ const hotelsData = [
         features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
         description: "Quality mid-range accommodation with excellent hospitality.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Standard)"
+        groupKey: "3-Star (Standard)",
+        website: "https://www.welcomehotelsgr.com/gulmarg"
     },
     // 3-Star Premium
     {
@@ -750,7 +760,8 @@ const hotelsData = [
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Premium)"
+        groupKey: "3-Star (Premium)",
+        website: "https://hotelroyalpark.net/"
     },
     {
         category: "3-Star",
@@ -761,7 +772,8 @@ const hotelsData = [
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Premium)"
+        groupKey: "3-Star (Premium)",
+        website: "https://hotelzahgeergulmarg.com/"
     },
     {
         category: "3-Star",
@@ -772,7 +784,8 @@ const hotelsData = [
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Premium)"
+        groupKey: "3-Star (Premium)",
+        website: "https://hotelkhaleelpalace.in/"
     },
     {
         category: "3-Star",
@@ -783,7 +796,8 @@ const hotelsData = [
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
         image: "images/stays/gold-room.jpg",
-        groupKey: "3-Star (Premium)"
+        groupKey: "3-Star (Premium)",
+        website: "https://hotelalpineridge.com/"
     },
     // 4-Star Standard
     {
@@ -795,7 +809,8 @@ const hotelsData = [
         features: ["Luxury Interiors", "Room Service", "Concierge"],
         description: "Low-tier luxury with spacious rooms and exceptional service.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "4-Star (Standard)"
+        groupKey: "4-Star (Standard)",
+        website: "https://grandmumtazgulmarg.com/"
     },
     {
         category: "4-Star",
@@ -806,7 +821,8 @@ const hotelsData = [
         features: ["Luxury Interiors", "Room Service", "Concierge"],
         description: "Low-tier luxury with spacious rooms and exceptional service.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "4-Star (Standard)"
+        groupKey: "4-Star (Standard)",
+        website: null
     },
     {
         category: "4-Star",
@@ -817,7 +833,8 @@ const hotelsData = [
         features: ["Luxury Interiors", "Room Service", "Concierge"],
         description: "Low-tier luxury with spacious rooms and exceptional service.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "4-Star (Standard)"
+        groupKey: "4-Star (Standard)",
+        website: "https://hotelroyalcastle.net/"
     },
     // 4-Star Premium
     {
@@ -829,7 +846,8 @@ const hotelsData = [
         features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
         description: "High-end 4-star resorts offering the best in class comfort.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "4-Star (Premium)"
+        groupKey: "4-Star (Premium)",
+        website: "https://hilltophotels.in/"
     },
     {
         category: "4-Star",
@@ -840,7 +858,8 @@ const hotelsData = [
         features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
         description: "High-end 4-star resorts offering the best in class comfort.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "4-Star (Premium)"
+        groupKey: "4-Star (Premium)",
+        website: "https://greenroomsresortgulmarg.com/"
     },
     {
         category: "4-Star",
@@ -851,7 +870,8 @@ const hotelsData = [
         features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
         description: "High-end 4-star resorts offering the best in class comfort.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "4-Star (Premium)"
+        groupKey: "4-Star (Premium)",
+        website: "https://prideresort.in/"
     },
     // 5-Star Luxury
     {
@@ -863,7 +883,8 @@ const hotelsData = [
         features: ["World Class Spa", "Panoramic Views", "5-Star Dining"],
         description: "The ultimate luxury experience in Gulmarg.",
         image: "images/stays/platinum-room.jpg",
-        groupKey: "5-Star Luxury"
+        groupKey: "5-Star Luxury",
+        website: "https://www.khyberhotels.com/"
     }
 ];
 
@@ -999,10 +1020,16 @@ function renderHotelCards() {
                         </div>
 
                         <div class="mt-auto self-end w-full md:w-auto flex flex-col md:flex-row gap-3">
-                            <a href="#" class="inline-flex justify-center items-center w-full md:w-auto px-6 py-3 rounded-lg border-2 border-slate-200 text-slate-600 font-bold hover:border-slate-900 hover:text-slate-900 transition-all">
-                                Official Website
+                            ${hotel.website ? `
+                            <a href="${hotel.website}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center w-full md:w-auto px-6 py-3 rounded-lg border-2 border-slate-200 text-slate-600 font-bold hover:border-slate-900 hover:text-slate-900 transition-all">
+                                Official Website <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </a>
-                            <a href="booking.html" class="inline-flex justify-center items-center w-full md:w-auto px-8 py-3 rounded-lg bg-alpine-blue hover:bg-blue-600 text-white font-bold transition-all shadow-lg shadow-blue-500/30">
+                            ` : `
+                            <button disabled class="inline-flex justify-center items-center w-full md:w-auto px-6 py-3 rounded-lg border-2 border-slate-100 text-slate-300 font-bold cursor-not-allowed">
+                                Website Not Available
+                            </button>
+                            `}
+                            <a href="booking.html?hotel=${encodeURIComponent(hotel.name)}&tier=${encodeURIComponent(hotel.groupKey)}" class="inline-flex justify-center items-center w-full md:w-auto px-8 py-3 rounded-lg bg-alpine-blue hover:bg-blue-600 text-white font-bold transition-all shadow-lg shadow-blue-500/30">
                                 Book This Stay
                             </a>
                         </div>
