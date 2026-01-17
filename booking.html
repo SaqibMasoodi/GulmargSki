@@ -394,6 +394,21 @@
                         Trip Details
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Sport Selection -->
+                        <div class="md:col-span-2">
+                            <label
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Sport</label>
+                            <div class="flex bg-slate-50 p-1 rounded-xl border border-slate-200">
+                                <button type="button" @click="sport = 'ski'"
+                                    :class="sport === 'ski' ? 'bg-white text-alpine-blue shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all">Skiing</button>
+                                <button type="button" @click="sport = 'board'"
+                                    :class="sport === 'board' ? 'bg-white text-alpine-blue shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all">Snowboarding</button>
+                            </div>
+                            <input type="hidden" name="sport" :value="sport">
+                        </div>
+
                         <!-- Wrapper removed -->
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Number
@@ -1346,8 +1361,9 @@
     <script>
         function skiCalculator() {
             return {
-                people: 5,
-                days: 5,
+                people: 1,
+                days: 1,
+                sport: 'ski', // ski | board
                 selectedTier: '2star',
                 selectedHotel: 'Hotel Lala', // Default
                 instructorMode: 'shared',
@@ -1360,18 +1376,24 @@
                 rooms: { single: 0, double: 0, triple: 0 },
 
                 accommodationData: {
-                    'dorm': { name: 'Basic', type: '1-Star', hotels: ['Dormitory'], pricePerPax: 1600, instructorTier: 'low' },
-                    '2star': { name: 'Silver', type: '2-Star', hotels: ['Hotel Lala', 'Hotel ZamZam'], prices: { 1: 3500, 2: 4500, 3: 6500 }, instructorTier: 'low' },
-                    '3star_low': { name: 'Gold', type: '3-Star Standard', hotels: ['Mama Palace', 'Gulmarg Inn', 'Hotel Welcome'], prices: { 1: 4000, 2: 5500, 3: 7500 }, instructorTier: 'high' },
-                    '3star_high': { name: 'Diamond', type: '3-Star Premium', hotels: ['Hotel Royal Park', 'Zahgeer', 'Khaleel Palace'], prices: { 1: 5000, 2: 7000, 3: 8500 }, instructorTier: 'high' },
-                    '4star_low': { name: 'Platinum', type: '4-Star Standard', hotels: ['Grand Mumtaz', 'Himalayan Pearl'], prices: { 1: 9000, 2: 12000, 3: 14500 }, instructorTier: 'high' },
-                    '4star_high': { name: 'Platinum+', type: '4-Star Premium', hotels: ['Hotel Hilltop', 'Green Resort'], prices: { 1: 10500, 2: 13500, 3: 16500 }, instructorTier: 'high' },
-                    '5star': { name: 'Royal', type: '5-Star Luxury', hotels: ['The Khyber Resort'], instructorTier: 'high', isCustom: true }
+                    'dorm': { name: 'Dormitory', type: 'Dormitory', hotels: ['Dormitory'], pricePerPax: 1600, instructorTier: 'low' },
+                    '2star': { name: '2 Star', type: '2 Star', hotels: ['Hotel Lala', 'Hotel ZamZam'], prices: { 1: 3500, 2: 4500, 3: 6500 }, instructorTier: 'low' },
+                    '3star_low': { name: '3 Star (Standard)', type: '3 Star', hotels: ['Mama Palace', 'Gulmarg Inn', 'Hotel Welcome'], prices: { 1: 4000, 2: 5500, 3: 7500 }, instructorTier: 'high' },
+                    '3star_high': { name: '3 Star (Premium)', type: '3 Star', hotels: ['Hotel Royal Park', 'Zahgeer', 'Khaleel Palace'], prices: { 1: 5000, 2: 7000, 3: 8500 }, instructorTier: 'high' },
+                    '4star_low': { name: '4 Star (Standard)', type: '4 Star', hotels: ['Grand Mumtaz', 'Himalayan Pearl'], prices: { 1: 9000, 2: 12000, 3: 14500 }, instructorTier: 'high' },
+                    '4star_high': { name: '4 Star (Premium)', type: '4 Star', hotels: ['Hotel Hilltop', 'Green Resort'], prices: { 1: 10500, 2: 13500, 3: 16500 }, instructorTier: 'high' },
+                    '5star': { name: '5 Star', type: '5 Star', hotels: ['The Khyber Resort'], instructorTier: 'high', isCustom: true }
                 },
 
                 instructorData: {
-                    'low': { '1:1': 3500, '2:1': 5000, '3:1': 6000, 'extra': 1000 },
-                    'high': { '1:1': 4000, '2:1': 5500, '3:1': 7000, 'extra': 1000 }
+                    'low': {
+                        ski: { '1:1': 3500, '2:1': 5000, '3:1': 6000, 'extra': 1000 },
+                        board: { '1:1': 5800, '2:1': 8700, '3:1': 10500, 'extra': 1500 }
+                    },
+                    'high': {
+                        ski: { '1:1': 4000, '2:1': 5500, '3:1': 7000, 'extra': 1000 },
+                        board: { '1:1': 8300, '2:1': 12500, '3:1': 15000, 'extra': 2000 }
+                    }
                 },
 
                 init() {
@@ -1465,7 +1487,8 @@
                     } else {
                         tierName = this.accommodationData[this.selectedTier].instructorTier;
                     }
-                    let rates = this.instructorData[tierName];
+                    if (!this.instructorData[tierName]) return 0;
+                    let rates = this.instructorData[tierName][this.sport];
                     if (this.people === 1) return rates['1:1'];
                     if (this.people === 2) return rates['2:1'];
                     return rates['3:1'];
@@ -1478,7 +1501,8 @@
                     } else {
                         tierName = this.accommodationData[this.selectedTier].instructorTier;
                     }
-                    return this.instructorData[tierName]['1:1'];
+                    if (!this.instructorData[tierName]) return 0;
+                    return this.instructorData[tierName][this.sport]['1:1'];
                 },
 
                 getDailyInstructorRate() {
@@ -1488,7 +1512,9 @@
                     } else {
                         tierName = this.accommodationData[this.selectedTier].instructorTier;
                     }
-                    let rates = this.instructorData[tierName];
+                    let rates = this.instructorData[tierName] && this.instructorData[tierName][this.sport] ? this.instructorData[tierName][this.sport] : null;
+                    if (!rates) return 0;
+
 
                     if (this.instructorMode === 'dedicated') {
                         return this.people * rates['1:1'];

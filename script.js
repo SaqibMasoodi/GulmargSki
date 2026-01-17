@@ -1,3 +1,22 @@
+// --- MOBILE MENU LOGIC ---
+function toggleMobileMenu() {
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (overlay.style.opacity === '1') {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+    } else {
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. RESORT MAP LOGIC ---
@@ -606,13 +625,13 @@ function submitBooking(e) {
 
     // 2. Package / Tier Map
     const tierMap = {
-        'dorm': 'Basic (Dorm)',
-        '2star': 'Silver (2-Star)',
-        '3star_low': 'Gold (3-Star)',
-        '3star_high': 'Diamond (3-Star High)',
-        '4star_low': 'Platinum (4-Star)',
-        '4star_high': 'Platinum+ (4-Star High)',
-        '5star': 'Royal (5-Star)'
+        'dorm': 'Dormitory',
+        '2star': '2 Star',
+        '3star_low': '3 Star (Standard)',
+        '3star_high': '3 Star (Premium)',
+        '4star_low': '4 Star (Standard)',
+        '4star_high': '4 Star (Premium)',
+        '5star': '5 Star'
     };
     const tierName = tierMap[alpineData.selectedTier] || alpineData.selectedTier;
     const hotel = formData.get('hotel') || 'Not Selected';
@@ -626,7 +645,8 @@ function submitBooking(e) {
     msg += `Phone: ${formData.get('phone')}\n`;
     msg += `Loc: ${formData.get('city')}, ${formData.get('country')}\n\n`;
 
-    msg += `🏔 *Trip Details*\n`;
+    msg += `⛷ *Sport & Trip*\n`;
+    msg += `Sport: ${alpineData.sport === 'ski' ? 'Skiing' : 'Snowboarding'}\n`;
     msg += `Pack: ${tierName}\n`;
     msg += `People: ${alpineData.people}\n`;
     msg += `Duration: ${alpineData.days} Days\n`;
@@ -822,7 +842,7 @@ const hotelsData = [
         description: "Low-tier luxury with spacious rooms and exceptional service.",
         image: "images/stays/platinum-room.jpg",
         groupKey: "4-Star (Standard)",
-        website: null
+        website: "https://www.thehimalayanpearl.com/"
     },
     {
         category: "4-Star",
