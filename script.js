@@ -292,6 +292,74 @@ const attractionsData = [
                 </div>
             </div>
         `
+    },
+    {
+        id: 'heli',
+        title: 'Helicopter Rides',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>',
+        content: `
+            <div class="p-8 lg:p-10 h-full flex flex-col">
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tight">Sky-High Adventure</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 overflow-y-auto no-scrollbar pr-2 pb-2">
+                    
+                    <!-- Joint Ride -->
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors group flex flex-col h-full">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-tight">Joint<br>Ride</h4>
+                            </div>
+                            <p class="text-xs text-blue-600 dark:text-blue-400 mb-4 font-bold uppercase tracking-wider">Aerial Sightseeing</p>
+                            <ul class="text-sm text-slate-600 dark:text-slate-400 font-medium space-y-2 mb-6">
+                                <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0"></span><span>No landing included</span></li>
+                                <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0"></span><span>Panoramic aerial views</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
+                             <span class="block text-xl font-black text-slate-900 dark:text-white">₹9,000</span>
+                             <span class="text-xs text-slate-500 font-bold uppercase">per person</span>
+                        </div>
+                    </div>
+
+                    <!-- Commodore Ride -->
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors group relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Bestseller</div>
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-tight">Commodore<br>Ride</h4>
+                            </div>
+                            <p class="text-xs text-blue-600 dark:text-blue-400 mb-4 font-bold uppercase tracking-wider">Landing Experience</p>
+                            <ul class="text-sm text-slate-600 dark:text-slate-400 font-medium space-y-2 mb-6">
+                                <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0"></span><span>Landing included</span></li>
+                                <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0"></span><span>Explore on foot</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
+                             <span class="block text-xl font-black text-slate-900 dark:text-white">₹12,000</span>
+                             <span class="text-xs text-slate-500 font-bold uppercase">per person</span>
+                        </div>
+                    </div>
+
+                    <!-- Sunshine Peak -->
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-amber-400 transition-colors group border-b-4 border-b-amber-400 md:border-b-0 md:border-l-4 md:border-l-amber-400 flex flex-col h-full">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-tight">Sunshine<br>Peak</h4>
+                            </div>
+                            <p class="text-xs text-amber-500 mb-4 font-bold uppercase tracking-wider">Premium Route</p>
+                            <ul class="text-sm text-slate-600 dark:text-slate-400 font-medium space-y-2 mb-6">
+                                <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0"></span><span>Mountain landing</span></li>
+                                <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 shrink-0"></span><span>Extended flight time</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
+                             <span class="block text-xl font-black text-slate-900 dark:text-white">₹15,000</span>
+                             <span class="text-xs text-slate-500 font-bold uppercase">per person</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        `
     }
 ];
 
