@@ -667,4 +667,415 @@ function submitBooking(e) {
     }, 1500);
 }
 
+// --- HOTELS DATA & RENDERING ---
+// Added at the end of the file
+
+const hotelsData = [
+    // Dormitory
+    {
+        category: "Dormitory",
+        tier: "Standard",
+        name: "Dormitory Stay",
+        price_private: 1600,
+        price_shared: null,
+        features: ["Dormitory Style", "Budget Friendly", "Basic Amenities"],
+        description: "Affordable dormitory stay. Perfect for solo travelers on a budget.",
+        image: "images/stays/silver-room.jpg",
+        groupKey: "Dormitory"
+    },
+    // 2-Star
+    {
+        category: "2-Star",
+        tier: "Standard",
+        name: "Hotel Lala",
+        price_private: 3500,
+        price_shared: 4500,
+        features: ["Private Rooms", "Shared Options", "Heated Rooms"],
+        description: "Comfortable budget stay with private and shared room options.",
+        image: "images/stays/silver-room.jpg",
+        groupKey: "2-Star"
+    },
+    {
+        category: "2-Star",
+        tier: "Standard",
+        name: "Hotel ZamZam",
+        price_private: 3500,
+        price_shared: 4500,
+        features: ["Private Rooms", "Shared Options", "Heated Rooms"],
+        description: "Comfortable budget stay with private and shared room options.",
+        image: "images/stays/silver-room.jpg",
+        groupKey: "2-Star"
+    },
+    // 3-Star Standard
+    {
+        category: "3-Star",
+        tier: "Standard",
+        name: "Mama Palace",
+        price_private: 4000,
+        price_shared: 5500,
+        features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
+        description: "Quality mid-range accommodation with excellent hospitality.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Standard)"
+    },
+    {
+        category: "3-Star",
+        tier: "Standard",
+        name: "Gulmarg Inn",
+        price_private: 4000,
+        price_shared: 5500,
+        features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
+        description: "Quality mid-range accommodation with excellent hospitality.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Standard)"
+    },
+    {
+        category: "3-Star",
+        tier: "Standard",
+        name: "Hotel Welcome",
+        price_private: 4000,
+        price_shared: 5500,
+        features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
+        description: "Quality mid-range accommodation with excellent hospitality.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Standard)"
+    },
+    // 3-Star Premium
+    {
+        category: "3-Star",
+        tier: "Premium",
+        name: "Hotel Royal Park",
+        price_private: 5000,
+        price_shared: 7000,
+        features: ["Premium Rooms", "Mountain View", "Central Heating"],
+        description: "Premium 3-star experience with upgraded amenities and views.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Premium)"
+    },
+    {
+        category: "3-Star",
+        tier: "Premium",
+        name: "Hotel Zahgeer",
+        price_private: 5000,
+        price_shared: 7000,
+        features: ["Premium Rooms", "Mountain View", "Central Heating"],
+        description: "Premium 3-star experience with upgraded amenities and views.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Premium)"
+    },
+    {
+        category: "3-Star",
+        tier: "Premium",
+        name: "Khaleel Palace",
+        price_private: 5000,
+        price_shared: 7000,
+        features: ["Premium Rooms", "Mountain View", "Central Heating"],
+        description: "Premium 3-star experience with upgraded amenities and views.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Premium)"
+    },
+    {
+        category: "3-Star",
+        tier: "Premium",
+        name: "Alpine Ridge",
+        price_private: 5000,
+        price_shared: 7000,
+        features: ["Premium Rooms", "Mountain View", "Central Heating"],
+        description: "Premium 3-star experience with upgraded amenities and views.",
+        image: "images/stays/gold-room.jpg",
+        groupKey: "3-Star (Premium)"
+    },
+    // 4-Star Standard
+    {
+        category: "4-Star",
+        tier: "Standard",
+        name: "Hotel Grand Mumtaz",
+        price_private: 9000,
+        price_shared: 12000,
+        features: ["Luxury Interiors", "Room Service", "Concierge"],
+        description: "Low-tier luxury with spacious rooms and exceptional service.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "4-Star (Standard)"
+    },
+    {
+        category: "4-Star",
+        tier: "Standard",
+        name: "The Himalayan Pearl",
+        price_private: 9000,
+        price_shared: 12000,
+        features: ["Luxury Interiors", "Room Service", "Concierge"],
+        description: "Low-tier luxury with spacious rooms and exceptional service.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "4-Star (Standard)"
+    },
+    {
+        category: "4-Star",
+        tier: "Standard",
+        name: "Royal Castle",
+        price_private: 9000,
+        price_shared: 12000,
+        features: ["Luxury Interiors", "Room Service", "Concierge"],
+        description: "Low-tier luxury with spacious rooms and exceptional service.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "4-Star (Standard)"
+    },
+    // 4-Star Premium
+    {
+        category: "4-Star",
+        tier: "Premium",
+        name: "Hotel Hilltop",
+        price_private: 10500,
+        price_shared: 13500,
+        features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
+        description: "High-end 4-star resorts offering the best in class comfort.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "4-Star (Premium)"
+    },
+    {
+        category: "4-Star",
+        tier: "Premium",
+        name: "Green Resort",
+        price_private: 10500,
+        price_shared: 13500,
+        features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
+        description: "High-end 4-star resorts offering the best in class comfort.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "4-Star (Premium)"
+    },
+    {
+        category: "4-Star",
+        tier: "Premium",
+        name: "Pride Resort",
+        price_private: 10500,
+        price_shared: 13500,
+        features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
+        description: "High-end 4-star resorts offering the best in class comfort.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "4-Star (Premium)"
+    },
+    // 5-Star Luxury
+    {
+        category: "5-Star",
+        tier: "Luxury",
+        name: "The Khyber Resort and Spa",
+        price_private: "Variable (3.0L - 5.0L)",
+        price_shared: "On Request",
+        features: ["World Class Spa", "Panoramic Views", "5-Star Dining"],
+        description: "The ultimate luxury experience in Gulmarg.",
+        image: "images/stays/platinum-room.jpg",
+        groupKey: "5-Star Luxury"
+    }
+];
+
+function renderHotelCards() {
+    const container = document.getElementById('hotels-container');
+    if (!container) return;
+
+    // Get Active Filters
+    const checkedBoxes = Array.from(document.querySelectorAll('#rating-filters input:checked')).map(cb => cb.value);
+
+    // Clear Button Visibility
+    const clearBtn = document.getElementById('clear-filters');
+    if (clearBtn) {
+        if (checkedBoxes.length > 0) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+    }
+
+    // Filter Data
+    let filteredHotels = hotelsData;
+    if (checkedBoxes.length > 0) {
+        filteredHotels = hotelsData.filter(h => {
+            // Construct key to match checkbox values: "1-Star", "3-Star Standard", etc.
+            let key = h.category;
+            if (h.category.includes('3-Star') || h.category.includes('4-Star')) {
+                key = `${h.category} ${h.tier}`;
+            }
+            return checkedBoxes.includes(key);
+        });
+    }
+
+    // Group by category/tier for header display
+    // We want a specific order: Dormitory, 2-Star, 3-Star Std, 3-Star Prm, 4-Star Std, 4-Star Prm, 5-Star
+    const sortOrder = [
+        "Dormitory",
+        "2-Star",
+        "3-Star (Standard)",
+        "3-Star (Premium)",
+        "4-Star (Standard)",
+        "4-Star (Premium)",
+        "5-Star Luxury"
+    ];
+
+    // Create Groups
+    const groups = {};
+    filteredHotels.forEach(h => {
+        if (!groups[h.groupKey]) groups[h.groupKey] = [];
+        groups[h.groupKey].push(h);
+    });
+
+    // Render Groups in Order
+    let html = '';
+
+    sortOrder.forEach(key => {
+        if (groups[key] && groups[key].length > 0) {
+
+            // Section Header
+            html += `
+            <div class="w-full pt-8 pb-4 border-b border-slate-100 mb-6 flex items-center gap-4">
+                <h3 class="text-2xl font-black text-slate-800 uppercase tracking-tight">${key} Stays</h3>
+                <div class="h-px bg-slate-200 flex-1"></div>
+                <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-full">${groups[key].length} Found</span>
+            </div>
+            `;
+
+            // Render Cards in this group
+            html += groups[key].map(hotel => {
+
+                // Construct Tag
+                let tag = hotel.groupKey;
+
+                const priceDisplay = isNaN(hotel.price_private) ? hotel.price_private : `\u20B9${hotel.price_private.toLocaleString()} / night`;
+
+                return `
+                <article class="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 group mb-8">
+                    <!-- Image Section (35%) -->
+                    <div class="md:w-[35%] relative h-64 md:h-auto overflow-hidden">
+                        <img src="${hotel.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${hotel.name}">
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 rounded bg-slate-900/90 text-white text-xs font-bold backdrop-blur-md border border-white/10 uppercase tracking-wide">
+                                ${tag}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Content Section (65%) -->
+                    <div class="md:w-[65%] p-6 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-black text-slate-900 leading-tight">${hotel.name}</h3>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <span class="block text-2xl font-bold text-alpine-blue">${priceDisplay}</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-wide">Private Room Rate</span>
+                        </div>
+
+                        <p class="text-slate-600 text-sm font-medium mb-6 leading-relaxed line-clamp-2">
+                            ${hotel.description}
+                        </p>
+
+                        <!-- Features Grid (Box Style) -->
+                        <div class="grid grid-cols-2 gap-3 mb-8">
+                             <!-- Feature 1 -->
+                             <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-slate-100 shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700">Private Room</span>
+                            </div>
+                             <!-- Feature 2 -->
+                            <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-slate-100 shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700">Shared Options</span>
+                            </div>
+                             <!-- Feature 3 -->
+                            <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-slate-100 shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700">Central Heating</span>
+                            </div>
+                             <!-- Feature 4 -->
+                            <div class="flex items-center gap-3 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-slate-100 shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path></svg>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700">High-Speed Wifi</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-auto self-end w-full md:w-auto flex flex-col md:flex-row gap-3">
+                            <a href="#" class="inline-flex justify-center items-center w-full md:w-auto px-6 py-3 rounded-lg border-2 border-slate-200 text-slate-600 font-bold hover:border-slate-900 hover:text-slate-900 transition-all">
+                                Official Website
+                            </a>
+                            <a href="booking.html" class="inline-flex justify-center items-center w-full md:w-auto px-8 py-3 rounded-lg bg-alpine-blue hover:bg-blue-600 text-white font-bold transition-all shadow-lg shadow-blue-500/30">
+                                Book This Stay
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+    });
+
+    // Empty State
+    if (html === '') {
+        container.innerHTML = `
+            <div class="text-center py-20">
+                <p class="text-slate-400 font-medium">No hotels found for selected filters.</p>
+            </div>
+        `;
+    } else {
+        container.innerHTML = html;
+    }
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    renderHotelCards();
+
+    // Filter Change Listener
+    const checkboxes = document.querySelectorAll('#rating-filters input');
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            renderHotelCards();
+            // Scroll to top of hotel list
+            const container = document.getElementById('hotels-container');
+            if (container) {
+                // Determine offset for sticky header/sidebar if needed, or standard scroll
+                const y = container.getBoundingClientRect().top + window.scrollY - 100; // 100px offset for header
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Clear Filter Listener
+    const clearBtn = document.getElementById('clear-filters');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            const inputs = document.querySelectorAll('#rating-filters input');
+            inputs.forEach(i => i.checked = false);
+            renderHotelCards();
+        });
+    }
+
+    // FAB Toggle
+    const fabToggle = document.getElementById('fab-toggle');
+    const fabMenu = document.getElementById('fab-menu');
+    const fabIconOpen = document.getElementById('fab-icon-open');
+    const fabIconClose = document.getElementById('fab-icon-close');
+
+    if (fabToggle && fabMenu) {
+        fabToggle.addEventListener('click', () => {
+            const isClosed = fabMenu.classList.contains('opacity-0');
+            if (isClosed) {
+                // Open
+                fabMenu.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none', 'scale-90');
+                fabIconOpen.classList.add('opacity-0', 'rotate-90');
+                fabIconClose.classList.remove('opacity-0', 'rotate-90');
+            } else {
+                // Close
+                fabMenu.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none', 'scale-90');
+                fabIconOpen.classList.remove('opacity-0', 'rotate-90');
+                fabIconClose.classList.add('opacity-0', 'rotate-90');
+            }
+        });
+    }
+});
+
 
