@@ -708,7 +708,7 @@ const hotelsData = [
         price_shared: null,
         features: ["Dormitory Style", "Budget Friendly", "Basic Amenities"],
         description: "Affordable dormitory stay. Perfect for solo travelers on a budget.",
-        image: "images/stays/silver-room.jpg",
+        image: "images/stays/silver-room.webp",
         groupKey: "Dormitory",
         website: null
     },
@@ -721,7 +721,7 @@ const hotelsData = [
         price_shared: 4500,
         features: ["Private Rooms", "Shared Options", "Heated Rooms"],
         description: "Comfortable budget stay with private and shared room options.",
-        image: "images/stays/silver-room.jpg",
+        image: "images/stays/silver-room.webp",
         groupKey: "2-Star",
         website: null
     },
@@ -733,7 +733,7 @@ const hotelsData = [
         price_shared: 4500,
         features: ["Private Rooms", "Shared Options", "Heated Rooms"],
         description: "Comfortable budget stay with private and shared room options.",
-        image: "images/stays/silver-room.jpg",
+        image: "images/stays/silver-room.webp",
         groupKey: "2-Star",
         website: null
     },
@@ -746,7 +746,7 @@ const hotelsData = [
         price_shared: 5500,
         features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
         description: "Quality mid-range accommodation with excellent hospitality.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Standard)",
         website: null
     },
@@ -758,7 +758,7 @@ const hotelsData = [
         price_shared: 5500,
         features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
         description: "Quality mid-range accommodation with excellent hospitality.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Standard)",
         website: null
     },
@@ -770,7 +770,7 @@ const hotelsData = [
         price_shared: 5500,
         features: ["High Tier Comfort", "Ensuite Bathroom", "Restaurant"],
         description: "Quality mid-range accommodation with excellent hospitality.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Standard)",
         website: "https://www.welcomehotelsgr.com/gulmarg"
     },
@@ -783,7 +783,7 @@ const hotelsData = [
         price_shared: 7000,
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Premium)",
         website: "https://hotelroyalpark.net/"
     },
@@ -795,7 +795,7 @@ const hotelsData = [
         price_shared: 7000,
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Premium)",
         website: "https://hotelzahgeergulmarg.com/"
     },
@@ -807,7 +807,7 @@ const hotelsData = [
         price_shared: 7000,
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Premium)",
         website: "https://hotelkhaleelpalace.in/"
     },
@@ -819,7 +819,7 @@ const hotelsData = [
         price_shared: 7000,
         features: ["Premium Rooms", "Mountain View", "Central Heating"],
         description: "Premium 3-star experience with upgraded amenities and views.",
-        image: "images/stays/gold-room.jpg",
+        image: "images/stays/gold-room.webp",
         groupKey: "3-Star (Premium)",
         website: "https://hotelalpineridge.com/"
     },
@@ -832,7 +832,7 @@ const hotelsData = [
         price_shared: 12000,
         features: ["Luxury Interiors", "Room Service", "Concierge"],
         description: "Low-tier luxury with spacious rooms and exceptional service.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "4-Star (Standard)",
         website: "https://grandmumtazgulmarg.com/"
     },
@@ -844,7 +844,7 @@ const hotelsData = [
         price_shared: 12000,
         features: ["Luxury Interiors", "Room Service", "Concierge"],
         description: "Low-tier luxury with spacious rooms and exceptional service.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "4-Star (Standard)",
         website: "https://www.thehimalayanpearl.com/"
     },
@@ -856,7 +856,7 @@ const hotelsData = [
         price_shared: 12000,
         features: ["Luxury Interiors", "Room Service", "Concierge"],
         description: "Low-tier luxury with spacious rooms and exceptional service.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "4-Star (Standard)",
         website: "https://hotelroyalcastle.net/"
     },
@@ -869,7 +869,7 @@ const hotelsData = [
         price_shared: 13500,
         features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
         description: "High-end 4-star resorts offering the best in class comfort.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "4-Star (Premium)",
         website: "https://hilltophotels.in/"
     },
@@ -881,7 +881,7 @@ const hotelsData = [
         price_shared: 13500,
         features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
         description: "High-end 4-star resorts offering the best in class comfort.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "4-Star (Premium)",
         website: "https://greenroomsresortgulmarg.com/"
     },
@@ -893,7 +893,7 @@ const hotelsData = [
         price_shared: 13500,
         features: ["Top Tier Luxury", "Spa Access", "Valet Parking"],
         description: "High-end 4-star resorts offering the best in class comfort.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "4-Star (Premium)",
         website: "https://prideresort.in/"
     },
@@ -906,7 +906,7 @@ const hotelsData = [
         price_shared: "On Request",
         features: ["World Class Spa", "Panoramic Views", "5-Star Dining"],
         description: "The ultimate luxury experience in Gulmarg.",
-        image: "images/stays/platinum-room.jpg",
+        image: "images/stays/platinum-room.webp",
         groupKey: "5-Star Luxury",
         website: "https://www.khyberhotels.com/"
     }
