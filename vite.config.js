@@ -2,9 +2,9 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-    // Set base to '/' for custom domain or '/GulmargSki/' for GitHub Pages
-    // Change this to '/your-repo-name/' if deploying to username.github.io/repo-name/
-    base: '/',
+    // GitHub Pages: /GulmargSki/ (for saqibmasoodi.github.io/GulmargSki/)
+    // For Hostinger deployment, you'll build with base: '/' separately
+    base: '/GulmargSki/',
     build: {
         rollupOptions: {
             input: {
