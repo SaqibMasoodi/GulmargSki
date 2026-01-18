@@ -1134,6 +1134,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function injectContactFAB() {
     if (document.getElementById('contact-fab-container')) return;
 
+    // Exclude booking.html from FAB injection
+    if (window.location.pathname.includes('booking.html')) return;
+
     // Inject Font if missing
     if (!document.querySelector('link[href*="Material+Symbols+Rounded"]')) {
         const link = document.createElement('link');
@@ -1142,7 +1145,6 @@ function injectContactFAB() {
         document.head.appendChild(link);
     }
 
-    // Check if valid page (exclude if needed, but user said all pages)
     const fabHTML = `
     <div id="contact-fab-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2 group pointer-events-none">
         <!-- Floating Options (Hidden by default) -->
@@ -1155,7 +1157,7 @@ function injectContactFAB() {
                 <span class="font-bold text-sm">Call Us</span>
                 <span class="material-symbols-rounded text-blue-500">call</span>
             </a>
-             <a href="mailto:hello@wolf.com" class="flex items-center gap-3 bg-white text-slate-800 px-5 py-3 rounded-2xl shadow-lg hover:bg-slate-50 transition-colors pointer-events-auto">
+             <a href="mailto:wolfadventureskashmir@gmail.com" class="flex items-center gap-3 bg-white text-slate-800 px-5 py-3 rounded-2xl shadow-lg hover:bg-slate-50 transition-colors pointer-events-auto">
                 <span class="font-bold text-sm">Email</span>
                 <span class="material-symbols-rounded text-slate-500">mail</span>
             </a>
