@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Journey | Wolf Adventure</title>
     <link rel="icon" type="image/png" href="images/wolf.png">
+    <meta property="og:image" content="images/logo.webp">
+    <meta property="og:type" content="website">
 
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -215,9 +217,23 @@
             <template x-for="(item, index) in filteredItems" :key="item.id">
                 <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-zoom-in break-inside-avoid"
                     @click="openLightbox(index)">
-                    <!-- Image -->
-                    <img :src="item.src" :alt="item.title" loading="lazy"
-                        class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110">
+                    <!-- Media -->
+                    <template x-if="item.type === 'video'">
+                        <div class="relative w-full aspect-video md:aspect-auto">
+                            <video :src="item.src" class="w-full h-auto object-cover" muted loop playsinline></video>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform duration-300">
+                                    <span
+                                        class="material-symbols-rounded text-white text-4xl leading-none ml-1">play_arrow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template x-if="!item.type || item.type === 'image'">
+                        <img :src="item.src" :alt="item.title" loading="lazy"
+                            class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110">
+                    </template>
 
                     <!-- Overlay -->
                     <div
@@ -258,19 +274,42 @@
         <!-- Main Image Container -->
         <div class="relative max-w-7xl max-h-[90vh] w-full px-4 flex flex-col items-center">
 
-            <img :src="filteredItems[currentIndex]?.src"
-                class="max-w-full max-h-[80vh] object-contain rounded shadow-2xl animate-fade-up" :key="currentIndex">
+            <!-- Close Button (Top Left on Mobile) -->
+            <button @click="closeLightbox()" class="md:hidden absolute -top-12 right-0 text-white">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+
+            <!-- Media Content -->
+            <template x-if="filteredItems[currentIndex]?.type === 'video'">
+                <div class="relative w-full max-h-[70vh] flex flex-col items-center">
+                    <video x-ref="lightboxVideo" :src="filteredItems[currentIndex].src"
+                        class="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl" @click.stop="togglePlay()"
+                        playsinline></video>
+
+                    <!-- Video Controls Overlay -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-6 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto"
+                        :class="lightboxOpen ? 'opacity-100' : ''">
+                        <button @click.stop="togglePlay()" class="text-white hover:text-sky-400 transition-colors">
+                            <span class="material-symbols-rounded text-3xl"
+                                x-text="isPlaying ? 'pause' : 'play_arrow'"></span>
+                        </button>
+                        <button @click.stop="toggleMute()" class="text-white hover:text-sky-400 transition-colors">
+                            <span class="material-symbols-rounded text-3xl"
+                                x-text="isMuted ? 'volume_off' : 'volume_up'"></span>
+                        </button>
+                    </div>
+                </div>
+            </template>
+            <template x-if="!filteredItems[currentIndex]?.type || filteredItems[currentIndex]?.type === 'image'">
+                <img :src="filteredItems[currentIndex]?.src"
+                    class="max-w-full max-h-[80vh] object-contain rounded shadow-2xl animate-fade-up"
+                    :key="currentIndex">
+            </template>
 
             <!-- Caption -->
             <div class="mt-6 text-center max-w-2xl">
                 <h2 class="text-2xl font-bold text-white mb-2" x-text="filteredItems[currentIndex]?.title"></h2>
                 <p class="text-slate-400 text-sm" x-text="filteredItems[currentIndex]?.desc"></p>
-            </div>
-
-            <!-- Thumbnail Strip -->
-            <div
-                class="absolute -bottom-24 lg:-bottom-32 left-1/2 -translate-x-1/2 flex gap-4 overflow-x-auto max-w-[80vw] py-4 no-scrollbar">
-                <!-- Can be added for enhancement -->
             </div>
         </div>
     </div>
@@ -293,6 +332,8 @@
                 activeCategory: 'all',
                 lightboxOpen: false,
                 currentIndex: 0,
+                isPlaying: false,
+                isMuted: false,
 
                 categories: [
                     { id: 'all', name: 'All Moments' },
@@ -303,26 +344,33 @@
                 ],
 
                 items: [
-                    // Ski Action
-                    { id: 1, category: 'ski', src: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070', title: 'Deep Powder Turns', desc: 'Cutting through fresh powder in the backcountry.' },
-                    { id: 2, category: 'ski', src: 'https://images.unsplash.com/photo-1522056615691-da7b8106c665?q=80&w=2070', title: 'Apharwat Peak Drop', desc: 'Starting the descent from 4200m.' },
-                    { id: 3, category: 'ski', src: 'https://images.unsplash.com/photo-1565992441121-4367c2967103?q=80&w=2127', title: 'Freeride Freedom', desc: 'Unmapped terrain is where we thrive.' },
-                    { id: 4, category: 'ski', src: 'https://images.unsplash.com/photo-1620021676882-62bdae125746?q=80&w=2070', title: 'Instruction Session', desc: 'Our guides teaching the basics of parallel turns.' },
+                    // Videos
+                    { id: 101, type: 'video', category: 'ski', src: 'images/Gallery/gandolaaaaa.mp4', title: 'Gondola Ascent', desc: 'Floating above the snow-laden pines towards the peak.' },
+                    { id: 102, type: 'video', category: 'ski', src: 'images/Gallery/gulll.mp4', title: 'Powder Run', desc: 'A firsthand look at the dry Himalayan powder.' },
+                    { id: 103, type: 'video', category: 'life', src: 'images/Gallery/WhatsApp Video 2026-01-08 at 7.13.28 PM.mp4', title: 'Resort Vibes', desc: 'The atmospheric hustle of Gulmarg in winter.' },
+                    { id: 104, type: 'video', category: 'life', src: 'images/Gallery/WhatsApp Video 2026-01-08 at 7.14.25 PM.mp4', title: 'Snowy Market', desc: 'Local colors and winter sounds.' },
+                    { id: 105, type: 'video', category: 'life', src: 'images/Gallery/WhatsApp Video 2026-01-08 at 7.14.30 PM.mp4', title: 'Après Magic', desc: 'Evening warmth in the heart of the mountains.' },
 
-                    // Landscapes
-                    { id: 5, category: 'landscape', src: 'https://images.unsplash.com/photo-1546555198-d2bc403e226e?q=80&w=2071', title: 'Himalayan Sunrise', desc: 'First light hitting the Pir Panjal range.' },
-                    { id: 6, category: 'landscape', src: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=2070', title: 'The Silent Forest', desc: 'Snow-covered pines in the lower valley.' },
-                    { id: 7, category: 'landscape', src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070', title: 'Summit Views', desc: 'Looking towards Nanga Parbat.' },
-
-                    // Life
-                    { id: 8, category: 'life', src: 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=2070', title: 'Après-Ski Vibes', desc: 'Warm fires and hot cocoa after a long day.' },
-                    { id: 9, category: 'life', src: 'https://images.unsplash.com/photo-1582216853874-9842de2c00d4?q=80&w=2070', title: 'Gulmarg Market', desc: 'Local culture and winter bustling.' },
-
-                    // Heli
-                    { id: 10, category: 'heli', src: 'https://images.unsplash.com/photo-1520626352824-00d93198083a?q=80&w=2070', title: 'Heli Drop', desc: 'Accessing untouched terrain.' },
-                    { id: 11, category: 'heli', src: 'https://images.unsplash.com/photo-1629815049539-7704eb093952?q=80&w=2071', title: 'Aerial Approach', desc: 'Flying over the Sunshine Peak.' },
+                    // Optimized Images
+                    { id: 1, category: 'ski', src: 'images/Gallery/DSC03931.webp', title: 'Powder Descent', desc: 'Carving through the legendary Gulmarg powder.' },
+                    { id: 2, category: 'ski', src: 'images/Gallery/DSC03935.webp', title: 'Apharwat Action', desc: 'High-altitude thrills on the upper slopes.' },
+                    { id: 3, category: 'landscape', src: 'images/Gallery/DSC03949.webp', title: 'Morning Light', desc: 'The sun rising over the Pir Panjal range.' },
+                    { id: 4, category: 'landscape', src: 'images/Gallery/DSC03953.webp', title: 'Summit View', desc: 'Breathtaking vistas from the top of the gondola.' },
+                    { id: 5, category: 'ski', src: 'images/Gallery/DSC03967.webp', title: 'Forest Run', desc: 'Navigating the pine-scented glades.' },
+                    { id: 6, category: 'landscape', src: 'images/Gallery/DSC03970.webp', title: 'Alpine Glow', desc: 'Golden hour hitting the snow-capped peaks.' },
+                    { id: 7, category: 'life', src: 'images/Gallery/DSC04002.webp', title: 'Village Life', desc: 'The charming winter atmosphere of Gulmarg village.' },
+                    { id: 8, category: 'landscape', src: 'images/Gallery/DSC04005.webp', title: 'Frozen Silence', desc: 'Untouched snow blankets the valley.' },
+                    { id: 9, category: 'ski', src: 'images/Gallery/DSC04011.webp', title: 'Cliff Drop', desc: 'Taking the bold line through the back bowls.' },
+                    { id: 10, category: 'landscape', src: 'images/Gallery/DSC04044.webp', title: 'Nanga Parbat View', desc: 'The mighty killer mountain visible in the distance.' },
+                    { id: 11, category: 'ski', src: 'images/Gallery/DSC04046.webp', title: 'Spray and Play', desc: 'Winter joy in its purest form.' },
+                    { id: 12, category: 'landscape', src: 'images/Gallery/DSC04047.webp', title: 'Ridge Walk', desc: 'Trekking along the skyline of Apharwat.' },
+                    { id: 13, category: 'life', src: 'images/Gallery/DSC04050.webp', title: 'Cozy Base', desc: 'Returning to warmth after a day of adventure.' },
+                    { id: 14, category: 'ski', src: 'images/Gallery/DSC04059.webp', title: 'Powder Cloud', desc: 'Disappearing into a spray of dry Himalayan snow.' },
+                    { id: 15, category: 'landscape', src: 'images/Gallery/DSC04062.webp', title: 'Winter Layers', desc: 'A landscape of textures and gradients.' },
+                    { id: 16, category: 'life', src: 'images/Gallery/DSC04112.webp', title: 'Market Colors', desc: 'The vibrant life of Gulmarg market in winter.' },
+                    { id: 17, category: 'ski', src: 'images/Gallery/DSC04117.webp', title: 'Sunset Shred', desc: 'Making the most of the last light.' },
+                    { id: 18, category: 'landscape', src: 'images/Gallery/page1.webp', title: 'Vista Point', desc: 'A wide-angle look at the ski resort layout.' }
                 ],
-
                 get filteredItems() {
                     if (this.activeCategory === 'all') return this.items;
                     return this.items.filter(item => item.category === this.activeCategory);
@@ -331,20 +379,70 @@
                 openLightbox(index) {
                     this.currentIndex = index;
                     this.lightboxOpen = true;
+                    this.isPlaying = false;
+                    this.isMuted = false;
                     document.body.style.overflow = 'hidden';
+
+                    // Auto-play if item is video
+                    this.$nextTick(() => {
+                        const video = this.$refs.lightboxVideo;
+                        if (this.filteredItems[this.currentIndex]?.type === 'video' && video) {
+                            video.play().then(() => {
+                                this.isPlaying = true;
+                            }).catch(e => console.log('Video play blocked'));
+                        }
+                    });
                 },
 
                 closeLightbox() {
+                    if (this.$refs.lightboxVideo) this.$refs.lightboxVideo.pause();
                     this.lightboxOpen = false;
+                    this.isPlaying = false;
                     document.body.style.overflow = 'auto';
+                },
+
+                togglePlay() {
+                    const video = this.$refs.lightboxVideo;
+                    if (video) {
+                        if (video.paused) {
+                            video.play();
+                            this.isPlaying = true;
+                        } else {
+                            video.pause();
+                            this.isPlaying = false;
+                        }
+                    }
+                },
+
+                toggleMute() {
+                    const video = this.$refs.lightboxVideo;
+                    if (video) {
+                        video.muted = !video.muted;
+                        this.isMuted = video.muted;
+                    }
                 },
 
                 nextImage() {
                     this.currentIndex = (this.currentIndex + 1) % this.filteredItems.length;
+                    this.resetVideoState();
                 },
 
                 prevImage() {
                     this.currentIndex = (this.currentIndex - 1 + this.filteredItems.length) % this.filteredItems.length;
+                    this.resetVideoState();
+                },
+
+                resetVideoState() {
+                    this.isPlaying = false;
+                    this.$nextTick(() => {
+                        const video = this.$refs.lightboxVideo;
+                        if (this.filteredItems[this.currentIndex]?.type === 'video' && video) {
+                            video.currentTime = 0;
+                            video.play().then(() => {
+                                this.isPlaying = true;
+                            });
+                        }
+                    });
                 }
             }))
         })
