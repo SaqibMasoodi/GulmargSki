@@ -31,3 +31,11 @@ ehthumbs.db
 
 # Vite cache
 .vite/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Documentation (if needed, can be removed)
+FOUC_FIX_SUMMARY.md
