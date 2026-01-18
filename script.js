@@ -241,7 +241,7 @@ const attractionsData = [
                         </div>
                     </div>
                     <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 aspect-[4/3]">
-                        <img src="images/home/attractions/snowmobile.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="ATV">
+                        <img src="https://images.unsplash.com/photo-1625902047808-72b157b88950?q=80&w=2670&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="ATV">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
                             <h4 class="text-xl font-bold text-white mb-1">ATV (Quad Bikes)</h4>
                             <p class="text-slate-300 text-xs font-medium mb-3">4x4 beasts with tire chains. Explore Tangmarg to Drung.</p>
@@ -269,14 +269,14 @@ const attractionsData = [
                     </div>
                     <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group">
                         <div class="h-32 rounded-lg bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden">
-                            <img src="images/home/attractions/church.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Church">
+                            <img src="https://images.unsplash.com/photo-1548625361-288295b927a4?q=80&w=2669&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Church">
                         </div>
                         <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">St. Mary’s Church</h4>
                         <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">100+ year old Victorian church.</p>
                     </div>
                     <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group">
                         <div class="h-32 rounded-lg bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden">
-                            <img src="images/home/attractions/temple.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Temple">
+                            <img src="https://images.unsplash.com/photo-1570176461466-4c7b80a568a0?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Temple">
                         </div>
                         <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Maharani Temple</h4>
                         <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Red-roofed Shiva temple on a hill.</p>
@@ -503,12 +503,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 4. WEATHER WIDGET
-const weatherData = {
-    gulmarg: { base: "-5°C", summit: "-12°C", baseLabel: "Base (2,650m)", summitLabel: "Summit (3,980m)" },
-    pahalgam: { base: "-2°C", summit: "-8°C", baseLabel: "Base (2,130m)", summitLabel: "Summit (3,400m)" },
-    sonamarg: { base: "-8°C", summit: "-15°C", baseLabel: "Base (2,800m)", summitLabel: "Summit (4,100m)" }
+// 4. WEATHER WIDGET (Live Data Integration)
+const weatherLocations = {
+    gulmarg: { lat: 34.0484, lon: 74.3805, baseAlt: 2650, summitAlt: 3980, baseLabel: "Base (2,650m)", summitLabel: "Summit (3,980m)" },
+    pahalgam: { lat: 34.0167, lon: 75.3167, baseAlt: 2130, summitAlt: 3400, baseLabel: "Base (2,130m)", summitLabel: "Summit (3,400m)" },
+    sonamarg: { lat: 34.3000, lon: 75.2500, baseAlt: 2800, summitAlt: 4100, baseLabel: "Base (2,800m)", summitLabel: "Summit (4,100m)" }
 };
+
+let weatherData = {
+    gulmarg: { base: "--°C", summit: "--°C", baseLabel: "Base (2,650m)", summitLabel: "Summit (3,980m)" },
+    pahalgam: { base: "--°C", summit: "--°C", baseLabel: "Base (2,130m)", summitLabel: "Summit (3,400m)" },
+    sonamarg: { base: "--°C", summit: "--°C", baseLabel: "Base (2,800m)", summitLabel: "Summit (4,100m)" }
+};
+
+async function fetchLiveWeather() {
+    for (const [key, loc] of Object.entries(weatherLocations)) {
+        try {
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&current=temperature_2m&timezone=auto`);
+            if (!res.ok) throw new Error('Weather API Error');
+            const data = await res.json();
+            const baseTemp = data.current.temperature_2m;
+
+            // Lapse rate estimation: 6.5°C per 1000m
+            const eleDiff = loc.summitAlt - loc.baseAlt;
+            const summitTemp = (baseTemp - (eleDiff / 1000 * 6.5)).toFixed(1);
+
+            weatherData[key] = {
+                base: `${baseTemp}°C`,
+                summit: `${summitTemp}°C`,
+                baseLabel: loc.baseLabel,
+                summitLabel: loc.summitLabel
+            };
+
+            // Update UI if this location is currently selected
+            const selectedText = document.getElementById('selected-weather');
+            if (selectedText && selectedText.textContent.toLowerCase().includes(key)) {
+                updateWeatherUI(key);
+            }
+        } catch (err) {
+            console.error(`Weather fetch error for ${key}:`, err);
+        }
+    }
+}
+
+function updateWeatherUI(location) {
+    const data = weatherData[location];
+    if (data && document.getElementById('base-temp')) {
+        document.getElementById('base-temp').textContent = data.base;
+        document.getElementById('summit-temp').textContent = data.summit;
+        document.getElementById('base-label').textContent = data.baseLabel;
+        document.getElementById('summit-label').textContent = data.summitLabel;
+    }
+}
 
 // -- Custom Dropdown Logic --
 function toggleWeatherDropdown(event) {
@@ -517,7 +563,6 @@ function toggleWeatherDropdown(event) {
     const arrow = document.getElementById('weather-arrow');
 
     if (menu.classList.contains('hidden')) {
-        // Open
         menu.classList.remove('hidden');
         setTimeout(() => {
             menu.classList.remove('opacity-0', 'scale-y-95');
@@ -525,7 +570,6 @@ function toggleWeatherDropdown(event) {
         }, 10);
         arrow.classList.add('rotate-180');
     } else {
-        // Close
         menu.classList.remove('opacity-100', 'scale-y-100');
         menu.classList.add('opacity-0', 'scale-y-95');
         setTimeout(() => menu.classList.add('hidden'), 200);
@@ -534,21 +578,14 @@ function toggleWeatherDropdown(event) {
 }
 
 function selectWeather(location, label) {
-    // 1. Update UI Text
-    document.getElementById('selected-weather').textContent = label;
-
-    // 2. Update Weather Data
-    const data = weatherData[location];
-    if (data) {
-        document.getElementById('base-temp').textContent = data.base;
-        document.getElementById('summit-temp').textContent = data.summit;
-        document.getElementById('base-label').textContent = data.baseLabel;
-        document.getElementById('summit-label').textContent = data.summitLabel;
-    }
-
-    // 3. Close Dropdown
+    const el = document.getElementById('selected-weather');
+    if (el) el.textContent = label;
+    updateWeatherUI(location);
     toggleWeatherDropdown();
 }
+
+// Invoke on load
+fetchLiveWeather();
 
 // Close dropdown when clicking outside
 window.addEventListener('click', (e) => {
@@ -732,7 +769,7 @@ function submitBooking(e) {
     msg += `💰 *Total Estimate*: ${totalEl ? totalEl.innerText : 'Pending'}\n`;
 
     // Encode and redirect
-    const waNumber = "919682136128"; // Replace with actual number if different
+    const waNumber = "916005806856"; // Replace with actual number if different
     const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 
     // Show confirmation UI
