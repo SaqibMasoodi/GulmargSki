@@ -6,162 +6,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolf Adventure | Gulmarg Ski Resort</title>
-    <link rel="icon" type="image/png" href="images/wolf.png">
-    <meta property="og:image" content="images/logo.webp">
-    <meta property="og:type" content="website">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description"
+        content="Experience the ultimate ski adventure in Gulmarg with certified instructors, premium logistics, and local expertise.">
+    <link rel="icon" type="image/png" href="assets/images/wolf.png">
 
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wolf Adventure | Gulmarg Ski Resort">
+    <meta property="og:description" content="Gulmarg's premier ski school and adventure guide.">
+    <meta property="og:image" content="assets/images/logo.webp">
+
+    <!-- External Assets -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                        display: ["'Plus Jakarta Sans'", "sans-serif"],
-                    },
-                    borderRadius: {
-                        DEFAULT: "0.5rem",
-                        "xl": "1rem",
-                        "2xl": "1.5rem",
-                        "3xl": "2rem",
-                    },
-                    colors: {
-                        primary: "#0f172a",
-                        accent: "#0ea5e9",
-                        "background-light": "#f8fafc",
-                        "background-dark": "#020617",
-                        "surface-light": "#ffffff",
-                        "surface-dark": "#1e293b",
-                        alpine: {
-                            white: '#ffffff',
-                            off: '#f8fafc', // Slate 50
-                            ice: '#e0f2fe', // Sky 100
-                            blue: '#0ea5e9', // Sky 500
-                            deep: '#0f172a', // Slate 900
-                            text: '#334155', // Slate 700
-                            muted: '#94a3b8' // Slate 400
-                        },
-                        // New Schedule Section Colors (Updated to Slate Palette)
-                        bg: '#020617',       /* Slate 950 */
-                        panel: '#0f172a',    /* Slate 900 */
-                        surface: '#1e293b',  /* Slate 800 */
-                        border: '#334155',   /* Slate 700 */
-                        subtle: '#475569',   /* Slate 600 */
-                        muted: '#94a3b8',    /* Slate 400 */
-                    },
-                    boxShadow: {
-                        'ice': '0 4px 14px 0 rgba(14, 165, 233, 0.15)',
-                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                        'glow': '0 0 15px rgba(14, 165, 233, 0.3)',
-                        'inner-glow': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        scroll: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom styles for Material Symbols Pattern */
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
-        }
 
-        .pattern-grid {
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-        }
+    <!-- Global Config -->
+    <script src="assets/js/tailwind-config.js"></script>
 
-        /* --- NEW SCHEDULE UTILITIES --- */
-        .sidebar-scroll-mask {
-            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-        }
+    <!-- Data Sources -->
+    <script src="assets/js/data/instructors.js"></script>
+    <script src="assets/js/data/attractions.js"></script>
 
-        /* Solid Snap Logic */
-        .snap-container {
-            scroll-snap-type: x mandatory;
-        }
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
 
-        .snap-item {
-            scroll-snap-align: center;
-        }
-
-        /* Custom Dropdown Animation */
-        .dropdown-menu {
-            transform-origin: top;
-            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s linear;
-        }
-
-        .dropdown-menu.hidden {
-            display: none;
-        }
-
-        .dropdown-menu.closed {
-            transform: scaleY(0.95);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .dropdown-menu.open {
-            transform: scaleY(1);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* Table Styles */
-        td {
-            vertical-align: top;
-        }
-
-        /* Vertical Marquee Animation */
-        @keyframes scrollY {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-50%);
-            }
-        }
-
-        .animate-scroll-y {
-            animation: scrollY 30s linear infinite;
-        }
-
-        .pause-on-hover:hover .animate-scroll-y {
-            animation-play-state: paused;
-        }
-    </style>
+    <!-- Core Logic -->
+    <script src="assets/js/components.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
 
 </head>
 
@@ -954,82 +828,7 @@
         </div>
 
         <script>
-            // Renamed data variable to ensure no conflicts
-            const instructorsData = [
-                {
-                    id: 1,
-                    category: 'ski',
-                    name: "Shafqat Shah",
-                    role: "Lead Guide",
-                    subRole: "NSF Certified | 4× National Participation",
-                    bio: "🏔 NSF Certified Ski Athlete & Instructor. 🥇 4× National Level Participation. 🏅 5× State Level Participation. 🥉🥈 Bronze & Silver Medals – Giant Slalom & Slalom. 🎿 Basic, Intermediate & Advanced Certified. 🥇 First Position Medalist in Training Programs.",
-                    tags: ["NSF Certified", "Medalist", "Safety"],
-                    image: "images/home/guides/shafqat.webp",
-                    stars: 5,
-                    selectedLabel: "National Athlete"
-                },
-                {
-                    id: 2,
-                    category: 'ski',
-                    name: "Mubashir Riyaz",
-                    role: "Founder & Lead",
-                    subRole: "Gold Medalist 2025 | IISM Advanced",
-                    bio: "Founder of Wolf Adventures and a 2025 Gold Medalist (All India Inter-University Skiing), Mubashir is an IISM Advanced Certified skier with national-level representation. He delivers technically refined, safety-focused instruction with an emphasis on balance and precision.",
-                    tags: ["Founder", "Gold Medalist", "Lead"],
-                    image: "images/home/guides/mubashir.webp",
-                    stars: 5,
-                    selectedLabel: "Lead Instructor"
-                },
-                {
-                    id: 3,
-                    category: 'ski',
-                    name: "Alya",
-                    role: "Freestyle Coach",
-                    subRole: "Expert Freerider",
-                    bio: "Specializing in creative movements and technical terrain. Alya brings a fresh perspective to big mountain riding, focusing on fluidity, style, and advanced carving techniques.",
-                    tags: ["Freestyle", "Carving", "Expert"],
-                    image: "images/home/guides/female.webp",
-                    stars: 5,
-                    selectedLabel: "Freestyle Coach"
-                },
-                {
-                    id: 6,
-                    category: 'ski',
-                    name: "Inayat Farooq",
-                    role: "Ski Mountaineer",
-                    subRole: "KIWG 2025 Bronze Medalist",
-                    bio: "KIWG 2025 Bronze medal in ski mountaineering. Inter College Gold medal in both slalom and giant slalom (Alpine skiing). Course doing advance. Medalist in all courses Basic, intermediate and advance.",
-                    tags: ["Medalist", "KIWG 2025", "Mountaineering"],
-                    image: "images/home/guides/carousel-3.webp",
-                    stars: 5,
-                    selectedLabel: "Bronze Medalist"
-                },
-                {
-                    id: 4,
-                    category: 'board',
-                    name: "Kashif Bhat",
-                    role: "Snowboard Lead",
-                    subRole: "2x National & 3x State Champion",
-                    bio: "2 times national champion, 3 times the state champion. 16 years of experience. Expert in steep terrain and powder maneuvers.",
-                    tags: ["Champion", "Snowboard", "Master"],
-                    image: "images/home/guides/kashif.webp",
-                    stars: 5,
-                    selectedLabel: "Snowboard Lead"
-                },
-                {
-                    id: 5,
-                    category: 'board',
-                    name: "Ishtiyaq Bhat",
-                    role: "Senior Instructor",
-                    subRole: "National & State Champion",
-                    bio: "1 time national champion, 2 time state champion. 15 years of experience. Specializing in freestyle and park progression.",
-                    tags: ["Champion", "Expert", "Veteran"],
-                    image: null,
-                    initials: "IB",
-                    stars: 5,
-                    selectedLabel: "Senior Instructor"
-                }
-            ];
+            // Instructor data moved to assets/js/data/instructors.js
 
             // Initialize State
             let currentFilter = 'ski';
@@ -1205,7 +1004,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 h-[600px]">
 
                 <div class="lg:col-span-3 relative rounded-[2.5rem] overflow-hidden group shadow-2xl">
-                    <img src="images/home/testimonials/content.webp"
+                    <img src="assets/images/home/testimonials/content.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         alt="Rider in Powder">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent">
@@ -1359,7 +1158,7 @@
 
     <section id="curriculum" class="py-24 px-6 relative overflow-hidden border-y border-slate-200">
         <div class="absolute inset-0 z-0">
-            <img src="images/home/curriculum/bg-curriculum.webp" class="w-full h-full object-cover"
+            <img src="assets/images/home/curriculum/bg-curriculum.webp" class="w-full h-full object-cover"
                 alt="Curriculum Background">
         </div>
 
@@ -1557,7 +1356,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="images/home/curriculum/day-1.webp" class="w-full h-full object-cover"
+                                <img src="assets/images/home/curriculum/day-1.webp" class="w-full h-full object-cover"
                                     alt="Day 1">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1655,7 +1454,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="images/home/curriculum/day-2.webp" class="w-full h-full object-cover"
+                                <img src="assets/images/home/curriculum/day-2.webp" class="w-full h-full object-cover"
                                     alt="Day 2">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1752,7 +1551,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="images/home/curriculum/day-3.webp" class="w-full h-full object-cover"
+                                <img src="assets/images/home/curriculum/day-3.webp" class="w-full h-full object-cover"
                                     alt="Day 3">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1849,7 +1648,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="images/home/curriculum/day-4.webp" class="w-full h-full object-cover"
+                                <img src="assets/images/home/curriculum/day-4.webp" class="w-full h-full object-cover"
                                     alt="Day 4">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1946,7 +1745,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="images/home/curriculum/day-5.webp" class="w-full h-full object-cover"
+                                <img src="assets/images/home/curriculum/day-5.webp" class="w-full h-full object-cover"
                                     alt="Day 5">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -2043,7 +1842,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="images/home/curriculum/day-6.webp" class="w-full h-full object-cover"
+                                <img src="assets/images/home/curriculum/day-6.webp" class="w-full h-full object-cover"
                                     alt="Day 6">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -2768,7 +2567,7 @@
                 <!-- Card 1: The "Rider" Tier -->
                 <div
                     class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                    <img src="images/home/stays_teaser/stay-3.webp"
+                    <img src="assets/images/home/stays_teaser/stay-3.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         alt="Dormitory Bunk">
                     <div
@@ -2803,7 +2602,7 @@
                 <!-- Card 2: The "Comfort" Tier -->
                 <div
                     class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-sky-500/20 transform md:-translate-y-4">
-                    <img src="images/home/stays_teaser/stay-1.webp"
+                    <img src="assets/images/home/stays_teaser/stay-1.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         alt="Comfort Room">
                     <div
@@ -2844,7 +2643,7 @@
                 <!-- Card 3: The "Luxury" Tier -->
                 <div
                     class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                    <img src="images/home/stays_teaser/stay-2.webp"
+                    <img src="assets/images/home/stays_teaser/stay-2.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         alt="Luxury Hotel">
                     <div
@@ -3055,9 +2854,6 @@
     <div id="footer-placeholder"></div>
 
     <div id="fab-placeholder"></div>
-    <script src="components.js"></script>
-    <script src="script.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>

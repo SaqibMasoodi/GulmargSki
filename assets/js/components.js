@@ -4,7 +4,7 @@ const HEADER_HTML = `
 
         <a href="index.html"
             class="flex items-center gap-2 text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
-            <img src="images/logo.webp" alt="Wolf Adventures"
+            <img src="assets/images/logo.webp" alt="Wolf Adventures"
                 class="h-10 w-10 rounded-full object-cover border-2 border-slate-200">
             <span class="hidden sm:inline">WOLF<span class="text-alpine-blue">.ADV</span></span>
         </a>
@@ -174,75 +174,10 @@ const FAB_HTML = `
     </div>
 `;
 
-const SCROLLBAR_STYLE = `
-/* Modern Global Scrollbar */
-::-webkit-scrollbar {
-    width: 14px;
-    height: 14px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #0f172a;
-    border-radius: 20px;
-    border: 3px solid #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #1e293b;
-}
-
-::-webkit-scrollbar-button:single-button {
-    background-color: transparent;
-    display: block;
-    background-size: 10px;
-    background-repeat: no-repeat;
-}
-
-/* Up button */
-::-webkit-scrollbar-button:single-button:vertical:decrement {
-    height: 16px;
-    width: 14px;
-    background-position: center bottom 2px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%230f172a'><polygon points='50,20 10,70 90,70'/></svg>");
-}
-
-/* Down button */
-::-webkit-scrollbar-button:single-button:vertical:increment {
-    height: 16px;
-    width: 14px;
-    background-position: center top 2px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%230f172a'><polygon points='50,80 10,30 90,30'/></svg>");
-}
-
-/* Scrollbar Hide Utilities */
-.no-scrollbar::-webkit-scrollbar,
-.scrollbar-hide::-webkit-scrollbar {
-    display: none !important;
-}
-
-.no-scrollbar,
-.scrollbar-hide {
-    -ms-overflow-style: none !important;
-    scrollbar-width: none !important;
-}
-`;
-
 function injectComponents() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
     const fabPlaceholder = document.getElementById('fab-placeholder');
-
-    // Inject Styles
-    if (!document.getElementById('global-scrollbar-style')) {
-        const styleTag = document.createElement('style');
-        styleTag.id = 'global-scrollbar-style';
-        styleTag.innerHTML = SCROLLBAR_STYLE;
-        document.head.appendChild(styleTag);
-    }
 
     if (headerPlaceholder) {
         headerPlaceholder.innerHTML = HEADER_HTML;

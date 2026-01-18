@@ -5,48 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Your Adventure | Wolf Adventure</title>
-    <link rel="icon" type="image/png" href="images/wolf.png">
-    <meta property="og:image" content="images/logo.webp">
+    <meta name="description"
+        content="Secure your spot for the ultimate Gulmarg ski experience. Instant quotes and WhatsApp confirmation.">
+    <link rel="icon" type="image/png" href="assets/images/wolf.png">
+
+    <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
+    <meta property="og:title" content="Book Your Adventure | Wolf Adventure">
+    <meta property="og:description" content="Plan and book your Gulmarg ski trip instantly.">
+    <meta property="og:image" content="assets/images/logo.webp">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- External Assets -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        alpine: {
-                            white: '#ffffff',
-                            off: '#f8fafc',
-                            ice: '#e0f2fe',
-                            blue: '#0ea5e9',
-                            deep: '#0f172a',
-                            text: '#334155',
-                            muted: '#94a3b8'
-                        }
-                    },
-                    boxShadow: {
-                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        'floating': '0 10px 40px -10px rgba(0,0,0,0.1)'
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
-        rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Global Config -->
+    <script src="assets/js/tailwind-config.js"></script>
+
+    <!-- Data Sources -->
+    <script src="assets/js/data/pricing.js"></script>
+    <script src="assets/js/data/hotels.js"></script>
+
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Core Logic -->
+    <script src="assets/js/components.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white"
@@ -1568,8 +1553,8 @@
     </div>
 
     <div id="fab-placeholder"></div>
-    <script src="components.js"></script>
-    <script src="script.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/script.js"></script>
     <script>
         function skiCalculator() {
             return {
@@ -1601,36 +1586,9 @@
                     heliSunshine: 0
                 },
 
-                addonPrices: {
-                    gondola: 1200,
-                    snowmobile: 2500,
-                    atv: 2000,
-                    sledging: 500,
-                    heliJoint: 9000,
-                    heliCommodore: 12000,
-                    heliSunshine: 15000
-                },
-
-                accommodationData: {
-                    'dorm': { name: 'Dormitory', type: 'Dormitory', hotels: ['Dormitory'], pricePerPax: 1600, instructorTier: 'low' },
-                    '2star': { name: '2 Star', type: '2 Star', hotels: ['Hotel Lala', 'Hotel ZamZam'], prices: { 1: 3500, 2: 4500, 3: 6500 }, instructorTier: 'low' },
-                    '3star_low': { name: '3 Star (Standard)', type: '3 Star', hotels: ['Mama Palace', 'Gulmarg Inn', 'Hotel Welcome'], prices: { 1: 4000, 2: 5500, 3: 7500 }, instructorTier: 'high' },
-                    '3star_high': { name: '3 Star (Premium)', type: '3 Star', hotels: ['Hotel Royal Park', 'Zahgeer', 'Khaleel Palace'], prices: { 1: 5000, 2: 7000, 3: 8500 }, instructorTier: 'high' },
-                    '4star_low': { name: '4 Star (Standard)', type: '4 Star', hotels: ['Grand Mumtaz', 'Himalayan Pearl'], prices: { 1: 9000, 2: 12000, 3: 14500 }, instructorTier: 'high' },
-                    '4star_high': { name: '4 Star (Premium)', type: '4 Star', hotels: ['Hotel Hilltop', 'Green Resort'], prices: { 1: 10500, 2: 13500, 3: 16500 }, instructorTier: 'high' },
-                    '5star': { name: '5 Star', type: '5 Star', hotels: ['The Khyber Resort'], instructorTier: 'high', isCustom: true }
-                },
-
-                instructorData: {
-                    'low': {
-                        ski: { '1:1': 3500, '2:1': 5000, '3:1': 6000, 'extra': 1000 },
-                        board: { '1:1': 5800, '2:1': 8700, '3:1': 10500, 'extra': 1500 }
-                    },
-                    'high': {
-                        ski: { '1:1': 4000, '2:1': 5500, '3:1': 7000, 'extra': 1000 },
-                        board: { '1:1': 8300, '2:1': 12500, '3:1': 15000, 'extra': 2000 }
-                    }
-                },
+                addonPrices: addonPrices,
+                accommodationData: accommodationData,
+                instructorData: instructorData,
 
                 init() {
                     // Parse URL Query Params

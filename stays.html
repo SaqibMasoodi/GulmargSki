@@ -5,44 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpine Sanctuaries | Wolf Adventure</title>
-    <link rel="icon" type="image/png" href="images/wolf.png">
-    <meta property="og:image" content="images/logo.webp">
+    <meta name="description"
+        content="Discover premium mountain lodges and cozy stays in Gulmarg. From luxury resorts to comfortable dorms.">
+    <link rel="icon" type="image/png" href="assets/images/wolf.png">
+
+    <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
+    <meta property="og:title" content="Alpine Sanctuaries | Wolf Adventure">
+    <meta property="og:description" content="Find your perfect basecamp in Gulmarg.">
+    <meta property="og:image" content="assets/images/logo.webp">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        alpine: {
-                            white: '#ffffff',
-                            off: '#f8fafc',
-                            ice: '#e0f2fe',
-                            blue: '#0ea5e9',
-                            deep: '#0f172a',
-                            text: '#334155',
-                            muted: '#94a3b8',
-                            gold: '#f59e0b', // Specific to Stays Page
-                            goldlight: '#fef3c7' // Specific to Stays Page
-                        }
-                    },
-                    boxShadow: {
-                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                        'glow': '0 0 20px rgba(245, 158, 11, 0.15)'
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
-        rel="stylesheet">
+    <!-- External Assets -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Global Config -->
+    <script src="assets/js/tailwind-config.js"></script>
+
+    <!-- Data Sources -->
+    <script src="assets/js/data/hotels.js"></script>
+
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Core Logic -->
+    <script src="assets/js/components.js" defer></script>
+    <script src="assets/js/script.js" defer></script>
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-gold selection:text-white">
@@ -175,8 +162,6 @@
     <div id="footer-placeholder"></div>
 
     <div id="fab-placeholder"></div>
-    <script src="components.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
