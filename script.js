@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         var map = L.map('gulmarg-map', {
             scrollWheelZoom: false,
             zoomControl: false,
-            attributionControl: false
-        }).setView([34.055, 74.38], 13);
+            attributionControl: true
+        }).setView([34.040, 74.382], 13);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            subdomains: 'abcd',
-            maxZoom: 19
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
         }).addTo(map);
 
         L.control.zoom({ position: 'topright' }).addTo(map);
@@ -55,10 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (defaultOpen) defaultOpen.click();
 
     // --- 4. SCHEDULE LOGIC (Init) ---
-    // Delay slightly to ensure DOM is fully painted
-    setTimeout(() => {
-        if (typeof render === 'function') render(2026);
-    }, 100);
+    // [REMOVED - Dead Code Cleanup]
 
     // Close dropdown on outside click
     window.addEventListener('click', (e) => {
@@ -125,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- GLOBAL FUNCTIONS (Must be outside DOMContentLoaded to be accessible by onclick) ---
 
+// 1. CURRICULUM SWITCHER
 // 1. CURRICULUM SWITCHER
 // --- NEW CURRICULUM LOGIC (Master the Mountain) ---
 
@@ -601,103 +599,8 @@ window.addEventListener('click', (e) => {
 // function updateWeather() { ... }
 
 // 5. SCHEDULE LOGIC
-const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+// [REMOVED - Dead Code Cleanup]
 
-const createBatches = (year, count) => {
-    return months.map((m, i) => ({
-        short: m,
-        long: fullMonths[i],
-        batches: Array.from({ length: count }, (_, b) => {
-            const levels = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
-            const level = levels[b % 3];
-            const spots = Math.floor(Math.random() * 6);
-            return {
-                id: `SKI-${year.toString().slice(2)}${(i + 1).toString().padStart(2, '0')}-${b + 1}`,
-                date: `${(b * 4) + 2}-${(b * 4) + 6} ${m}`,
-                level: level,
-                price: level === 'BEGINNER' ? '₹15k' : (level === 'INTERMEDIATE' ? '₹18k' : '₹22k'),
-                spots: spots,
-                status: spots === 0 ? 'SOLD OUT' : 'OPEN'
-            };
-        })
-    }));
-};
-
-const db = { 2026: createBatches(2026, 8), 2025: createBatches(2025, 8) };
-let currentYear = 2026;
-let observer;
-
-function render(year) {
-    const data = db[year];
-    document.getElementById('total-count').innerText = `${data.reduce((acc, curr) => acc + curr.batches.length, 0)} BATCHES`;
-
-    document.getElementById('cards-container').innerHTML = data.map((d, i) => `
-        <article id="card-${i}" class="snap-item shrink-0 w-[88vw] md:w-[400px] h-full bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-col relative group overflow-hidden hover:shadow-lg transition-all duration-300">
-            <div class="p-6 border-b border-slate-100"><h2 class="text-4xl font-black text-slate-900 tracking-tighter">${d.long}</h2></div>
-            <div class="flex-1 overflow-y-auto no-scrollbar bg-white p-6 pt-4 space-y-4">
-                ${d.batches.map(batch => `
-                    <div class="flex flex-col gap-1 pb-4 border-b border-slate-50 last:border-0 last:pb-0">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${batch.id}</span>
-                        <span class="text-xl font-bold text-slate-900">${batch.date}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </article>
-    `).join('');
-
-    const gridContainer = document.getElementById('grid-container');
-    gridContainer.className = "grid grid-cols-3 gap-2 p-4";
-    gridContainer.innerHTML = data.map((d, i) => `
-        <button onclick="scrollToIndex(${i})" id="btn-${i}" class="h-10 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center uppercase tracking-widest bg-slate-50 text-slate-400 border border-transparent hover:bg-slate-100">${d.short}</button>
-    `).join('');
-
-    setupObserver();
-}
-
-function toggleDropdown() {
-    const menu = document.getElementById('year-dropdown');
-    if (menu.classList.contains('open')) {
-        menu.classList.remove('open'); menu.classList.add('closed');
-        setTimeout(() => menu.classList.add('hidden'), 150);
-    } else {
-        menu.classList.remove('hidden');
-        setTimeout(() => { menu.classList.remove('closed'); menu.classList.add('open'); }, 10);
-    }
-}
-
-function selectYear(year) {
-    currentYear = year;
-    document.getElementById('current-year-display').innerText = `${year} Season`;
-    toggleDropdown();
-    render(year);
-}
-
-function scrollToIndex(index) {
-    const card = document.getElementById(`card-${index}`);
-    if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-}
-
-function updateActiveButton(index) {
-    document.querySelectorAll('#grid-container button').forEach(btn => {
-        btn.className = "h-10 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center uppercase tracking-widest bg-slate-50 text-slate-400 border border-transparent hover:bg-slate-100";
-    });
-    const btn = document.getElementById(`btn-${index}`);
-    if (btn) btn.className = "h-10 w-full rounded-lg text-xs font-bold transition-all flex items-center justify-center uppercase tracking-widest bg-slate-900 text-white shadow-md scale-105";
-}
-
-function setupObserver() {
-    if (observer) observer.disconnect();
-    observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id.split('-')[1];
-                updateActiveButton(id);
-            }
-        });
-    }, { root: document.getElementById('cards-container'), threshold: 0.6 });
-    document.querySelectorAll('.snap-item').forEach(card => observer.observe(card));
-}
 // --- BOOKING PAGE LOGIC ---
 
 // Helper to access Alpine Data
