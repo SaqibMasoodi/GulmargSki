@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Policies & Legal | Wolf Adventure</title>
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -42,8 +43,11 @@
         id="main-nav">
 
         <a href="index.html"
-            class="text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">WOLF<span
-                class="text-alpine-blue">.ADV</span></a>
+            class="flex items-center gap-2 text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
+            <img src="images/logo.jpg" alt="Wolf Adventures"
+                class="h-10 w-10 rounded-full object-cover border-2 border-slate-200">
+            <span class="hidden sm:inline">WOLF<span class="text-alpine-blue">.ADV</span></span>
+        </a>
 
         <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
             <a href="index.html" class="hover:text-alpine-blue transition-colors">Home</a>
@@ -92,35 +96,65 @@
         </ul>
     </div>
 
+    <header class="relative h-[70vh] w-full overflow-hidden flex items-center justify-center bg-slate-900">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop"
+                class="w-full h-full object-cover" alt="Mountain Landscape">
+            <div class="absolute inset-0 z-10 bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-slate-950/40">
+            </div>
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+        </div>
 
-    <main class="max-w-7xl mx-auto pt-32 pb-24 px-6">
+        <div class="relative z-20 w-full max-w-4xl px-6 text-center">
+            <div class="fade-in-up">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <span
+                        class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.8)]"></span>
+                    <span class="text-rose-400 text-[10px] font-bold uppercase tracking-[0.2em] font-mono">Legal
+                        Framework • Read Before Booking</span>
+                </div>
+                <h1
+                    class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.85] text-white mb-6 drop-shadow-2xl">
+                    POLICIES & <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-300 to-white">LEGAL</span>
+                </h1>
+                <p
+                    class="text-slate-300 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+                    Transparency is key. Review our cancellation, refund, and safety policies before booking your
+                    adventure.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-16 px-6">
         <div class="lg:grid lg:grid-cols-4 gap-12">
 
             <aside class="lg:col-span-1 mb-12 lg:mb-0">
                 <div class="sticky top-28">
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 hidden lg:block">
-                        Contents</p>
+                        Legal Framework</p>
                     <nav
                         class="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-4 lg:gap-0 pb-4 lg:pb-0 scrollbar-hide border-b lg:border-b-0 border-slate-200 lg:border-l lg:border-slate-200">
                         <a href="#booking"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
-                            Booking & Payments
+                            Payment Instructions
                         </a>
-                        <a href="#cancellations"
+                        <a href="#refunds"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
-                            Cancellation Policy
+                            Cancellation & Refunds
                         </a>
-                        <a href="#liability"
+                        <a href="#legal"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
-                            Risk & Liability
+                            Legal & Liability
                         </a>
-                        <a href="#compliance"
+                        <a href="#consent"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
-                            Client & Compliance
+                            Consent & Protocols
                         </a>
                         <a href="#privacy"
                             class="nav-link whitespace-nowrap lg:whitespace-normal px-4 lg:px-6 py-2.5 block text-sm font-medium text-slate-500 hover:text-slate-800 border-l-2 border-transparent">
-                            Privacy & Data
+                            Privacy Policy
                         </a>
                     </nav>
                 </div>
@@ -129,11 +163,10 @@
             <div class="lg:col-span-3 max-w-3xl space-y-24">
 
                 <section id="booking" class="scroll-mt-32">
-                    <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Booking & Payments</h2>
+                    <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Payment Instructions</h2>
                     <div class="text-slate-600 space-y-4 leading-relaxed">
                         <p>To secure your spot on any Wolf Adventure expedition, a deposit is required. We operate on a
-                            first-come, first-served basis due to limited capacity on the mountain and in our partner
-                            lodges.</p>
+                            first-come, first-served basis due to limited capacity.</p>
                         <div class="bg-white border border-slate-200 rounded-2xl p-8 mt-8 shadow-card">
                             <ul class="space-y-8">
                                 <li class="flex items-start gap-4">
@@ -143,8 +176,7 @@
                                     <div>
                                         <h4 class="text-slate-900 font-bold mb-1">Confirmation Deposit</h4>
                                         <p class="text-sm text-slate-500">A <span class="text-slate-900 font-bold">50%
-                                                advance payment</span> is required to confirm your booking. Until this
-                                            deposit is received, your dates are not guaranteed.</p>
+                                                advance payment</span> is required to confirm your booking.</p>
                                     </div>
                                 </li>
                                 <li class="w-px h-8 bg-slate-200 ml-4"></li>
@@ -155,8 +187,8 @@
                                     <div>
                                         <h4 class="text-slate-900 font-bold mb-1">Final Balance</h4>
                                         <p class="text-sm text-slate-500">The remaining 50% must be paid at least <span
-                                                class="text-slate-900 font-bold">15 days prior to your arrival</span> in
-                                            Gulmarg. Failure to pay the balance may result in cancellation.</p>
+                                                class="text-slate-900 font-bold">15 days prior to your arrival</span>.
+                                        </p>
                                     </div>
                                 </li>
                             </ul>
@@ -164,104 +196,151 @@
                     </div>
                 </section>
 
-                <section id="cancellations" class="scroll-mt-32">
-                    <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Cancellation Policy</h2>
-                    <p class="text-slate-600 mb-8 leading-relaxed">We understand that plans change. However, due to the
-                        logistical complexity of high-altitude expeditions and hotel pre-bookings, our refund policy is
-                        strict.</p>
-                    <div class="overflow-hidden rounded-2xl border border-slate-200 shadow-card">
-                        <table class="w-full text-left border-collapse bg-white">
-                            <thead>
-                                <tr class="border-b border-slate-200 bg-slate-50">
-                                    <th class="p-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Timeframe
-                                    </th>
-                                    <th class="p-6 text-xs font-bold text-slate-500 uppercase tracking-widest">Refund
-                                        Eligibility</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100">
-                                <tr>
-                                    <td class="p-6 text-slate-700 font-medium">&gt; 30 Days before arrival</td>
-                                    <td class="p-6 text-emerald-600 font-bold">90% Refund <span
-                                            class="text-xs font-normal text-slate-400 ml-2">(10% processing fee)</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="p-6 text-slate-700 font-medium">15 - 30 Days before arrival</td>
-                                    <td class="p-6 text-amber-500 font-bold">50% Refund</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-6 text-slate-700 font-medium">&lt; 15 Days before arrival</td>
-                                    <td class="p-6 text-rose-500 font-bold">No Refund</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-4 font-medium">* All refunds are processed within 7-10 business
-                        days to the original payment method.</p>
-                </section>
+                <section id="refunds" class="scroll-mt-32">
+                    <h2 class="text-3xl font-black text-slate-900 mb-2 tracking-tight">Cancellation & Refunds</h2>
+                    <span
+                        class="inline-block bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded mb-8">Hotel-Policy
+                        Linked | Complaint-Safe</span>
 
-                <section id="liability" class="scroll-mt-32">
-                    <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Risk & Liability Waiver</h2>
-                    <div class="bg-red-50 border border-red-100 rounded-2xl p-8 mb-8">
-                        <div class="flex items-start gap-4">
-                            <svg class="w-6 h-6 text-red-500 shrink-0 mt-1" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                            <div>
-                                <h3 class="text-lg font-bold text-red-900 mb-2">Extreme Sport Warning</h3>
-                                <p class="text-red-700 text-sm leading-relaxed">Skiing, snowboarding, and high-altitude
-                                    trekking are classified as extreme sports. They carry inherent risks including, but
-                                    not limited to, physical injury, avalanche, hypothermia, and equipment failure.</p>
-                            </div>
+                    <div class="prose prose-slate text-slate-600 max-w-none text-sm leading-relaxed space-y-8">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">1. Hotel Policy Covers Refunds</h3>
+                            <p>All cancellations and refunds are governed strictly by the respective hotel’s
+                                cancellation and refund policy. <strong>Wolf Adventure does not override, modify, or
+                                    guarantee hotel refund decisions.</strong></p>
+                            <p class="mt-2 text-xs bg-slate-50 p-3 rounded border-l-2 border-slate-300"><strong>Role of
+                                    Wolf Adventure:</strong> We act solely as a facilitator/booking agent between the
+                                client and hotel. Any refundable amount approved by the hotel (if applicable) will be
+                                passed to the client after deduction of applicable service, transaction, and
+                                administrative charges.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">2. Non-Refundable Components</h3>
+                            <p>Company service charges, instructor booking charges, equipment blocking charges, and
+                                logistics costs are <strong>non-refundable</strong>, irrespective of hotel refunds. Only
+                                the portion explicitly refunded by the hotel is eligible for return.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">3. Timeline for Refunds</h3>
+                            <p>Refunds (if approved by hotel) will be processed within <strong>7–15 working
+                                    days</strong> after the amount is received from the hotel/vendor. Delays caused by
+                                hotels, banks, or payment gateways are beyond company control.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">4. Non-Refundable Situations</h3>
+                            <p>No refund shall be applicable in the following cases:</p>
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>No-show by client</li>
+                                <li>Early departure</li>
+                                <li>Missed training sessions</li>
+                                <li>Cancellation due to weather, road blocks, gondola closure, or law & order situation
+                                </li>
+                                <li>Medical issues or personal emergencies</li>
+                                <li>Government advisories or administrative restrictions</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">5. Date Modification</h3>
+                            <p>Date change requests are subject to Hotel availability, Revised pricing, and Written
+                                confirmation. Date change approval is not a right, but a discretionary decision.</p>
+                        </div>
+
+                        <div class="bg-amber-50 border border-amber-100 p-6 rounded-xl">
+                            <h3 class="text-lg font-bold text-amber-900 mb-2">No Cash / No Guarantee Clause</h3>
+                            <p class="text-amber-800">Wolf Adventure does not guarantee refunds in cash or immediate
+                                refunds. Refund eligibility depends entirely on third-party vendor approvals.</p>
+                            <p class="mt-4 font-bold text-amber-900">Client agrees not to initiate:</p>
+                            <ul class="list-disc pl-5 mt-2 space-y-1 text-amber-800">
+                                <li>Police complaints</li>
+                                <li>FIRs</li>
+                                <li>Chargebacks</li>
+                                <li>Defamation campaigns</li>
+                            </ul>
+                            <p class="mt-2 text-amber-800">for refund delays or vendor denials that are clearly
+                                disclosed in these terms.</p>
                         </div>
                     </div>
-                    <div class="prose prose-slate text-slate-600 max-w-none text-sm leading-relaxed space-y-4">
-                        <p>By booking a package with Wolf Adventure, you acknowledge that you are voluntarily
-                            participating in these activities with knowledge of the dangers involved.</p>
-                        <p><strong class="text-slate-900">Wolf Adventure and its affiliates are not liable for:</strong>
-                        </p>
-                        <ul class="list-disc pl-5 space-y-2 marker:text-slate-400">
-                            <li>Personal injury or death resulting from skiing/snowboarding accidents.</li>
-                            <li>Loss or damage of personal equipment (cameras, phones, ski gear).</li>
-                            <li>Delays or cancellations caused by "Acts of God" (heavy snowfall blocking roads,
-                                avalanche control, political unrest).</li>
-                        </ul>
-                        <p>We strongly recommend all guests purchase comprehensive <strong class="text-slate-900">Travel
-                                Insurance</strong> that specifically covers winter sports and emergency helicopter
-                            evacuation.</p>
+                </section>
+
+                <section id="legal" class="scroll-mt-32">
+                    <h2 class="text-3xl font-black text-slate-900 mb-2 tracking-tight">Legal & Liability</h2>
+                    <span
+                        class="inline-block bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded mb-8">Misuse
+                        Prevention | Law-and-Order Disclaimer</span>
+
+                    <div class="prose prose-slate text-slate-600 max-w-none text-sm leading-relaxed space-y-8">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Legal Awareness & Misuse Prevention</h3>
+                            <div class="bg-red-50 border-l-4 border-red-500 p-4">
+                                <p class="font-bold text-red-900">Any attempt by a client to:</p>
+                                <ul class="list-disc pl-5 mt-2 space-y-1 text-red-800">
+                                    <li>Threaten police action without valid grounds</li>
+                                    <li>File false complaints or exaggerated allegations</li>
+                                    <li>Pressure staff through intimidation or misuse of law</li>
+                                </ul>
+                                <p class="mt-2 text-red-900">will be treated as harassment and misuse of legal process.
+                                    Wolf Adventure reserves the right to seek legal remedy, claim damages, and report
+                                    malicious complaints to authorities.</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Police, FIR & Law-and-Order Disclaimer
+                            </h3>
+                            <p>Kashmir is a sensitive region subject to sudden administrative decisions. The client
+                                fully understands that Police, Army, Tourism Dept., or District Administration may
+                                restrict movement or activities. Such restrictions do not constitute service failure.
+                            </p>
+                            <p class="mt-2"><strong>No FIR, consumer complaint, or legal claim shall be valid against
+                                    Wolf Adventure for actions taken under lawful government orders.</strong></p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Consumer Dispute Limitation</h3>
+                            <p>The client agrees that dissatisfaction due to Weather, Personal expectations, Natural
+                                conditions, or Third-party hotel services <strong>does not amount to deficiency of
+                                    service under consumer law.</strong></p>
+                            <p>Claims shall be limited strictly to the actual amount paid to Wolf Adventure, excluding
+                                consequential damages, mental harassment claims, or punitive demands.</p>
+                        </div>
                     </div>
                 </section>
 
-                <section id="compliance" class="scroll-mt-32">
-                    <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Client & Compliance</h2>
+                <section id="consent" class="scroll-mt-32">
+                    <h2 class="text-3xl font-black text-slate-900 mb-2 tracking-tight">Consent & Protocols</h2>
 
-                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-8">
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2">Liability Release Form</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed max-w-md">
-                                    All guests are required to sign a liability waiver before participating. Please
-                                    download the PDF, sign it, and bring a physical copy on your arrival.
-                                </p>
-                            </div>
-                            <a href="#"
-                                class="group relative flex items-center gap-3 px-8 py-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-alpine-blue hover:-translate-y-0.5 transition-all duration-300">
-                                <div
-                                    class="p-2 rounded-full bg-slate-100 text-slate-600 group-hover:bg-alpine-blue group-hover:text-white transition-colors">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                    </svg>
-                                </div>
-                                <div class="text-left">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Download
-                                        PDF</p>
-                                    <span class="block text-slate-900 font-bold">Liability Waiver</span>
-                                </div>
-                            </a>
+                    <div class="prose prose-slate text-slate-600 max-w-none text-sm leading-relaxed space-y-8">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Written Communication Only</h3>
+                            <p>Only written confirmations via <strong>Official email</strong> or <strong>WhatsApp number
+                                    of Wolf Adventure</strong> shall be considered valid. Verbal promises, assumptions,
+                                or third-party statements hold no legal validity.</p>
+                        </div>
+
+                        <div class="bg-slate-900 text-slate-300 p-8 rounded-2xl shadow-xl">
+                            <h3 class="text-xl font-bold text-white mb-4">Acknowledgement & Digital Consent</h3>
+                            <p class="mb-4">By booking through Website, WhatsApp, Instagram, Email, or Phone call, the
+                                client confirms:</p>
+                            <ul class="list-disc pl-5 space-y-2 mb-6 text-white">
+                                <li>Acceptance of all policies</li>
+                                <li>Understanding of hotel-dependent refunds</li>
+                                <li>Waiver of unjustified legal action</li>
+                            </ul>
+                            <p class="font-bold text-white">Digital acceptance is treated as legally binding consent.
+                            </p>
+
+                            <hr class="border-slate-700 my-6">
+
+                            <p class="text-justify italic text-slate-400 text-xs">
+                                “By proceeding with the booking, the client confirms that they have understood the
+                                nature of adventure tourism in Kashmir and agree not to misuse police, legal, or
+                                administrative mechanisms to seek refunds or compensation beyond the scope of disclosed
+                                policies.”
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -283,7 +362,8 @@
                             <li>Medical teams (in case of emergency).</li>
                         </ul>
                         <h4 class="text-slate-900 font-bold text-base mt-8 mb-2">Media Rights</h4>
-                        <p>Photos or videos taken by our guides during the trip may be used for Wolf Adventure marketing
+                        <p>Photos or videos taken by our instructors during the trip may be used for Wolf Adventure
+                            marketing
                             materials. If you prefer not to be photographed, please inform your lead guide on Day 1.</p>
                     </div>
                 </section>

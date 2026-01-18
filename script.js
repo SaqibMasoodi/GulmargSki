@@ -379,6 +379,35 @@ const attractionsData = [
                 </div>
             </div>
         `
+    },
+    {
+        id: 'sledging',
+        title: 'Sledging',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>',
+        content: `
+            <div class="p-8 lg:p-10 h-full flex flex-col">
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-3 uppercase tracking-tight">Classic Snow Fun</h3>
+                <p class="text-slate-500 dark:text-slate-400 mb-8 font-medium leading-relaxed max-w-2xl">Experience the timeless joy of sledging down Gulmarg's snowy slopes.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors group">
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-2 uppercase">Traditional Sledge</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-4">Wooden sleds pulled or pushed by local guides on gentle slopes. Perfect for families and beginners.</p>
+                        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <span class="block text-xl font-black text-slate-900 dark:text-white">₹500 - ₹1,000</span>
+                            <span class="text-xs text-slate-500 font-bold uppercase">per ride</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors group">
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-2 uppercase">Tube Sledging</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-4">Inflatable tube rides for a faster, more thrilling descent. Available at Phase 1 Gondola area.</p>
+                        <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <span class="block text-xl font-black text-slate-900 dark:text-white">₹300 - ₹500</span>
+                            <span class="text-xs text-slate-500 font-bold uppercase">per ride</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
     }
 ];
 
@@ -428,16 +457,51 @@ function setAttraction(id) {
 // 3. CURRENCY CONVERTER
 function updateCurrency() {
     const selector = document.getElementById('currency-selector');
-    const currency = selector.value;
+    let currency = 'INR';
+
+    if (selector) {
+        currency = selector.value;
+        localStorage.setItem('preferredCurrency', currency);
+    } else {
+        currency = localStorage.getItem('preferredCurrency') || 'INR';
+    }
+
     const priceElements = document.querySelectorAll('.price-display');
-    const rates = { 'INR': 1, 'USD': 85, 'EUR': 90 }; const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€' };
+    const rates = { 'INR': 1, 'USD': 85, 'EUR': 90 };
+    const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€' };
 
     priceElements.forEach(el => {
-        const basePrice = parseFloat(el.getAttribute('data-inr'));
+        let basePrice = el.getAttribute('data-inr');
+        if (!basePrice) {
+            // If data-inr is missing, try to read it from text content if it's INR
+            const text = el.textContent.replace(/[^0-9.]/g, '');
+            if (text) basePrice = text;
+            el.setAttribute('data-inr', basePrice);
+        }
+        basePrice = parseFloat(basePrice);
+
+        if (isNaN(basePrice)) return;
+
         let convertedPrice = (currency === 'INR') ? basePrice : basePrice / rates[currency];
-        el.textContent = `${symbols[currency]}${Math.round(convertedPrice).toLocaleString()}`;
+
+        if (basePrice > 100000 && currency === 'INR') {
+            el.textContent = `₹${(basePrice / 100000).toFixed(1)}L`;
+        } else {
+            el.textContent = `${symbols[currency]}${Math.round(convertedPrice).toLocaleString()}`;
+        }
     });
 }
+// Initialize currency on load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedCurrency = localStorage.getItem('preferredCurrency');
+    const selector = document.getElementById('currency-selector');
+    if (savedCurrency && selector) {
+        selector.value = savedCurrency;
+        updateCurrency();
+    } else if (savedCurrency) {
+        updateCurrency(); // Update prices even if selector is missing (other pages)
+    }
+});
 
 // 4. WEATHER WIDGET
 const weatherData = {
@@ -1126,3 +1190,50 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// --- 11. GLOBAL CONTACT BUBBLE ---
+function injectContactFAB() {
+    if (document.getElementById('contact-fab-container')) return;
+
+    // Inject Font if missing
+    if (!document.querySelector('link[href*="Material+Symbols+Rounded"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap';
+        document.head.appendChild(link);
+    }
+
+    // Check if valid page (exclude if needed, but user said all pages)
+    const fabHTML = `
+    <div id="contact-fab-container" class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2 group pointer-events-none">
+        <!-- Floating Options (Hidden by default) -->
+        <div id="fab-options" class="flex flex-col gap-2 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto pb-2">
+             <a href="https://wa.me/916005806856" target="_blank" class="flex items-center gap-3 bg-white text-slate-800 px-5 py-3 rounded-2xl shadow-lg hover:bg-green-50 transition-colors pointer-events-auto">
+                <span class="font-bold text-sm">WhatsApp</span>
+                <span class="material-symbols-rounded text-green-600">forum</span>
+            </a>
+            <a href="tel:+916005806856" class="flex items-center gap-3 bg-white text-slate-800 px-5 py-3 rounded-2xl shadow-lg hover:bg-blue-50 transition-colors pointer-events-auto">
+                <span class="font-bold text-sm">Call Us</span>
+                <span class="material-symbols-rounded text-blue-500">call</span>
+            </a>
+             <a href="mailto:hello@wolf.com" class="flex items-center gap-3 bg-white text-slate-800 px-5 py-3 rounded-2xl shadow-lg hover:bg-slate-50 transition-colors pointer-events-auto">
+                <span class="font-bold text-sm">Email</span>
+                <span class="material-symbols-rounded text-slate-500">mail</span>
+            </a>
+        </div>
+
+        <!-- Main FAB Button -->
+        <button class="w-16 h-16 bg-alpine-blue hover:bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-105 focus:outline-none relative overflow-hidden pointer-events-auto">
+            <span class="material-symbols-rounded text-3xl absolute transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 rotate-0 group-hover:rotate-90">support_agent</span>
+            <span class="material-symbols-rounded text-3xl absolute transition-all duration-300 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 -rotate-90 group-hover:rotate-0">close</span>
+        </button>
+    </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', fabHTML);
+}
+
+// Inject FAB on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectContactFAB);
+} else {
+    injectContactFAB();
+}

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Your Adventure | Wolf Adventure</title>
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -37,7 +38,8 @@
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
@@ -50,8 +52,11 @@
         id="main-nav">
 
         <a href="index.html"
-            class="text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">WOLF<span
-                class="text-alpine-blue">.ADV</span></a>
+            class="flex items-center gap-2 text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
+            <img src="images/logo.jpg" alt="Wolf Adventures"
+                class="h-10 w-10 rounded-full object-cover border-2 border-slate-200">
+            <span class="hidden sm:inline">WOLF<span class="text-alpine-blue">.ADV</span></span>
+        </a>
 
         <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
             <a href="index.html" class="hover:text-alpine-blue transition-colors">Home</a>
@@ -100,13 +105,37 @@
         </ul>
     </div>
 
-    <div class="pt-32 pb-12 px-6 max-w-7xl mx-auto">
-
-        <div class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">BOOK YOUR TRIP</h1>
-            <p class="text-slate-500 font-medium max-w-xl mx-auto">Fill out the form below. We'll generate a quote and
-                confirm availability instantly via WhatsApp.</p>
+    <header class="relative h-[70vh] w-full overflow-hidden flex items-center justify-center bg-slate-900">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=2070&auto=format&fit=crop"
+                class="w-full h-full object-cover" alt="Ski Adventure">
+            <div class="absolute inset-0 z-10 bg-gradient-to-r from-sky-950/90 via-sky-900/60 to-slate-900/40"></div>
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
         </div>
+
+        <div class="relative z-20 w-full max-w-4xl px-6 text-center">
+            <div class="fade-in-up">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <span
+                        class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-sky-400 animate-pulse shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                    <span class="text-sky-400 text-[10px] font-bold uppercase tracking-[0.2em] font-mono">Instant
+                        Quote • WhatsApp Confirmation</span>
+                </div>
+                <h1
+                    class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.85] text-white mb-6 drop-shadow-2xl">
+                    BOOK YOUR <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-emerald-300">ADVENTURE</span>
+                </h1>
+                <p
+                    class="text-slate-300 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+                    Fill out the form below. We'll generate a quote and confirm availability instantly via WhatsApp.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <div class="py-12 px-6 max-w-7xl mx-auto">
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
 
@@ -398,13 +427,15 @@
                         <div class="md:col-span-2">
                             <label
                                 class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Sport</label>
-                            <div class="flex bg-slate-50 p-1 rounded-xl border border-slate-200">
+                            <div class="flex bg-slate-50 p-1 rounded-xl border border-slate-200 relative">
+                                <div class="absolute inset-y-1 w-1/2 bg-white rounded-lg shadow-sm border border-slate-200 transition-all duration-300 ease-out"
+                                    :style="sport === 'ski' ? 'left: 4px' : 'left: calc(50% - 4px)'"></div>
                                 <button type="button" @click="sport = 'ski'"
-                                    :class="sport === 'ski' ? 'bg-white text-alpine-blue shadow-sm' : 'text-slate-500 hover:text-slate-700'"
-                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all">Skiing</button>
+                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all relative z-10"
+                                    :class="sport === 'ski' ? 'text-slate-900' : 'text-slate-500 hover:text-slate-700'">Skiing</button>
                                 <button type="button" @click="sport = 'board'"
-                                    :class="sport === 'board' ? 'bg-white text-alpine-blue shadow-sm' : 'text-slate-500 hover:text-slate-700'"
-                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all">Snowboarding</button>
+                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all relative z-10"
+                                    :class="sport === 'board' ? 'text-slate-900' : 'text-slate-500 hover:text-slate-700'">Snowboarding</button>
                             </div>
                             <input type="hidden" name="sport" :value="sport">
                         </div>
@@ -861,15 +892,194 @@
                         </label>
                     </div>
                 </div>
-
-                <!-- Safety Section Removed -->
-
-                <!-- 5. Preferences & Consent -->
+                <!-- 5. Addons & Activities -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
                             class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
+                        Addons & Activities
+                        <span class="ml-auto text-xs font-normal text-slate-400">(Optional)</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-6">Select number of tickets for each activity. Price = Tickets ×
+                        Price per ticket.</p>
+
+                    <div class="space-y-4">
+                        <!-- Gondola Cable Car -->
+                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
+                            :class="addons.gondola > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-slate-900">Gondola Cable Car</span>
+                                    <span
+                                        class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">₹1,200/ticket</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Phase 1 & 2 cable car access.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="addons.gondola = Math.max(0, addons.gondola - 1)"
+                                    class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
+                                <span class="w-8 text-center font-bold text-slate-900" x-text="addons.gondola"></span>
+                                <button type="button" @click="addons.gondola++"
+                                    class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Snowmobile Ride -->
+                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
+                            :class="addons.snowmobile > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-slate-900">Snowmobile Ride</span>
+                                    <span
+                                        class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">₹2,500/ticket</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">High-speed motorized sleds across frozen
+                                    snowfields.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="addons.snowmobile = Math.max(0, addons.snowmobile - 1)"
+                                    class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
+                                <span class="w-8 text-center font-bold text-slate-900"
+                                    x-text="addons.snowmobile"></span>
+                                <button type="button" @click="addons.snowmobile++"
+                                    class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+
+                        <!-- ATV Ride -->
+                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
+                            :class="addons.atv > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-slate-900">ATV Ride</span>
+                                    <span
+                                        class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">₹2,000/ticket</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">4x4 beasts with tire chains. Explore Tangmarg to
+                                    Drung.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="addons.atv = Math.max(0, addons.atv - 1)"
+                                    class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
+                                <span class="w-8 text-center font-bold text-slate-900" x-text="addons.atv"></span>
+                                <button type="button" @click="addons.atv++"
+                                    class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Sledging -->
+                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
+                            :class="addons.sledging > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold text-slate-900">Sledging</span>
+                                    <span
+                                        class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">₹500/ticket</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Classic snow fun. Traditional wooden sleds or
+                                    tube sledging.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button type="button" @click="addons.sledging = Math.max(0, addons.sledging - 1)"
+                                    class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
+                                <span class="w-8 text-center font-bold text-slate-900" x-text="addons.sledging"></span>
+                                <button type="button" @click="addons.sledging++"
+                                    class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Helicopter Rides Section -->
+                        <div class="border-2 border-amber-200 bg-amber-50/50 rounded-xl p-5">
+                            <div class="flex items-center gap-2 mb-4 pb-3 border-b border-amber-200">
+                                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                                <span class="font-bold text-slate-900">Helicopter Rides</span>
+                                <span
+                                    class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded uppercase">Premium</span>
+                            </div>
+
+                            <div class="space-y-3">
+                                <!-- Joint Ride -->
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-100"
+                                    :class="addons.heliJoint > 0 ? 'border-amber-400 ring-1 ring-amber-400' : ''">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold text-slate-800 text-sm">Joint Ride</span>
+                                            <span class="text-xs font-bold text-emerald-600">₹9,000/ticket</span>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500">Aerial sightseeing, no landing.</p>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button"
+                                            @click="addons.heliJoint = Math.max(0, addons.heliJoint - 1)"
+                                            class="w-7 h-7 bg-white border border-amber-300 rounded-lg hover:bg-amber-50 shadow-sm font-bold text-amber-600 flex items-center justify-center text-sm">−</button>
+                                        <span class="w-6 text-center font-bold text-slate-900 text-sm"
+                                            x-text="addons.heliJoint"></span>
+                                        <button type="button" @click="addons.heliJoint++"
+                                            class="w-7 h-7 bg-amber-500 text-white rounded-lg hover:bg-amber-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                    </div>
+                                </div>
+
+                                <!-- Commodore Ride -->
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-100"
+                                    :class="addons.heliCommodore > 0 ? 'border-amber-400 ring-1 ring-amber-400' : ''">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold text-slate-800 text-sm">Commodore Ride</span>
+                                            <span class="text-xs font-bold text-emerald-600">₹12,000/ticket</span>
+                                            <span
+                                                class="text-[9px] font-bold text-white bg-amber-500 px-1.5 py-0.5 rounded uppercase">Bestseller</span>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500">Landing experience included.</p>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button"
+                                            @click="addons.heliCommodore = Math.max(0, addons.heliCommodore - 1)"
+                                            class="w-7 h-7 bg-white border border-amber-300 rounded-lg hover:bg-amber-50 shadow-sm font-bold text-amber-600 flex items-center justify-center text-sm">−</button>
+                                        <span class="w-6 text-center font-bold text-slate-900 text-sm"
+                                            x-text="addons.heliCommodore"></span>
+                                        <button type="button" @click="addons.heliCommodore++"
+                                            class="w-7 h-7 bg-amber-500 text-white rounded-lg hover:bg-amber-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                    </div>
+                                </div>
+
+                                <!-- Sunshine Peak -->
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-100"
+                                    :class="addons.heliSunshine > 0 ? 'border-amber-400 ring-1 ring-amber-400' : ''">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-semibold text-slate-800 text-sm">Sunshine Peak</span>
+                                            <span class="text-xs font-bold text-emerald-600">₹15,000/ticket</span>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500">Mountain landing + extended flight.</p>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button"
+                                            @click="addons.heliSunshine = Math.max(0, addons.heliSunshine - 1)"
+                                            class="w-7 h-7 bg-white border border-amber-300 rounded-lg hover:bg-amber-50 shadow-sm font-bold text-amber-600 flex items-center justify-center text-sm">−</button>
+                                        <span class="w-6 text-center font-bold text-slate-900 text-sm"
+                                            x-text="addons.heliSunshine"></span>
+                                        <button type="button" @click="addons.heliSunshine++"
+                                            class="w-7 h-7 bg-amber-500 text-white rounded-lg hover:bg-amber-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Section Removed -->
+
+                <!-- 6. Preferences & Consent -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">6</span>
                         Final Details
                     </h3>
                     <div class="space-y-6">
@@ -1018,19 +1228,70 @@
                             </div>
                         </div>
 
+                        <!-- Addons Summary -->
+                        <div class="mb-4 relative z-10" x-show="calculateAddonsCost() > 0">
+                            <div class="text-xs uppercase text-amber-400 font-bold tracking-wider mb-2">Addons &
+                                Activities</div>
+                            <div class="space-y-1 text-gray-300 text-sm">
+                                <template x-if="addons.gondola > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.gondola"></span>x
+                                            Gondola</span><span
+                                            x-text="formatMoney(addonPrices.gondola * addons.gondola)"></span></div>
+                                </template>
+                                <template x-if="addons.snowmobile > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.snowmobile"></span>x
+                                            Snowmobile</span><span
+                                            x-text="formatMoney(addonPrices.snowmobile * addons.snowmobile)"></span>
+                                    </div>
+                                </template>
+                                <template x-if="addons.atv > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.atv"></span>x
+                                            ATV</span><span x-text="formatMoney(addonPrices.atv * addons.atv)"></span>
+                                    </div>
+                                </template>
+                                <template x-if="addons.sledging > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.sledging"></span>x
+                                            Sledging</span><span
+                                            x-text="formatMoney(addonPrices.sledging * addons.sledging)"></span></div>
+                                </template>
+                                <template x-if="addons.heliJoint > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.heliJoint"></span>x
+                                            Heli Joint</span><span
+                                            x-text="formatMoney(addonPrices.heliJoint * addons.heliJoint)"></span></div>
+                                </template>
+                                <template x-if="addons.heliCommodore > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.heliCommodore"></span>x
+                                            Heli Commodore</span><span
+                                            x-text="formatMoney(addonPrices.heliCommodore * addons.heliCommodore)"></span>
+                                    </div>
+                                </template>
+                                <template x-if="addons.heliSunshine > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.heliSunshine"></span>x
+                                            Heli Sunshine</span><span
+                                            x-text="formatMoney(addonPrices.heliSunshine * addons.heliSunshine)"></span>
+                                    </div>
+                                </template>
+                            </div>
+                            <div
+                                class="mt-2 pt-2 border-t border-gray-700 border-dashed flex justify-between text-amber-200">
+                                <span>Addons Subtotal</span>
+                                <span class="font-bold" x-text="formatMoney(calculateAddonsCost())"></span>
+                            </div>
+                        </div>
+
                         <div
-                            class="bg-gray-800 p-4 rounded-lg text-center border border-gray-600 relative z-10 mb-6 mt-6">
+                            class="bg-gray-800 p-3 rounded-lg text-center border border-gray-600 relative z-10 mb-3 mt-3">
                             <span class="block text-gray-400 text-[10px] uppercase tracking-widest mb-1">Total Estimated
                                 Cost</span>
-                            <span class="block text-3xl font-bold text-white mb-2" id="summary-total"
+                            <span class="block text-2xl font-bold text-white mb-1" id="summary-total"
                                 x-text="formatMoney(calculateTotal())"></span>
-                            <div class="inline-block px-3 py-1 bg-gray-700 rounded text-xs text-gray-300">
+                            <div class="inline-block px-2 py-0.5 bg-gray-700 rounded text-xs text-gray-300">
                                 <span x-text="formatMoney(Math.round(calculateTotal() / people))"></span> per person
                             </div>
                         </div>
 
                         <!-- View Complete Summary Button -->
-                        <div class="relative z-10">
+                        <div class="relative z-10 mb-3">
                             <button @click="showModal = true" type="button"
                                 class="w-full py-2 text-xs font-bold uppercase tracking-wider text-alpine-blue bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors flex items-center justify-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1362,7 +1623,7 @@
         function skiCalculator() {
             return {
                 people: 1,
-                days: 1,
+                days: 5,
                 sport: 'ski', // ski | board
                 selectedTier: '2star',
                 selectedHotel: 'Hotel Lala', // Default
@@ -1373,7 +1634,31 @@
 
                 customRates: { single: 15000, double: 18000, triple: 22000 },
 
+                currency: 'INR',
+                rates: { 'INR': 1, 'USD': 85, 'EUR': 90 },
+                symbols: { 'INR': '₹', 'USD': '$', 'EUR': '€' },
+
                 rooms: { single: 0, double: 0, triple: 0 },
+
+                addons: {
+                    gondola: 0,
+                    snowmobile: 0,
+                    atv: 0,
+                    sledging: 0,
+                    heliJoint: 0,
+                    heliCommodore: 0,
+                    heliSunshine: 0
+                },
+
+                addonPrices: {
+                    gondola: 1200,
+                    snowmobile: 2500,
+                    atv: 2000,
+                    sledging: 500,
+                    heliJoint: 9000,
+                    heliCommodore: 12000,
+                    heliSunshine: 15000
+                },
 
                 accommodationData: {
                     'dorm': { name: 'Dormitory', type: 'Dormitory', hotels: ['Dormitory'], pricePerPax: 1600, instructorTier: 'low' },
@@ -1401,8 +1686,13 @@
                     const urlParams = new URL(window.location.href).searchParams;
                     const tierParam = urlParams.get('tier');
                     const hotelParam = urlParams.get('hotel');
+                    const daysParam = urlParams.get('days');
 
-                    this.params = { tier: tierParam, hotel: hotelParam };
+                    this.params = { tier: tierParam, hotel: hotelParam, days: daysParam };
+
+                    if (daysParam) {
+                        this.days = parseInt(daysParam) || 1;
+                    }
 
                     if (tierParam) {
                         // Map readable tier names back to internal keys if needed
@@ -1435,6 +1725,24 @@
 
                     this.autoDistributeRooms();
                     this.$watch('people', () => this.autoDistributeRooms());
+
+                    // Listen for global currency changes
+                    window.addEventListener('storage', (e) => {
+                        if (e.key === 'preferredCurrency' && this.rates[e.newValue]) {
+                            this.currency = e.newValue;
+                        }
+                    });
+
+                    // Also hook into global updateCurrency if called
+                    const originalUpdateCurrency = window.updateCurrency;
+                    window.updateCurrency = () => {
+                        const selector = document.getElementById('currency-selector');
+                        if (selector && this.rates[selector.value]) {
+                            this.currency = selector.value;
+                            localStorage.setItem('preferredCurrency', this.currency);
+                        }
+                        if (originalUpdateCurrency) originalUpdateCurrency();
+                    };
                 },
 
                 showModal: false,
@@ -1533,15 +1841,30 @@
                     return this.getDailyInstructorRate() * this.days;
                 },
 
+                calculateAddonsCost() {
+                    let total = 0;
+                    for (let [key, ticketCount] of Object.entries(this.addons)) {
+                        if (ticketCount > 0 && this.addonPrices[key]) {
+                            total += this.addonPrices[key] * ticketCount;
+                        }
+                    }
+                    return total;
+                },
+
                 calculateTotal() {
-                    let total = this.calculateAccommodationCost() + this.calculateInstructorCost();
-                    // If 5-star, total might be just instructor cost, but effectively it's "On Request" state.
+                    let total = this.calculateAccommodationCost() + this.calculateInstructorCost() + this.calculateAddonsCost();
                     return total;
                 },
 
                 formatMoney(amount) {
                     if (this.selectedTier === '5star') return 'On Request';
-                    return '₹' + Math.round(amount).toLocaleString('en-IN');
+
+                    let converted = amount;
+                    if (this.currency !== 'INR') {
+                        converted = amount / this.rates[this.currency];
+                    }
+
+                    return this.symbols[this.currency] + Math.round(converted).toLocaleString();
                 }
             }
         }
