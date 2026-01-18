@@ -162,37 +162,7 @@
             animation-play-state: paused;
         }
     </style>
-    <style type="text/tailwindcss">
-        .gallery-card {
-            @apply relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-700 ease-out;
-        }
-        .gallery-card:hover {
-            @apply z-20 shadow-2xl shadow-sky-500/20 scale-[1.02];
-        }
-        .gallery-card img {
-            @apply transition-transform duration-700 ease-in-out w-full h-full object-cover;
-        }
-        .gallery-card:hover img {
-            @apply scale-110 rotate-1;
-        }
-        .gallery-card::after {
-            content: '';
-            @apply absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-60 transition-opacity duration-500;
-        }
-        .gallery-card:hover::after {
-            @apply opacity-90;
-        }
-        .nav-link-custom {
-            @apply relative text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300;
-        }
-        .nav-link-custom::after {
-            content: '';
-            @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-sky-500 transition-all duration-300;
-        }
-        .nav-link-custom:hover::after {
-            @apply w-full;
-        }
-    </style>
+
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
