@@ -142,22 +142,27 @@
 <body class="bg-slate-50 text-slate-600 antialiased selection:bg-alpine-blue selection:text-white">
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300"
         id="main-nav">
+
         <a href="index.html"
             class="flex items-center gap-2 text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
             <img src="images/logo.webp" alt="Wolf Adventures"
                 class="h-10 w-10 rounded-full object-cover border-2 border-slate-200">
             <span class="hidden sm:inline">WOLF<span class="text-alpine-blue">.ADV</span></span>
         </a>
+
         <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
             <a href="index.html" class="hover:text-alpine-blue transition-colors">Home</a>
             <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
             <a href="packages.html" class="hover:text-alpine-blue transition-colors">Packages</a>
+            <a href="gallery.html" class="hover:text-alpine-blue transition-colors">Gallery</a>
             <a href="policies.html" class="hover:text-alpine-blue transition-colors">Policies</a>
         </div>
+
         <div class="flex items-center gap-3 z-50 relative">
             <a href="booking.html"
-                class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg hidden sm:block">Book
+                class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book
                 Now</a>
+
             <button onclick="toggleMobileMenu()"
                 class="lg:hidden p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,11 +174,13 @@
             </button>
         </div>
     </nav>
+
     <div id="mobile-menu-overlay"
         class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center">
         <ul class="text-center space-y-8">
             <li><a href="index.html" onclick="toggleMobileMenu()"
-                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Home</a></li>
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Home</a>
+            </li>
             <li><a href="stays.html" onclick="toggleMobileMenu()"
                     class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Accommodations</a>
             </li>
@@ -183,8 +190,13 @@
             <li><a href="policies.html" onclick="toggleMobileMenu()"
                     class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Policies</a>
             </li>
-            <li><a href="booking.html"
-                    class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold">Book Now</a>
+            <li><a href="gallery.html" onclick="toggleMobileMenu()"
+                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Gallery</a>
+            </li>
+            <li>
+                <a href="booking.html"
+                    class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold shadow-xl">Book
+                    Your Trip</a>
             </li>
         </ul>
     </div>
