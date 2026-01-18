@@ -3,7 +3,7 @@
  * Used in stays.html and booking.html
  */
 
-const hotelsData = [
+export const hotelsData = [
     // Dormitory
     {
         category: "Dormitory",

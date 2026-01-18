@@ -7,7 +7,7 @@
     <title>Visual Journey | Wolf Adventure</title>
     <meta name="description"
         content="Explore Gulmarg's breathtaking peaks and powder through our curated visual gallery.">
-    <link rel="icon" type="image/png" href="assets/images/wolf.png">
+    <link rel="icon" type="image/png" href="/wolf.png">
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -15,22 +15,11 @@
     <meta property="og:description" content="A stunning collection of Gulmarg's best moments.">
     <meta property="og:image" content="assets/images/logo.webp">
 
-    <!-- External Assets -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Main Stylesheet (Loaded before JS to prevent FOUC) -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
 
-    <!-- Global Config -->
-    <script src="assets/js/tailwind-config.js"></script>
-
-    <!-- Data Sources -->
-    <script src="assets/js/data/gallery.js"></script>
-
-    <!-- Local Styles -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-
-    <!-- Core Logic -->
-    <script src="assets/js/components.js" defer></script>
-    <script src="assets/js/script.js" defer></script>
+    <!-- Core Application -->
+    <script type="module" src="/assets/js/script.js"></script>
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white font-sans"

@@ -1,4 +1,4 @@
-const HEADER_HTML = `
+export const HEADER_HTML = `
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300 font-sans"
         id="main-nav">
 
@@ -61,7 +61,7 @@ const HEADER_HTML = `
     </div>
 `;
 
-const FOOTER_HTML = `
+export const FOOTER_HTML = `
     <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 px-6 mt-12 font-sans">
         <div class="w-[95%] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
 
@@ -143,7 +143,7 @@ const FOOTER_HTML = `
     </footer>
 `;
 
-const FAB_HTML = `
+export const FAB_HTML = `
     <div id="contact-fab-container"
         class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2 group pointer-events-none font-sans">
         <div id="fab-options"
@@ -174,7 +174,7 @@ const FAB_HTML = `
     </div>
 `;
 
-function injectComponents() {
+export function injectComponents() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
     const fabPlaceholder = document.getElementById('fab-placeholder');
@@ -197,10 +197,22 @@ function injectComponents() {
     }
 }
 
-// Inject as soon as the script loads if the placeholders exist, 
-// or on DOMContentLoaded as a fallback.
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectComponents);
-} else {
-    injectComponents();
+// Initial injection is now handled by script.js to ensure proper ESM order.
+
+export function toggleMobileMenu() {
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (overlay.style.opacity === '1') {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+    } else {
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+    }
 }

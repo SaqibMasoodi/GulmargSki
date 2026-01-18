@@ -3,7 +3,7 @@
  * Used in index.html (Our Instructors section)
  */
 
-const instructorsData = [
+export const instructorsData = [
     {
         id: 1,
         category: 'ski',

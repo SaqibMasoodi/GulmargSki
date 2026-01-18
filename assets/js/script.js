@@ -1,21 +1,45 @@
-// --- MOBILE MENU LOGIC ---
-function toggleMobileMenu() {
-    const overlay = document.getElementById('mobile-menu-overlay');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
+import Alpine from 'alpinejs';
+import { injectComponents, toggleMobileMenu } from './components.js';
+import { instructorsData } from './data/instructors.js';
+import { attractionsData } from './data/attractions.js';
+import { galleryItems } from './data/gallery.js';
+import { hotelsData } from './data/hotels.js';
+import { PRICING, accommodationData, instructorData } from './data/pricing.js';
 
-    if (overlay.style.opacity === '1') {
-        overlay.style.opacity = '0';
-        overlay.style.pointerEvents = 'none';
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-    } else {
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'auto';
-        menuIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-    }
-}
+// --- ATTACH TO WINDOW FOR GLOBAL ACCESS ---
+window.Alpine = Alpine;
+window.instructorsData = instructorsData;
+window.attractionsData = attractionsData;
+window.galleryItems = galleryItems;
+window.hotelsData = hotelsData;
+window.PRICING = PRICING;
+window.addonPrices = PRICING; // Alias for booking page
+window.accommodationData = accommodationData;
+window.instructorData = instructorData;
+window.toggleMobileMenu = toggleMobileMenu;
+
+// Attach interactive functions to window for HTML event handlers
+window.highlightActiveLink = highlightActiveLink;
+window.switchDay = switchDay;
+window.renderAttractionsList = renderAttractionsList;
+window.renderAttractionDetail = renderAttractionDetail;
+window.setAttraction = setAttraction;
+window.updateCurrency = updateCurrency;
+window.fetchLiveWeather = fetchLiveWeather;
+window.updateWeatherUI = updateWeatherUI;
+window.toggleWeatherDropdown = toggleWeatherDropdown;
+window.selectWeather = selectWeather;
+window.submitBooking = submitBooking;
+window.renderHotelCards = renderHotelCards;
+
+// Initial Component Injection
+injectComponents();
+
+// Start Alpine
+Alpine.start();
+
+// --- MOBILE MENU LOGIC ---
+// Moved to components.js and attached to window
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -53,6 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. ATTRACTIONS INIT ---
     if (typeof setAttraction === 'function' && document.getElementById('attractions-list')) {
         setAttraction('gondola');
+    }
+
+    // --- 4. INSTRUCTORS INIT ---
+    // The inline script in index.html may not have access to instructorsData from modules
+    // So we initialize here after DOM is ready and setCategory is defined
+    if (typeof setCategory === 'function' && document.getElementById('guides-list')) {
+        setCategory('ski');
     }
 
     // --- 4. GLOBAL CLICK LISTENERS (Dropdowns) ---
@@ -228,10 +259,6 @@ function switchDay(dayNum) {
     }
 }
 
-
-// Initialize Day 1 and Attractions on Load
-if (typeof switchDay === 'function') switchDay(1); // Legacy Curriculum
-if (typeof setAttraction === 'function') setAttraction('gondola'); // New Attractions
 
 // 2. ATTRACTIONS LOGIC (Sidebar Layout)
 

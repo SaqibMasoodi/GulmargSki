@@ -8,7 +8,7 @@
     <title>Wolf Adventure | Gulmarg Ski Resort</title>
     <meta name="description"
         content="Experience the ultimate ski adventure in Gulmarg with certified instructors, premium logistics, and local expertise.">
-    <link rel="icon" type="image/png" href="assets/images/wolf.png">
+    <link rel="icon" type="image/png" href="/wolf.png">
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -21,22 +21,12 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- Global Config -->
-    <script src="assets/js/tailwind-config.js"></script>
+    <!-- Main Stylesheet (Loaded before JS to prevent FOUC) -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
 
-    <!-- Data Sources -->
-    <script src="assets/js/data/instructors.js"></script>
-    <script src="assets/js/data/attractions.js"></script>
-
-    <!-- Local Styles -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-
-    <!-- Core Logic -->
-    <script src="assets/js/components.js" defer></script>
-    <script src="assets/js/script.js" defer></script>
-
+    <!-- Core Application -->
+    <script type="module" src="/assets/js/script.js"></script>
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
@@ -970,9 +960,8 @@
                 `;
             }
 
-            // Initial Render
-            // Ensure DOM is ready (though script is at end of body)
-            setCategory('ski');
+            // Initial Render - handled by script.js DOMContentLoaded event
+            // This ensures proper timing with module imports
         </script>
     </section>
 

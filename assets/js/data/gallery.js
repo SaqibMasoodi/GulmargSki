@@ -3,7 +3,7 @@
  * Used in gallery.html
  */
 
-const galleryItems = [
+export const galleryItems = [
     // Videos
     { id: 101, type: 'video', category: 'ski', src: 'assets/images/Gallery/gandolaaaaa.mp4', title: 'Gondola Ascent', desc: 'Floating above the snow-laden pines towards the peak.' },
     { id: 102, type: 'video', category: 'ski', src: 'assets/images/Gallery/gulll.mp4', title: 'Powder Run', desc: 'A firsthand look at the dry Himalayan powder.' },

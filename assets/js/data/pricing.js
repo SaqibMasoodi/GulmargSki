@@ -3,7 +3,7 @@
  * Used in booking.html (Alpine.js Calculator)
  */
 
-const addonPrices = {
+export const PRICING = {
     gondola: 1200,
     snowmobile: 2500,
     atv: 2000,
@@ -13,7 +13,7 @@ const addonPrices = {
     heliSunshine: 15000
 };
 
-const accommodationData = {
+export const accommodationData = {
     'dorm': { name: 'Dormitory', type: 'Dormitory', hotels: ['Dormitory'], pricePerPax: 1600, instructorTier: 'low' },
     '2star': { name: '2 Star', type: '2 Star', hotels: ['Hotel Lala', 'Hotel ZamZam'], prices: { 1: 3500, 2: 4500, 3: 6500 }, instructorTier: 'low' },
     '3star_low': { name: '3 Star (Standard)', type: '3 Star', hotels: ['Mama Palace', 'Gulmarg Inn', 'Hotel Welcome'], prices: { 1: 4000, 2: 5500, 3: 7500 }, instructorTier: 'high' },
@@ -23,7 +23,7 @@ const accommodationData = {
     '5star': { name: '5 Star', type: '5 Star', hotels: ['The Khyber Resort'], instructorTier: 'high', isCustom: true }
 };
 
-const instructorData = {
+export const instructorData = {
     'low': {
         ski: { '1:1': 3500, '2:1': 5000, '3:1': 6000, 'extra': 1000 },
         board: { '1:1': 5800, '2:1': 8700, '3:1': 10500, 'extra': 1500 }

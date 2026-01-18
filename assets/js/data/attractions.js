@@ -3,7 +3,7 @@
  * Used in index.html (Attractions Tabs)
  */
 
-const attractionsData = [
+export const attractionsData = [
     {
         id: 'gondola',
         title: 'Gondola Cable Car',
