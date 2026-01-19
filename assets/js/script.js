@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs';
+import '/assets/css/styles.css';
 import { injectComponents, toggleMobileMenu } from './components.js';
 import { instructorsData } from './data/instructors.js';
 import { attractionsData } from './data/attractions.js';
@@ -80,8 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. INSTRUCTORS INIT ---
-    // The inline script in index.html may not have access to instructorsData from modules
-    // So we initialize here after DOM is ready and setCategory is defined
     if (typeof setCategory === 'function' && document.getElementById('guides-list')) {
         setCategory('ski');
     }

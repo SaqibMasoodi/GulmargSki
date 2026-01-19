@@ -2,9 +2,6 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-    // GitHub Pages: /GulmargSki/ (for saqibmasoodi.github.io/GulmargSki/)
-    // For Hostinger deployment, you'll build with base: '/' separately
-    base: '/GulmargSki/',
     build: {
         rollupOptions: {
             input: {

@@ -22,8 +22,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <!-- Main Stylesheet (Loaded before JS to prevent FOUC) -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
+
 
     <!-- Core Application -->
     <script type="module" src="/assets/js/script.js"></script>
@@ -960,8 +959,10 @@
                 `;
             }
 
-            // Initial Render - handled by script.js DOMContentLoaded event
-            // This ensures proper timing with module imports
+            // Initial Render - call after functions are defined
+            if (typeof instructorsData !== 'undefined') {
+                setCategory('ski');
+            }
         </script>
     </section>
 
