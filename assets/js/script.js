@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs';
-import '/assets/css/styles.css';
+import '../css/styles.css';
 import { injectComponents, toggleMobileMenu } from './components.js';
 import { instructorsData } from './data/instructors.js';
 import { attractionsData } from './data/attractions.js';
