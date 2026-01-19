@@ -230,7 +230,7 @@ const attractionsData = [
                 <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-8 uppercase tracking-tight">Adrenaline Without Skis</h3>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 aspect-[4/3]">
-                        <img src="images/home/attractions/gondola.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Snowmobile">
+                        <img src="images/home/attractions/gondola.webp" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Snowmobile">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
                             <h4 class="text-xl font-bold text-white mb-1">Snowmobiles</h4>
                             <p class="text-slate-300 text-xs font-medium mb-3">High-speed motorized sleds. Zoom across vast frozen snowfields.</p>
@@ -258,7 +258,7 @@ const attractionsData = [
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group">
                         <div class="h-32 rounded-lg bg-slate-200 dark:bg-slate-800 mb-4 overflow-hidden">
-                            <img src="images/home/attractions/waterfall.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Waterfall">
+                            <img src="images/home/attractions/waterfall.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Waterfall">
                         </div>
                         <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Drung Waterfall</h4>
                         <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Famous frozen waterfall (Jan/Feb).</p>
