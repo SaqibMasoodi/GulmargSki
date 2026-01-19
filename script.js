@@ -596,9 +596,126 @@ window.addEventListener('click', (e) => {
 // --- BOOKING PAGE LOGIC ---
 
 // Helper to access Alpine Data
+// Helper to access Alpine Data
 function getAlpineData() {
     const el = document.querySelector('[x-data]');
     return el && el._x_dataStack ? el._x_dataStack[0] : null;
+}
+
+// DEBUG: Helper (Optional now, can be used by test button too)
+function debugFormData(data) {
+    let output = "Sent to Google (Check Sheet):\n\n";
+    for (const [key, value] of data.entries()) {
+        output += `${key}: ${value}\n`;
+    }
+    alert(output);
+}
+
+// DEBUG: Helper to show what we are sending
+function debugFormData(data) {
+    let output = "Check this data carefully:\n\n";
+    for (const [key, value] of data.entries()) {
+        output += `${key}: ${value}\n`;
+    }
+    alert(output);
+}
+
+// 1. Submit to Google Form (Hidden Iframe Method)
+function submitToGoogleForm(formData, alpineData, tierName, hotel, totalEstimate) {
+    // CORRECT FORM ID
+    const formID = "1FAIpQLSdYlASPKg64NizjNE73NJsw8sKkxfY-k7wHof1HB1CVCdv7ZQ";
+    const submitURL = `https://docs.google.com/forms/d/e/${formID}/formResponse`;
+
+    // A. Create Hidden Iframe
+    const iframeId = 'hidden_iframe';
+    let iframe = document.getElementById(iframeId);
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = iframeId;
+        iframe.id = iframeId;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+
+    // B. Create Form
+    const form = document.createElement('form');
+    form.action = submitURL;
+    form.method = 'POST';
+    form.target = iframeId;
+    form.style.display = 'none';
+
+    // --- Format Add-ons Summary ---
+    let addonsList = [];
+
+    // Transfers
+    if (alpineData.transfers && alpineData.transfers.sedan > 0) addonsList.push(`Sedan Transfer x${alpineData.transfers.sedan}`);
+    if (alpineData.transfers && alpineData.transfers.suv > 0) addonsList.push(`SUV Transfer x${alpineData.transfers.suv}`);
+
+    // Activities
+    if (alpineData.addons && alpineData.addons.gondola > 0) addonsList.push(`Gondola Ph1 x${alpineData.addons.gondola}`);
+    if (alpineData.addons && alpineData.addons.gondolaPhase2 > 0) addonsList.push(`Gondola Ph2 x${alpineData.addons.gondolaPhase2}`);
+    if (alpineData.addons && alpineData.addons.snowmobile > 0) addonsList.push(`Snowmobile x${alpineData.addons.snowmobile}`);
+    if (alpineData.addons && alpineData.addons.atv > 0) addonsList.push(`ATV x${alpineData.addons.atv}`);
+    if (alpineData.addons && alpineData.addons.sledging > 0) addonsList.push(`Sledging x${alpineData.addons.sledging}`);
+
+    // Heli
+    if (alpineData.addons && alpineData.addons.heliJoint > 0) addonsList.push(`Heli Joint x${alpineData.addons.heliJoint}`);
+    if (alpineData.addons && alpineData.addons.heliKongdoori > 0) addonsList.push(`Heli Kongdoori x${alpineData.addons.heliKongdoori}`);
+    if (alpineData.addons && alpineData.addons.heliSunshine > 0) addonsList.push(`Heli Sunshine x${alpineData.addons.heliSunshine}`);
+
+    const addonsString = addonsList.length > 0 ? addonsList.join(', ') : 'None';
+
+    // DEBUG: Check Room Data
+    console.log('Submitting Rooms:', alpineData.rooms, 'Trip Type:', alpineData.tripType);
+
+    // C. Map Data
+    const fieldMap = {
+        'entry.1411305861': formData.get('name'),
+        'entry.1394501994': formData.get('email'),
+        'emailAddress': formData.get('email'),
+        'entry.126183217': formData.get('phone'),
+        'entry.251270045': formData.get('age'),
+        'entry.1533349685': formData.get('state'),
+        'entry.1387493298': formData.get('country'),
+        'entry.2053792323': alpineData.sport === 'ski' ? 'Skiing' : 'Snowboarding',
+        'entry.1931006243': alpineData.skill,
+        'entry.1837840527': alpineData.instructorMode === 'dedicated' ? 'Dedicated (1:1)' : 'Shared Group',
+        'entry.1043109708': formData.get('date'),
+        'entry.1519182878': alpineData.people,
+        'entry.649618320': alpineData.days,
+        'entry.1426188473': alpineData.tripType === 'ski_only' ? 'Instruction Only' : 'Stay + Instruction',
+        'entry.139253658': tierName,
+        'entry.33423613': hotel,
+        'entry.1661625790': `${alpineData.rooms.triple}T + ${alpineData.rooms.double}D + ${alpineData.rooms.single}S`,
+        'entry.379112098': addonsString,                    // Add-ons Summary
+        'entry.33825423': totalEstimate,
+        'entry.140366505': formData.get('notes')            // Special Requests using FormData
+    };
+
+    // D. Add Inputs
+    for (const [key, value] of Object.entries(fieldMap)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value || '';
+        form.appendChild(input);
+    }
+
+    // E. Submit
+    try {
+        document.body.appendChild(form);
+        form.submit();
+        console.log('Google Form submitted silently.');
+    } catch (e) {
+        console.error('Google Form submission failed', e);
+    }
+
+    // Cleanup
+    setTimeout(() => {
+        if (document.body.contains(form)) {
+            document.body.removeChild(form);
+        }
+    }, 2000);
 }
 
 function submitBooking(e) {
@@ -619,7 +736,7 @@ function submitBooking(e) {
         return;
     }
 
-    // 2. Package / Tier Map
+    // --- 1. Prepare Data for WhatsApp ---
     const tierMap = {
         'dorm': 'Dormitory',
         '2star': '2 Star',
@@ -661,7 +778,12 @@ function submitBooking(e) {
 
     // Get total from UI or calculate
     const totalEl = document.getElementById('summary-total');
-    msg += `💰 *Total Estimate*: ${totalEl ? totalEl.innerText : 'Pending'}\n`;
+    const totalEstimate = totalEl ? totalEl.innerText : 'Pending';
+
+    // Submit to Google Form (Background)
+    submitToGoogleForm(formData, alpineData, tierName, hotel, totalEstimate);
+
+    msg += `💰 *Total Estimate*: ${totalEstimate}\n`;
 
     // Encode and redirect
     const waNumber = "916005806856"; // Replace with actual number if different
@@ -683,7 +805,8 @@ function submitBooking(e) {
     }
 
     setTimeout(() => {
-        window.location.href = url;
+        window.location.href = url; // Redirect restored
+        // console.log("Redirect blocked for debugging. Click link manually if needed.");
     }, 1500);
 }
 

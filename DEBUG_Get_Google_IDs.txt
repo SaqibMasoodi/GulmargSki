@@ -1,0 +1,53 @@
+function getRealEntryIds() {
+  // 1. Open your form by ID
+  var formId = '1EyXAZjHm8XFHmjrBxMkWRYQelRzJ-IoA2MaVqGkTDSE'; 
+  var form = FormApp.openById(formId);
+  var items = form.getItems();
+  var response = form.createResponse();
+
+  // 2. Loop through all questions and fill them with their own Title
+  // This lets us map "Entry ID" -> "Field Name"
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var title = item.getTitle();
+    
+    // We can only fill questions that accept text/answers
+    // Skipping Images, PageBreaks, etc.
+    if (item.getType() == FormApp.ItemType.TEXT) {
+      response.withItemResponse(item.asTextItem().createResponse(title));
+    } else if (item.getType() == FormApp.ItemType.PARAGRAPH_TEXT) {
+      response.withItemResponse(item.asParagraphTextItem().createResponse(title));
+    } else if (item.getType() == FormApp.ItemType.MULTIPLE_CHOICE) {
+      // For multiple choice, we must pick a valid option to generate a URL. 
+      // We'll pick the first one.
+      var choice = item.asMultipleChoiceItem().getChoices()[0].getValue();
+      response.withItemResponse(item.asMultipleChoiceItem().createResponse(choice));
+    } else if (item.getType() == FormApp.ItemType.LIST) {
+      var choice = item.asListItem().getChoices()[0].getValue();
+      response.withItemResponse(item.asListItem().createResponse(choice));
+    } else if (item.getType() == FormApp.ItemType.DATE) {
+        response.withItemResponse(item.asDateItem().createResponse(new Date()));
+    }
+    // Add other types if necessary (checkboxes, etc)
+  }
+
+  // 3. Generate the URL (this contains the REAL entry IDs)
+  var url = response.toPrefilledUrl();
+  console.log("Analyze this URL to find IDs:");
+  console.log(url);
+  
+  // 4. Try to parse it for you
+  console.log("\n--- DETECTED MAPPING ---");
+  var queryString = url.split('?')[1];
+  if (queryString) {
+    var pairs = queryString.split('&');
+    for (var j = 0; j < pairs.length; j++) {
+      var pair = pairs[j].split('=');
+      var key = pair[0];
+      var val = decodeURIComponent(pair[1]);
+      if (key.startsWith("entry.")) {
+        console.log(key + ": " + val);
+      }
+    }
+  }
+}
