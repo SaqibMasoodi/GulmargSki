@@ -129,14 +129,6 @@
                                 class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
                                 placeholder="25" required>
                         </div>
-                        <!-- New Fields -->
-                        <div class="md:col-span-2">
-                            <label
-                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Address</label>
-                            <input type="text" name="address"
-                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
-                                placeholder="Street Address, P.O. Box, etc." required>
-                        </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">State /
                                 Province</label>
@@ -867,12 +859,82 @@
                 </div>
 
 
-                <!-- 5. Addons & Activities -->
+                <!-- 5. Transfers & Logistics -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <span
+                                class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
+                            Transfers & Logistics
+                        </h3>
+
+                    </div>
+
+                    <div class="relative min-h-[100px]">
+
+
+                        <!-- Vehicle Selection -->
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Sedan -->
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 transition shadow-sm hover:shadow-md flex flex-col justify-between h-full"
+                                :class="transfers.sedan > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
+                                <div class="mb-3">
+                                    <div class="font-bold text-slate-900 text-sm mb-1">Airport Pickup (Sedan)</div>
+                                    <p class="text-[11px] text-slate-500 leading-tight">Private sedan for up to 3
+                                        passengers.</p>
+                                </div>
+                                <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
+                                    <div
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue">
+                                        ₹3,200<span class="text-sky-300 font-normal ml-1">/trip</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button"
+                                            @click="transfers.sedan = Math.max(0, transfers.sedan - 1)"
+                                            class="w-7 h-7 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-bold flex items-center justify-center">−</button>
+                                        <span class="w-5 text-center font-bold text-slate-900 text-sm"
+                                            x-text="transfers.sedan"></span>
+                                        <button type="button" @click="transfers.sedan++"
+                                            class="w-7 h-7 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 font-bold flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SUV -->
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 transition shadow-sm hover:shadow-md flex flex-col justify-between h-full"
+                                :class="transfers.suv > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
+                                <div class="mb-3">
+                                    <div class="font-bold text-slate-900 text-sm mb-1">Airport Pickup (SUV)</div>
+                                    <p class="text-[11px] text-slate-500 leading-tight">Spacious 4x4 for up to 6
+                                        passengers or extra gear.</p>
+                                </div>
+                                <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
+                                    <div
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue">
+                                        ₹5,300<span class="text-sky-300 font-normal ml-1">/trip</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <button type="button" @click="transfers.suv = Math.max(0, transfers.suv - 1)"
+                                            class="w-7 h-7 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-bold flex items-center justify-center">−</button>
+                                        <span class="w-5 text-center font-bold text-slate-900 text-sm"
+                                            x-text="transfers.suv"></span>
+                                        <button type="button" @click="transfers.suv++"
+                                            class="w-7 h-7 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 font-bold flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- 6. Addons & Activities -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
-                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">6</span>
                         Addons & Activities
                         <span class="ml-auto text-xs font-normal text-slate-400">(Optional)</span>
                     </h3>
@@ -899,8 +961,9 @@
                                         </p>
                                     </div>
                                     <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
-                                        <div class="text-xs font-bold text-emerald-600">₹900<span
-                                                class="text-slate-400 font-normal">/tkt</span></div>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-emerald-50 border-emerald-100 text-emerald-700">
+                                            ₹900<span class="text-emerald-400 font-normal ml-1">/tkt</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.gondola = Math.max(0, addons.gondola - 1)"
@@ -922,8 +985,9 @@
                                         </p>
                                     </div>
                                     <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
-                                        <div class="text-xs font-bold text-emerald-600">₹1,100<span
-                                                class="text-slate-400 font-normal">/tkt</span></div>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-emerald-50 border-emerald-100 text-emerald-700">
+                                            ₹1,100<span class="text-emerald-400 font-normal ml-1">/tkt</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.gondolaPhase2 = Math.max(0, addons.gondolaPhase2 - 1)"
@@ -953,7 +1017,9 @@
                                     <p class="text-[11px] text-slate-500 leading-tight mb-4 flex-grow">High-speed
                                         motorized sleds.</p>
                                     <div class="mt-auto">
-                                        <div class="text-xs font-bold text-alpine-blue mb-2">₹2,200</div>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue mb-2">
+                                            ₹2,200</div>
                                         <div class="flex items-center justify-between bg-slate-50 rounded-lg p-1">
                                             <button type="button"
                                                 @click="addons.snowmobile = Math.max(0, addons.snowmobile - 1)"
@@ -973,7 +1039,9 @@
                                     <p class="text-[11px] text-slate-500 leading-tight mb-4 flex-grow">4x4 beasts with
                                         tire chains.</p>
                                     <div class="mt-auto">
-                                        <div class="text-xs font-bold text-alpine-blue mb-2">₹2,200</div>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue mb-2">
+                                            ₹2,200</div>
                                         <div class="flex items-center justify-between bg-slate-50 rounded-lg p-1">
                                             <button type="button" @click="addons.atv = Math.max(0, addons.atv - 1)"
                                                 class="w-6 h-6 bg-white border border-slate-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-slate-50">−</button>
@@ -991,7 +1059,9 @@
                                     <p class="text-[11px] text-slate-500 leading-tight mb-4 flex-grow">Classic snow fun.
                                     </p>
                                     <div class="mt-auto">
-                                        <div class="text-xs font-bold text-alpine-blue mb-2">₹1,500</div>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue mb-2">
+                                            ₹1,500</div>
                                         <div class="flex items-center justify-between bg-slate-50 rounded-lg p-1">
                                             <button type="button"
                                                 @click="addons.sledging = Math.max(0, addons.sledging - 1)"
@@ -1004,7 +1074,7 @@
                                     </div>
                                 </div>
 
-                                
+
                             </div>
                         </div>
 
@@ -1032,7 +1102,9 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
-                                        <span class="text-xs font-bold text-amber-600">₹9,000</span>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-amber-50 border-amber-100 text-amber-700">
+                                            ₹9,000</div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.heliJoint = Math.max(0, addons.heliJoint - 1)"
@@ -1063,7 +1135,9 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
-                                        <span class="text-xs font-bold text-amber-600">₹12,000</span>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-amber-50 border-amber-100 text-amber-700">
+                                            ₹12,000</div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.heliKongdoori = Math.max(0, addons.heliKongdoori - 1)"
@@ -1090,7 +1164,9 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-col items-end gap-1">
-                                        <span class="text-xs font-bold text-amber-600">₹15,000</span>
+                                        <div
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-amber-50 border-amber-100 text-amber-700">
+                                            ₹15,000</div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.heliSunshine = Math.max(0, addons.heliSunshine - 1)"
@@ -1108,12 +1184,12 @@
                     </div>
                 </div>
 
-                <!-- 6. Preferences & Consent -->
+                <!-- 7. Preferences & Consent -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
-                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">6</span>
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">7</span>
                         Final Details
                     </h3>
                     <div class="space-y-6">
@@ -1672,18 +1748,27 @@
 
                 rooms: { single: 0, double: 0, triple: 0 },
 
+                transfers: {
+                    own: false,
+                    sedan: 0,
+                    suv: 0
+                },
+
                 addons: {
                     gondola: 0,
+                    gondolaPhase2: 0,
                     snowmobile: 0,
                     atv: 0,
                     sledging: 0,
                     heliJoint: 0,
                     heliKongdoori: 0,
-                    heliSunshine: 0,
-                    gondolaPhase2: 0,
-                    airportPickup: 0
+                    heliSunshine: 0
                 },
 
+                transferPrices: {
+                    sedan: 3200,
+                    suv: 5300
+                },
                 addonPrices: {
                     gondola: 900,
                     gondolaPhase2: 1100,
@@ -1692,8 +1777,7 @@
                     sledging: 1500,
                     heliJoint: 9000,
                     heliKongdoori: 12000,
-                    heliSunshine: 15000,
-                    airportPickup: 5500
+                    heliSunshine: 15000
                 },
 
                 accommodationData: {
@@ -1877,6 +1961,13 @@
                     return this.getDailyInstructorRate() * this.days;
                 },
 
+                calculateTransfersCost() {
+                    if (this.transfers.own) return 0;
+                    return (this.transfers.sedan * this.transferPrices.sedan) + (this.transfers.suv * this.transferPrices.suv);
+                },
+
+
+
                 calculateAddonsCost() {
                     let total = 0;
                     for (let [key, ticketCount] of Object.entries(this.addons)) {
@@ -1888,7 +1979,7 @@
                 },
 
                 calculateTotal() {
-                    let total = this.calculateAccommodationCost() + this.calculateInstructorCost() + this.calculateAddonsCost();
+                    let total = this.calculateAccommodationCost() + this.calculateInstructorCost() + this.calculateAddonsCost() + this.calculateTransfersCost();
                     return total;
                 },
 
