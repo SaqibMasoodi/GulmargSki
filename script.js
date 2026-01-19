@@ -16,6 +16,8 @@ function toggleMobileMenu() {
         closeIcon.classList.remove('hidden');
     }
 }
+// Make globally accessible for Safari
+window.toggleMobileMenu = toggleMobileMenu;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -753,23 +755,23 @@ function submitBooking(e) {
     // --- WHATSAPP MESSAGE ---
     let msg = `*New Booking Request from Skigulmarg.com*\n\n`;
 
-    msg += `👤 *Customer*\n`;
+    msg += `*Customer*\n`;
     msg += `Name: ${formData.get('name')}\n`;
     msg += `Phone: ${formData.get('phone')}\n`;
-    msg += `Loc: ${formData.get('city')}, ${formData.get('country')}\n\n`;
+    msg += `Location: ${formData.get('state') || 'Not specified'}, ${formData.get('country')}\n\n`;
 
-    msg += `⛷ *Sport & Trip*\n`;
+    msg += `*Trip Details*\n`;
     msg += `Sport: ${alpineData.sport === 'ski' ? 'Skiing' : 'Snowboarding'}\n`;
     msg += `Pack: ${tierName}\n`;
     msg += `People: ${alpineData.people}\n`;
     msg += `Duration: ${alpineData.days} Days\n`;
     msg += `Start: ${dateVal}\n\n`;
 
-    msg += `🏨 *Stay*\n`;
+    msg += `*Stay*\n`;
     msg += `Hotel: ${hotel}\n`;
     msg += `Rooms: ${alpineData.rooms.triple}T + ${alpineData.rooms.double}D + ${alpineData.rooms.single}S\n\n`;
 
-    msg += `⛷ *Instructor*\n`;
+    msg += `*Instructor*\n`;
     const instrMode = formData.get('instructorMode') === 'dedicated' ? 'Dedicated (1:1)' : 'Shared Group';
     const instrTier = alpineData.tripType === 'ski_only' ? (alpineData.selectedInstructionTier === 'low' ? 'Standard' : 'Premium') : 'Linked to Stay';
     msg += `Mode: ${instrMode}\n`;
@@ -783,10 +785,10 @@ function submitBooking(e) {
     // Submit to Google Form (Background)
     submitToGoogleForm(formData, alpineData, tierName, hotel, totalEstimate);
 
-    msg += `💰 *Total Estimate*: ${totalEstimate}\n`;
+    msg += `*Total Estimate*: ${totalEstimate}\n`;
 
     // Encode and redirect
-    const waNumber = "916005806856"; // Replace with actual number if different
+    const waNumber = "916005806856";
     const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 
     // Show confirmation UI
@@ -804,11 +806,16 @@ function submitBooking(e) {
         `;
     }
 
+    // Mark submission as successful in localStorage
+    localStorage.setItem('bookingSubmitted', 'true');
+
     setTimeout(() => {
         window.location.href = url; // Redirect restored
         // console.log("Redirect blocked for debugging. Click link manually if needed.");
     }, 3000);
 }
+// Make globally accessible for Safari
+window.submitBooking = submitBooking;
 
 // --- HOTELS DATA & RENDERING ---
 // Added at the end of the file
