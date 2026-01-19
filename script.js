@@ -807,7 +807,7 @@ function submitBooking(e) {
     setTimeout(() => {
         window.location.href = url; // Redirect restored
         // console.log("Redirect blocked for debugging. Click link manually if needed.");
-    }, 1500);
+    }, 3000);
 }
 
 // --- HOTELS DATA & RENDERING ---
