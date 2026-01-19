@@ -361,34 +361,115 @@
                     </div>
                 </div>
 
-                <!-- Address & Identity Removed -->
-
-                <!-- 2. Trip Details (Replaced Package Section) -->
+                <!-- 2. Activity & Skill (NEW) -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
                             class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
-                        Trip Details
+                        Activity & Skill
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <div class="space-y-6">
                         <!-- Sport Selection -->
-                        <div class="md:col-span-2">
-                            <label
-                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Sport</label>
-                            <div class="flex bg-slate-50 p-1 rounded-xl border border-slate-200 relative">
-                                <div class="absolute inset-y-1 w-1/2 bg-white rounded-lg shadow-sm border border-slate-200 transition-all duration-300 ease-out"
-                                    :style="sport === 'ski' ? 'left: 4px' : 'left: calc(50% - 4px)'"></div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Choose
+                                your sport</label>
+                            <div class="grid grid-cols-2 gap-4">
                                 <button type="button" @click="sport = 'ski'"
-                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all relative z-10"
-                                    :class="sport === 'ski' ? 'text-slate-900' : 'text-slate-500 hover:text-slate-700'">Skiing</button>
+                                    class="flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all"
+                                    :class="sport === 'ski' ? 'border-alpine-blue bg-sky-50 text-slate-900' : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300'">
+                                    <span class="material-symbols-rounded">downhill_skiing</span>
+                                    <span class="font-bold text-sm">Skiing</span>
+                                </button>
                                 <button type="button" @click="sport = 'board'"
-                                    class="flex-1 py-3 rounded-lg text-sm font-bold transition-all relative z-10"
-                                    :class="sport === 'board' ? 'text-slate-900' : 'text-slate-500 hover:text-slate-700'">Snowboarding</button>
+                                    class="flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all"
+                                    :class="sport === 'board' ? 'border-alpine-blue bg-sky-50 text-slate-900' : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300'">
+                                    <span class="material-symbols-rounded">snowboarding</span>
+                                    <span class="font-bold text-sm">Snowboarding</span>
+                                </button>
                             </div>
                             <input type="hidden" name="sport" :value="sport">
                         </div>
 
+                        <!-- Skill Level -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Skill
+                                Level</label>
+                            <div class="relative">
+                                <select name="skill" x-model="skill"
+                                    class="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
+                                    <option value="Beginner">Beginner (First time)</option>
+                                    <option value="Intermediate">Intermediate (Can turn & stop)</option>
+                                    <option value="Advanced">Advanced (Black runs / Off-piste)</option>
+                                </select>
+                                <div
+                                    class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instructor Mode -->
+                        <div>
+                            <label
+                                class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Instructor
+                                Mode</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Shared -->
+                                <div @click="instructorMode = 'shared'"
+                                    class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                    :class="instructorMode === 'shared' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-sm text-slate-800">Shared Group</span>
+                                        <span x-show="instructorMode === 'shared'"
+                                            class="text-alpine-blue bg-white rounded-full p-0.5">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-tight">Economical. 1 Instructor manages the
+                                        whole group.</p>
+                                </div>
+
+                                <!-- Dedicated -->
+                                <div @click="instructorMode = 'dedicated'"
+                                    class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                    :class="instructorMode === 'dedicated' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-sm text-slate-800">Dedicated (1:1)</span>
+                                        <span x-show="instructorMode === 'dedicated'"
+                                            class="text-alpine-blue bg-white rounded-full p-0.5">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-tight">Premium. Every participant gets
+                                        their own personal instructor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address & Identity Removed -->
+
+                <!-- 3. Trip Logistics (MOVED from 2) -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <h3
+                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span
+                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+                        Trip Logistics
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Wrapper removed -->
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Number
@@ -435,412 +516,357 @@
                     </div>
                 </div>
 
-                <!-- 3. Accommodation Tier & Rooms -->
+                <!-- 4. Stay & Accommodation -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                    <h3
-                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                        <span
-                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
-                        Packages
-                    </h3>
-
-                    <!-- Trip Type Toggle -->
+                    <!-- Header with Inline Toggle -->
                     <div
-                        class="bg-slate-50 border border-slate-200 rounded-xl p-1 flex mb-6 text-sm font-bold relative">
-                        <div class="absolute inset-y-1 w-1/2 bg-white rounded-lg shadow-sm border border-slate-200 transition-all duration-300 ease-out"
-                            :style="tripType === 'stay_ski' ? 'left: 4px' : 'left: calc(50% - 4px)'"></div>
-                        <button type="button"
-                            @click="tripType = 'stay_ski'; autoDistributeRooms(); params.tier ? null : selectedTier='2star'"
-                            class="flex-1 py-2 rounded-lg text-center relative z-10 transition-colors"
-                            :class="tripType === 'stay_ski' ? 'text-slate-900' : 'text-slate-500 hover:text-slate-700'">
-                            Stay + Ski
-                        </button>
-                        <button type="button" @click="tripType = 'ski_only'"
-                            class="flex-1 py-2 rounded-lg text-center relative z-10 transition-colors"
-                            :class="tripType === 'ski_only' ? 'text-slate-900' : 'text-slate-500 hover:text-slate-700'">
-                            Instruction Only
-                        </button>
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <span
+                                class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                            Stay & Accommodation
+                        </h3>
+
+                        <!-- Inline Toggle -->
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <span
+                                class="text-sm font-medium text-slate-500 group-hover:text-slate-700 transition-colors">I
+                                have booked my own stay</span>
+                            <div class="relative flex items-center">
+                                <input type="checkbox"
+                                    @change="tripType = $el.checked ? 'ski_only' : 'stay_ski'; if(!$el.checked) { autoDistributeRooms(); if(!params.tier) selectedTier='2star'; }"
+                                    :checked="tripType === 'ski_only'"
+                                    class="w-5 h-5 text-alpine-blue border-slate-300 rounded focus:ring-alpine-blue transition cursor-pointer">
+                            </div>
+                        </label>
                     </div>
 
-                    <!-- Instruction Only Tier Selection -->
-                    <div x-show="tripType === 'ski_only'" class="mb-6 space-y-3">
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Select
-                            Instructor Tier</label>
+                    <!-- Layout Container -->
+                    <div class="relative min-h-[100px]">
 
-                        <!-- Standard Instructor -->
-                        <div @click="selectedInstructionTier = 'low'"
-                            class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                            :class="selectedInstructionTier === 'low' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-sm text-slate-800">Standard Instruction</span>
-                                <span
-                                    class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1 bg-slate-200 text-slate-600"
-                                    :class="selectedInstructionTier === 'low' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                    Basic
-                                    <span x-show="selectedInstructionTier === 'low'"
-                                        class="pl-1 border-l border-white/20">
-                                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="text-xs text-slate-500 leading-tight mt-2">Certified local instructors.
-                                Great
-                                for beginners to intermediates.</div>
-                        </div>
-
-                        <!-- Premium Instructor -->
-                        <div @click="selectedInstructionTier = 'high'"
-                            class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                            :class="selectedInstructionTier === 'high' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-sm text-slate-800">Premium Instruction</span>
-                                <span
-                                    class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1 bg-slate-200 text-slate-600"
-                                    :class="selectedInstructionTier === 'high' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                    Pro
-                                    <span x-show="selectedInstructionTier === 'high'"
-                                        class="pl-1 border-l border-white/20">
-                                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="text-xs text-slate-500 leading-tight mt-2">Highly experienced, often
-                                international or top-tier local pros. Best for advanced techniques.</div>
-                        </div>
-                    </div>
-
-                    <!-- Tier Selection (Custom Layout) -->
-                    <div class="space-y-4 mb-6" x-show="tripType === 'stay_ski'">
-
-                        <!-- Row 1: Basic (Dorm) -->
-                        <div @click="selectedTier = 'dorm'; autoDistributeRooms(); selectedHotel = accommodationData['dorm'].hotels[0]"
-                            class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                            :class="selectedTier === 'dorm' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-sm text-slate-800"
-                                    x-text="accommodationData['dorm'].name"></span>
-                                <span
-                                    class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                    :class="selectedTier === 'dorm' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                    <span x-text="accommodationData['dorm'].type"></span>
-                                    <span x-show="params.tier === 'dorm'" class="pl-1 border-l border-white/20"><svg
-                                            class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg></span>
-                                </span>
-                            </div>
-                            <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                x-text="accommodationData['dorm'].hotels.join(', ')"></div>
-                        </div>
-
-                        <!-- Row 2: Silver (2-Star) -->
-                        <div @click="selectedTier = '2star'; autoDistributeRooms(); selectedHotel = accommodationData['2star'].hotels[0]"
-                            class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                            :class="selectedTier === '2star' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-sm text-slate-800"
-                                    x-text="accommodationData['2star'].name"></span>
-                                <span
-                                    class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                    :class="selectedTier === '2star' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                    <span x-text="accommodationData['2star'].type"></span>
-                                    <span x-show="params.tier === '2star'" class="pl-1 border-l border-white/20"><svg
-                                            class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg></span>
-                                </span>
-                            </div>
-                            <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                x-text="accommodationData['2star'].hotels.join(', ')"></div>
-                        </div>
-
-                        <!-- Row 3: Gold & Diamond (3-Star) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- Gold -->
-                            <div @click="selectedTier = '3star_low'; autoDistributeRooms(); selectedHotel = accommodationData['3star_low'].hotels[0]"
-                                class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                                :class="selectedTier === '3star_low' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                                <div class="flex justify-between items-center mb-1">
-                                    <span class="font-bold text-sm text-slate-800"
-                                        x-text="accommodationData['3star_low'].name"></span>
-                                    <span
-                                        class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                        :class="selectedTier === '3star_low' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                        <span x-text="accommodationData['3star_low'].type"></span>
-                                        <span x-show="params.tier === '3star_low'"
-                                            class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg></span>
-                                    </span>
-                                </div>
-                                <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                    x-text="accommodationData['3star_low'].hotels.join(', ')"></div>
-                            </div>
-                            <!-- Diamond -->
-                            <div @click="selectedTier = '3star_high'; autoDistributeRooms(); selectedHotel = accommodationData['3star_high'].hotels[0]"
-                                class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                                :class="selectedTier === '3star_high' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                                <div class="flex justify-between items-center mb-1">
-                                    <span class="font-bold text-sm text-slate-800"
-                                        x-text="accommodationData['3star_high'].name"></span>
-                                    <span
-                                        class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                        :class="selectedTier === '3star_high' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                        <span x-text="accommodationData['3star_high'].type"></span>
-                                        <span x-show="params.tier === '3star_high'"
-                                            class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg></span>
-                                    </span>
-                                </div>
-                                <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                    x-text="accommodationData['3star_high'].hotels.join(', ')"></div>
-                            </div>
-                        </div>
-
-                        <!-- Row 4: Platinum & Platinum+ (4-Star) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- Platinum -->
-                            <div @click="selectedTier = '4star_low'; autoDistributeRooms(); selectedHotel = accommodationData['4star_low'].hotels[0]"
-                                class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                                :class="selectedTier === '4star_low' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                                <div class="flex justify-between items-center mb-1">
-                                    <span class="font-bold text-sm text-slate-800"
-                                        x-text="accommodationData['4star_low'].name"></span>
-                                    <span
-                                        class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                        :class="selectedTier === '4star_low' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                        <span x-text="accommodationData['4star_low'].type"></span>
-                                        <span x-show="params.tier === '4star_low'"
-                                            class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg></span>
-                                    </span>
-                                </div>
-                                <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                    x-text="accommodationData['4star_low'].hotels.join(', ')"></div>
-                            </div>
-                            <!-- Platinum+ -->
-                            <div @click="selectedTier = '4star_high'; autoDistributeRooms(); selectedHotel = accommodationData['4star_high'].hotels[0]"
-                                class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                                :class="selectedTier === '4star_high' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                                <div class="flex justify-between items-center mb-1">
-                                    <span class="font-bold text-sm text-slate-800"
-                                        x-text="accommodationData['4star_high'].name"></span>
-                                    <span
-                                        class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                        :class="selectedTier === '4star_high' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                        <span x-text="accommodationData['4star_high'].type"></span>
-                                        <span x-show="params.tier === '4star_high'"
-                                            class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg></span>
-                                    </span>
-                                </div>
-                                <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                    x-text="accommodationData['4star_high'].hotels.join(', ')"></div>
-                            </div>
-                        </div>
-
-                        <!-- Row 5: Royal (5-Star) -->
-                        <div @click="selectedTier = '5star'; autoDistributeRooms(); selectedHotel = accommodationData['5star'].hotels[0]"
-                            class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
-                            :class="selectedTier === '5star' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-sm text-slate-800"
-                                    x-text="accommodationData['5star'].name"></span>
-                                <span
-                                    class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
-                                    :class="selectedTier === '5star' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
-                                    <span x-text="accommodationData['5star'].type"></span>
-                                    <span x-show="params.tier === '5star'" class="pl-1 border-l border-white/20"><svg
-                                            class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg></span>
-                                </span>
-                            </div>
-                            <div class="text-xs text-slate-500 leading-tight mt-2 italic"
-                                x-text="accommodationData['5star'].hotels.join(', ')"></div>
-                        </div>
-
-                    </div>
-
-                    <!-- Hotel Selection (Dynamic) -->
-                    <div x-show="tripType === 'stay_ski' && selectedTier && accommodationData[selectedTier].hotels.length > 0"
-                        class="mb-8" x-transition>
-                        <label
-                            class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-2">Preferred
-                            Stay <span x-show="params.hotel && params.hotel === selectedHotel"
-                                class="text-green-600 text-[10px] font-bold bg-green-50 px-2 py-0.5 rounded-full border border-green-100 flex items-center gap-1"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg> You selected this</span></label>
-                        <div class="relative">
-                            <select x-model="selectedHotel" name="hotel"
-                                class="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
-                                <template x-for="hotel in accommodationData[selectedTier].hotels" :key="hotel">
-                                    <option :value="hotel" x-text="hotel"></option>
-                                </template>
-                            </select>
+                        <!-- View 1: Instruction Only Message (Centered & Clean) -->
+                        <div x-show="tripType === 'ski_only'" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            class="flex flex-col items-center justify-center text-center p-8 bg-slate-50 border border-slate-100 rounded-2xl">
                             <div
-                                class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 9l-7 7-7-7"></path>
-                                </svg>
+                                class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mb-3 text-emerald-500">
+                                <span class="material-symbols-rounded text-2xl">check_circle</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <div x-show="selectedTier === '5star'" x-cloak
-                        class="mb-8 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-                        <h3 class="font-bold text-sm text-indigo-900 mb-2">💎 Premium Experience</h3>
-                        <p class="text-xs text-indigo-700">Prices for 5-Star properties depend on live
-                            availability
-                            and
-                            seasonal rates. We will confirm the exact quote manually.</p>
-                    </div>
-
-                    <!-- Room Split Section -->
-                    <div x-show="tripType === 'stay_ski' && selectedTier !== 'dorm' && selectedTier !== '5star'"
-                        x-transition>
-                        <div class="flex justify-between items-center border-b border-slate-100 pb-2 mb-4">
-                            <h4 class="text-sm font-bold text-slate-900">Configure Rooms</h4>
-                            <button type="button" @click="autoDistributeRooms()"
-                                class="text-xs text-alpine-blue hover:underline font-semibold">
-                                Reset Default
-                            </button>
+                            <h4 class="font-bold text-slate-900 mb-1">Booking as Instruction Only</h4>
+                            <p class="text-sm text-slate-500 max-w-sm">Our team will reach out to coordinate your pickup
+                                and meeting location based on your skill level.</p>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <!-- Triple -->
-                            <div class="bg-sky-50 p-4 rounded-xl border border-sky-200 relative overflow-hidden">
-                                <div
-                                    class="absolute top-0 right-0 bg-sky-200 text-sky-800 text-[9px] px-2 py-0.5 font-bold rounded-bl">
-                                    BEST VALUE</div>
-                                <label
-                                    class="block text-xs font-bold uppercase text-sky-800 tracking-wide mb-1">3-Person
-                                    Room</label>
-                                <div class="text-lg font-bold text-slate-800 mb-2" x-text="'₹' + getRoomPrice(3)">
-                                </div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <button type="button" @click="rooms.triple = Math.max(0, rooms.triple - 1)"
-                                        class="w-8 h-8 bg-white border border-sky-200 rounded hover:bg-white shadow-sm font-bold text-sky-600">-</button>
-                                    <input type="number" x-model.number="rooms.triple"
-                                        class="w-full text-center bg-transparent font-bold outline-none text-slate-800">
-                                    <button type="button" @click="rooms.triple++"
-                                        class="w-8 h-8 bg-white border border-sky-200 rounded hover:bg-white shadow-sm font-bold text-sky-600">+</button>
-                                </div>
-                                <div class="text-xs text-center font-bold text-sky-700" x-show="rooms.triple > 0">
-                                    Total: <span x-text="rooms.triple * 3"></span> People
-                                </div>
-                            </div>
-                            <!-- Double -->
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                <label
-                                    class="block text-xs font-bold uppercase text-slate-500 tracking-wide mb-1">2-Person
-                                    Room</label>
-                                <div class="text-lg font-bold text-slate-800 mb-2" x-text="'₹' + getRoomPrice(2)">
-                                </div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <button type="button" @click="rooms.double = Math.max(0, rooms.double - 1)"
-                                        class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">-</button>
-                                    <input type="number" x-model.number="rooms.double"
-                                        class="w-full text-center bg-transparent font-bold outline-none text-slate-800">
-                                    <button type="button" @click="rooms.double++"
-                                        class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">+</button>
-                                </div>
-                                <div class="text-xs text-center font-bold text-slate-500" x-show="rooms.double > 0">
-                                    Total: <span x-text="rooms.double * 2"></span> People
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                <label
-                                    class="block text-xs font-bold uppercase text-slate-500 tracking-wide mb-1">1-Person
-                                    Room</label>
-                                <div class="text-lg font-bold text-slate-800 mb-2" x-text="'₹' + getRoomPrice(1)">
-                                </div>
-                                <div class="flex items-center gap-2 mb-2">
-                                    <button type="button" @click="rooms.single = Math.max(0, rooms.single - 1)"
-                                        class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">-</button>
-                                    <input type="number" x-model.number="rooms.single"
-                                        class="w-full text-center bg-transparent font-bold outline-none text-slate-800">
-                                    <button type="button" @click="rooms.single++"
-                                        class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">+</button>
-                                </div>
-                                <div class="text-xs text-center font-bold text-slate-500" x-show="rooms.single > 0">
-                                    Total: <span x-text="rooms.single"></span> People
-                                </div>
-                            </div>
-                        </div>
+                        <!-- View 2: Accommodation Selection (Collapse Animation) -->
+                        <div x-show="tripType === 'stay_ski'" x-collapse>
+                            <!-- Tier Selection (Custom Layout) -->
+                            <div class="space-y-4 mb-6">
 
-                        <div class="mt-4 flex justify-end">
-                            <div class="px-3 py-1 rounded text-xs font-bold transition-colors duration-300"
-                                :class="totalAccommodated === people ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'">
-                                <span x-show="totalAccommodated === people">✅ All <span x-text="people"></span>
-                                    people
-                                    assigned.</span>
-                                <span x-show="totalAccommodated !== people">⚠️ Assigned <span
-                                        x-text="totalAccommodated"></span> / <span x-text="people"></span>
-                                    people.</span>
+                                <!-- Row 1: Basic (Dorm) -->
+                                <div @click="selectedTier = 'dorm'; autoDistributeRooms(); selectedHotel = accommodationData['dorm'].hotels[0]"
+                                    class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                    :class="selectedTier === 'dorm' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-sm text-slate-800"
+                                            x-text="accommodationData['dorm'].name"></span>
+                                        <span
+                                            class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                            :class="selectedTier === 'dorm' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                            <span x-text="accommodationData['dorm'].type"></span>
+                                            <span x-show="params.tier === 'dorm'"
+                                                class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                </svg></span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                        x-text="accommodationData['dorm'].hotels.join(', ')"></div>
+                                </div>
+
+                                <!-- Row 2: Silver (2-Star) -->
+                                <div @click="selectedTier = '2star'; autoDistributeRooms(); selectedHotel = accommodationData['2star'].hotels[0]"
+                                    class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                    :class="selectedTier === '2star' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-sm text-slate-800"
+                                            x-text="accommodationData['2star'].name"></span>
+                                        <span
+                                            class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                            :class="selectedTier === '2star' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                            <span x-text="accommodationData['2star'].type"></span>
+                                            <span x-show="params.tier === '2star'"
+                                                class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                </svg></span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                        x-text="accommodationData['2star'].hotels.join(', ')"></div>
+                                </div>
+
+                                <!-- Row 3: Gold & Diamond (3-Star) -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <!-- Gold -->
+                                    <div @click="selectedTier = '3star_low'; autoDistributeRooms(); selectedHotel = accommodationData['3star_low'].hotels[0]"
+                                        class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                        :class="selectedTier === '3star_low' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-sm text-slate-800"
+                                                x-text="accommodationData['3star_low'].name"></span>
+                                            <span
+                                                class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                                :class="selectedTier === '3star_low' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                                <span x-text="accommodationData['3star_low'].type"></span>
+                                                <span x-show="params.tier === '3star_low'"
+                                                    class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg></span>
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                            x-text="accommodationData['3star_low'].hotels.join(', ')"></div>
+                                    </div>
+                                    <!-- Diamond -->
+                                    <div @click="selectedTier = '3star_high'; autoDistributeRooms(); selectedHotel = accommodationData['3star_high'].hotels[0]"
+                                        class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                        :class="selectedTier === '3star_high' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-sm text-slate-800"
+                                                x-text="accommodationData['3star_high'].name"></span>
+                                            <span
+                                                class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                                :class="selectedTier === '3star_high' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                                <span x-text="accommodationData['3star_high'].type"></span>
+                                                <span x-show="params.tier === '3star_high'"
+                                                    class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg></span>
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                            x-text="accommodationData['3star_high'].hotels.join(', ')"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Row 4: Platinum & Platinum+ (4-Star) -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <!-- Platinum -->
+                                    <div @click="selectedTier = '4star_low'; autoDistributeRooms(); selectedHotel = accommodationData['4star_low'].hotels[0]"
+                                        class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                        :class="selectedTier === '4star_low' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-sm text-slate-800"
+                                                x-text="accommodationData['4star_low'].name"></span>
+                                            <span
+                                                class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                                :class="selectedTier === '4star_low' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                                <span x-text="accommodationData['4star_low'].type"></span>
+                                                <span x-show="params.tier === '4star_low'"
+                                                    class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg></span>
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                            x-text="accommodationData['4star_low'].hotels.join(', ')"></div>
+                                    </div>
+                                    <!-- Platinum+ -->
+                                    <div @click="selectedTier = '4star_high'; autoDistributeRooms(); selectedHotel = accommodationData['4star_high'].hotels[0]"
+                                        class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                        :class="selectedTier === '4star_high' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="font-bold text-sm text-slate-800"
+                                                x-text="accommodationData['4star_high'].name"></span>
+                                            <span
+                                                class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                                :class="selectedTier === '4star_high' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                                <span x-text="accommodationData['4star_high'].type"></span>
+                                                <span x-show="params.tier === '4star_high'"
+                                                    class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg></span>
+                                            </span>
+                                        </div>
+                                        <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                            x-text="accommodationData['4star_high'].hotels.join(', ')"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Row 5: Royal (5-Star) -->
+                                <div @click="selectedTier = '5star'; autoDistributeRooms(); selectedHotel = accommodationData['5star'].hotels[0]"
+                                    class="cursor-pointer border-2 rounded-xl p-4 transition-all hover:shadow-md relative"
+                                    :class="selectedTier === '5star' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-sm text-slate-800"
+                                            x-text="accommodationData['5star'].name"></span>
+                                        <span
+                                            class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1"
+                                            :class="selectedTier === '5star' ? 'bg-alpine-blue text-white' : 'bg-slate-200 text-slate-600'">
+                                            <span x-text="accommodationData['5star'].type"></span>
+                                            <span x-show="params.tier === '5star'"
+                                                class="pl-1 border-l border-white/20"><svg class="w-2.5 h-2.5"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                </svg></span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-slate-500 leading-tight mt-2 italic"
+                                        x-text="accommodationData['5star'].hotels.join(', ')"></div>
+                                </div>
+
+                            </div>
+
+                            <!-- Hotel Selection (Dynamic) -->
+                            <div x-show="tripType === 'stay_ski' && selectedTier && accommodationData[selectedTier].hotels.length > 0"
+                                class="mb-8" x-transition>
+                                <label
+                                    class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 flex items-center gap-2">Preferred
+                                    Stay <span x-show="params.hotel && params.hotel === selectedHotel"
+                                        class="text-green-600 text-[10px] font-bold bg-green-50 px-2 py-0.5 rounded-full border border-green-100 flex items-center gap-1"><svg
+                                            class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7">
+                                            </path>
+                                        </svg> You selected this</span></label>
+                                <div class="relative">
+                                    <select x-model="selectedHotel" name="hotel"
+                                        class="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
+                                        <template x-for="hotel in accommodationData[selectedTier].hotels" :key="hotel">
+                                            <option :value="hotel" x-text="hotel"></option>
+                                        </template>
+                                    </select>
+                                    <div
+                                        class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div x-show="selectedTier === '5star'" x-cloak
+                                class="mb-8 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+                                <h3 class="font-bold text-sm text-indigo-900 mb-2">💎 Premium Experience</h3>
+                                <p class="text-xs text-indigo-700">Prices for 5-Star properties depend on live
+                                    availability
+                                    and
+                                    seasonal rates. We will confirm the exact quote manually.</p>
+                            </div>
+
+                            <!-- Room Split Section -->
+                            <div x-show="tripType === 'stay_ski' && selectedTier !== 'dorm' && selectedTier !== '5star'"
+                                x-transition>
+                                <div class="flex justify-between items-center border-b border-slate-100 pb-2 mb-4">
+                                    <h4 class="text-sm font-bold text-slate-900">Configure Rooms</h4>
+                                    <button type="button" @click="autoDistributeRooms()"
+                                        class="text-xs text-alpine-blue hover:underline font-semibold">
+                                        Reset Default
+                                    </button>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <!-- Triple -->
+                                    <div
+                                        class="bg-sky-50 p-4 rounded-xl border border-sky-200 relative overflow-hidden">
+                                        <div
+                                            class="absolute top-0 right-0 bg-sky-200 text-sky-800 text-[9px] px-2 py-0.5 font-bold rounded-bl">
+                                            BEST VALUE</div>
+                                        <label
+                                            class="block text-xs font-bold uppercase text-sky-800 tracking-wide mb-1">3-Person
+                                            Room</label>
+                                        <div class="text-lg font-bold text-slate-800 mb-2"
+                                            x-text="'₹' + getRoomPrice(3)">
+                                        </div>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <button type="button" @click="rooms.triple = Math.max(0, rooms.triple - 1)"
+                                                class="w-8 h-8 bg-white border border-sky-200 rounded hover:bg-white shadow-sm font-bold text-sky-600">-</button>
+                                            <input type="number" x-model.number="rooms.triple"
+                                                class="w-full text-center bg-transparent font-bold outline-none text-slate-800">
+                                            <button type="button" @click="rooms.triple++"
+                                                class="w-8 h-8 bg-white border border-sky-200 rounded hover:bg-white shadow-sm font-bold text-sky-600">+</button>
+                                        </div>
+                                        <div class="text-xs text-center font-bold text-sky-700"
+                                            x-show="rooms.triple > 0">
+                                            Total: <span x-text="rooms.triple * 3"></span> People
+                                        </div>
+                                    </div>
+                                    <!-- Double -->
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                        <label
+                                            class="block text-xs font-bold uppercase text-slate-500 tracking-wide mb-1">2-Person
+                                            Room</label>
+                                        <div class="text-lg font-bold text-slate-800 mb-2"
+                                            x-text="'₹' + getRoomPrice(2)">
+                                        </div>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <button type="button" @click="rooms.double = Math.max(0, rooms.double - 1)"
+                                                class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">-</button>
+                                            <input type="number" x-model.number="rooms.double"
+                                                class="w-full text-center bg-transparent font-bold outline-none text-slate-800">
+                                            <button type="button" @click="rooms.double++"
+                                                class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">+</button>
+                                        </div>
+                                        <div class="text-xs text-center font-bold text-slate-500"
+                                            x-show="rooms.double > 0">
+                                            Total: <span x-text="rooms.double * 2"></span> People
+                                        </div>
+                                    </div>
+                                    <!-- Single -->
+                                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                        <label
+                                            class="block text-xs font-bold uppercase text-slate-500 tracking-wide mb-1">1-Person
+                                            Room</label>
+                                        <div class="text-lg font-bold text-slate-800 mb-2"
+                                            x-text="'₹' + getRoomPrice(1)">
+                                        </div>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <button type="button" @click="rooms.single = Math.max(0, rooms.single - 1)"
+                                                class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">-</button>
+                                            <input type="number" x-model.number="rooms.single"
+                                                class="w-full text-center bg-transparent font-bold outline-none text-slate-800">
+                                            <button type="button" @click="rooms.single++"
+                                                class="w-8 h-8 bg-white border border-slate-200 rounded hover:bg-slate-100 shadow-sm font-bold text-slate-600">+</button>
+                                        </div>
+                                        <div class="text-xs text-center font-bold text-slate-500"
+                                            x-show="rooms.single > 0">
+                                            Total: <span x-text="rooms.single"></span> People
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 flex justify-end">
+                                    <div class="px-3 py-1 rounded text-xs font-bold transition-colors duration-300"
+                                        :class="totalAccommodated === people ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'">
+                                        <span x-show="totalAccommodated === people">✅ All <span x-text="people"></span>
+                                            people
+                                            assigned.</span>
+                                        <span x-show="totalAccommodated !== people">⚠️ Assigned <span
+                                                x-text="totalAccommodated"></span>
+                                            / <span x-text="people"></span>
+                                            people.</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. Instructor Mode -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
-                    <h3
-                        class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
-                        <span
-                            class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
-                        Instructor Mode
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <label class="flex flex-col p-4 border-2 rounded-xl cursor-pointer hover:bg-slate-50 transition"
-                            :class="instructorMode === 'shared' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200'">
-                            <div class="flex items-center gap-2 mb-2">
-                                <input type="radio" name="instructorMode" value="shared" x-model="instructorMode"
-                                    class="w-5 h-5 text-alpine-blue focus:ring-alpine-blue">
-                                <span class="font-bold text-slate-900">Shared Group</span>
-                            </div>
-                            <p class="text-xs text-slate-500 ml-7">Economical. 1 Instructor manages up to 3 people.
-                                Adds
-                                ₹1000/pax after that.</p>
-                        </label>
 
-                        <label class="flex flex-col p-4 border-2 rounded-xl cursor-pointer hover:bg-slate-50 transition"
-                            :class="instructorMode === 'dedicated' ? 'border-alpine-blue bg-sky-50' : 'border-slate-200'">
-                            <div class="flex items-center gap-2 mb-2">
-                                <input type="radio" name="instructorMode" value="dedicated" x-model="instructorMode"
-                                    class="w-5 h-5 text-alpine-blue focus:ring-alpine-blue">
-                                <span class="font-bold text-slate-900">Dedicated (1:1)</span>
-                            </div>
-                            <p class="text-xs text-slate-500 ml-7">Premium. Every participant gets their own
-                                personal
-                                instructor.</p>
-                        </label>
-                    </div>
-                </div>
                 <!-- 5. Addons & Activities -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
                     <h3
@@ -850,155 +876,142 @@
                         Addons & Activities
                         <span class="ml-auto text-xs font-normal text-slate-400">(Optional)</span>
                     </h3>
-                    <p class="text-xs text-slate-500 mb-6">Select number of tickets for each activity. Price = Tickets ×
-                        Price per ticket.</p>
+                    <p class="text-xs text-slate-500 mb-6">Select number of tickets for each activity.</p>
 
-                    <div class="space-y-4">
-                        <!-- Gondola Section -->
+                    <div class="space-y-8">
+
+                        <!-- 1. Gondola Tickets (Green Theme) -->
                         <div class="border-2 border-emerald-200 bg-emerald-50/50 rounded-xl p-5">
                             <div class="flex items-center gap-2 mb-4 pb-3 border-b border-emerald-200">
-                                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z">
-                                    </path>
-                                </svg>
+                                <span class="material-symbols-rounded text-emerald-600">landscape</span>
                                 <span class="font-bold text-slate-900">Gondola Tickets</span>
                                 <span
                                     class="ml-auto text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded uppercase">Essential</span>
                             </div>
 
-                            <div class="space-y-3">
-                                <!-- Gondola Cable Car Phase 1 -->
-                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-emerald-100"
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Phase 1 -->
+                                <div class="bg-white p-4 rounded-xl border border-emerald-100 transition shadow-sm hover:shadow-md flex flex-col justify-between h-full"
                                     :class="addons.gondola > 0 ? 'border-emerald-400 ring-1 ring-emerald-400' : ''">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-semibold text-slate-800 text-sm">Phase 1</span>
-                                        </div>
-                                        <p class="text-[11px] text-slate-500">To Kongdoori (Mid-station).</p>
+                                    <div class="mb-3">
+                                        <div class="font-bold text-slate-900 text-sm mb-1">Phase 1</div>
+                                        <p class="text-[11px] text-slate-500 leading-tight">To Kongdoori (Mid-station).
+                                        </p>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹900/ticket</span>
+                                    <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
+                                        <div class="text-xs font-bold text-emerald-600">₹900<span
+                                                class="text-slate-400 font-normal">/tkt</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.gondola = Math.max(0, addons.gondola - 1)"
-                                                class="w-7 h-7 bg-white border border-emerald-300 rounded-lg hover:bg-emerald-50 shadow-sm font-bold text-emerald-600 flex items-center justify-center text-sm">−</button>
-                                            <span class="w-6 text-center font-bold text-slate-900 text-sm"
+                                                class="w-7 h-7 bg-white border border-emerald-200 rounded-lg hover:bg-emerald-50 text-emerald-600 font-bold flex items-center justify-center">−</button>
+                                            <span class="w-5 text-center font-bold text-slate-900 text-sm"
                                                 x-text="addons.gondola"></span>
                                             <button type="button" @click="addons.gondola++"
-                                                class="w-7 h-7 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                                class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 font-bold flex items-center justify-center">+</button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Gondola Cable Car Phase 2 -->
-                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-emerald-100"
+                                <!-- Phase 2 -->
+                                <div class="bg-white p-4 rounded-xl border border-emerald-100 transition shadow-sm hover:shadow-md flex flex-col justify-between h-full"
                                     :class="addons.gondolaPhase2 > 0 ? 'border-emerald-400 ring-1 ring-emerald-400' : ''">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-semibold text-slate-800 text-sm">Phase 2</span>
-                                        </div>
-                                        <p class="text-[11px] text-slate-500">To Apharwat Peak (Summit).</p>
+                                    <div class="mb-3">
+                                        <div class="font-bold text-slate-900 text-sm mb-1">Phase 2</div>
+                                        <p class="text-[11px] text-slate-500 leading-tight">To Apharwat Peak (Summit).
+                                        </p>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹1,100/ticket</span>
+                                    <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
+                                        <div class="text-xs font-bold text-emerald-600">₹1,100<span
+                                                class="text-slate-400 font-normal">/tkt</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.gondolaPhase2 = Math.max(0, addons.gondolaPhase2 - 1)"
-                                                class="w-7 h-7 bg-white border border-emerald-300 rounded-lg hover:bg-emerald-50 shadow-sm font-bold text-emerald-600 flex items-center justify-center text-sm">−</button>
-                                            <span class="w-6 text-center font-bold text-slate-900 text-sm"
+                                                class="w-7 h-7 bg-white border border-emerald-200 rounded-lg hover:bg-emerald-50 text-emerald-600 font-bold flex items-center justify-center">−</button>
+                                            <span class="w-5 text-center font-bold text-slate-900 text-sm"
                                                 x-text="addons.gondolaPhase2"></span>
                                             <button type="button" @click="addons.gondolaPhase2++"
-                                                class="w-7 h-7 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                                class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg hover:bg-emerald-200 font-bold flex items-center justify-center">+</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Snowmobile Ride -->
-                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
-                            :class="addons.snowmobile > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-3">
-                                    <span class="font-bold text-slate-900">Snowmobile Ride</span>
-                                </div>
-                                <p class="text-xs text-slate-500 mt-1">High-speed motorized sleds across frozen
-                                    snowfields.</p>
+                        <!-- 2. Snow Adventures (Blue Theme) -->
+                        <div class="border-2 border-sky-200 bg-sky-50/50 rounded-xl p-5">
+                            <div class="flex items-center gap-2 mb-4 pb-3 border-b border-sky-200">
+                                <span class="material-symbols-rounded text-sky-600">ac_unit</span>
+                                <span class="font-bold text-slate-900">Snow Adventures</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹2,200/ticket</span>
-                                <div class="flex items-center gap-2">
-                                    <button type="button"
-                                        @click="addons.snowmobile = Math.max(0, addons.snowmobile - 1)"
-                                        class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
-                                    <span class="w-8 text-center font-bold text-slate-900"
-                                        x-text="addons.snowmobile"></span>
-                                    <button type="button" @click="addons.snowmobile++"
-                                        class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Snowmobile -->
+                                <div class="bg-white p-4 rounded-xl border border-sky-100 transition shadow-sm hover:shadow-md flex flex-col h-full"
+                                    :class="addons.snowmobile > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
+                                    <div class="font-bold text-slate-900 text-sm mb-1">Snowmobile</div>
+                                    <p class="text-[11px] text-slate-500 leading-tight mb-4 flex-grow">High-speed
+                                        motorized sleds.</p>
+                                    <div class="mt-auto">
+                                        <div class="text-xs font-bold text-alpine-blue mb-2">₹2,200</div>
+                                        <div class="flex items-center justify-between bg-slate-50 rounded-lg p-1">
+                                            <button type="button"
+                                                @click="addons.snowmobile = Math.max(0, addons.snowmobile - 1)"
+                                                class="w-6 h-6 bg-white border border-slate-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-slate-50">−</button>
+                                            <span class="text-sm font-bold text-slate-900"
+                                                x-text="addons.snowmobile"></span>
+                                            <button type="button" @click="addons.snowmobile++"
+                                                class="w-6 h-6 bg-alpine-blue text-white rounded shadow-sm flex items-center justify-center hover:bg-sky-700">+</button>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <!-- ATV Ride -->
+                                <div class="bg-white p-4 rounded-xl border border-sky-100 transition shadow-sm hover:shadow-md flex flex-col h-full"
+                                    :class="addons.atv > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
+                                    <div class="font-bold text-slate-900 text-sm mb-1">ATV Ride</div>
+                                    <p class="text-[11px] text-slate-500 leading-tight mb-4 flex-grow">4x4 beasts with
+                                        tire chains.</p>
+                                    <div class="mt-auto">
+                                        <div class="text-xs font-bold text-alpine-blue mb-2">₹2,200</div>
+                                        <div class="flex items-center justify-between bg-slate-50 rounded-lg p-1">
+                                            <button type="button" @click="addons.atv = Math.max(0, addons.atv - 1)"
+                                                class="w-6 h-6 bg-white border border-slate-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-slate-50">−</button>
+                                            <span class="text-sm font-bold text-slate-900" x-text="addons.atv"></span>
+                                            <button type="button" @click="addons.atv++"
+                                                class="w-6 h-6 bg-alpine-blue text-white rounded shadow-sm flex items-center justify-center hover:bg-sky-700">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sledging -->
+                                <div class="bg-white p-4 rounded-xl border border-sky-100 transition shadow-sm hover:shadow-md flex flex-col h-full"
+                                    :class="addons.sledging > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
+                                    <div class="font-bold text-slate-900 text-sm mb-1">Sledging</div>
+                                    <p class="text-[11px] text-slate-500 leading-tight mb-4 flex-grow">Classic snow fun.
+                                    </p>
+                                    <div class="mt-auto">
+                                        <div class="text-xs font-bold text-alpine-blue mb-2">₹1,500</div>
+                                        <div class="flex items-center justify-between bg-slate-50 rounded-lg p-1">
+                                            <button type="button"
+                                                @click="addons.sledging = Math.max(0, addons.sledging - 1)"
+                                                class="w-6 h-6 bg-white border border-slate-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-slate-50">−</button>
+                                            <span class="text-sm font-bold text-slate-900"
+                                                x-text="addons.sledging"></span>
+                                            <button type="button" @click="addons.sledging++"
+                                                class="w-6 h-6 bg-alpine-blue text-white rounded shadow-sm flex items-center justify-center hover:bg-sky-700">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
                             </div>
                         </div>
 
-                        <!-- ATV Ride -->
-                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
-                            :class="addons.atv > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-3">
-                                    <span class="font-bold text-slate-900">ATV Ride</span>
-                                </div>
-                                <p class="text-xs text-slate-500 mt-1">4x4 beasts with tire chains. Explore Tangmarg to
-                                    Drung.</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹2,200/ticket</span>
-                                <div class="flex items-center gap-2">
-                                    <button type="button" @click="addons.atv = Math.max(0, addons.atv - 1)"
-                                        class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
-                                    <span class="w-8 text-center font-bold text-slate-900" x-text="addons.atv"></span>
-                                    <button type="button" @click="addons.atv++"
-                                        class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Sledging -->
-                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
-                            :class="addons.sledging > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-3">
-                                    <span class="font-bold text-slate-900">Sledging</span>
-                                </div>
-                                <p class="text-xs text-slate-500 mt-1">Classic snow fun. Range: ₹1,000 - ₹5,000.</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹1,500
-                                    (Est.)</span>
-                                <div class="flex items-center gap-2">
-                                    <button type="button" @click="addons.sledging = Math.max(0, addons.sledging - 1)"
-                                        class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
-                                    <span class="w-8 text-center font-bold text-slate-900"
-                                        x-text="addons.sledging"></span>
-                                    <button type="button" @click="addons.sledging++"
-                                        class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Helicopter Rides Section -->
+                        <!-- 3. Helicopter Rides (Orange Theme) -->
                         <div class="border-2 border-amber-200 bg-amber-50/50 rounded-xl p-5">
                             <div class="flex items-center gap-2 mb-4 pb-3 border-b border-amber-200">
-                                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                </svg>
+                                <span class="material-symbols-rounded text-amber-600">helicopter</span>
                                 <span class="font-bold text-slate-900">Helicopter Rides</span>
                                 <span
                                     class="ml-auto text-[10px] font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded uppercase">Premium</span>
@@ -1006,105 +1019,92 @@
 
                             <div class="space-y-3">
                                 <!-- Joint Ride -->
-                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-100"
+                                <div class="flex items-center justify-between p-4 bg-white rounded-xl border border-amber-100 transition shadow-sm hover:shadow-md"
                                     :class="addons.heliJoint > 0 ? 'border-amber-400 ring-1 ring-amber-400' : ''">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-semibold text-slate-800 text-sm">Joint Ride</span>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
+                                            <span class="material-symbols-rounded text-xl">flight_takeoff</span>
                                         </div>
-                                        <p class="text-[11px] text-slate-500">Aerial sightseeing, no landing.</p>
+                                        <div>
+                                            <span class="font-bold text-slate-900 text-sm block">Joint Ride</span>
+                                            <span class="text-[11px] text-slate-500">Aerial sightseeing only.</span>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹9,000/ticket</span>
+                                    <div class="flex flex-col items-end gap-1">
+                                        <span class="text-xs font-bold text-amber-600">₹9,000</span>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.heliJoint = Math.max(0, addons.heliJoint - 1)"
-                                                class="w-7 h-7 bg-white border border-amber-300 rounded-lg hover:bg-amber-50 shadow-sm font-bold text-amber-600 flex items-center justify-center text-sm">−</button>
+                                                class="w-6 h-6 bg-white border border-amber-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-amber-50">−</button>
                                             <span class="w-6 text-center font-bold text-slate-900 text-sm"
                                                 x-text="addons.heliJoint"></span>
                                             <button type="button" @click="addons.heliJoint++"
-                                                class="w-7 h-7 bg-amber-500 text-white rounded-lg hover:bg-amber-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                                class="w-6 h-6 bg-amber-500 text-white rounded shadow-sm flex items-center justify-center hover:bg-amber-600">+</button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Kongdoori Ride -->
-                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-100"
+                                <div class="flex items-center justify-between p-4 bg-white rounded-xl border border-amber-100 transition shadow-sm hover:shadow-md"
                                     :class="addons.heliKongdoori > 0 ? 'border-amber-400 ring-1 ring-amber-400' : ''">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-semibold text-slate-800 text-sm">Kongdoori Ride</span>
-                                            <span
-                                                class="text-[9px] font-bold text-white bg-amber-500 px-1.5 py-0.5 rounded uppercase">Bestseller</span>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
+                                            <span class="material-symbols-rounded text-xl">landscape</span>
                                         </div>
-                                        <p class="text-[11px] text-slate-500">Landing experience included.</p>
+                                        <div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-bold text-slate-900 text-sm">Kongdoori Ride</span>
+                                                <span
+                                                    class="text-[9px] font-bold text-white bg-amber-500 px-1.5 py-0.5 rounded uppercase">Bestseller</span>
+                                            </div>
+                                            <span class="text-[11px] text-slate-500">Landing included.</span>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹12,000/ticket</span>
+                                    <div class="flex flex-col items-end gap-1">
+                                        <span class="text-xs font-bold text-amber-600">₹12,000</span>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.heliKongdoori = Math.max(0, addons.heliKongdoori - 1)"
-                                                class="w-7 h-7 bg-white border border-amber-300 rounded-lg hover:bg-amber-50 shadow-sm font-bold text-amber-600 flex items-center justify-center text-sm">−</button>
+                                                class="w-6 h-6 bg-white border border-amber-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-amber-50">−</button>
                                             <span class="w-6 text-center font-bold text-slate-900 text-sm"
                                                 x-text="addons.heliKongdoori"></span>
                                             <button type="button" @click="addons.heliKongdoori++"
-                                                class="w-7 h-7 bg-amber-500 text-white rounded-lg hover:bg-amber-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                                class="w-6 h-6 bg-amber-500 text-white rounded shadow-sm flex items-center justify-center hover:bg-amber-600">+</button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Sunshine Peak -->
-                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-100"
+                                <div class="flex items-center justify-between p-4 bg-white rounded-xl border border-amber-100 transition shadow-sm hover:shadow-md"
                                     :class="addons.heliSunshine > 0 ? 'border-amber-400 ring-1 ring-amber-400' : ''">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-semibold text-slate-800 text-sm">Sunshine Peak</span>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
+                                            <span class="material-symbols-rounded text-xl">sunny</span>
                                         </div>
-                                        <p class="text-[11px] text-slate-500">Mountain landing + extended flight.</p>
+                                        <div>
+                                            <span class="font-bold text-slate-900 text-sm block">Sunshine Peak</span>
+                                            <span class="text-[11px] text-slate-500">Extended flight + landing.</span>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <span
-                                            class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹15,000/ticket</span>
+                                    <div class="flex flex-col items-end gap-1">
+                                        <span class="text-xs font-bold text-amber-600">₹15,000</span>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.heliSunshine = Math.max(0, addons.heliSunshine - 1)"
-                                                class="w-7 h-7 bg-white border border-amber-300 rounded-lg hover:bg-amber-50 shadow-sm font-bold text-amber-600 flex items-center justify-center text-sm">−</button>
+                                                class="w-6 h-6 bg-white border border-amber-200 rounded shadow-sm text-slate-600 flex items-center justify-center hover:bg-amber-50">−</button>
                                             <span class="w-6 text-center font-bold text-slate-900 text-sm"
                                                 x-text="addons.heliSunshine"></span>
                                             <button type="button" @click="addons.heliSunshine++"
-                                                class="w-7 h-7 bg-amber-500 text-white rounded-lg hover:bg-amber-600 shadow-sm font-bold flex items-center justify-center text-sm">+</button>
+                                                class="w-6 h-6 bg-amber-500 text-white rounded shadow-sm flex items-center justify-center hover:bg-amber-600">+</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Airport Pickup -->
-                        <div class="flex items-center justify-between p-4 border-2 rounded-xl transition"
-                            :class="addons.airportPickup > 0 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-slate-50'">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-3">
-                                    <span class="font-bold text-slate-900">Airport Pickup</span>
-                                </div>
-                                <p class="text-xs text-slate-500 mt-1">One-way private transfer from Srinagar Airport.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1.5 rounded-lg min-w-[100px] text-center shadow-sm">₹5,500</span>
-                                <div class="flex items-center gap-2">
-                                    <button type="button"
-                                        @click="addons.airportPickup = Math.max(0, addons.airportPickup - 1)"
-                                        class="w-8 h-8 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 shadow-sm font-bold text-slate-600 flex items-center justify-center">−</button>
-                                    <span class="w-8 text-center font-bold text-slate-900"
-                                        x-text="addons.airportPickup"></span>
-                                    <button type="button" @click="addons.airportPickup++"
-                                        class="w-8 h-8 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 shadow-sm font-bold flex items-center justify-center">+</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -1117,25 +1117,7 @@
                         Final Details
                     </h3>
                     <div class="space-y-6">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Skill
-                                Level</label>
-                            <div class="relative">
-                                <select name="skill"
-                                    class="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
-                                    <option value="Beginner">Beginner (First time)</option>
-                                    <option value="Intermediate">Intermediate (Can turn & stop)</option>
-                                    <option value="Advanced">Advanced (Black runs / Off-piste)</option>
-                                </select>
-                                <div
-                                    class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
+
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Special
                                 Requests / Notes</label>
@@ -1147,7 +1129,8 @@
                                 class="w-5 h-5 rounded border-slate-300 text-alpine-blue focus:ring-alpine-blue cursor-pointer">
                             <label for="terms" class="text-sm text-slate-600 cursor-pointer">
                                 I agree to the <a href="policies.html"
-                                    class="text-alpine-blue font-bold hover:underline">Terms & Conditions</a> and
+                                    class="text-alpine-blue font-bold hover:underline">Terms
+                                    & Conditions</a> and
                                 understand that skiing involves inherent risks.
                             </label>
                         </div>
@@ -1671,7 +1654,9 @@
             return {
                 people: 1,
                 days: 5,
+
                 sport: 'ski', // ski | board
+                skill: 'Beginner', // Beginner | Intermediate | Advanced
                 selectedTier: '2star',
                 selectedHotel: 'Hotel Lala', // Default
                 instructorMode: 'shared',
