@@ -1,10 +1,10 @@
-export const HEADER_HTML = `
+const HEADER_HTML = `
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300 font-sans"
         id="main-nav">
 
         <a href="index.html"
             class="flex items-center gap-2 text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
-            <img src="assets/images/logo.webp" alt="Wolf Adventures"
+            <img src="images/logo.webp" alt="Wolf Adventures"
                 class="h-10 w-10 rounded-full object-cover border-2 border-slate-200">
             <span class="hidden sm:inline">WOLF<span class="text-alpine-blue">.ADV</span></span>
         </a>
@@ -61,7 +61,7 @@ export const HEADER_HTML = `
     </div>
 `;
 
-export const FOOTER_HTML = `
+const FOOTER_HTML = `
     <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 px-6 mt-12 font-sans">
         <div class="w-[95%] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
 
@@ -143,7 +143,7 @@ export const FOOTER_HTML = `
     </footer>
 `;
 
-export const FAB_HTML = `
+const FAB_HTML = `
     <div id="contact-fab-container"
         class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2 group pointer-events-none font-sans">
         <div id="fab-options"
@@ -174,10 +174,75 @@ export const FAB_HTML = `
     </div>
 `;
 
-export function injectComponents() {
+const SCROLLBAR_STYLE = `
+/* Modern Global Scrollbar */
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0f172a;
+    border-radius: 20px;
+    border: 3px solid #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-button:single-button {
+    background-color: transparent;
+    display: block;
+    background-size: 10px;
+    background-repeat: no-repeat;
+}
+
+/* Up button */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+    height: 16px;
+    width: 14px;
+    background-position: center bottom 2px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%230f172a'><polygon points='50,20 10,70 90,70'/></svg>");
+}
+
+/* Down button */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    height: 16px;
+    width: 14px;
+    background-position: center top 2px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%230f172a'><polygon points='50,80 10,30 90,30'/></svg>");
+}
+
+/* Scrollbar Hide Utilities */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
+}
+
+.no-scrollbar,
+.scrollbar-hide {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+`;
+
+function injectComponents() {
     const headerPlaceholder = document.getElementById('header-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
     const fabPlaceholder = document.getElementById('fab-placeholder');
+
+    // Inject Styles
+    if (!document.getElementById('global-scrollbar-style')) {
+        const styleTag = document.createElement('style');
+        styleTag.id = 'global-scrollbar-style';
+        styleTag.innerHTML = SCROLLBAR_STYLE;
+        document.head.appendChild(styleTag);
+    }
 
     if (headerPlaceholder) {
         headerPlaceholder.innerHTML = HEADER_HTML;
@@ -197,22 +262,10 @@ export function injectComponents() {
     }
 }
 
-// Initial injection is now handled by script.js to ensure proper ESM order.
-
-export function toggleMobileMenu() {
-    const overlay = document.getElementById('mobile-menu-overlay');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
-
-    if (overlay.style.opacity === '1') {
-        overlay.style.opacity = '0';
-        overlay.style.pointerEvents = 'none';
-        menuIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-    } else {
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'auto';
-        menuIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-    }
+// Inject as soon as the script loads if the placeholders exist, 
+// or on DOMContentLoaded as a fallback.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectComponents);
+} else {
+    injectComponents();
 }

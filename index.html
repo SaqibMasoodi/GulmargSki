@@ -6,26 +6,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolf Adventure | Gulmarg Ski Resort</title>
-    <meta name="description"
-        content="Experience the ultimate ski adventure in Gulmarg with certified instructors, premium logistics, and local expertise.">
-    <link rel="icon" type="image/png" href="wolf.png">
-
-    <!-- Open Graph / Social -->
+    <link rel="icon" type="image/png" href="images/wolf.png">
+    <meta property="og:image" content="images/logo.webp">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Wolf Adventure | Gulmarg Ski Resort">
-    <meta property="og:description" content="Gulmarg's premier ski school and adventure guide.">
-    <meta property="og:image" content="assets/images/logo.webp">
+    <link rel="stylesheet" href="styles.css">
 
-    <!-- External Assets -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ["'Plus Jakarta Sans'", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
+                    },
+                    colors: {
+                        primary: "#0f172a",
+                        accent: "#0ea5e9",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#020617",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e293b",
+                        alpine: {
+                            white: '#ffffff',
+                            off: '#f8fafc', // Slate 50
+                            ice: '#e0f2fe', // Sky 100
+                            blue: '#0ea5e9', // Sky 500
+                            deep: '#0f172a', // Slate 900
+                            text: '#334155', // Slate 700
+                            muted: '#94a3b8' // Slate 400
+                        },
+                        // New Schedule Section Colors (Updated to Slate Palette)
+                        bg: '#020617',       /* Slate 950 */
+                        panel: '#0f172a',    /* Slate 900 */
+                        surface: '#1e293b',  /* Slate 800 */
+                        border: '#334155',   /* Slate 700 */
+                        subtle: '#475569',   /* Slate 600 */
+                        muted: '#94a3b8',    /* Slate 400 */
+                    },
+                    boxShadow: {
+                        'ice': '0 4px 14px 0 rgba(14, 165, 233, 0.15)',
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(14, 165, 233, 0.3)',
+                        'inner-glow': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for Material Symbols Pattern */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+        }
 
+        .pattern-grid {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
 
+        /* --- NEW SCHEDULE UTILITIES --- */
+        .sidebar-scroll-mask {
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
 
-    <!-- Core Application -->
-    <script type="module" src="assets/js/script.js"></script>
+        /* Solid Snap Logic */
+        .snap-container {
+            scroll-snap-type: x mandatory;
+        }
+
+        .snap-item {
+            scroll-snap-align: center;
+        }
+
+        /* Custom Dropdown Animation */
+        .dropdown-menu {
+            transform-origin: top;
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.1s linear;
+        }
+
+        .dropdown-menu.hidden {
+            display: none;
+        }
+
+        .dropdown-menu.closed {
+            transform: scaleY(0.95);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .dropdown-menu.open {
+            transform: scaleY(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Table Styles */
+        td {
+            vertical-align: top;
+        }
+
+        /* Vertical Marquee Animation */
+        @keyframes scrollY {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .animate-scroll-y {
+            animation: scrollY 30s linear infinite;
+        }
+
+        .pause-on-hover:hover .animate-scroll-y {
+            animation-play-state: paused;
+        }
+    </style>
+
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
@@ -319,448 +456,8 @@
 
     <section id="guides"
         class="py-24 w-full bg-surface-light dark:bg-surface-dark transition-colors duration-300 relative overflow-hidden group">
-        <!-- Pattern Background -->
-        <div
-            class="absolute inset-0 pattern-grid p-6 grid grid-cols-8 md:grid-cols-12 gap-6 content-start opacity-50 select-none pointer-events-none z-0 mix-blend-multiply dark:mix-blend-normal">
-            <!-- Row 1 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
 
-            <!-- Row 2 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
 
-            <!-- Row 3 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 4 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 5 (Repeated for density/coverage) -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 6 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 7 (Extra coverage) -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <!-- Row 8 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 9 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 10 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 11 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 12 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 13 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 14 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 15 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 16 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 17 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 18 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 19 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 20 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-        </div>
         <div
             class="absolute inset-0 bg-gradient-to-t from-surface-light dark:from-surface-dark via-transparent to-transparent opacity-100 z-0 pointer-events-none">
         </div>
@@ -817,9 +514,123 @@
         </div>
 
         <script>
-            // Instructor data moved to assets/js/data/instructors.js
+            // Renamed data variable to ensure no conflicts
+            const instructorsData = [
+                {
+                    id: 1,
+                    category: 'ski',
+                    name: "Shafqat Shah",
+                    role: "Lead Guide",
+                    subRole: "NSF Certified | 4x National Participation",
+                    bio: "An NSF certified ski athlete and senior instructor with extensive competitive experience. His background includes four national-level and five state-level appearances, earning silver and bronze medals in Giant Slalom. He is certified across basic, intermediate, and advanced levels with a focus on high-performance training.",
+                    tags: ["NSF Certified", "Medalist", "Safety"],
+                    image: "images/home/guides/shafqat.webp",
+                    stars: 5,
+                    selectedLabel: "National Athlete"
+                },
+                {
+                    id: 2,
+                    category: 'ski',
+                    name: "Mubashir Riyaz",
+                    role: "Founder & Lead",
+                    subRole: "Gold Medalist 2025 | IISM Advanced",
+                    bio: "Founder of Wolf Adventures and a 2025 Gold Medalist in the All India Inter-University Skiing championships. As an IISM Advanced certified skier with national-level representation, he delivers technically refined, safety-focused instruction with an emphasis on balance and alpine precision.",
+                    tags: ["Founder", "Gold Medalist", "Lead"],
+                    image: "images/home/guides/mubashir.webp",
+                    stars: 5,
+                    selectedLabel: "Lead Instructor"
+                },
+                {
+                    id: 3,
+                    category: 'ski',
+                    name: "Inayat Farooq",
+                    role: "Ski Mountaineer",
+                    subRole: "KIWG 2025 Bronze Medalist",
+                    bio: "A specialized ski mountaineer and KIWG 2025 Bronze medalist. She holds inter-college gold medals in both Slalom and Giant Slalom disciplines. Her expertise spans across basic, intermediate, and advanced alpine skiing, with a focus on high-altitude endurance.",
+                    tags: ["Medalist", "KIWG 2025", "Mountaineering"],
+                    image: "images/home/guides/female.webp",
+                    stars: 5,
+                    selectedLabel: "Bronze Medalist"
+                },
+                {
+                    id: 4,
+                    category: 'ski',
+                    name: "Kashif Bhat",
+                    role: "Snowboard Lead",
+                    subRole: "2x National & 3x State Champion",
+                    bio: "A veteran snowboarder with 16 years of mountain experience. A two-time national champion and three-time state champion, he specializes in technical backcountry navigation, steep terrain maneuvers, and deep powder riding.",
+                    tags: ["Champion", "Snowboard", "Master"],
+                    image: "images/home/guides/kashif.webp",
+                    stars: 5,
+                    selectedLabel: "Snowboard Lead"
+                },
+                {
+                    id: 5,
+                    category: 'ski',
+                    name: "Ishtiyaq Bhat",
+                    role: "Senior Instructor",
+                    subRole: "National & State Champion",
+                    bio: "A highly decorated senior instructor with 15 years of professional experience. Having secured titles at both national and state levels, he focuses on freestyle progression and park-specific skill development.",
+                    tags: ["Champion", "Expert", "Veteran"],
+                    image: null,
+                    initials: "IB",
+                    stars: 5,
+                    selectedLabel: "Senior Instructor"
+                },
+                {
+                    id: 6,
+                    category: 'board',
+                    name: "Qazi Waseem",
+                    role: "Technical Guide",
+                    subRole: "NSF Certified | Speed Specialist",
+                    bio: "A professional snowboarder with an NSF certification and a background in high-velocity racing. Drawing from a competitive national career, Waseem focuses on edge control and technical stability at high speeds, helping students master fluid carved turns.",
+                    tags: ["NSF Certified", "Speed Specialist", "Boarding"],
+                    image: null,
+                    initials: "QW",
+                    stars: 5,
+                    selectedLabel: "Technical Guide"
+                },
+                {
+                    id: 7,
+                    category: 'board',
+                    name: "Zaqir Rather",
+                    role: "Backcountry Lead",
+                    subRole: "IISM Advanced | Steep Terrain Expert",
+                    bio: "Specializing in refined mechanics and advanced board control, Zaqir brings a technical perspective to the board lead role. Certified via IISM Advanced, he emphasizes safety-first mountain navigation and precision maneuvering in complex terrains.",
+                    tags: ["IISM Advanced", "Backcountry", "Precision"],
+                    image: null,
+                    initials: "ZR",
+                    stars: 5,
+                    selectedLabel: "Terrain Specialist"
+                },
+                {
+                    id: 8,
+                    category: 'board',
+                    name: "Iqbal Shah",
+                    role: "Performance Coach",
+                    subRole: "IISM Certified | Form Specialist",
+                    bio: "Iqbal focuses on the biomechanics of snowboarding, offering technically refined coaching for advanced riders. His approach prioritizes posture and weight distribution to achieve effortless movement across diverse snow conditions.",
+                    tags: ["IISM Certified", "Coaching", "Form"],
+                    image: null,
+                    initials: "IS",
+                    stars: 5,
+                    selectedLabel: "Performance Coach"
+                },
+                {
+                    id: 9,
+                    category: 'board',
+                    name: "Rahil",
+                    role: "Expedition Lead",
+                    subRole: "NSF Certified | Endurance Athlete",
+                    bio: "A versatile athlete with NSF certification, Rahil specializes in mountain expeditions and long-distance backcountry boarding. He combines an athletic competitive edge with a deep knowledge of mountain safety and weather patterns.",
+                    tags: ["NSF Certified", "Expedition", "Endurance"],
+                    image: null,
+                    initials: "RH",
+                    stars: 5,
+                    selectedLabel: "Expedition Lead"
+                }
+            ];
 
-            // Initialize State
             let currentFilter = 'ski';
             let activeInstructorId = 1;
 
@@ -959,10 +770,9 @@
                 `;
             }
 
-            // Initial Render - call after functions are defined
-            if (typeof instructorsData !== 'undefined') {
-                setCategory('ski');
-            }
+            // Initial Render
+            // Ensure DOM is ready (though script is at end of body)
+            setCategory('ski');
         </script>
     </section>
 
@@ -994,7 +804,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 h-[600px]">
 
                 <div class="lg:col-span-3 relative rounded-[2.5rem] overflow-hidden group shadow-2xl">
-                    <img src="assets/images/home/testimonials/content.webp"
+                    <img src="images/home/testimonials/content.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         alt="Rider in Powder">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent">
@@ -1148,7 +958,7 @@
 
     <section id="curriculum" class="py-24 px-6 relative overflow-hidden border-y border-slate-200">
         <div class="absolute inset-0 z-0">
-            <img src="assets/images/home/curriculum/bg-curriculum.webp" class="w-full h-full object-cover"
+            <img src="images/home/curriculum/bg-curriculum.webp" class="w-full h-full object-cover"
                 alt="Curriculum Background">
         </div>
 
@@ -1346,7 +1156,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="assets/images/home/curriculum/day-1.webp" class="w-full h-full object-cover"
+                                <img src="images/home/curriculum/day-1.webp" class="w-full h-full object-cover"
                                     alt="Day 1">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1444,7 +1254,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="assets/images/home/curriculum/day-2.webp" class="w-full h-full object-cover"
+                                <img src="images/home/curriculum/day-2.webp" class="w-full h-full object-cover"
                                     alt="Day 2">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1541,7 +1351,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="assets/images/home/curriculum/day-3.webp" class="w-full h-full object-cover"
+                                <img src="images/home/curriculum/day-3.webp" class="w-full h-full object-cover"
                                     alt="Day 3">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1638,7 +1448,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="assets/images/home/curriculum/day-4.webp" class="w-full h-full object-cover"
+                                <img src="images/home/curriculum/day-4.webp" class="w-full h-full object-cover"
                                     alt="Day 4">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1735,7 +1545,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="assets/images/home/curriculum/day-5.webp" class="w-full h-full object-cover"
+                                <img src="images/home/curriculum/day-5.webp" class="w-full h-full object-cover"
                                     alt="Day 5">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -1832,7 +1642,7 @@
                             <div class="relative h-48 md:h-56 w-full shrink-0">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
                                 </div>
-                                <img src="assets/images/home/curriculum/day-6.webp" class="w-full h-full object-cover"
+                                <img src="images/home/curriculum/day-6.webp" class="w-full h-full object-cover"
                                     alt="Day 6">
                                 <div class="absolute bottom-0 left-0 p-8 z-20">
                                     <span
@@ -2010,448 +1820,7 @@
 
     <section id="attractions"
         class="py-24 px-6 bg-slate-100 dark:bg-slate-900 font-sans border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 relative overflow-hidden group">
-        <!-- Pattern Background -->
-        <div
-            class="absolute inset-0 pattern-grid p-6 grid grid-cols-8 md:grid-cols-12 gap-6 content-start opacity-50 select-none pointer-events-none z-0 mix-blend-multiply dark:mix-blend-normal">
-            <!-- Row 1 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
 
-            <!-- Row 2 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 3 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 4 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 5 (Repeated for density/coverage) -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 6 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 7 (Extra coverage) -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <!-- Row 8 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 9 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 10 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 11 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 12 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 13 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 14 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 15 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 16 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 17 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 18 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-
-            <!-- Row 19 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">hiking</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-12">severe_cold</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-45">skateboarding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-45">landscape</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">snowboarding</span>
-
-            <!-- Row 20 -->
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 rotate-45">ac_unit</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">sledding</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-6">downhill_skiing</span>
-            <span class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">forest</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-6">snowmobile</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 -rotate-12">cloudy_snowing</span>
-            <span
-                class="material-symbols-outlined text-2xl text-slate-300 dark:text-slate-700 rotate-12">nordic_walking</span>
-            <span class="material-symbols-outlined text-2xl text-blue-200 dark:text-blue-900 -rotate-6">landscape</span>
-        </div>
         <div
             class="absolute inset-0 bg-gradient-to-t from-slate-100 dark:from-slate-900 via-transparent to-transparent opacity-100 z-0 pointer-events-none">
         </div>
@@ -2557,7 +1926,7 @@
                 <!-- Card 1: The "Rider" Tier -->
                 <div
                     class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                    <img src="assets/images/home/stays_teaser/stay-3.webp"
+                    <img src="images/home/stays_teaser/stay-3.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         alt="Dormitory Bunk">
                     <div
@@ -2592,7 +1961,7 @@
                 <!-- Card 2: The "Comfort" Tier -->
                 <div
                     class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 border-2 border-sky-500/20 transform md:-translate-y-4">
-                    <img src="assets/images/home/stays_teaser/stay-1.webp"
+                    <img src="images/home/stays_teaser/stay-1.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         alt="Comfort Room">
                     <div
@@ -2633,7 +2002,7 @@
                 <!-- Card 3: The "Luxury" Tier -->
                 <div
                     class="group relative rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100">
-                    <img src="assets/images/home/stays_teaser/stay-2.webp"
+                    <img src="images/home/stays_teaser/stay-2.webp"
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                         alt="Luxury Hotel">
                     <div
@@ -2844,6 +2213,9 @@
     <div id="footer-placeholder"></div>
 
     <div id="fab-placeholder"></div>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

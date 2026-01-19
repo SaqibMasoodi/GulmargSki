@@ -5,18 +5,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Journey | Wolf Adventure</title>
-    <meta name="description"
-        content="Explore Gulmarg's breathtaking peaks and powder through our curated visual gallery.">
-    <link rel="icon" type="image/png" href="wolf.png">
-
-    <!-- Open Graph / Social -->
+    <link rel="icon" type="image/png" href="images/wolf.png">
+    <meta property="og:image" content="images/logo.webp">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Visual Journey | Wolf Adventure">
-    <meta property="og:description" content="A stunning collection of Gulmarg's best moments.">
-    <meta property="og:image" content="assets/images/logo.webp">
 
-    <!-- Core Application -->
-    <script type="module" src="assets/js/script.js"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ["'Plus Jakarta Sans'", "sans-serif"],
+                    },
+                    colors: {
+                        alpine: {
+                            white: '#ffffff',
+                            off: '#f8fafc',
+                            ice: '#e0f2fe',
+                            blue: '#0ea5e9',
+                            deep: '#0f172a',
+                            text: '#334155',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-up': 'fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 24px;
+        }
+
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        /* Hide scrollbar for category selector */
+    </style>
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white font-sans"
@@ -196,7 +265,34 @@
                     { id: 'heli', name: 'Heli-Skiing' }
                 ],
 
-                items: galleryItems,
+                items: [
+                    // Videos
+                    { id: 101, type: 'video', category: 'ski', src: 'images/Gallery/gandolaaaaa.mp4', title: 'Gondola Ascent', desc: 'Floating above the snow-laden pines towards the peak.' },
+                    { id: 102, type: 'video', category: 'ski', src: 'images/Gallery/gulll.mp4', title: 'Powder Run', desc: 'A firsthand look at the dry Himalayan powder.' },
+                    { id: 103, type: 'video', category: 'life', src: 'images/Gallery/WhatsApp Video 2026-01-08 at 7.13.28 PM.mp4', title: 'Resort Vibes', desc: 'The atmospheric hustle of Gulmarg in winter.' },
+                    { id: 104, type: 'video', category: 'life', src: 'images/Gallery/WhatsApp Video 2026-01-08 at 7.14.25 PM.mp4', title: 'Snowy Market', desc: 'Local colors and winter sounds.' },
+                    { id: 105, type: 'video', category: 'life', src: 'images/Gallery/WhatsApp Video 2026-01-08 at 7.14.30 PM.mp4', title: 'Après Magic', desc: 'Evening warmth in the heart of the mountains.' },
+
+                    // Optimized Images
+                    { id: 1, category: 'ski', src: 'images/Gallery/DSC03931.webp', title: 'Powder Descent', desc: 'Carving through the legendary Gulmarg powder.' },
+                    { id: 2, category: 'ski', src: 'images/Gallery/DSC03935.webp', title: 'Apharwat Action', desc: 'High-altitude thrills on the upper slopes.' },
+                    { id: 3, category: 'landscape', src: 'images/Gallery/DSC03949.webp', title: 'Morning Light', desc: 'The sun rising over the Pir Panjal range.' },
+                    { id: 4, category: 'landscape', src: 'images/Gallery/DSC03953.webp', title: 'Summit View', desc: 'Breathtaking vistas from the top of the gondola.' },
+                    { id: 5, category: 'ski', src: 'images/Gallery/DSC03967.webp', title: 'Forest Run', desc: 'Navigating the pine-scented glades.' },
+                    { id: 6, category: 'landscape', src: 'images/Gallery/DSC03970.webp', title: 'Alpine Glow', desc: 'Golden hour hitting the snow-capped peaks.' },
+                    { id: 7, category: 'life', src: 'images/Gallery/DSC04002.webp', title: 'Village Life', desc: 'The charming winter atmosphere of Gulmarg village.' },
+                    { id: 8, category: 'landscape', src: 'images/Gallery/DSC04005.webp', title: 'Frozen Silence', desc: 'Untouched snow blankets the valley.' },
+                    { id: 9, category: 'ski', src: 'images/Gallery/DSC04011.webp', title: 'Cliff Drop', desc: 'Taking the bold line through the back bowls.' },
+                    { id: 10, category: 'landscape', src: 'images/Gallery/DSC04044.webp', title: 'Nanga Parbat View', desc: 'The mighty killer mountain visible in the distance.' },
+                    { id: 11, category: 'ski', src: 'images/Gallery/DSC04046.webp', title: 'Spray and Play', desc: 'Winter joy in its purest form.' },
+                    { id: 12, category: 'landscape', src: 'images/Gallery/DSC04047.webp', title: 'Ridge Walk', desc: 'Trekking along the skyline of Apharwat.' },
+                    { id: 13, category: 'life', src: 'images/Gallery/DSC04050.webp', title: 'Cozy Base', desc: 'Returning to warmth after a day of adventure.' },
+                    { id: 14, category: 'ski', src: 'images/Gallery/DSC04059.webp', title: 'Powder Cloud', desc: 'Disappearing into a spray of dry Himalayan snow.' },
+                    { id: 15, category: 'landscape', src: 'images/Gallery/DSC04062.webp', title: 'Winter Layers', desc: 'A landscape of textures and gradients.' },
+                    { id: 16, category: 'life', src: 'images/Gallery/DSC04112.webp', title: 'Market Colors', desc: 'The vibrant life of Gulmarg market in winter.' },
+                    { id: 17, category: 'ski', src: 'images/Gallery/DSC04117.webp', title: 'Sunset Shred', desc: 'Making the most of the last light.' },
+                    { id: 18, category: 'landscape', src: 'images/Gallery/page1.webp', title: 'Vista Point', desc: 'A wide-angle look at the ski resort layout.' }
+                ],
                 get filteredItems() {
                     if (this.activeCategory === 'all') return this.items;
                     return this.items.filter(item => item.category === this.activeCategory);
@@ -274,7 +370,8 @@
         })
     </script>
     <div id="fab-placeholder"></div>
-
+    <script src="components.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

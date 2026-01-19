@@ -5,18 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Policies & Legal | Wolf Adventure</title>
-    <meta name="description"
-        content="Important information regarding bookings, cancellations, and terms of service for Wolf Adventure Gulmarg.">
-    <link rel="icon" type="image/png" href="wolf.png">
-
-    <!-- Open Graph / Social -->
+    <link rel="icon" type="image/png" href="images/wolf.png">
+    <meta property="og:image" content="images/logo.webp">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Policies & Legal | Wolf Adventure">
-    <meta property="og:description" content="Essential information for your Gulmarg trip.">
-    <meta property="og:image" content="assets/images/logo.webp">
 
-    <!-- Core Application -->
-    <script type="module" src="assets/js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        alpine: {
+                            white: '#ffffff',
+                            off: '#f8fafc',
+                            ice: '#e0f2fe',
+                            blue: '#0ea5e9',
+                            deep: '#0f172a',
+                            text: '#334155',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-alpine-off text-alpine-text antialiased selection:bg-alpine-blue selection:text-white">
@@ -302,6 +325,8 @@
     <div id="footer-placeholder"></div>
 
     <div id="fab-placeholder"></div>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
