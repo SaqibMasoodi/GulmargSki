@@ -207,7 +207,7 @@ const attractionsData = [
                             <span class="text-[10px] bg-slate-900 text-white font-bold px-2 py-1 rounded">8,500 ft</span>
                         </div>
                         <p class="text-xs text-blue-600 dark:text-blue-400 mb-3 font-bold uppercase tracking-wider">Gulmarg to Kongdoori</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">Takes you to a bowl-shaped valley. Features restaurants, snow parks, and the main beginner slopes.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">Takes you to a bowl-shaped valley. Features restaurants, snow parks, and the main beginner slopes. <br><span class="font-bold text-slate-900 dark:text-white">Price: ₹900</span></p>
                     </div>
                     <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors relative overflow-hidden group">
                         <div class="flex justify-between items-center mb-4 relative z-10">
@@ -215,7 +215,7 @@ const attractionsData = [
                             <span class="text-[10px] bg-blue-600 text-white font-bold px-2 py-1 rounded">14,000 ft</span>
                         </div>
                         <p class="text-xs text-blue-600 dark:text-blue-400 mb-3 font-bold uppercase tracking-wider relative z-10">To Apharwat Peak</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">The main event. Breathtaking views of Nanga Parbat. <br><span class="text-red-500 font-bold text-xs mt-2 block">*Sightseeing or Experts Only.</span></p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">The main event. Breathtaking views of Nanga Parbat. <br><span class="text-red-500 font-bold text-xs mt-2 block">*Sightseeing or Experts Only.</span><span class="font-bold text-slate-900 dark:text-white block mt-1">Price: ₹1,100</span></p>
                     </div>
                 </div>
             </div>
@@ -233,14 +233,14 @@ const attractionsData = [
                         <img src="images/home/attractions/gondola.webp" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Snowmobile">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
                             <h4 class="text-xl font-bold text-white mb-1">Snowmobiles</h4>
-                            <p class="text-slate-300 text-xs font-medium mb-3">High-speed motorized sleds. Zoom across vast frozen snowfields.</p>
+                            <p class="text-slate-300 text-xs font-medium mb-3">High-speed motorized sleds. Zoom across vast frozen snowfields. <br><span class="text-white font-bold">Price: ₹2,200</span></p>
                         </div>
                     </div>
                     <div class="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1625902047808-72b157b88950?q=80&w=2670&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="ATV">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
                             <h4 class="text-xl font-bold text-white mb-1">ATV (Quad Bikes)</h4>
-                            <p class="text-slate-300 text-xs font-medium mb-3">4x4 beasts with tire chains. Explore Tangmarg to Drung.</p>
+                            <p class="text-slate-300 text-xs font-medium mb-3">4x4 beasts with tire chains. Explore Tangmarg to Drung. <br><span class="text-white font-bold">Price: ₹2,200</span></p>
                         </div>
                     </div>
                 </div>
@@ -340,7 +340,7 @@ const attractionsData = [
                         <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Bestseller</div>
                         <div>
                             <div class="flex justify-between items-start mb-2">
-                                <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-tight">Commodore<br>Ride</h4>
+                                <h4 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-tight">Kongdoori<br>Ride</h4>
                             </div>
                             <p class="text-xs text-blue-600 dark:text-blue-400 mb-4 font-bold uppercase tracking-wider">Landing Experience</p>
                             <ul class="text-sm text-slate-600 dark:text-slate-400 font-medium space-y-2 mb-6">
@@ -389,8 +389,8 @@ const attractionsData = [
                         <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-2 uppercase">Traditional Sledge</h4>
                         <p class="text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-4">Wooden sleds pulled or pushed by local guides on gentle slopes. Perfect for families and beginners.</p>
                         <div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
-                            <span class="block text-xl font-black text-slate-900 dark:text-white">₹500 - ₹1,000</span>
-                            <span class="text-xs text-slate-500 font-bold uppercase">per ride</span>
+                            <span class="block text-xl font-black text-slate-900 dark:text-white">₹1,000 - ₹5,000</span>
+                            <span class="text-xs text-slate-500 font-bold uppercase">per ride (Est. ₹1,500)</span>
                         </div>
                     </div>
                     <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-400 transition-colors group">
@@ -592,12 +592,6 @@ window.addEventListener('click', (e) => {
         toggleWeatherDropdown();
     }
 });
-
-// Remove old updateWeather function as it's replaced by selectWeather
-// function updateWeather() { ... }
-
-// 5. SCHEDULE LOGIC
-// [REMOVED - Dead Code Cleanup]
 
 // --- BOOKING PAGE LOGIC ---
 
