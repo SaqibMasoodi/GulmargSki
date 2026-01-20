@@ -43,11 +43,16 @@
             display: none !important;
         }
 
-        .sticky-sidebar {
-            position: sticky;
-            top: 7rem;
-            max-height: calc(100vh - 4rem);
-            overflow-y: auto;
+        /* Hide scrollbar for mobile horizontal layout */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
     </style>
 </head>
@@ -88,120 +93,115 @@
         </div>
     </header>
 
-    <main class="w-full max-w-[1440px] mx-auto pt-10 pb-20 px-4 md:px-8">
+    <main class="w-full max-w-[1440px] mx-auto pt-4 lg:pt-10 pb-20 px-4 md:px-8">
 
-        <div class="flex flex-col lg:flex-row gap-8 items-start">
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
 
-            <!-- STICKY SIDEBAR (CONTROLS) -->
-            <aside class="w-full lg:w-80 flex-shrink-0 sticky-sidebar z-30 transition-all duration-300"
-                :class="{'lg:translate-y-0': true}">
+            <!-- CONTROLS SIDEBAR -->
+            <!-- Mobile: Horizontal Scroll / Desktop: Sticky Sidebar -->
+            <aside class="w-full lg:w-80 flex-shrink-0 z-30 transition-all duration-300 lg:sticky lg:top-[7rem] static">
 
-                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-6 space-y-8">
+                <div
+                    class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-2 lg:p-6 flex flex-col gap-2 lg:gap-8">
 
-                    <div>
-                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Select Sport</h3>
-                        <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
-                            <button @click="sport = 'ski'"
-                                class="py-3 rounded-lg text-sm font-bold transition-all duration-300"
-                                :class="sport === 'ski' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'">
-                                Skiing
-                            </button>
-                            <button @click="sport = 'board'"
-                                class="py-3 rounded-lg text-sm font-bold transition-all duration-300"
-                                :class="sport === 'board' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'">
-                                Snowboard
-                            </button>
+                    <!-- Mobile Horizontal Layout Wrapper -->
+                    <div
+                        class="flex flex-row lg:flex-col gap-2 lg:gap-4 overflow-x-auto pb-1 lg:pb-0 items-stretch no-scrollbar">
+
+                        <!-- Sport Selector -->
+                        <div class="min-w-[100px] lg:w-full flex-shrink-0">
+                            <h3
+                                class="text-[9px] lg:text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 lg:mb-4">
+                                Select Sport</h3>
+                            <div class="grid grid-cols-2 gap-1 p-0.5 bg-slate-100 rounded-lg h-[32px] lg:h-auto">
+                                <button @click="sport = 'ski'"
+                                    class="py-0.5 lg:py-3 rounded-md text-[10px] lg:text-sm font-bold transition-all duration-300 h-full flex items-center justify-center"
+                                    :class="sport === 'ski' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'">
+                                    Ski
+                                </button>
+                                <button @click="sport = 'board'"
+                                    class="py-0.5 lg:py-3 rounded-md text-[10px] lg:text-sm font-bold transition-all duration-300 h-full flex items-center justify-center"
+                                    :class="sport === 'board' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'">
+                                    Board
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Group Size</h3>
+                        <!-- Group Size Selector -->
+                        <div class="flex-1 min-w-[140px] lg:w-full flex-shrink-0">
+                            <h3
+                                class="text-[9px] lg:text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 lg:mb-4">
+                                Group Size</h3>
 
-                        <!-- Solo Option -->
-                        <div @click="pax = 1" class="cursor-pointer group mb-3">
-                            <div class="relative overflow-hidden rounded-xl border-2 transition-all duration-300 p-4"
-                                :class="pax === 1 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-white hover:border-slate-300'">
-                                <div class="flex items-center justify-between z-10 relative">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-                                            :class="pax === 1 ? 'bg-alpine-blue text-white' : 'bg-slate-100 text-slate-400'">
-                                            <span class="material-symbols-rounded">person</span>
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-slate-900">Solo Traveler</div>
-                                            <div class="text-[10px] text-slate-500 uppercase tracking-wide font-bold">
-                                                Private Instructor (1:1)</div>
+                            <div class="flex lg:flex-col gap-1 h-full lg:h-auto">
+                                <!-- Solo Option -->
+                                <div @click="pax = 1" class="cursor-pointer group flex-1">
+                                    <div class="h-[32px] lg:h-auto relative overflow-hidden rounded-lg border transition-all duration-300 px-2 lg:p-4 flex flex-row lg:flex-col items-center justify-center lg:justify-start gap-1.5"
+                                        :class="pax === 1 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-white hover:border-slate-300'">
+                                        <div class="flex items-center gap-1.5 lg:gap-2 z-10 relative">
+                                            <div class="w-4 h-4 lg:w-10 lg:h-10 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+                                                :class="pax === 1 ? 'bg-alpine-blue text-white' : 'bg-slate-100 text-slate-400'">
+                                                <span
+                                                    class="material-symbols-rounded text-[10px] lg:text-base">person</span>
+                                            </div>
+                                            <div class="leading-none">
+                                                <div
+                                                    class="font-bold text-slate-900 text-[10px] lg:text-base leading-tight">
+                                                    Solo</div>
+                                                <div
+                                                    class="text-[9px] lg:text-[10px] text-slate-500 uppercase tracking-wide font-bold hidden lg:block">
+                                                    Private</div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                                        :class="pax === 1 ? 'border-alpine-blue' : 'border-slate-300'">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-alpine-blue transition-transform duration-300"
-                                            :class="pax === 1 ? 'scale-100' : 'scale-0'"></div>
+                                </div>
+
+                                <!-- Buddy Option -->
+                                <div @click="pax = 2" class="cursor-pointer group flex-1">
+                                    <div class="h-[32px] lg:h-auto relative overflow-hidden rounded-lg border transition-all duration-300 px-2 lg:p-4 flex flex-row lg:flex-col items-center justify-center lg:justify-start gap-1.5"
+                                        :class="pax === 2 ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'">
+                                        <div class="flex items-center gap-1.5 lg:gap-2 z-10 relative">
+                                            <div class="w-4 h-4 lg:w-10 lg:h-10 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+                                                :class="pax === 2 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400'">
+                                                <span
+                                                    class="material-symbols-rounded text-[10px] lg:text-base">groups</span>
+                                            </div>
+                                            <div class="leading-none">
+                                                <div
+                                                    class="font-bold text-slate-900 text-[10px] lg:text-base leading-tight">
+                                                    Buddy</div>
+                                                <div
+                                                    class="text-[9px] lg:text-[10px] text-slate-500 uppercase tracking-wide font-bold hidden lg:block">
+                                                    Shared</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Buddy Option -->
-                        <div @click="pax = 2" class="cursor-pointer group">
-                            <div class="relative overflow-hidden rounded-xl border-2 transition-all duration-300 p-4"
-                                :class="pax === 2 ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'">
-                                <div
-                                    class="absolute top-0 right-0 bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">
-                                    BEST VALUE
-                                </div>
-                                <div class="flex items-center justify-between z-10 relative">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-                                            :class="pax === 2 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400'">
-                                            <span class="material-symbols-rounded">groups</span>
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-slate-900">Buddy Deal (2 Pax)</div>
-                                            <div class="text-[10px] text-slate-500 uppercase tracking-wide font-bold">
-                                                Shared Instructor (2:1)</div>
-                                        </div>
-                                    </div>
-                                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                                        :class="pax === 2 ? 'border-emerald-500' : 'border-slate-300'">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 transition-transform duration-300"
-                                            :class="pax === 2 ? 'scale-100' : 'scale-0'"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="pt-6 border-t border-slate-100">
-                        <div class="text-xs text-slate-400 text-center font-medium">Currency</div>
-                        <div class="mt-2 flex justify-center">
-                            <select x-model="currency"
-                                class="bg-slate-50 border border-slate-200 text-slate-700 text-sm font-bold rounded-lg focus:ring-alpine-blue focus:border-alpine-blue block w-full p-2.5 cursor-pointer text-center">
-                                <option value="INR">INR (₹)</option>
-                                <option value="USD">USD ($)</option>
-                                <option value="EUR">EUR (€)</option>
-                            </select>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </aside>
 
             <!-- PACKAGES GRID -->
             <div class="flex-1 w-full">
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+                <!-- Mobile: grid-cols-2 with smaller gap. Desktop: standard grid -->
+                <div class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-2 gap-3 lg:gap-6">
 
                     <template x-for="pkg in filteredPackages" :key="pkg.tier_key">
-                        <div class="group relative flex flex-col rounded-3xl bg-white border-2 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                        <div class="group relative flex flex-col rounded-2xl lg:rounded-3xl bg-white border-2 p-3 lg:p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                             :class="getBorderColor(pkg.tier_key)">
 
                             <!-- Image Section -->
                             <div
-                                class="relative aspect-[4/3] w-full overflow-hidden rounded-2xl mb-4 shadow-inner bg-slate-100">
+                                class="relative aspect-[4/3] w-full overflow-hidden rounded-xl lg:rounded-2xl mb-3 lg:mb-4 shadow-inner bg-slate-100">
                                 <img :src="getImage(pkg.tier_key)"
                                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 <span
-                                    class="absolute bottom-3 left-3 rounded-full px-4 py-1.5 text-xs font-bold shadow-lg backdrop-blur-md"
+                                    class="absolute bottom-2 left-2 lg:bottom-3 lg:left-3 rounded-full px-2 py-1 lg:px-4 lg:py-1.5 text-[10px] lg:text-xs font-bold shadow-lg backdrop-blur-md"
                                     :class="getBadgeColor(pkg.tier_key)">
                                     <span x-text="getBadgeText(pkg.tier_key)"></span>
                                 </span>
@@ -209,30 +209,33 @@
 
                             <!-- Content -->
                             <div class="flex flex-col flex-1">
-                                <h3 class="text-xl font-black text-slate-900 tracking-tight" x-text="pkg.tier_name">
-                                </h3>
-                                <p class="text-xs text-slate-500 font-medium mt-1" x-text="getHotelNames(pkg.tier_key)">
-                                </p>
+                                <h3 class="text-sm lg:text-xl font-black text-slate-900 tracking-tight leading-tight"
+                                    x-text="pkg.tier_name"></h3>
+                                <p class="text-[10px] lg:text-xs text-slate-500 font-medium mt-0.5 lg:mt-1 leading-tight line-clamp-1"
+                                    x-text="getHotelNames(pkg.tier_key)"></p>
 
-                                <div class="mt-4 mb-2 flex items-baseline gap-2">
-                                    <template x-if="pkg.grand_total > 0 && pkg.tier_key !== '5star'">
-                                        <div class="flex items-baseline gap-1">
-                                            <span class="text-3xl font-black text-slate-900"
+                                <div
+                                    class="mt-2 lg:mt-4 mb-2 lg:mb-2 flex flex-col lg:flex-row lg:items-baseline gap-0 lg:gap-2">
+                                    <template x-if="pkg.pricing && pkg.pricing.grand_total > 0">
+                                        <div class="flex flex-col lg:flex-row lg:items-baseline gap-0 lg:gap-1">
+                                            <span class="text-lg lg:text-3xl font-black text-slate-900"
                                                 x-text="formatMoney(pkg.pricing.grand_total)"></span>
-                                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest"
+                                            <span
+                                                class="text-[9px] lg:text-xs font-bold text-slate-400 uppercase tracking-widest"
                                                 x-text="pax === 2 ? '/ couple' : '/ person'"></span>
                                         </div>
                                     </template>
-                                    <template x-if="pkg.grand_total === 0 || pkg.tier_key === '5star'">
-                                        <span class="text-2xl font-bold text-slate-400">On Request</span>
+                                    <template x-if="!pkg.pricing || pkg.pricing.grand_total === 0">
+                                        <span class="text-sm lg:text-2xl font-bold text-slate-400">On Request</span>
                                     </template>
                                 </div>
-                                <div class="text-[10px] text-alpine-blue font-bold uppercase tracking-widest mb-4">
+                                <div
+                                    class="text-[9px] lg:text-[10px] text-alpine-blue font-bold uppercase tracking-widest mb-2 lg:mb-4 hidden lg:block">
                                     6 Days / 5 Nights &bull; <span
                                         x-text="sport === 'ski' ? 'Skiing' : 'Snowboarding'"></span>
                                 </div>
 
-                                <div class="space-y-2 mb-6">
+                                <div class="space-y-1 lg:space-y-2 mb-3 lg:mb-6 hidden lg:block">
                                     <div class="flex items-center gap-2 text-xs text-slate-600">
                                         <span
                                             class="material-symbols-rounded text-emerald-500 text-sm">check_circle</span>
@@ -253,7 +256,7 @@
 
                                 <div class="mt-auto">
                                     <a :href="'booking.html?tier=' + encodeURIComponent(pkg.tier_key) + '&days=6&people=' + pax + '&sport=' + sport"
-                                        class="block w-full py-3.5 rounded-xl text-white font-bold text-center text-sm shadow-lg transition-transform active:scale-95"
+                                        class="block w-full py-2.5 lg:py-3.5 rounded-lg lg:rounded-xl text-white font-bold text-center text-xs lg:text-sm shadow-md lg:shadow-lg transition-transform active:scale-95"
                                         :class="getBtnColor(pkg.tier_key)">
                                         Book Now
                                     </a>
@@ -706,8 +709,9 @@
                     filtered.push({
                         tier_name: "5 Star Luxury",
                         tier_key: "5star",
-                        grand_total: 0 // Indicates On Request
+                        pricing: { grand_total: 0 } // Indicates On Request
                     });
+
 
                     return filtered;
                 },
