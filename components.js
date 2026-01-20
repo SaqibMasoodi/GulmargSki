@@ -1,5 +1,5 @@
 const HEADER_HTML = `
-    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-4 py-2 md:px-6 md:py-4 flex justify-between items-center shadow-2xl transition-all duration-300 font-sans"
+    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[1800px] bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-4 py-2 md:px-6 md:py-4 flex justify-between items-center shadow-2xl transition-all duration-300 font-sans"
         id="main-nav">
 
         <a href="index.html"
@@ -35,29 +35,63 @@ const HEADER_HTML = `
     </nav>
 
     <div id="mobile-menu-overlay"
-        class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center font-sans">
-        <ul class="text-center space-y-8">
-            <li><a href="index.html" onclick="toggleMobileMenu()"
-                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Home</a>
-            </li>
-            <li><a href="stays.html" onclick="toggleMobileMenu()"
-                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Accommodations</a>
-            </li>
-            <li><a href="packages.html" onclick="toggleMobileMenu()"
-                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Packages</a>
-            </li>
-            <li><a href="policies.html" onclick="toggleMobileMenu()"
-                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Policies</a>
-            </li>
-            <li><a href="gallery.html" onclick="toggleMobileMenu()"
-                    class="text-2xl font-black text-slate-900 hover:text-alpine-blue transition-colors">Gallery</a>
-            </li>
-            <li>
-                <a href="booking.html"
-                    class="inline-block mt-4 px-8 py-3 rounded-full bg-alpine-deep text-white font-bold shadow-xl">Book
-                    Your Trip</a>
-            </li>
-        </ul>
+        class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-center font-sans px-6">
+        
+        <div class="w-full max-w-sm mx-auto flex flex-col gap-3">
+            
+            <!-- Home -->
+            <a href="index.html" onclick="toggleMobileMenu()"
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded">home</span>
+                </div>
+                <span class="text-lg font-bold text-slate-800">Home</span>
+            </a>
+
+            <!-- Accommodations -->
+            <a href="stays.html" onclick="toggleMobileMenu()"
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded">bed</span>
+                </div>
+                <span class="text-lg font-bold text-slate-800">Accommodations</span>
+            </a>
+
+            <!-- Packages -->
+            <a href="packages.html" onclick="toggleMobileMenu()"
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded">package_2</span>
+                </div>
+                <span class="text-lg font-bold text-slate-800">Packages</span>
+            </a>
+
+            <!-- Gallery -->
+            <a href="gallery.html" onclick="toggleMobileMenu()"
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded">photo_library</span>
+                </div>
+                <span class="text-lg font-bold text-slate-800">Gallery</span>
+            </a>
+
+            <!-- Policies -->
+            <a href="policies.html" onclick="toggleMobileMenu()"
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded">gavel</span>
+                </div>
+                <span class="text-lg font-bold text-slate-800">Policies</span>
+            </a>
+
+            <!-- CTA Button -->
+             <a href="booking.html" onclick="toggleMobileMenu()"
+                class="mt-6 w-full py-4 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white font-black text-center shadow-xl shadow-slate-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                <span class="material-symbols-rounded">calendar_month</span>
+                Book Your Trip
+            </a>
+
+        </div>
     </div>
 `;
 
