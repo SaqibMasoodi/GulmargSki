@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <header class="relative h-[70vh] w-full overflow-hidden flex items-center justify-center bg-slate-900">
+    <header class="relative h-[50vh] md:h-[70vh] w-full overflow-hidden flex items-center justify-center bg-slate-900">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=2070&auto=format&fit=crop"
                 class="w-full h-full object-cover" alt="Ski Adventure">
@@ -103,37 +103,38 @@
             <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
         </div>
 
-        <div class="relative z-20 w-full max-w-4xl px-6 text-center pt-24">
+        <div class="relative z-20 w-full max-w-4xl px-4 md:px-6 text-center pt-28 md:pt-24 pb-12">
             <div class="fade-in-up">
-                <div class="flex items-center justify-center gap-3 mb-6">
+                <div class="flex items-center justify-center gap-2 mb-2 md:mb-6">
                     <span
-                        class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-sky-400 animate-pulse shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
-                    <span class="text-sky-400 text-[10px] font-bold uppercase tracking-[0.2em] font-mono">Instant
+                        class="inline-flex items-center justify-center w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-sky-400 animate-pulse shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                    <span
+                        class="text-sky-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.15em] font-mono">Instant
                         Quote • WhatsApp Confirmation</span>
                 </div>
                 <h1
-                    class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.85] text-white mb-6 drop-shadow-2xl">
+                    class="text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-white mb-3 md:mb-6 drop-shadow-2xl">
                     BOOK YOUR <br>
                     <span
                         class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-emerald-300">ADVENTURE</span>
                 </h1>
                 <p
-                    class="text-slate-300 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+                    class="text-slate-300 text-sm md:text-xl font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md px-4 md:px-0">
                     Fill out the form below. We'll generate a quote and confirm availability instantly via WhatsApp.
                 </p>
             </div>
         </div>
     </header>
 
-    <div class="py-12 px-6 max-w-7xl mx-auto">
+    <div class="py-6 px-3 md:py-12 md:px-6 max-w-7xl mx-auto">
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 relative">
 
             <!-- LEFT COLUMN: FORM -->
-            <form id="bookingForm" class="lg:col-span-2 space-y-8">
+            <form id="bookingForm" class="lg:col-span-2 space-y-6 md:space-y-8">
 
                 <!-- 1. Customer Details -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
@@ -146,7 +147,7 @@
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Full
                                 Name</label>
                             <input type="text" name="name"
-                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-slate-900 font-medium focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors"
                                 placeholder="John Doe" required>
                         </div>
                         <div>
@@ -188,7 +189,7 @@
                                     class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Country</label>
                                 <div class="relative">
                                     <select name="country" x-model="country"
-                                        class="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
+                                        class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
                                         <option value="India">India</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Albania">Albania</option>
@@ -260,7 +261,7 @@
                                 <template x-if="country === 'India'">
                                     <div class="relative">
                                         <select name="state"
-                                            class="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
+                                            class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-slate-900 font-bold focus:outline-none focus:border-alpine-blue focus:ring-1 focus:ring-alpine-blue transition-colors appearance-none cursor-pointer shadow-sm">
                                             <option value="" disabled selected>Select State / UT</option>
 
                                             <optgroup label="Special & Edge Cases">
@@ -334,7 +335,7 @@
                 </div>
 
                 <!-- 2. Activity & Skill (NEW) -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
@@ -434,14 +435,14 @@
                 <!-- Address & Identity Removed -->
 
                 <!-- 3. Trip Logistics (MOVED from 2) -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
                             class="bg-alpine-blue text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
                         Trip Logistics
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         <!-- Wrapper removed -->
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Number
@@ -489,7 +490,7 @@
                 </div>
 
                 <!-- 4. Stay & Accommodation -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-8 shadow-sm">
                     <!-- Header with Inline Toggle -->
                     <div
                         class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
@@ -840,7 +841,7 @@
 
 
                 <!-- 5. Transfers & Logistics -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-8 shadow-sm">
                     <div
                         class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
                         <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -910,7 +911,7 @@
 
 
                 <!-- 6. Addons & Activities -->
-                <div class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                <div class="bg-white border border-slate-200 rounded-2xl p-4 md:p-8 shadow-sm">
                     <h3
                         class="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                         <span
@@ -920,7 +921,7 @@
                     </h3>
                     <p class="text-xs text-slate-500 mb-6">Select number of tickets for each activity.</p>
 
-                    <div class="space-y-8">
+                    <div class="space-y-6 md:space-y-8">
 
                         <!-- 1. Gondola Tickets (Green Theme) -->
                         <div class="border-2 border-emerald-200 bg-emerald-50/50 rounded-xl p-5">
@@ -1200,7 +1201,7 @@
                 <div class="sticky top-32 space-y-4">
 
                     <div
-                        class="bg-slate-900 text-gray-100 rounded-2xl shadow-floating p-6 border border-slate-700 font-mono text-sm relative overflow-hidden">
+                        class="bg-slate-900 text-gray-100 rounded-2xl shadow-floating p-4 md:p-6 border border-slate-700 font-mono text-sm relative overflow-hidden">
 
                         <!-- Background decoration -->
                         <div
@@ -1390,7 +1391,7 @@
 
 
                     <button type="button" onclick="submitBooking(event)"
-                        class="w-full bg-alpine-blue text-white font-bold text-lg py-4 rounded-xl hover:bg-sky-600 transition-all shadow-lg shadow-alpine-blue/25 flex items-center justify-center gap-2 relative z-10">
+                        class="w-full bg-alpine-blue text-white font-bold text-lg py-3 md:py-4 rounded-xl hover:bg-sky-600 transition-all shadow-lg shadow-alpine-blue/25 flex items-center justify-center gap-2 relative z-10">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />

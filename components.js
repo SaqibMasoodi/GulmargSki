@@ -1,11 +1,11 @@
 const HEADER_HTML = `
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl transition-all duration-300 font-sans"
+    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-white/90 backdrop-blur-md border border-slate-200 rounded-full px-4 py-2 md:px-6 md:py-4 flex justify-between items-center shadow-2xl transition-all duration-300 font-sans"
         id="main-nav">
 
         <a href="index.html"
-            class="flex items-center gap-2 text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
+            class="flex items-center gap-2 text-lg md:text-xl font-black tracking-tighter text-alpine-deep mr-4 shrink-0 z-50 relative">
             <img src="images/logo.webp" alt="Wolf Adventures"
-                class="h-10 w-10 rounded-full object-cover border-2 border-slate-200">
+                class="h-8 w-8 md:h-10 md:w-10 rounded-full object-cover border-2 border-slate-200">
             <span class="hidden sm:inline">WOLF<span class="text-alpine-blue">.ADV</span></span>
         </a>
 
@@ -19,11 +19,11 @@ const HEADER_HTML = `
 
         <div class="flex items-center gap-3 z-50 relative">
             <a href="booking.html"
-                class="bg-alpine-deep text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book
+                class="bg-alpine-deep text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-xs md:text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book
                 Now</a>
 
             <button onclick="toggleMobileMenu()"
-                class="lg:hidden p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
+                class="lg:hidden p-1.5 md:p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 6h16M4 12h16M4 18h16"></path>
@@ -145,7 +145,7 @@ const FOOTER_HTML = `
 
 const FAB_HTML = `
     <div id="contact-fab-container"
-        class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-2 group pointer-events-none font-sans">
+        class="fixed bottom-4 right-4 z-[100] flex flex-col items-end gap-2 group pointer-events-none font-sans">
         <div id="fab-options"
             class="flex flex-col gap-2 transition-all duration-300 opacity-0 invisible translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto">
             <a href="https://wa.me/916005806856" target="_blank"
@@ -165,11 +165,11 @@ const FAB_HTML = `
             </a>
         </div>
         <button
-            class="w-16 h-16 bg-alpine-blue hover:bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-105 focus:outline-none relative overflow-hidden pointer-events-auto">
+            class="w-14 h-14 bg-alpine-blue hover:bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-105 focus:outline-none relative overflow-hidden pointer-events-auto">
             <span
-                class="material-symbols-rounded text-3xl absolute transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 rotate-0 group-hover:rotate-90">support_agent</span>
+                class="material-symbols-rounded text-2xl absolute transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 rotate-0 group-hover:rotate-90">support_agent</span>
             <span
-                class="material-symbols-rounded text-3xl absolute transition-all duration-300 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 -rotate-90 group-hover:rotate-0">close</span>
+                class="material-symbols-rounded text-2xl absolute transition-all duration-300 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 -rotate-90 group-hover:rotate-0">close</span>
         </button>
     </div>
 `;
