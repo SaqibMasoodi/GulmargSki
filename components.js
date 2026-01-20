@@ -42,62 +42,62 @@ const HEADER_HTML = `
             
             <!-- Home -->
             <a href="index.html" onclick="toggleMobileMenu()"
-                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded">home</span>
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded text-xl">home</span>
                 </div>
-                <span class="text-lg font-bold text-slate-800">Home</span>
+                <span class="text-sm font-bold text-slate-800">Home</span>
             </a>
 
             <!-- Accommodations -->
             <a href="stays.html" onclick="toggleMobileMenu()"
-                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded">bed</span>
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded text-xl">bed</span>
                 </div>
-                <span class="text-lg font-bold text-slate-800">Accommodations</span>
+                <span class="text-sm font-bold text-slate-800">Accommodations</span>
             </a>
 
             <!-- Packages -->
             <a href="packages.html" onclick="toggleMobileMenu()"
-                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded">package_2</span>
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded text-xl">package_2</span>
                 </div>
-                <span class="text-lg font-bold text-slate-800">Packages</span>
+                <span class="text-sm font-bold text-slate-800">Packages</span>
             </a>
 
             <!-- Curriculum (NEW) -->
             <a href="index.html#curriculum" onclick="toggleMobileMenu()"
-                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded">school</span>
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded text-xl">school</span>
                 </div>
-                <span class="text-lg font-bold text-slate-800">Curriculum</span>
+                <span class="text-sm font-bold text-slate-800">Curriculum</span>
             </a>
 
             <!-- Gallery -->
             <a href="gallery.html" onclick="toggleMobileMenu()"
-                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded">photo_library</span>
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded text-xl">photo_library</span>
                 </div>
-                <span class="text-lg font-bold text-slate-800">Gallery</span>
+                <span class="text-sm font-bold text-slate-800">Gallery</span>
             </a>
 
             <!-- Policies -->
             <a href="policies.html" onclick="toggleMobileMenu()"
-                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded">gavel</span>
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded text-xl">gavel</span>
                 </div>
-                <span class="text-lg font-bold text-slate-800">Policies</span>
+                <span class="text-sm font-bold text-slate-800">Policies</span>
             </a>
 
             <!-- CTA Button (Red/Pink to match screenshot) -->
              <a href="booking.html" onclick="toggleMobileMenu()"
-                class="mt-6 w-full py-4 rounded-2xl bg-[#ff385c] hover:bg-[#d90b3e] text-white font-black text-center shadow-xl shadow-rose-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
-                <span class="material-symbols-rounded">calendar_month</span>
+                class="mt-4 w-full py-3 rounded-xl bg-[#ff385c] hover:bg-[#d90b3e] text-white font-black text-center shadow-xl shadow-rose-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-sm">
+                <span class="material-symbols-rounded text-lg">calendar_month</span>
                 Book Your Trip
             </a>
 
