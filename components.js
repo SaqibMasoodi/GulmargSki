@@ -20,8 +20,9 @@ const HEADER_HTML = `
 
         <div class="flex items-center gap-3 z-50 relative">
             <a href="booking.html"
-                class="bg-alpine-deep text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-xs md:text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 hidden sm:block">Book
-                Now</a>
+                class="bg-alpine-deep text-white px-3 py-1.5 md:px-5 md:py-2 rounded-full text-xs md:text-sm font-bold hover:bg-alpine-blue transition-transform hover:scale-105 shadow-lg shadow-alpine-deep/20 flex items-center gap-1">
+                <span>Book Now</span>
+            </a>
 
             <button onclick="toggleMobileMenu()"
                 class="lg:hidden p-1.5 md:p-2 text-slate-900 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
