@@ -15,6 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -30,7 +31,6 @@
     </script>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Specific overrides for this page */
         .snap-x {
             scroll-snap-type: x mandatory;
         }
@@ -39,100 +39,27 @@
             scroll-snap-align: center;
         }
 
-        /* --- MODAL VISIBILITY FIX --- */
-        .modal {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            pointer-events: none;
+        [x-cloak] {
+            display: none !important;
         }
 
-        .modal.open {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .modal.open .modal-content {
-            transform: scale(1);
-        }
-
-        .modal.open .modal-content {
-            transform: scale(1);
-        }
-
-        /* --- 3D APPLE-LIKE TILT EFFECT --- */
-        /* --- APPLE-LIKE CARDS --- */
-        .package-card {
-            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1.1), box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transform-style: preserve-3d;
-            will-change: transform, box-shadow;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            position: relative;
-        }
-
-        /* Top Edge Highlight (simulated light) */
-        .package-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 1.5rem;
-            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
-            pointer-events: none;
-            z-index: 20;
-        }
-
-        .package-card:hover {
-            /* Shadow removed */
-            z-index: 10;
-        }
-
-        .package-card .card-content {
-            transform: translateZ(20px);
-        }
-
-        .package-card .card-image {
-            transform: translateZ(10px);
-            transition: filter 0.4s ease-out;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .package-card:hover .card-image {
-            filter: contrast(1.04) saturate(1.02);
-            /* Subtle clarity boost */
-        }
-
-        /* Gloss/Highlight Effect */
-        .card-gloss {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.4) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 20;
-            mix-blend-mode: overlay;
-        }
-
-        .package-card:hover .card-gloss {
-            opacity: 1;
+        .sticky-sidebar {
+            position: sticky;
+            top: 7rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
         }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-600 antialiased selection:bg-alpine-blue selection:text-white">
+<body class="bg-slate-50 text-slate-600 antialiased selection:bg-alpine-blue selection:text-white"
+    x-data="packagesApp()">
+
+    <!-- NAVBAR PLACEHOLDER -->
     <div id="header-placeholder"></div>
 
-    <header class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-slate-900">
-        <!-- Background -->
+    <!-- Header / Hero -->
+    <header class="relative h-[60vh] w-full overflow-hidden flex items-center justify-center bg-slate-900">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?q=80&w=2069&auto=format&fit=crop"
                 class="w-full h-full object-cover" alt="Skiing Adventure">
@@ -140,58 +67,207 @@
             <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
         </div>
 
-        <div class="relative z-20 w-full max-w-4xl px-6 text-center">
+        <div class="relative z-20 w-full max-w-4xl px-6 text-center pt-20">
             <div class="fade-in-up">
-                <div class="flex items-center justify-center gap-3 mb-6">
+                <div class="flex items-center justify-center gap-3 mb-4">
                     <span
                         class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.8)]"></span>
                     <span class="text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] font-mono">Season
-                        2026 Open • Limited Slots</span>
+                        2026 Open</span>
                 </div>
                 <h1
-                    class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.85] text-white mb-6 drop-shadow-2xl">
-                    CHOOSE <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">YOUR
-                        ADVENTURE</span>
+                    class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] text-white mb-6 drop-shadow-2xl">
+                    CHOOSE YOUR <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">ADVENTURE</span>
                 </h1>
-                <p
-                    class="text-slate-200 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-md mb-8">
-                    From beginner lessons to expert backcountry expeditions. Curated packages for every skill level.
+                <p class="text-slate-200 text-lg font-medium max-w-xl mx-auto leading-relaxed drop-shadow-md">
+                    Curated 6 Day / 5 Night packages including accommodation and professional instruction.
                 </p>
-
-                <!-- Inline Controls -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                    <div class="bg-white/10 backdrop-blur-md p-1.5 rounded-xl flex border border-white/20">
-                        <button onclick="setSport('ski')" id="btn-ski"
-                            class="px-6 py-3 rounded-lg text-sm font-bold transition-all bg-white text-slate-900">Skiing</button>
-                        <button onclick="setSport('board')" id="btn-board"
-                            class="px-6 py-3 rounded-lg text-sm font-bold text-white/70 hover:text-white transition-all">Snowboarding</button>
-                    </div>
-                    <div
-                        class="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-xl border border-white/20">
-                        <span class="text-xs font-bold text-white/70 uppercase tracking-wider">Currency</span>
-                        <select id="currency-selector" onchange="updateCurrency()"
-                            class="bg-transparent text-sm font-black text-white focus:outline-none cursor-pointer border-none p-0 focus:ring-0">
-                            <option value="INR" class="text-slate-900" selected>INR (₹)</option>
-                            <option value="USD" class="text-slate-900">USD ($)</option>
-                            <option value="EUR" class="text-slate-900">EUR (€)</option>
-                        </select>
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </header>
 
-    <main class="flex-1 flex flex-col w-full max-w-[1440px] mx-auto pt-12">
-        <section id="packages-grid" class="w-full pb-16 px-4 md:px-10 relative group/scroll">
-            <div id="packages-container"
-                class="flex flex-wrap justify-center gap-6 pb-16 pt-8 px-4 items-start h-auto perspective-1000 max-w-[90%] xl:max-w-[80%] mx-auto">
-                <!-- Packages will be rendered here by JavaScript -->
+    <main class="w-full max-w-[1440px] mx-auto pt-10 pb-20 px-4 md:px-8">
+
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+            <!-- STICKY SIDEBAR (CONTROLS) -->
+            <aside class="w-full lg:w-80 flex-shrink-0 sticky-sidebar z-30 transition-all duration-300"
+                :class="{'lg:translate-y-0': true}">
+
+                <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-6 space-y-8">
+
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Select Sport</h3>
+                        <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
+                            <button @click="sport = 'ski'"
+                                class="py-3 rounded-lg text-sm font-bold transition-all duration-300"
+                                :class="sport === 'ski' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'">
+                                Skiing
+                            </button>
+                            <button @click="sport = 'board'"
+                                class="py-3 rounded-lg text-sm font-bold transition-all duration-300"
+                                :class="sport === 'board' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'">
+                                Snowboard
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Group Size</h3>
+
+                        <!-- Solo Option -->
+                        <div @click="pax = 1" class="cursor-pointer group mb-3">
+                            <div class="relative overflow-hidden rounded-xl border-2 transition-all duration-300 p-4"
+                                :class="pax === 1 ? 'border-alpine-blue bg-sky-50' : 'border-slate-200 bg-white hover:border-slate-300'">
+                                <div class="flex items-center justify-between z-10 relative">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                                            :class="pax === 1 ? 'bg-alpine-blue text-white' : 'bg-slate-100 text-slate-400'">
+                                            <span class="material-symbols-rounded">person</span>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-slate-900">Solo Traveler</div>
+                                            <div class="text-[10px] text-slate-500 uppercase tracking-wide font-bold">
+                                                Private Instructor (1:1)</div>
+                                        </div>
+                                    </div>
+                                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
+                                        :class="pax === 1 ? 'border-alpine-blue' : 'border-slate-300'">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-alpine-blue transition-transform duration-300"
+                                            :class="pax === 1 ? 'scale-100' : 'scale-0'"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buddy Option -->
+                        <div @click="pax = 2" class="cursor-pointer group">
+                            <div class="relative overflow-hidden rounded-xl border-2 transition-all duration-300 p-4"
+                                :class="pax === 2 ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-300'">
+                                <div
+                                    class="absolute top-0 right-0 bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">
+                                    BEST VALUE
+                                </div>
+                                <div class="flex items-center justify-between z-10 relative">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                                            :class="pax === 2 ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400'">
+                                            <span class="material-symbols-rounded">groups</span>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-slate-900">Buddy Deal (2 Pax)</div>
+                                            <div class="text-[10px] text-slate-500 uppercase tracking-wide font-bold">
+                                                Shared Instructor (2:1)</div>
+                                        </div>
+                                    </div>
+                                    <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center"
+                                        :class="pax === 2 ? 'border-emerald-500' : 'border-slate-300'">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 transition-transform duration-300"
+                                            :class="pax === 2 ? 'scale-100' : 'scale-0'"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-100">
+                        <div class="text-xs text-slate-400 text-center font-medium">Currency</div>
+                        <div class="mt-2 flex justify-center">
+                            <select x-model="currency"
+                                class="bg-slate-50 border border-slate-200 text-slate-700 text-sm font-bold rounded-lg focus:ring-alpine-blue focus:border-alpine-blue block w-full p-2.5 cursor-pointer text-center">
+                                <option value="INR">INR (₹)</option>
+                                <option value="USD">USD ($)</option>
+                                <option value="EUR">EUR (€)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- PACKAGES GRID -->
+            <div class="flex-1 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+
+                    <template x-for="pkg in filteredPackages" :key="pkg.tier_key">
+                        <div class="group relative flex flex-col rounded-3xl bg-white border-2 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                            :class="getBorderColor(pkg.tier_key)">
+
+                            <!-- Image Section -->
+                            <div
+                                class="relative aspect-[4/3] w-full overflow-hidden rounded-2xl mb-4 shadow-inner bg-slate-100">
+                                <img :src="getImage(pkg.tier_key)"
+                                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <span
+                                    class="absolute bottom-3 left-3 rounded-full px-4 py-1.5 text-xs font-bold shadow-lg backdrop-blur-md"
+                                    :class="getBadgeColor(pkg.tier_key)">
+                                    <span x-text="getBadgeText(pkg.tier_key)"></span>
+                                </span>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="flex flex-col flex-1">
+                                <h3 class="text-xl font-black text-slate-900 tracking-tight" x-text="pkg.tier_name">
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium mt-1" x-text="getHotelNames(pkg.tier_key)">
+                                </p>
+
+                                <div class="mt-4 mb-2 flex items-baseline gap-2">
+                                    <template x-if="pkg.grand_total > 0 && pkg.tier_key !== '5star'">
+                                        <div class="flex items-baseline gap-1">
+                                            <span class="text-3xl font-black text-slate-900"
+                                                x-text="formatMoney(pkg.pricing.grand_total)"></span>
+                                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest"
+                                                x-text="pax === 2 ? '/ couple' : '/ person'"></span>
+                                        </div>
+                                    </template>
+                                    <template x-if="pkg.grand_total === 0 || pkg.tier_key === '5star'">
+                                        <span class="text-2xl font-bold text-slate-400">On Request</span>
+                                    </template>
+                                </div>
+                                <div class="text-[10px] text-alpine-blue font-bold uppercase tracking-widest mb-4">
+                                    6 Days / 5 Nights &bull; <span
+                                        x-text="sport === 'ski' ? 'Skiing' : 'Snowboarding'"></span>
+                                </div>
+
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex items-center gap-2 text-xs text-slate-600">
+                                        <span
+                                            class="material-symbols-rounded text-emerald-500 text-sm">check_circle</span>
+                                        <span>Accommodation (5 Nights)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-600">
+                                        <span
+                                            class="material-symbols-rounded text-emerald-500 text-sm">check_circle</span>
+                                        <span>Instructor (6 Days)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-xs text-slate-600">
+                                        <span
+                                            class="material-symbols-rounded text-emerald-500 text-sm">check_circle</span>
+                                        <span><span x-text="sport === 'ski' ? 'Ski' : 'Snowboard'"></span> Equipment
+                                            Rental</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto">
+                                    <a :href="'booking.html?tier=' + encodeURIComponent(pkg.tier_key) + '&days=6&people=' + pax + '&sport=' + sport"
+                                        class="block w-full py-3.5 rounded-xl text-white font-bold text-center text-sm shadow-lg transition-transform active:scale-95"
+                                        :class="getBtnColor(pkg.tier_key)">
+                                        Book Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
             </div>
-        </section>
+
+        </div>
     </main>
+
     <footer class="bg-slate-900 text-white pt-24 pb-12 px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
             <div>
@@ -266,385 +342,460 @@
                     class="hover:text-white transition-colors">Terms of Service</a></div>
         </div>
     </footer>
-    <div id="modal-overlay"
-        class="modal fixed inset-0 z-[60] bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4"
-        onclick="closeModal()">
-        <div class="modal-content bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden relative"
-            onclick="event.stopPropagation()"><button onclick="closeModal()"
-                class="absolute top-4 right-4 p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors"><span
-                    class="material-symbols-outlined text-slate-600">close</span></button>
-            <div id="modal-body" class="p-8"></div>
-        </div>
-    </div>
-    <script> // --- 1. PACKAGES & MODAL LOGIC ---
 
-        const packageData = {
-            basic: {
-                id: 'basic',
-                title: "Dormitory",
-                hotels: "Dormitory Stay",
-                amenities: ["Shared Bunk Bed", "Common Washroom", "Heating", "Hot Water", "Wi-Fi"],
-                description: "Perfect for solo travelers and those on a budget. Meet like-minded adventurers in our cozy, heated dormitory.",
-                inclusion: "Group Lessons, Standard Gear",
-                get priceSki() { return calculatePackagePrice('dorm', 'ski'); },
-                get priceBoard() { return calculatePackagePrice('dorm', 'board'); },
-                image: "images/packages/basic.webp",
-                badge: "Beginner",
-                badgeColor: "bg-white/20 text-white border-white/20 backdrop-blur-md", // Custom badge style
-                borderColor: "border-slate-200"
-            }
-
-            ,
-            silver: {
-                id: 'silver',
-                title: "2 Star",
-                hotels: "Hotel Lala / ZamZam",
-                amenities: ["Double Bed", "Private Bathroom", "Heating", "Hot Water", "Breakfast & Dinner"],
-                description: "Comfortable private rooms with all essentials. A great balance of privacy and value.",
-                inclusion: "Phase 1 Pass, Personal Instructor",
-                get priceSki() { return calculatePackagePrice('2star', 'ski'); },
-                get priceBoard() { return calculatePackagePrice('2star', 'board'); },
-                image: "images/packages/silver.webp",
-                badge: "Value",
-                badgeColor: "bg-alpine-blue text-white",
-                borderColor: "border-sky-200"
-            }
-
-            ,
-            gold: {
-                id: 'gold',
-                title: "3 Star (Standard)",
-                hotels: "Mama Palace / Gulmarg Inn",
-                amenities: ["King/Twin Bed", "En-suite Bathroom", "Central Heating", "Mountain View", "All Meals"],
-                description: "Upgrade your stay with better amenities, central heating, and delicious full-board meals.",
-                inclusion: "All Meals, Performance Gear",
-                get priceSki() { return calculatePackagePrice('3star_low', 'ski'); },
-                get priceBoard() { return calculatePackagePrice('3star_low', 'board'); },
-                image: "images/packages/gold.webp",
-                badge: "Popular",
-                badgeColor: "bg-amber-500 text-white",
-                borderColor: "border-blue-200"
-            }
-
-            ,
-            diamond: {
-                id: 'diamond',
-                title: "3 Star (Premium)",
-                hotels: "Royal Park / Khaleel Palace",
-                amenities: ["Premium Room", "Modern Interiors", "Central Heating", "Lounge Access", "Buffet Meals"],
-                description: "Premium comfort with modern interiors and excellent service. Experience Gulmarg in style.",
-                inclusion: "4-Star Stay, Private Guide",
-                get priceSki() { return calculatePackagePrice('3star_high', 'ski'); },
-                get priceBoard() { return calculatePackagePrice('3star_high', 'board'); },
-                image: "images/packages/diamond.webp",
-                badge: "Luxury",
-                badgeColor: "bg-indigo-500 text-white",
-                borderColor: "border-indigo-200"
-            }
-
-            ,
-            platinum: {
-                id: 'platinum',
-                title: "4 Star (Standard)",
-                hotels: "Grand Mumtaz / Himalayan Pearl",
-                amenities: ["Luxury Suite", "Room Service", "Spa Access", "Central Heating", "Gourmet Dining"],
-                description: "Luxury accommodations with top-tier facilities including spa access and gourmet dining options.",
-                inclusion: "Luxury Transport, Pro Race Gear",
-                get priceSki() { return calculatePackagePrice('4star_low', 'ski'); },
-                get priceBoard() { return calculatePackagePrice('4star_low', 'board'); },
-                image: "images/packages/platinum.webp",
-                badge: "Premium",
-                badgeColor: "bg-slate-800 text-white",
-                borderColor: "border-slate-300"
-            }
-
-            ,
-            platinum_plus: {
-                id: 'platinum_plus',
-                title: "4 Star (Premium)",
-                hotels: "Hotel Hilltop / Green Resort / Pride Resort",
-                amenities: ["Premium Suites", "Ski-in/Ski-out", "Luxury Spa", "Valet Service"],
-                description: "The ultimate mountain experience with premium 4-star resorts offering valet service and luxury spas.",
-                inclusion: "VIP Transport, Elite Gear",
-                get priceSki() { return calculatePackagePrice('4star_high', 'ski'); },
-                get priceBoard() { return calculatePackagePrice('4star_high', 'board'); },
-                image: "images/packages/platinum.webp", // Reuse for now or placeholder
-                badge: "Elite",
-                badgeColor: "bg-purple-600 text-white",
-                borderColor: "border-purple-300"
-            }
-
-            ,
-            royal: {
-                id: 'royal',
-                title: "5 Star",
-                hotels: "The Khyber Resort and Spa",
-                amenities: ["World Class Luxury", "Panoramic Pools", "5-Star Dining", "Butler Service"],
-                description: "The pinnacle of luxury in Gulmarg. Stay at the world-renowned Khyber Resort.",
-                inclusion: "Helicopter Transfer Option, Celebrity Guide",
-                priceSki: 0, // 0 = Price on Request
-                priceBoard: 0,
-                image: "images/packages/diamond.webp", // Reuse or placeholder
-                badge: "The Best",
-                badgeColor: "bg-amber-400 text-white text-shadow-sm",
-                borderColor: "border-amber-400 shadow-amber-100" // Special Gold Border
-            }
-        }
-
-            ;
-
-        let currentSport = 'ski';
-
-        function setSport(sport) {
-            currentSport = sport;
-            const btnSki = document.getElementById('btn-ski');
-            const btnBoard = document.getElementById('btn-board');
-
-            if (sport === 'ski') {
-                btnSki.className = "px-8 py-3 rounded-lg text-sm font-bold transition-all shadow-lg bg-white text-slate-900";
-                btnBoard.className = "px-8 py-3 rounded-lg text-sm font-bold text-slate-300 hover:text-white transition-all";
-            } else {
-                btnBoard.className = "px-8 py-3 rounded-lg text-sm font-bold transition-all shadow-lg bg-white text-slate-900";
-                btnSki.className = "px-8 py-3 rounded-lg text-sm font-bold text-slate-300 hover:text-white transition-all";
-            }
-
-            document.querySelectorAll('.price-display').forEach(el => {
-                const price = el.getAttribute(`data-${sport}`);
-                el.setAttribute('data-inr', price);
-
-                if (price > 100000) {
-                    el.innerText = `₹${(price / 100000).toFixed(1)}L`;
-                } else {
-                    el.innerText = `₹${parseInt(price).toLocaleString()}`;
-                }
-            });
-
-            document.querySelectorAll('.gear-text').forEach(el => {
-                el.innerText = sport === 'ski' ? "Standard Skis" : "Snowboard Kit";
-                if (el.closest('.group').querySelector('h3').innerText.includes('Gold')) {
-                    el.innerText = sport === 'ski' ? "Performance Skis" : "Pro Board";
-                }
-            });
-
-            if (typeof updateCurrency === "function") {
-                updateCurrency();
-            }
-        }
-
-        function openModal(tier) {
-            const data = packageData[tier];
-            const currencySelector = document.getElementById('currency-selector');
-            const currency = currencySelector ? currencySelector.value : 'INR';
-
-            const rates = { 'INR': 1, 'USD': 85, 'EUR': 90 };
-            const symbols = { 'INR': '₹', 'USD': '$', 'EUR': '€' };
-            const sym = symbols[currency] || '₹';
-            const rate = rates[currency] || 1;
-
-            let priceString = "";
-            let totalPrice = "";
-
-            if (data.priceSki === 0) {
-                priceString = "Price on Request";
-                totalPrice = "On Request";
-            } else {
-                const ski = Math.round(data.priceSki / rate).toLocaleString();
-                const board = Math.round(data.priceBoard / rate).toLocaleString();
-                priceString = `${sym}${ski} (Ski) / ${sym}${board} (Board)`;
-                totalPrice = priceString;
-            }
-
-            const amenitiesHTML = data.amenities.map(item =>
-                `<li class="flex items-center gap-2 text-xs text-slate-500"><span class="material-symbols-rounded text-[14px] text-emerald-500">check_circle</span>${item}</li>`
-            ).join('');
-
-            const content = `
-                <div class="mb-6">
-                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1 block">Package Details</span>
-                    <h2 class="text-3xl font-black text-slate-900">${data.title} Tier</h2>
-                    <p class="text-slate-500 mt-2 text-sm leading-relaxed">${data.description}</p>
-                </div>
-                <div class="space-y-6">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <h4 class="font-bold text-slate-900 text-sm mb-3">Amenities</h4>
-                        <ul class="grid grid-cols-2 gap-2">
-                            ${amenitiesHTML}
-                        </ul>
-                    </div>
-                    <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
-                        <h4 class="font-bold text-slate-900 mb-2 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-alpine-blue">hotel</span>Accommodations
-                        </h4>
-                        <p class="text-sm text-slate-600 leading-relaxed">${data.hotels}</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <h4 class="font-bold text-slate-900 mb-2 text-sm">Key Inclusions</h4>
-                            <p class="text-xs text-slate-600">${data.inclusion}</p>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <h4 class="font-bold text-slate-900 mb-2 text-sm">Price</h4>
-                            <p class="text-xs text-slate-600 font-medium">${priceString}</p>
-                        </div>
-                    </div>
-                    <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between gap-4">
-                        <div class="bg-indigo-50 px-4 py-2 rounded-lg border border-indigo-100">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-400 block mb-1">Total Trip Price</span>
-                            <span class="text-xl font-black text-slate-900">${totalPrice}</span>
-                        </div>
-                        <a href="booking.html?tier=${encodeURIComponent(data.title)}&days=7" class="flex-1 bg-alpine-blue text-white font-bold py-3 rounded-xl hover:bg-blue-600 transition-colors shadow-lg shadow-blue-200 text-center">Book Now</a>
-                    </div>
-                </div>`;
-
-            document.getElementById('modal-body').innerHTML = content;
-            document.getElementById('modal-overlay').classList.add('open');
-        }
-
-        function closeModal() {
-            document.getElementById('modal-overlay').classList.remove('open');
-        }
-
-        // RENDER PACKAGES
-        function renderPackages() {
-            const container = document.getElementById('packages-container');
-            if (!container) return;
-
-            container.innerHTML = Object.values(packageData).map(pkg => {
-                const isPriceOnRequest = pkg.priceSki === 0;
-                const skiPrice = isPriceOnRequest ? "On Request" : `₹${pkg.priceSki.toLocaleString()}`;
-
-                const isGold = pkg.id === 'royal';
-                const cardBg = isGold ? 'bg-gradient-to-br from-amber-50 to-white' : 'bg-white';
-                const titleColor = isGold ? 'text-amber-900' : 'text-slate-900';
-
-                return `
-                <div class="package-card group relative flex h-full w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-col rounded-3xl ${cardBg} border-2 ${pkg.borderColor} p-4 shadow-sm cursor-default transition-all duration-500">
-                    
-                    <div class="card-gloss"></div>
-                    <div class="relative aspect-[4/3] w-full overflow-hidden rounded-2xl mb-4 shadow-inner card-image">
-                        <img src="${pkg.image}" class="absolute inset-0 h-full w-full object-cover">
-                        <!-- Shiny Overlay on Image -->
-                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0 group-hover:animate-shine pointer-events-none"></div>
-                        <span class="absolute bottom-3 left-3 rounded-full px-4 py-1.5 text-xs font-bold shadow-lg ${pkg.badgeColor}">${pkg.badge}</span>
-                    </div>
-                    <div class="card-content flex flex-col flex-1">
-                        <h3 class="text-xl font-black ${titleColor} tracking-tight">${pkg.title}</h3>
-                        <div class="mt-2 flex items-baseline gap-2">
-                             ${isPriceOnRequest
-                        ? `<span class="text-lg font-bold ${isGold ? 'text-amber-600' : 'text-slate-500'}">Price on Request</span>`
-                        : `<span class="text-3xl font-black ${isGold ? 'text-amber-500' : 'text-alpine-blue'} price-display" data-ski="${pkg.priceSki}" data-board="${pkg.priceBoard}" data-inr="${pkg.priceSki}">${skiPrice}</span><span class="text-xs font-bold text-slate-400 uppercase tracking-widest">/ person</span>`
-                    }
-                        </div>
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1 mb-3">6 Days / 5 Nights</div>
-                        <div class="flex items-center gap-2 mb-4 p-2.5 rounded-xl ${isGold ? 'bg-amber-100/50' : 'bg-slate-50'} border ${isGold ? 'border-amber-100' : 'border-slate-100'}">
-                            <span class="material-symbols-rounded text-base ${isGold ? 'text-amber-600' : 'text-slate-400'}">hotel</span>
-                            <span class="text-xs font-bold ${isGold ? 'text-amber-800' : 'text-slate-600'} leading-tight line-clamp-2">${pkg.hotels}</span>
-                        </div>
-                        
-                        <div class="mt-auto space-y-3 relative z-30">
-                            <button onclick="openModal('${pkg.id}')" class="w-full py-3 rounded-xl font-bold text-sm transition-all duration-300 transform active:scale-95 ${isGold ? 'bg-amber-100 text-amber-900 hover:bg-amber-200' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}">View Details</button>
-                            <a href="booking.html?tier=${encodeURIComponent(pkg.title)}&days=5" class="block w-full py-3 rounded-xl text-white font-bold text-center text-sm shadow-lg transition-all duration-300 transform hover:-translate-y-1 active:scale-95 ${isGold ? 'bg-amber-500 hover:bg-amber-600 shadow-amber-200' : 'bg-alpine-blue hover:bg-blue-600 shadow-blue-200'}">Book Now</a>
-                        </div>
-                    </div>
-                </div > `;
-            }).join('');
-
-            initAppleTilt();
-        }
-
-        // TILT EFFECT LOGIC
-        // PHYSICAL DEPTH TILT EFFECT
-        function initAppleTilt() {
-            const cards = document.querySelectorAll('.package-card');
-            cards.forEach(card => {
-                let bounds;
-
-                function updateBounds() {
-                    bounds = card.getBoundingClientRect();
-                }
-
-                card.addEventListener('mouseenter', () => {
-                    updateBounds();
-                    // Smooth, slower pop-out (0.3s)
-                    card.style.transition = 'transform 0.3s ease-out';
-                });
-
-                card.addEventListener('mousemove', (e) => {
-                    if (!bounds) updateBounds();
-
-                    const mouseX = e.clientX;
-                    const mouseY = e.clientY;
-                    const leftX = mouseX - bounds.x;
-                    const topY = mouseY - bounds.y;
-                    const center = {
-                        x: leftX - bounds.width / 2,
-                        y: topY - bounds.height / 2
-                    }
-
-                    // Stronger tilt
-                    const maxTilt = 12;
-                    const rotateX = ((center.y / bounds.height) * -maxTilt).toFixed(2);
-                    const rotateY = ((center.x / bounds.width) * maxTilt).toFixed(2);
-
-                    // Maintain smooth transition during movement for "heavy" feel
-                    card.style.transition = 'transform 0.3s ease-out';
-
-                    card.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                scale3d(1.08, 1.08, 1.08)
-                translateY(-10px)
-                    `;
-
-                    // Gloss Light Source
-                    card.style.setProperty('--mouse-x', `${leftX} px`);
-                    card.style.setProperty('--mouse-y', `${topY} px`);
-                });
-
-                card.addEventListener('mouseleave', () => {
-                    card.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)'; // Slow ease out
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                });
-            });
-        }
-
-        function scrollPackages(direction) {
-            const container = document.getElementById('packages-container');
-            const card = container.querySelector('.package-card');
-            if (!container || !card) return;
-
-            // Calculate exact scroll stride
-            const cardWidth = card.getBoundingClientRect().width;
-            const gap = parseFloat(getComputedStyle(container).gap) || 32;
-            const stride = cardWidth + gap;
-
-            // Determines current "index" based on scroll position
-            // Rounding ensures we snap to the nearest slot before moving
-            const currentScroll = container.scrollLeft;
-            const currentIndex = Math.round(currentScroll / stride);
-
-            // Calculate next target
-            const targetIndex = currentIndex + direction;
-            const targetScroll = targetIndex * stride;
-
-            container.scrollTo({
-                left: targetScroll,
-                behavior: 'smooth'
-            });
-        }
-
-        // Initialize Callbacks
-        document.addEventListener('DOMContentLoaded', () => {
-            renderPackages();
-        });
-
-        // Toggle FAB removed - handled by CSS hover
-    </script>
     <div id="fab-placeholder"></div>
-    <script src="pricing_data.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        function packagesApp() {
+            return {
+                sport: 'ski',
+                pax: 1, // 1 or 2
+                currency: 'INR',
+                rates: { 'INR': 1, 'USD': 85, 'EUR': 90 },
+                symbols: { 'INR': '₹', 'USD': '$', 'EUR': '€' },
+
+                // INLINED JSON DATA
+                allPackages: [
+                    {
+                        "tier_name": "Dormitory",
+                        "tier_key": "dorm",
+                        "sport": "Skiing",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 8000,
+                            "instructor_total": 21000,
+                            "grand_total": 29000
+                        }
+                    },
+                    {
+                        "tier_name": "Dormitory",
+                        "tier_key": "dorm",
+                        "sport": "Skiing",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 16000,
+                            "instructor_total": 30000,
+                            "grand_total": 46000
+                        }
+                    },
+                    {
+                        "tier_name": "Dormitory",
+                        "tier_key": "dorm",
+                        "sport": "Snowboarding",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 8000,
+                            "instructor_total": 34800,
+                            "grand_total": 42800
+                        }
+                    },
+                    {
+                        "tier_name": "Dormitory",
+                        "tier_key": "dorm",
+                        "sport": "Snowboarding",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 16000,
+                            "instructor_total": 52200,
+                            "grand_total": 68200
+                        }
+                    },
+                    {
+                        "tier_name": "2 Star",
+                        "tier_key": "2star",
+                        "sport": "Skiing",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 17500,
+                            "instructor_total": 21000,
+                            "grand_total": 38500
+                        }
+                    },
+                    {
+                        "tier_name": "2 Star",
+                        "tier_key": "2star",
+                        "sport": "Skiing",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 22500,
+                            "instructor_total": 30000,
+                            "grand_total": 52500
+                        }
+                    },
+                    {
+                        "tier_name": "2 Star",
+                        "tier_key": "2star",
+                        "sport": "Snowboarding",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 17500,
+                            "instructor_total": 34800,
+                            "grand_total": 52300
+                        }
+                    },
+                    {
+                        "tier_name": "2 Star",
+                        "tier_key": "2star",
+                        "sport": "Snowboarding",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 22500,
+                            "instructor_total": 52200,
+                            "grand_total": 74700
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Standard)",
+                        "tier_key": "3star_low",
+                        "sport": "Skiing",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 20000,
+                            "instructor_total": 24000,
+                            "grand_total": 44000
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Standard)",
+                        "tier_key": "3star_low",
+                        "sport": "Skiing",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 27500,
+                            "instructor_total": 33000,
+                            "grand_total": 60500
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Standard)",
+                        "tier_key": "3star_low",
+                        "sport": "Snowboarding",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 20000,
+                            "instructor_total": 49800,
+                            "grand_total": 69800
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Standard)",
+                        "tier_key": "3star_low",
+                        "sport": "Snowboarding",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 27500,
+                            "instructor_total": 75000,
+                            "grand_total": 102500
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Premium)",
+                        "tier_key": "3star_high",
+                        "sport": "Skiing",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 25000,
+                            "instructor_total": 24000,
+                            "grand_total": 49000
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Premium)",
+                        "tier_key": "3star_high",
+                        "sport": "Skiing",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 35000,
+                            "instructor_total": 33000,
+                            "grand_total": 68000
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Premium)",
+                        "tier_key": "3star_high",
+                        "sport": "Snowboarding",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 25000,
+                            "instructor_total": 49800,
+                            "grand_total": 74800
+                        }
+                    },
+                    {
+                        "tier_name": "3 Star (Premium)",
+                        "tier_key": "3star_high",
+                        "sport": "Snowboarding",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 35000,
+                            "instructor_total": 75000,
+                            "grand_total": 110000
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Standard)",
+                        "tier_key": "4star_low",
+                        "sport": "Skiing",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 45000,
+                            "instructor_total": 24000,
+                            "grand_total": 69000
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Standard)",
+                        "tier_key": "4star_low",
+                        "sport": "Skiing",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 60000,
+                            "instructor_total": 33000,
+                            "grand_total": 93000
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Standard)",
+                        "tier_key": "4star_low",
+                        "sport": "Snowboarding",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 45000,
+                            "instructor_total": 49800,
+                            "grand_total": 94800
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Standard)",
+                        "tier_key": "4star_low",
+                        "sport": "Snowboarding",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 60000,
+                            "instructor_total": 75000,
+                            "grand_total": 135000
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Premium)",
+                        "tier_key": "4star_high",
+                        "sport": "Skiing",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 52500,
+                            "instructor_total": 24000,
+                            "grand_total": 76500
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Premium)",
+                        "tier_key": "4star_high",
+                        "sport": "Skiing",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 67500,
+                            "instructor_total": 33000,
+                            "grand_total": 100500
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Premium)",
+                        "tier_key": "4star_high",
+                        "sport": "Snowboarding",
+                        "people": 1,
+                        "instructor_mode": "Private (1:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 52500,
+                            "instructor_total": 49800,
+                            "grand_total": 102300
+                        }
+                    },
+                    {
+                        "tier_name": "4 Star (Premium)",
+                        "tier_key": "4star_high",
+                        "sport": "Snowboarding",
+                        "people": 2,
+                        "instructor_mode": "Shared (2:1)",
+                        "duration_days": 6,
+                        "duration_nights": 5,
+                        "pricing": {
+                            "accommodation_total": 67500,
+                            "instructor_total": 75000,
+                            "grand_total": 142500
+                        }
+                    }
+                ],
+
+                get filteredPackages() {
+                    const filtered = this.allPackages.filter(p =>
+                        p.sport === (this.sport === 'ski' ? 'Skiing' : 'Snowboarding') &&
+                        p.people === this.pax
+                    );
+
+                    // Add 5 Star Placeholder manual check as it might typically be custom
+                    filtered.push({
+                        tier_name: "5 Star Luxury",
+                        tier_key: "5star",
+                        grand_total: 0 // Indicates On Request
+                    });
+
+                    return filtered;
+                },
+
+                formatMoney(amount) {
+                    let converted = amount;
+                    if (this.currency !== 'INR') {
+                        converted = amount / this.rates[this.currency];
+                    }
+                    return this.symbols[this.currency] + Math.round(converted).toLocaleString();
+                },
+
+                // Helper Styles
+                getImage(key) {
+                    const map = {
+                        'dorm': 'images/packages/basic.webp',
+                        '2star': 'images/packages/silver.webp',
+                        '3star_low': 'images/packages/gold.webp',
+                        '3star_high': 'images/packages/diamond.webp',
+                        '4star_low': 'images/packages/platinum.webp',
+                        '4star_high': 'images/packages/platinum.webp',
+                        '5star': 'images/packages/diamond.webp'
+                    };
+                    return map[key] || 'images/packages/basic.webp';
+                },
+                getBadgeText(key) {
+                    const map = {
+                        'dorm': 'Budget',
+                        '2star': 'Value',
+                        '3star_low': 'Popular',
+                        '3star_high': 'Premium',
+                        '4star_low': 'Luxury',
+                        '4star_high': 'Elite',
+                        '5star': 'Ultra Lux'
+                    };
+                    return map[key];
+                },
+                getBadgeColor(key) {
+                    const map = {
+                        'dorm': 'bg-white/20 text-white border border-white/30',
+                        '2star': 'bg-alpine-blue text-white',
+                        '3star_low': 'bg-amber-500 text-white',
+                        '3star_high': 'bg-indigo-500 text-white',
+                        '4star_low': 'bg-slate-800 text-white',
+                        '4star_high': 'bg-purple-600 text-white',
+                        '5star': 'bg-black text-amber-400 border border-amber-400'
+                    };
+                    return map[key];
+                },
+                getBorderColor(key) {
+                    const map = {
+                        'dorm': 'border-slate-100',
+                        '2star': 'border-sky-100',
+                        '3star_low': 'border-amber-100',
+                        '3star_high': 'border-indigo-100',
+                        '4star_low': 'border-slate-200',
+                        '4star_high': 'border-purple-100',
+                        '5star': 'border-amber-400'
+                    };
+                    return map[key];
+                },
+                getBtnColor(key) {
+                    const map = {
+                        'dorm': 'bg-slate-700 hover:bg-slate-800',
+                        '2star': 'bg-alpine-blue hover:bg-sky-600',
+                        '3star_low': 'bg-amber-500 hover:bg-amber-600',
+                        '3star_high': 'bg-indigo-500 hover:bg-indigo-600',
+                        '4star_low': 'bg-slate-800 hover:bg-slate-900',
+                        '4star_high': 'bg-purple-600 hover:bg-purple-700',
+                        '5star': 'bg-black text-amber-400 border border-amber-500'
+                    };
+                    return map[key] || 'bg-alpine-blue';
+                },
+                getHotelNames(key) {
+                    const map = {
+                        'dorm': 'Dormitory Stay',
+                        '2star': 'Hotel Lala / ZamZam',
+                        '3star_low': 'Mama Palace / Gulmarg Inn',
+                        '3star_high': 'Royal Park / Khaleel Palace',
+                        '4star_low': 'Grand Mumtaz / Himalayan Pearl',
+                        '4star_high': 'Hotel Hilltop / Green Resort',
+                        '5star': 'The Khyber Resort'
+                    };
+                    return map[key];
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

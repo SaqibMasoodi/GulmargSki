@@ -467,7 +467,8 @@
                                 (Days)</label>
                             <div
                                 class="flex items-center justify-between bg-white border border-slate-200 rounded-lg p-1 shadow-sm">
-                                <div class="flex-1 font-black text-slate-900 text-lg px-4" x-text="days"></div>
+                                <div class="flex-1 font-black text-slate-900 text-lg px-4"
+                                    x-text="days + ' Days ' + Math.max(0, days - 1) + ' Nights'"></div>
                                 <div class="flex gap-1">
                                     <button type="button" @click="days = Math.max(1, days - 1)"
                                         class="w-10 h-10 flex items-center justify-center rounded-md bg-sky-50 text-alpine-blue border border-sky-100 hover:bg-sky-100 shadow-sm transition-all font-bold text-lg">-</button>
@@ -1211,7 +1212,7 @@
                         <div class="mb-5 pb-3 border-b border-gray-700 relative z-10">
                             <h2 class="text-lg font-bold text-white font-sans mb-1">Trip Summary</h2>
                             <p class="text-gray-400 text-xs mb-4"><span x-text="people"></span> People &bull; <span
-                                    x-text="days"></span> Days</p>
+                                    x-text="days + ' Days ' + Math.max(0, days - 1) + ' Nights'"></span></p>
                             <div class="grid grid-cols-5 items-center">
                                 <div class="col-span-2 text-gray-500 uppercase tracking-widest text-[10px]">Grand Total
                                 </div>
@@ -1230,7 +1231,7 @@
                                     <span><span x-text="people"></span>x Dorm Bed (@<span
                                             x-text="accommodationData.dorm.pricePerPax"></span>)</span>
                                     <span
-                                        x-text="formatMoney(people * accommodationData.dorm.pricePerPax * days)"></span>
+                                        x-text="formatMoney(people * accommodationData.dorm.pricePerPax * Math.max(0, days - 1))"></span>
                                 </div>
                             </template>
 
@@ -1246,21 +1247,24 @@
                                         <div class="flex justify-between">
                                             <span><span x-text="rooms.triple"></span>x Triple Room (@<span
                                                     x-text="getRoomPrice(3)"></span>)</span>
-                                            <span x-text="formatMoney(rooms.triple * getRoomPrice(3) * days)"></span>
+                                            <span
+                                                x-text="formatMoney(rooms.triple * getRoomPrice(3) * Math.max(0, days - 1))"></span>
                                         </div>
                                     </template>
                                     <template x-if="rooms.double > 0">
                                         <div class="flex justify-between">
                                             <span><span x-text="rooms.double"></span>x Double Room (@<span
                                                     x-text="getRoomPrice(2)"></span>)</span>
-                                            <span x-text="formatMoney(rooms.double * getRoomPrice(2) * days)"></span>
+                                            <span
+                                                x-text="formatMoney(rooms.double * getRoomPrice(2) * Math.max(0, days - 1))"></span>
                                         </div>
                                     </template>
                                     <template x-if="rooms.single > 0">
                                         <div class="flex justify-between">
                                             <span><span x-text="rooms.single"></span>x Single Room (@<span
                                                     x-text="getRoomPrice(1)"></span>)</span>
-                                            <span x-text="formatMoney(rooms.single * getRoomPrice(1) * days)"></span>
+                                            <span
+                                                x-text="formatMoney(rooms.single * getRoomPrice(1) * Math.max(0, days - 1))"></span>
                                         </div>
                                     </template>
                                 </div>
@@ -1268,7 +1272,7 @@
 
                             <div
                                 class="mt-2 pt-2 border-t border-gray-700 border-dashed flex justify-between text-indigo-200">
-                                <span>Subtotal (x<span x-text="days"></span> Days)</span>
+                                <span>Subtotal (x<span x-text="Math.max(0, days - 1)"></span> Nights)</span>
                                 <span class="font-bold" x-text="formatMoney(calculateAccommodationCost())"></span>
                             </div>
                         </div>
@@ -1459,7 +1463,7 @@
                                         class="text-[10px] font-normal text-slate-400 normal-case">(Per Person)</span>
                                 </th>
                                 <th class="p-4 text-right bg-indigo-50/50 text-indigo-900 border-l border-indigo-100">
-                                    <span x-text="days"></span>-Day Split Cost<br><span
+                                    <span x-text="Math.max(0, days - 1)"></span>-Night Split Cost<br><span
                                         class="text-[10px] font-normal text-slate-400 normal-case">(Per Person)</span>
                                 </th>
                                 <th
@@ -1471,7 +1475,7 @@
                                     class="p-4 text-right bg-emerald-50/50 text-emerald-900 border-l border-emerald-100">
                                     Total Group Price<br><span
                                         class="text-[10px] font-normal text-slate-400 normal-case">(For <span
-                                            x-text="days"></span> Days)</span></th>
+                                            x-text="Math.max(0, days - 1)"></span> Nights)</span></th>
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y divide-slate-100">
@@ -1506,7 +1510,8 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(accommodationData.dorm.pricePerPax * days)"></span>
+                                        <span
+                                            x-text="formatMoney(accommodationData.dorm.pricePerPax * Math.max(0, days - 1))"></span>
                                     </td>
                                     <td
                                         class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
@@ -1515,7 +1520,7 @@
                                     <td
                                         class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
                                         <span
-                                            x-text="formatMoney(accommodationData.dorm.pricePerPax * people * days)"></span>
+                                            x-text="formatMoney(accommodationData.dorm.pricePerPax * people * Math.max(0, days - 1))"></span>
                                     </td>
                                 </tr>
                             </template>
@@ -1541,7 +1546,7 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney((getRoomPrice(3)/3) * days)"></span>
+                                        <span x-text="formatMoney((getRoomPrice(3)/3) * Math.max(0, days - 1))"></span>
                                     </td>
                                     <td
                                         class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
@@ -1549,7 +1554,8 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(getRoomPrice(3) * rooms.triple * days)"></span>
+                                        <span
+                                            x-text="formatMoney(getRoomPrice(3) * rooms.triple * Math.max(0, days - 1))"></span>
                                     </td>
                                 </tr>
                             </template>
@@ -1570,7 +1576,7 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney((getRoomPrice(2)/2) * days)"></span>
+                                        <span x-text="formatMoney((getRoomPrice(2)/2) * Math.max(0, days - 1))"></span>
                                     </td>
                                     <td
                                         class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
@@ -1578,7 +1584,8 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(getRoomPrice(2) * rooms.double * days)"></span>
+                                        <span
+                                            x-text="formatMoney(getRoomPrice(2) * rooms.double * Math.max(0, days - 1))"></span>
                                     </td>
                                 </tr>
                             </template>
@@ -1599,7 +1606,7 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(getRoomPrice(1) * days)"></span>
+                                        <span x-text="formatMoney(getRoomPrice(1) * Math.max(0, days - 1))"></span>
                                     </td>
                                     <td
                                         class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
@@ -1607,7 +1614,8 @@
                                     </td>
                                     <td
                                         class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(getRoomPrice(1) * rooms.single * days)"></span>
+                                        <span
+                                            x-text="formatMoney(getRoomPrice(1) * rooms.single * Math.max(0, days - 1))"></span>
                                     </td>
                                 </tr>
                             </template>
@@ -1920,6 +1928,11 @@
                 },
 
                 calculateAccommodationCost() {
+                    // Plain English Calculation Summary:
+                    // Total Accommodation Cost = (Sum of Daily Room Rates) * (Total Trip Days - 1)
+                    // Note: If Trip Days is 1, the multiplier is 0 (as 1 day trip = 0 nights stay).
+                    // This logic decouples accommodation nights from instruction days.
+
                     // If instruction only, no accommodation cost
                     if (this.tripType === 'ski_only') return 0;
 
@@ -1931,7 +1944,10 @@
                         dailyCost += this.rooms.double * this.getRoomPrice(2);
                         dailyCost += this.rooms.triple * this.getRoomPrice(3);
                     }
-                    return dailyCost * this.days;
+
+                    // Multiplier: (days - 1), but not less than 0
+                    const accommodationNights = Math.max(0, this.days - 1);
+                    return dailyCost * accommodationNights;
                 },
 
                 // Helper to get raw rates for the summary view
