@@ -126,68 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. CURRICULUM SWITCHER
 // --- NEW CURRICULUM LOGIC (Master the Mountain) ---
 
-function switchDay(dayNum) {
-    // 1. Reset ALL buttons to "Inactive" state
-    const allBtns = document.querySelectorAll('.nav-btn');
-    allBtns.forEach(btn => {
-        const number = btn.querySelector('.nav-number');
-        const title = btn.querySelector('.nav-title');
-        const subtitle = btn.querySelector('.nav-subtitle');
-        const arrow = btn.querySelector('.nav-arrow');
 
-        // Reset Container (Glassy Inactive)
-        btn.className = "nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden";
-
-        // Reset Number (Slate/Invisible bg)
-        number.className = "nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500";
-
-        // Reset Text
-        title.className = "nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900";
-        subtitle.className = "nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80";
-
-        // Reset Arrow (Hidden)
-        arrow.className = "nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500";
-    });
-
-    // 2. Set ACTIVE button style
-    const activeBtn = document.getElementById(`nav-btn-${dayNum}`);
-    if (activeBtn) {
-        const number = activeBtn.querySelector('.nav-number');
-        const title = activeBtn.querySelector('.nav-title');
-        const subtitle = activeBtn.querySelector('.nav-subtitle');
-        const arrow = activeBtn.querySelector('.nav-arrow');
-
-        // Active Container (Solid Blue)
-        activeBtn.className = "nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-blue-500/0 hover:border-sky-200/50 bg-blue-600 shadow-xl shadow-blue-900/20 relative overflow-hidden";
-
-        // Active Number (White text)
-        number.className = "nav-number w-12 h-12 rounded-full bg-white/20 flex items-center justify-center font-black text-white text-lg transition-all duration-500";
-
-        // Active Text (White)
-        title.className = "nav-title font-bold text-white text-lg leading-tight";
-        subtitle.className = "nav-subtitle text-xs font-bold text-blue-100 tracking-wide uppercase mt-0.5";
-
-        // Active Arrow (Visible White)
-        arrow.className = "nav-arrow opacity-100 translate-x-0 transition-all duration-500 text-white";
-    }
-
-    // 3. Switch Content Panel (Fade Effect)
-    const allContent = document.querySelectorAll('.day-content');
-    allContent.forEach(content => {
-        content.classList.remove('opacity-100', 'relative', 'z-10');
-        content.classList.add('opacity-0', 'absolute', 'z-0', 'pointer-events-none');
-    });
-
-    const activeContent = document.getElementById(`day-${dayNum}`);
-    if (activeContent) {
-        activeContent.classList.remove('opacity-0', 'absolute', 'z-0', 'pointer-events-none');
-        activeContent.classList.add('opacity-100', 'relative', 'z-10');
-    }
-}
 
 // Initialize Day 1 and Attractions on Load
 document.addEventListener('DOMContentLoaded', () => {
-    if (typeof switchDay === 'function') switchDay(1); // Legacy Curriculum
+    // switchDay was legacy, removed.
     if (typeof setAttraction === 'function') setAttraction('gondola'); // New Attractions
 });
 
