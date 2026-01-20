@@ -286,8 +286,8 @@
                 amenities: ["Shared Bunk Bed", "Common Washroom", "Heating", "Hot Water", "Wi-Fi"],
                 description: "Perfect for solo travelers and those on a budget. Meet like-minded adventurers in our cozy, heated dormitory.",
                 inclusion: "Group Lessons, Standard Gear",
-                priceSki: 20999,
-                priceBoard: 29999,
+                get priceSki() { return calculatePackagePrice('dorm', 'ski'); },
+                get priceBoard() { return calculatePackagePrice('dorm', 'board'); },
                 image: "images/packages/basic.webp",
                 badge: "Beginner",
                 badgeColor: "bg-white/20 text-white border-white/20 backdrop-blur-md", // Custom badge style
@@ -302,8 +302,8 @@
                 amenities: ["Double Bed", "Private Bathroom", "Heating", "Hot Water", "Breakfast & Dinner"],
                 description: "Comfortable private rooms with all essentials. A great balance of privacy and value.",
                 inclusion: "Phase 1 Pass, Personal Instructor",
-                priceSki: 23999,
-                priceBoard: 37999,
+                get priceSki() { return calculatePackagePrice('2star', 'ski'); },
+                get priceBoard() { return calculatePackagePrice('2star', 'board'); },
                 image: "images/packages/silver.webp",
                 badge: "Value",
                 badgeColor: "bg-alpine-blue text-white",
@@ -318,8 +318,8 @@
                 amenities: ["King/Twin Bed", "En-suite Bathroom", "Central Heating", "Mountain View", "All Meals"],
                 description: "Upgrade your stay with better amenities, central heating, and delicious full-board meals.",
                 inclusion: "All Meals, Performance Gear",
-                priceSki: 27999,
-                priceBoard: 46999,
+                get priceSki() { return calculatePackagePrice('3star_low', 'ski'); },
+                get priceBoard() { return calculatePackagePrice('3star_low', 'board'); },
                 image: "images/packages/gold.webp",
                 badge: "Popular",
                 badgeColor: "bg-amber-500 text-white",
@@ -334,8 +334,8 @@
                 amenities: ["Premium Room", "Modern Interiors", "Central Heating", "Lounge Access", "Buffet Meals"],
                 description: "Premium comfort with modern interiors and excellent service. Experience Gulmarg in style.",
                 inclusion: "4-Star Stay, Private Guide",
-                priceSki: 31999,
-                priceBoard: 55999,
+                get priceSki() { return calculatePackagePrice('3star_high', 'ski'); },
+                get priceBoard() { return calculatePackagePrice('3star_high', 'board'); },
                 image: "images/packages/diamond.webp",
                 badge: "Luxury",
                 badgeColor: "bg-indigo-500 text-white",
@@ -350,8 +350,8 @@
                 amenities: ["Luxury Suite", "Room Service", "Spa Access", "Central Heating", "Gourmet Dining"],
                 description: "Luxury accommodations with top-tier facilities including spa access and gourmet dining options.",
                 inclusion: "Luxury Transport, Pro Race Gear",
-                priceSki: 43999,
-                priceBoard: 97999,
+                get priceSki() { return calculatePackagePrice('4star_low', 'ski'); },
+                get priceBoard() { return calculatePackagePrice('4star_low', 'board'); },
                 image: "images/packages/platinum.webp",
                 badge: "Premium",
                 badgeColor: "bg-slate-800 text-white",
@@ -366,8 +366,8 @@
                 amenities: ["Premium Suites", "Ski-in/Ski-out", "Luxury Spa", "Valet Service"],
                 description: "The ultimate mountain experience with premium 4-star resorts offering valet service and luxury spas.",
                 inclusion: "VIP Transport, Elite Gear",
-                priceSki: 65999,
-                priceBoard: 120999,
+                get priceSki() { return calculatePackagePrice('4star_high', 'ski'); },
+                get priceBoard() { return calculatePackagePrice('4star_high', 'board'); },
                 image: "images/packages/platinum.webp", // Reuse for now or placeholder
                 badge: "Elite",
                 badgeColor: "bg-purple-600 text-white",
@@ -642,6 +642,7 @@
         // Toggle FAB removed - handled by CSS hover
     </script>
     <div id="fab-placeholder"></div>
+    <script src="pricing_data.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
