@@ -1101,784 +1101,253 @@
         </div>
     </section>
 
-    <section id="curriculum" class="py-24 px-6 relative overflow-hidden border-y border-slate-200">
-        <div class="absolute inset-0 z-0">
-            <img src="images/home/curriculum/bg-curriculum.webp" class="w-full h-full object-cover"
-                alt="Curriculum Background">
+    <!-- CURRICULUM SECTION -->
+    <section id="curriculum"
+        class="relative min-h-screen flex flex-col py-24 px-6 md:px-12 lg:px-24 bg-slate-900 transition-colors duration-300">
+
+        <!-- Background Elements -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-sky-900/20 rounded-full blur-3xl">
+            </div>
+            <div class="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-emerald-900/20 rounded-full blur-3xl">
+            </div>
+            <svg class="absolute top-0 right-0 w-full h-full opacity-[0.03]" viewBox="0 0 100 100"
+                preserveAspectRatio="none">
+                <pattern id="curriculum-grid" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M0 8L8 0" stroke="currentColor" stroke-width="0.5" class="text-white">
+                    </path>
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#curriculum-grid)"></rect>
+            </svg>
         </div>
 
-        <div class="max-w-7xl mx-auto relative z-10">
+        <div class="w-[95%] max-w-7xl mx-auto relative z-10 flex flex-col h-full">
+            <!-- Header Section -->
+            <header class="mb-12">
+                <span class="text-sky-400 font-bold tracking-widest uppercase text-xs mb-3 block">Professional
+                    Training</span>
+                <h1 class="text-5xl md:text-7xl font-black leading-tight text-white mb-8 tracking-tight uppercase">
+                    Wolf Adventures <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-600">6-Day
+                        Curriculum</span>
+                </h1>
 
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div>
-                    <span class="text-blue-600 font-bold tracking-widest uppercase text-xs mb-3 block">From Zero to
-                        Hero</span>
-                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter uppercase">06 Day
-                        Curriculum</h2>
-                </div>
-                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">
-                    <span class="material-symbols-outlined text-slate-400 text-sm">landscape</span>
-                    <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">Gulmarg, Kashmir</span>
-                </div>
-            </div>
+                <!-- Level Tabs -->
+                <nav class="flex flex-wrap gap-4 border-b border-slate-700 pb-4">
+                    <button onclick="setCurriculumLevel('beginner')" id="level-beginner"
+                        class="px-8 py-3 bg-sky-500 text-white font-bold uppercase tracking-widest text-sm transition-all border-2 border-sky-500 rounded-lg hover:bg-sky-600">
+                        Beginner
+                    </button>
+                    <button onclick="setCurriculumLevel('intermediate')" id="level-intermediate"
+                        class="px-8 py-3 bg-transparent text-slate-400 font-bold uppercase tracking-widest text-sm hover:text-sky-400 transition-all border-2 border-transparent hover:border-sky-500 rounded-lg">
+                        Intermediate
+                    </button>
+                    <button onclick="setCurriculumLevel('advanced')" id="level-advanced"
+                        class="px-8 py-3 bg-transparent text-slate-600 dark:text-slate-400 font-bold uppercase tracking-widest text-sm hover:text-sky-500 transition-all border-2 border-transparent hover:border-sky-500 rounded-lg">
+                        Advanced
+                    </button>
+                </nav>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Day Navigation -->
+                <nav class="flex overflow-x-auto gap-2 mt-6 no-scrollbar">
+                    <button onclick="setCurriculumDay(1)" id="day-1"
+                        class="flex-none px-6 py-2 bg-white text-sky-600 border-2 border-sky-500 font-bold rounded shadow-sm">Day
+                        01</button>
+                    <button onclick="setCurriculumDay(2)" id="day-2"
+                        class="flex-none px-6 py-2 bg-white text-slate-600 hover:text-sky-600 hover:border-sky-300 transition-colors rounded shadow-sm border-2 border-slate-200">Day
+                        02</button>
+                    <button onclick="setCurriculumDay(3)" id="day-3"
+                        class="flex-none px-6 py-2 bg-white text-slate-600 hover:text-sky-600 hover:border-sky-300 transition-colors rounded shadow-sm border-2 border-slate-200">Day
+                        03</button>
+                    <button onclick="setCurriculumDay(4)" id="day-4"
+                        class="flex-none px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-sky-500 transition-colors rounded">Day
+                        04</button>
+                    <button onclick="setCurriculumDay(5)" id="day-5"
+                        class="flex-none px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-sky-500 transition-colors rounded">Day
+                        05</button>
+                    <button onclick="setCurriculumDay(6)" id="day-6"
+                        class="flex-none px-6 py-2 bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-sky-500 transition-colors rounded">Day
+                        06</button>
+                </nav>
+            </header>
 
-                <div class="lg:col-span-4 flex flex-col relative space-y-4">
-                    <!-- Vertical Track Line (Hidden on mobile, visible on lg) -->
-                    <!-- Removed static line to allow for cleaner "floating" look -->
-
-                    <!-- Day 1 -->
-                    <div onclick="switchDay(1)" id="nav-btn-1"
-                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-blue-500/0 hover:border-sky-200/50 bg-blue-600 shadow-xl shadow-blue-900/20 relative overflow-hidden">
-
-                        <div
-                            class="nav-number w-12 h-12 rounded-full bg-white/20 flex items-center justify-center font-black text-white text-lg transition-all duration-500">
-                            1
+            <!-- Main Content Grid -->
+            <main class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start flex-1">
+                <!-- Content Column -->
+                <div class="lg:col-span-7">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <span class="h-px w-12 bg-sky-500"></span>
+                            <span id="curriculum-level-label"
+                                class="text-sky-500 font-bold uppercase tracking-widest text-sm">Level: Beginner</span>
                         </div>
-
-                        <div class="flex-1 transition-transform duration-500">
-                            <h3 class="nav-title font-bold text-white text-lg leading-tight">Foundations</h3>
-                            <p class="nav-subtitle text-xs font-bold text-blue-100 tracking-wide uppercase mt-0.5">Day
-                                01</p>
-                        </div>
-
-                        <div class="nav-arrow opacity-100 translate-x-0 transition-all duration-500 text-white">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
+                        <h2 id="curriculum-title" class="text-4xl md:text-5xl font-black text-white uppercase">
+                            Day 1: Introduction
+                        </h2>
                     </div>
 
-                    <!-- Day 2 -->
-                    <div onclick="switchDay(2)" id="nav-btn-2"
-                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
-
-                        <div
-                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
-                            2
-                        </div>
-
-                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
-                            <h3
-                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
-                                Motion</h3>
-                            <p
-                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
-                                Day 02</p>
-                        </div>
-
-                        <div
-                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
+                    <!-- Daily Activities -->
+                    <div
+                        class="bg-slate-800/70 backdrop-blur-sm p-8 border-l-4 border-sky-500 space-y-6 rounded-lg shadow-soft mt-8">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <span class="material-symbols-rounded text-sky-500">event_note</span>
+                            Daily Activities
+                        </h3>
+                        <ul id="curriculum-activities" class="space-y-3">
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <span class="material-symbols-rounded text-sky-500 text-sm mt-1">check_circle</span>
+                                <span>Arrival & Issue of Skis</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <span class="material-symbols-rounded text-sky-500 text-sm mt-1">check_circle</span>
+                                <span>Intro to Equipment</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <span class="material-symbols-rounded text-sky-500 text-sm mt-1">check_circle</span>
+                                <span>Theory Class</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <span class="material-symbols-rounded text-sky-500 text-sm mt-1">check_circle</span>
+                                <span>Snow Plough</span>
+                            </li>
+                        </ul>
                     </div>
 
-                    <!-- Day 3 -->
-                    <div onclick="switchDay(3)" id="nav-btn-3"
-                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
-
-                        <div
-                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
-                            3
-                        </div>
-
-                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
-                            <h3
-                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
-                                The Turn</h3>
-                            <p
-                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
-                                Day 03</p>
-                        </div>
-
-                        <div
-                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Day 4 -->
-                    <div onclick="switchDay(4)" id="nav-btn-4"
-                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
-
-                        <div
-                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
-                            4
-                        </div>
-
-                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
-                            <h3
-                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
-                                Correction</h3>
-                            <p
-                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
-                                Day 04</p>
-                        </div>
-
-                        <div
-                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Day 5 -->
-                    <div onclick="switchDay(5)" id="nav-btn-5"
-                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
-
-                        <div
-                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
-                            5
-                        </div>
-
-                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
-                            <h3
-                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
-                                Flow State</h3>
-                            <p
-                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
-                                Day 05</p>
-                        </div>
-
-                        <div
-                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Day 6 -->
-                    <div onclick="switchDay(6)" id="nav-btn-6"
-                        class="nav-btn group w-full flex items-center gap-5 p-4 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] cursor-pointer border border-white/40 hover:border-sky-300/50 bg-white/60 backdrop-blur-md hover:bg-white hover:shadow-lg hover:shadow-sky-900/5 relative overflow-hidden">
-
-                        <div
-                            class="nav-number w-12 h-12 rounded-full bg-white/50 flex items-center justify-center font-black text-slate-400 text-lg group-hover:scale-110 group-hover:bg-sky-50 group-hover:text-sky-600 transition-all duration-500">
-                            6
-                        </div>
-
-                        <div class="flex-1 transition-transform duration-500 group-hover:translate-x-2">
-                            <h3
-                                class="nav-title font-bold text-slate-800 text-lg leading-tight group-hover:text-sky-900">
-                                Certification</h3>
-                            <p
-                                class="nav-subtitle text-xs font-bold text-slate-500 tracking-wide uppercase mt-0.5 group-hover:text-sky-500/80">
-                                Day 06</p>
-                        </div>
-
-                        <div
-                            class="nav-arrow opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-sky-500">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
+                    <!-- CTA Button -->
+                    <div class="mt-8">
+                        <a href="booking.html"
+                            class="group inline-flex items-center gap-4 bg-gradient-to-r from-sky-500 to-blue-600 px-10 py-5 text-white font-black uppercase tracking-widest text-lg rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-sky-500/50">
+                            <span class="relative z-10 flex items-center gap-2">
+                                Book This Course
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </span>
+                        </a>
                     </div>
                 </div>
 
-                <div class="lg:col-span-8 relative">
-                    <!-- Absolute container to prevent grid stretching from content side -->
-                    <!-- We want the list to drive height, so we use absolute positioning on desktop if needed, 
-                         or strict max-height matching. 
-                         Grid stretch makes them equal height. We just need to ensure content doesn't push it. -->
-
-                    <div id="day-1"
-                        class="day-content relative h-full w-full opacity-100 transition-opacity duration-500">
-                        <div
-                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
-                            <!-- Image Section (Fixed Height) -->
-                            <div class="relative h-48 md:h-56 w-full shrink-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
-                                </div>
-                                <img src="images/home/curriculum/day-1.webp" class="w-full h-full object-cover"
-                                    alt="Day 1">
-                                <div class="absolute bottom-0 left-0 p-8 z-20">
-                                    <span
-                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
-                                        01 Focus</span>
-                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Foundations &
-                                        Gear</h2>
-                                </div>
-                            </div>
-
-                            <!-- Scrollable Content Section -->
-                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
-                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
-                                    <div class="flex-1">
-                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                            Overview</h3>
-                                        <p class="text-slate-500 text-sm leading-relaxed">
-                                            The journey begins. We focus on understanding your equipment, finding your
-                                            balance on flat ground, and the essential mechanics of stance. No slopes
-                                            yet, just connection with the snow.
-                                        </p>
-                                    </div>
-                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
-                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                            <div class="flex justify-between items-center mb-1.5">
-                                                <span
-                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
-                                                <span
-                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
-                                                    1</span>
-                                            </div>
-                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div class="h-full bg-blue-600 w-[20%] rounded-full"></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
-                                                <span class="font-black text-sm text-slate-900">4 Hrs</span>
-                                            </div>
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
-                                                <span class="font-black text-sm text-slate-900">Flat</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 shrink-0">
-                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                1</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Boot Fitting</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                2</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Static Balance</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                3</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Side Stepping</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                4</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Ski Geometry</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Image Column -->
+                <div class="lg:col-span-5 relative">
+                    <div class="bg-slate-700 w-full aspect-[4/5] relative overflow-hidden group rounded-3xl shadow-xl">
+                        <img id="curriculum-image" alt="Skier training on slopes"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=2070&auto=format&fit=crop">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent">
+                        </div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <p id="curriculum-image-caption"
+                                class="text-white font-black text-2xl uppercase italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                "First turns of the pack"
+                            </p>
                         </div>
                     </div>
 
-                    <div id="day-2"
-                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
-                        <div
-                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
-                            <!-- Image Section (Fixed Height) -->
-                            <div class="relative h-48 md:h-56 w-full shrink-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
-                                </div>
-                                <img src="images/home/curriculum/day-2.webp" class="w-full h-full object-cover"
-                                    alt="Day 2">
-                                <div class="absolute bottom-0 left-0 p-8 z-20">
-                                    <span
-                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
-                                        02 Focus</span>
-                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Motion &
-                                        Gravity</h2>
-                                </div>
-                            </div>
-
-                            <!-- Scrollable Content Section -->
-                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
-                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
-                                    <div class="flex-1">
-                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                            Overview</h3>
-                                        <p class="text-slate-500 text-sm leading-relaxed">
-                                            Introduction to the gentle slope. You will learn to trust gravity and
-                                            control your speed using the foundational "Snow Plough" technique.
-                                        </p>
-                                    </div>
-                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
-                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                            <div class="flex justify-between items-center mb-1.5">
-                                                <span
-                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
-                                                <span
-                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
-                                                    1+</span>
-                                            </div>
-                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div class="h-full bg-blue-600 w-[30%] rounded-full"></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
-                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
-                                            </div>
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
-                                                <span class="font-black text-sm text-slate-900">Green</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 shrink-0">
-                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                1</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Gentle Sliding</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                2</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Wedge Braking</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                3</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Speed Control</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                4</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Falling Safely</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Decorative Elements -->
+                    <div
+                        class="absolute -top-6 -right-6 w-24 h-24 border-2 border-sky-500/30 rounded-full animate-pulse">
                     </div>
-
-                    <div id="day-3"
-                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
-                        <div
-                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
-                            <!-- Image Section (Fixed Height) -->
-                            <div class="relative h-48 md:h-56 w-full shrink-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
-                                </div>
-                                <img src="images/home/curriculum/day-3.webp" class="w-full h-full object-cover"
-                                    alt="Day 3">
-                                <div class="absolute bottom-0 left-0 p-8 z-20">
-                                    <span
-                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
-                                        03 Focus</span>
-                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">The Art of the
-                                        Turn</h2>
-                                </div>
-                            </div>
-
-                            <!-- Scrollable Content Section -->
-                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
-                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
-                                    <div class="flex-1">
-                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                            Overview</h3>
-                                        <p class="text-slate-500 text-sm leading-relaxed">
-                                            We break the straight line. You will learn to initiate turns, transferring
-                                            weight from one ski to the other to change direction effectively.
-                                        </p>
-                                    </div>
-                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
-                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                            <div class="flex justify-between items-center mb-1.5">
-                                                <span
-                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
-                                                <span
-                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
-                                                    2</span>
-                                            </div>
-                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div class="h-full bg-blue-600 w-[45%] rounded-full"></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
-                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
-                                            </div>
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
-                                                <span class="font-black text-sm text-slate-900">Blue</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 shrink-0">
-                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                1</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Wedge Turns</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                2</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Traversing</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                3</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Uphill Stop</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                4</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Weight Shift</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="day-4"
-                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
-                        <div
-                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
-                            <!-- Image Section (Fixed Height) -->
-                            <div class="relative h-48 md:h-56 w-full shrink-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
-                                </div>
-                                <img src="images/home/curriculum/day-4.webp" class="w-full h-full object-cover"
-                                    alt="Day 4">
-                                <div class="absolute bottom-0 left-0 p-8 z-20">
-                                    <span
-                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
-                                        04 Focus</span>
-                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Posture &
-                                        Correction</h2>
-                                </div>
-                            </div>
-
-                            <!-- Scrollable Content Section -->
-                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
-                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
-                                    <div class="flex-1">
-                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                            Overview</h3>
-                                        <p class="text-slate-500 text-sm leading-relaxed">
-                                            Building confidence through repetition. We analyze your stance, correct bad
-                                            habits, and introduce longer runs on varied terrain.
-                                        </p>
-                                    </div>
-                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
-                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                            <div class="flex justify-between items-center mb-1.5">
-                                                <span
-                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
-                                                <span
-                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
-                                                    2+</span>
-                                            </div>
-                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div class="h-full bg-blue-600 w-[60%] rounded-full"></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
-                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
-                                            </div>
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
-                                                <span class="font-black text-sm text-slate-900">Blue</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 shrink-0">
-                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                1</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Side Slipping</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                2</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Garland Drills</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                3</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Linked Turns</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                4</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Video Analysis</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="day-5"
-                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
-                        <div
-                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
-                            <!-- Image Section (Fixed Height) -->
-                            <div class="relative h-48 md:h-56 w-full shrink-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
-                                </div>
-                                <img src="images/home/curriculum/day-5.webp" class="w-full h-full object-cover"
-                                    alt="Day 5">
-                                <div class="absolute bottom-0 left-0 p-8 z-20">
-                                    <span
-                                        class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Day
-                                        05 Focus</span>
-                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Entering Flow
-                                        State</h2>
-                                </div>
-                            </div>
-
-                            <!-- Scrollable Content Section -->
-                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
-                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
-                                    <div class="flex-1">
-                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                            Overview</h3>
-                                        <p class="text-slate-500 text-sm leading-relaxed">
-                                            Linking turns fluidly. You move from mechanical thinking to feeling the
-                                            rhythm of the mountain, introducing parallel concepts.
-                                        </p>
-                                    </div>
-                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
-                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                            <div class="flex justify-between items-center mb-1.5">
-                                                <span
-                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
-                                                <span
-                                                    class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Level
-                                                    3</span>
-                                            </div>
-                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div class="h-full bg-blue-600 w-[80%] rounded-full"></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
-                                                <span class="font-black text-sm text-slate-900">5 Hrs</span>
-                                            </div>
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
-                                                <span class="font-black text-sm text-slate-900">Red</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 shrink-0">
-                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                1</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Rhythm Control</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                2</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Pole Planting</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                3</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Stem Turns</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                4</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Parallel Intro</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="day-6"
-                        class="day-content relative h-full w-full opacity-0 pointer-events-none transition-opacity duration-500">
-                        <div
-                            class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-full flex flex-col max-h-[800px] lg:max-h-full">
-                            <!-- Image Section (Fixed Height) -->
-                            <div class="relative h-48 md:h-56 w-full shrink-0">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10">
-                                </div>
-                                <img src="images/home/curriculum/day-6.webp" class="w-full h-full object-cover"
-                                    alt="Day 6">
-                                <div class="absolute bottom-0 left-0 p-8 z-20">
-                                    <span
-                                        class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Graduation</span>
-                                    <h2 class="text-white text-3xl md:text-4xl font-black leading-tight">Certification
-
-                                    </h2>
-                                </div>
-                            </div>
-
-                            <div class="p-5 flex flex-col gap-5 flex-1 overflow-y-auto custom-scrollbar">
-                                <div class="flex flex-col md:flex-row gap-5 border-b border-slate-100 pb-5 shrink-0">
-                                    <div class="flex-1">
-                                        <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                            Overview</h3>
-                                        <p class="text-slate-500 text-sm leading-relaxed">
-                                            The final run. Demonstrate your control and technique on the upper slopes to
-                                            earn your certificate and join the Wolf Adventure alumni.
-                                        </p>
-                                    </div>
-                                    <div class="w-full md:w-56 flex flex-col gap-2 shrink-0">
-                                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                                            <div class="flex justify-between items-center mb-1.5">
-                                                <span
-                                                    class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</span>
-                                                <span
-                                                    class="text-[10px] font-bold text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded">Level
-                                                    4</span>
-                                            </div>
-                                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                                <div class="h-full bg-emerald-500 w-[100%] rounded-full"></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-2">
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Time</span>
-                                                <span class="font-black text-sm text-slate-900">Full Day</span>
-                                            </div>
-                                            <div
-                                                class="flex-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-center">
-                                                <span
-                                                    class="block text-[10px] font-bold text-slate-400 uppercase">Zone</span>
-                                                <span class="font-black text-sm text-slate-900">Black</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-1 shrink-0">
-                                    <h3 class="text-base font-bold text-slate-900 mb-3">Skills You'll Learn</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                1</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Supervised Run</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                2</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Style Check</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                3</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Certification</h4>
-                                        </div>
-                                        <div
-                                            class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-blue-200 transition-colors">
-                                            <div
-                                                class="w-6 h-6 rounded-md bg-white text-blue-600 flex items-center justify-center shadow-sm mb-2 font-bold text-xs">
-                                                4</div>
-                                            <h4 class="font-bold text-xs text-slate-900">Graduation</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <div class="absolute -bottom-4 -left-4 w-32 h-1 bg-sky-500"></div>
+                    <div class="absolute top-1/2 -right-4 w-12 h-12 bg-sky-500/20 rotate-45"></div>
                 </div>
-            </div>
+            </main>
         </div>
+
+
     </section>
+
+    <script>
+        // Curriculum data structure
+        const curriculumData = {
+            beginner: [
+                { day: 1, title: "Introduction", activities: ["Arrival & Issue of Skis", "Intro to Equipment", "Theory Class", "Snow Plough"] },
+                { day: 2, title: "Control & Turns", activities: ["Snow Plough Control", "Snow Plough Turns", "Sidestepping"] },
+                { day: 3, title: "Traverse & Swing", activities: ["Traverse and Uphill Swing", "Basic Swing"] },
+                { day: 4, title: "Refining Turns", activities: ["Polishing Snow Plough Turns", "Stem Turn"] },
+                { day: 5, title: "Parallel & Exam", activities: ["Open, Parallel and Rough Form", "Slalom", "Free Ski Exam"] },
+                { day: 6, title: "Completion", activities: ["Free Ski", "Departure"] }
+            ],
+            intermediate: [
+                { day: 1, title: "Assessment & Recap", activities: ["Arrival & Issue of Skis", "Intro to Equipment & Theory", "Revision of Basic Techniques"] },
+                { day: 2, title: "Swing & Stem", activities: ["Basic Swing", "Downhill Swing", "Sidestep Garland", "Stem Turns", "Long Parallel Turns (Open Skis)"] },
+                { day: 3, title: "Polishing Long Turns", activities: ["Polishing Long Parallel Turns (Open Skis)", "Short Parallel Turns (Open Skis)"] },
+                { day: 4, title: "Polishing Short Turns", activities: ["Polishing Short Parallel Turns (Open Skis)", "Revision of All Intermediate Techniques"] },
+                { day: 5, title: "Advanced Form & Exam", activities: ["Long Parallel Turns (Open Skis)", "Short Parallel Turns (Open Skis)", "Slalom", "Exam"] },
+                { day: 6, title: "Completion", activities: ["Free Ski", "Departure"] }
+            ],
+            advanced: [
+                { day: 1, title: "Advanced Setup", activities: ["Arrival & Issue of Skis", "Intro to Equipment & Theory", "Revision of Intermediate Techniques"] },
+                { day: 2, title: "Pole & Stem", activities: ["Downhill Swing", "Pole Plant", "Stem Turn"] },
+                { day: 3, title: "Closed Skis", activities: ["Pole Plant", "Long Parallel Turn (Closed Skis)"] },
+                { day: 4, title: "Short Turns", activities: ["Pole Plant", "Short Parallel Turns (Closed Skis)"] },
+                { day: 5, title: "Polishing & Exam", activities: ["Polishing Pole Plant", "Long & Short Parallel Turns (Closed Skis)", "Slalom and Exam"] },
+                { day: 6, title: "Completion", activities: ["Free Ski", "Departure"] }
+            ]
+        };
+
+        let currentLevel = 'beginner';
+        let currentDay = 1;
+
+        function setCurriculumLevel(level) {
+            currentLevel = level;
+
+            // Update level button states
+            ['beginner', 'intermediate', 'advanced'].forEach(l => {
+                const btn = document.getElementById(`level-${l}`);
+                if (l === level) {
+                    btn.className = "px-8 py-3 bg-sky-500 text-white font-bold uppercase tracking-widest text-sm transition-all border-2 border-sky-500 rounded-lg hover:bg-sky-600";
+                } else {
+                    btn.className = "px-8 py-3 bg-transparent text-slate-400 font-bold uppercase tracking-widest text-sm hover:text-sky-400 transition-all border-2 border-transparent hover:border-sky-500 rounded-lg";
+                }
+            });
+
+            updateCurriculumContent();
+        }
+
+        function setCurriculumDay(day) {
+            currentDay = day;
+
+            // Update day button states
+            for (let i = 1; i <= 6; i++) {
+                const btn = document.getElementById(`day-${i}`);
+                if (i === day) {
+                    btn.className = "flex-none px-6 py-2 bg-white text-sky-600 border-2 border-sky-500 font-bold rounded shadow-sm";
+                } else {
+                    btn.className = "flex-none px-6 py-2 bg-white text-slate-600 hover:text-sky-600 hover:border-sky-300 transition-colors rounded shadow-sm border-2 border-slate-200";
+                }
+            }
+
+            updateCurriculumContent();
+        }
+
+        function updateCurriculumContent() {
+            const data = curriculumData[currentLevel][currentDay - 1]; // Array is 0-indexed
+
+            // Update level label
+            document.getElementById('curriculum-level-label').textContent = `Level: ${currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1)}`;
+
+            // Update title
+            document.getElementById('curriculum-title').textContent = `Day ${data.day}: ${data.title}`;
+
+            // Update activities
+            const activitiesList = document.getElementById('curriculum-activities');
+            activitiesList.innerHTML = data.activities.map(activity => `
+                <li class="flex items-start gap-3 text-slate-300">
+                    <span class="material-symbols-rounded text-sky-500 text-sm mt-1">check_circle</span>
+                    <span>${activity}</span>
+                </li>
+            `).join('');
+        }
+
+        // Initialize on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateCurriculumContent);
+        } else {
+            updateCurriculumContent();
+        }
+    </script>
 
     <section id="resort" class="py-16 px-6 bg-slate-50 font-sans">
         <div class="w-[95%] max-w-7xl mx-auto">
@@ -2262,6 +1731,8 @@
             </a>
         </div>
     </section>
+
+
 
     <section class="py-24 px-6 relative overflow-hidden group bg-slate-900">
         <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?q=80&w=2652&auto=format&fit=crop"
