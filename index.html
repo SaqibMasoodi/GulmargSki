@@ -342,223 +342,138 @@
         </div>
     </header>
 
-    <!-- About Us Section -->
-    <section id="about" class="py-24 bg-white relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
-            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <pattern id="grid-pattern" width="8" height="8" patternUnits="userSpaceOnUse">
-                    <path d="M0 8L8 0" stroke="currentColor" stroke-width="0.5"></path>
+    <!-- Wolf Pack Section -->
+    <section id="about"
+        class="relative min-h-[90vh] flex items-center overflow-hidden py-24 px-6 md:px-12 lg:px-24 bg-white dark:bg-slate-900 overflow-x-hidden">
+
+        <!-- Decorative Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div
+                class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-sky-100/40 dark:bg-sky-900/10 rounded-full blur-3xl">
+            </div>
+            <div
+                class="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-emerald-100/40 dark:bg-emerald-900/10 rounded-full blur-3xl">
+            </div>
+            <svg class="absolute top-0 right-0 w-full h-full opacity-[0.03]" viewBox="0 0 100 100"
+                preserveAspectRatio="none">
+                <pattern id="grid-pattern-new" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M0 8L8 0" stroke="currentColor" stroke-width="0.5" class="text-slate-900 dark:text-white">
+                    </path>
                 </pattern>
-                <rect width="100%" height="100%" fill="url(#grid-pattern)"></rect>
+                <rect width="100%" height="100%" fill="url(#grid-pattern-new)"></rect>
             </svg>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
 
-            <!-- Header -->
-            <div class="relative w-full mb-20 text-center">
-                <h1
-                    class="text-6xl md:text-8xl font-display font-black uppercase leading-none tracking-tighter text-slate-900">
-                    Welcome to the <br />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">Wolf
-                        Pack</span>
-                </h1>
-                <div
-                    class="inline-block mt-4 bg-slate-900 text-sky-400 font-display font-bold px-4 py-1 text-xl shadow-lg transform -rotate-2 border-2 border-sky-400">
-                    #Adventure
+            <!-- Text Content -->
+            <div class="flex flex-col space-y-10 max-w-2xl">
+                <div class="space-y-4 fade-in-up">
+                    <h1
+                        class="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] text-slate-900 dark:text-white drop-shadow-sm">
+                        Welcome to <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-600">the Wolf
+                            Pack</span>
+                    </h1>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
+                <div class="space-y-6 fade-in-up delay-100">
+                    <h2
+                        class="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-4 font-display">
+                        <span class="w-12 h-[3px] bg-sky-500 rounded-full"></span>
+                        A Message from Our Founders
+                    </h2>
 
-                <!-- Left Column -->
-                <div class="lg:col-span-5 relative order-2 lg:order-1">
-
-                    <!-- Founders' Note (Project Preset Card Style) -->
-                    <div
-                        class="bg-slate-50 rounded-[2.5rem] p-8 md:p-10 border-2 border-slate-200 shadow-xl relative overflow-hidden group">
-                        <!-- Wolf Logo Watermark -->
-                        <div class="absolute -top-6 -left-6 w-32 h-32 z-0 opacity-10 pointer-events-none">
-                            <img src="images/wolf.png" alt="Wolf Logo"
-                                class="w-full h-full object-contain mix-blend-multiply opacity-20">
-                        </div>
-
-                        <h2
-                            class="text-3xl font-display font-bold text-slate-900 mb-6 uppercase tracking-wide border-b border-slate-200 pb-2 relative z-10">
-                            Founders' Note
-                        </h2>
-
-                        <p class="font-sans text-slate-600 text-lg leading-relaxed mb-8 relative z-10">
-                            "Listen up, adrenaline seekers! <span class="bg-sky-100 text-sky-700 px-1 font-bold">This
-                                isn't just a school.</span> It's a gateway to the wild. Nothing beats that epic rush
-                            when you first carve through Gulmarg's powder. We built Wolf Adventures Kashmir to turn
-                            rookies into legends on these icy peaks. You aren't just hitting slopes; you're joining the
-                            pack."
+                    <div class="relative pl-6 md:pl-8 border-l-4 border-sky-100 dark:border-slate-800">
+                        <span
+                            class="material-symbols-rounded absolute -top-4 -left-3 text-sky-200 dark:text-sky-900 text-5xl bg-white dark:bg-slate-900 p-1">format_quote</span>
+                        <p
+                            class="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed italic relative z-10 pt-2">
+                            "Listen up, adrenaline seekers! Nothing beats that epic, heart-thumping rush when you first
+                            carve through Gulmarg's legendary deep powder. Here at Wolf Adventures Kashmir, we aren't
+                            just running some boring, stuffy school; we're opening up our wild mountain playground just
+                            for you. These 6-day shred sessions are custom-built to turn total rookies into absolute
+                            legends on the icy peaks. Led by certified national pros, you're not just hitting the
+                            slopes—you're officially joining the pack."
                         </p>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-sky-400 shadow-md">
-                                <img alt="Founder Signature"
-                                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGCbtOejf-muCzhK8H2RT88QPq2b_uYZYLY3rdC5vFRT8_-qBnCQXgHtnN2QO5wuXOjh9bMMFYJJkyoUtCkXr1gWRBTE02OSZjeXSqdmtSiscIMMvSHmytgyL94DHKYev7u57z-Rt6Ojt9IKxeI0IgXU7nU4MZ--NeQKNRX23pOqnVdGknH1-MERBrQcNZz_Mshu2dVt5zWUxQUoDiqRG2ZY1NSV640kznx1aZcEarew0PZRfrBcaFcQdO9nQ0fnfaIp_fIx2nd8o" />
-                            </div>
-                            <div>
-                                <p class="font-display text-xl text-slate-900 font-bold uppercase">Shafqat &amp;
-                                    Mubashir</p>
-                                <p class="text-xs text-sky-500 font-bold tracking-widest uppercase">Chief Guides</p>
-                            </div>
-                            <span
-                                class="material-symbols-rounded text-4xl text-slate-200 ml-auto leading-none">history_edu</span>
-                        </div>
-
-                        <!-- Badge -->
                         <div
-                            class="absolute bottom-6 right-6 bg-yellow-400 text-black font-bold font-display text-xs p-2 rounded shadow-lg transform -rotate-6 border border-white z-20">
-                            EST. 2018
+                            class="mt-6 flex items-center gap-3 text-sky-600 dark:text-sky-400 font-bold tracking-wider uppercase text-xs md:text-sm">
+                            <span class="w-8 h-[1px] bg-sky-300"></span>
+                            <p>Shafqat & Mubashir</p>
                         </div>
                     </div>
-
-                    <!-- "Know Your Limits" Typographic Layout -->
-                    <div class="mt-16 relative pl-4">
-                        <div class="relative bg-slate-100 text-slate-900 inline-block p-4 transform -rotate-2 shadow-lg z-10"
-                            style="clip-path: polygon(0 0, 100% 2%, 98% 100%, 2% 96%);">
-                            <h3 class="text-4xl md:text-5xl font-display font-black uppercase leading-none">
-                                Know Your
-                            </h3>
-                        </div>
-                        <br />
-                        <div class="relative bg-sky-500 text-white inline-block p-4 transform rotate-1 shadow-lg -mt-2 ml-8 z-20"
-                            style="clip-path: polygon(2% 0, 100% 5%, 95% 100%, 0 95%);">
-                            <h3 class="text-4xl md:text-5xl font-display font-black uppercase leading-none">
-                                Limits
-                            </h3>
-                            <div
-                                class="absolute -right-3 -top-3 w-12 h-12 bg-white/10 border-2 border-red-500 rounded-full flex items-center justify-center backdrop-blur-sm transform rotate-12">
-                                <span class="text-xs font-bold text-red-500 font-display">FAIL</span>
-                            </div>
-                        </div>
-                        <br />
-                        <div
-                            class="relative border-2 border-slate-900 text-slate-900 inline-block p-4 transform -rotate-1 shadow-sm -mt-2 z-0">
-                            <h3 class="text-4xl md:text-5xl font-display font-black uppercase leading-none">
-                                Ski Beyond
-                            </h3>
-                        </div>
-                        <div class="relative text-sky-500 inline-block p-2 transform rotate-3 ml-2">
-                            <h3
-                                class="text-5xl md:text-6xl font-display font-black uppercase leading-none drop-shadow-md">
-                                Them!
-                            </h3>
-                            <svg class="absolute -bottom-4 left-0 w-full h-4" preserveAspectRatio="none"
-                                viewBox="0 0 100 10">
-                                <path d="M0 5 Q 50 10 100 5" fill="none" stroke="#0ea5e9" stroke-width="3"></path>
-                            </svg>
-                        </div>
-                    </div>
-
                 </div>
 
-                <!-- Right Column (Images & Video) -->
-                <div class="lg:col-span-7 relative order-1 lg:order-2 min-h-[500px] flex items-center justify-center">
-
-                    <!-- Floating Image 1 -->
+                <div class="mt-4 fade-in-up delay-200 hidden md:block">
                     <div
-                        class="hidden md:block absolute top-0 right-10 w-48 h-48 bg-white p-2 transform rotate-6 shadow-xl z-0 transition hover:rotate-0 hover:z-30 duration-300">
-                        <img alt="Deep Powder" class="w-full h-full object-cover filter contrast-125 sepia-[.2]"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyat_4wohWNkugq7vEghnv_1Pt_VC50WiMgYeV69XfYLgI9oLiRZ2I0kmiCUORRGuYLcY2pd77O9Voe8E9kLJ_TuvjR9MTBO18FDnI8qfcUDHsqOOChBzaZ-z1IR2iseDQzYtKI0kaxin5wC10H1E1XdiILYz17Gbx6vHiQZFnQGxibWXvWiGsjbQwxroKfVS3aPUDNVtF0eKvGcC9rog6EsHLWbUoVkO4IOloko82kbc6D1PaqothoN1x6NiiONJzoOnx8NBvkmg" />
-                        <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-white/50 backdrop-blur-sm shadow-sm transform rotate-1">
-                        </div>
+                        class="font-display flex flex-col uppercase text-6xl lg:text-8xl font-black leading-[0.8] tracking-tighter opacity-100 select-none">
+                        <span class="text-slate-100 dark:text-slate-800" style="-webkit-text-stroke: 1px #cbd5e1;">Know
+                            Your</span>
+                        <span class="text-slate-200 dark:text-slate-800/50">Limits</span>
+                        <span class="text-slate-900 dark:text-white mt-2">Ski Beyond</span>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-emerald-500">Them</span>
                     </div>
-
-                    <!-- Floating Image 2 -->
-                    <div
-                        class="hidden md:block absolute bottom-10 left-0 w-40 h-40 bg-white p-2 transform -rotate-12 shadow-xl z-10 transition hover:scale-105 duration-300">
-                        <img alt="Group Shot" class="w-full h-full object-cover filter grayscale contrast-125"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCddYQgrC0rPrgyWfLlThkKj64uz-gH2CNQc1kXMLz6cUyIb6co8g7FgBfYfJ2aKaV8lJhZ058Penv4ywq2_dP5lmhV_YKgzCgw4WSV_iJrpmMfs9IXbjXUi8r5do8kCsEs8q8iPJj46ubxKxHaMvf7_gIjbBUxnnlRNc4RasIDHdaz5x3P2b4OQLEdKClpVGR2BW5LFDpUQilxbCUjtw9aX9eJgPAiRiPz3ghxaf-zTuT0q7EDdxaqDULyLeudo6ETNVnNJCtbem8" />
-                        <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-white/50 backdrop-blur-sm shadow-sm transform -rotate-2">
-                        </div>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div class="absolute top-1/4 left-10 w-24 h-24 z-20 pointer-events-none hidden lg:block">
-                        <svg class="w-full h-full transform rotate-45 text-sky-400 drop-shadow-md"
-                            viewBox="0 0 100 100">
-                            <path d="M10 50 Q 50 20 80 50 M 70 40 L 80 50 L 65 60" fill="none" stroke="currentColor"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                            <text class="font-display font-bold text-xs fill-slate-900 rotate-[-45deg]" x="0"
-                                y="80">Watch This</text>
-                        </svg>
-                    </div>
-
-                    <!-- Main Video Card -->
-                    <div
-                        class="relative z-30 w-full max-w-md aspect-video bg-black border-4 border-white shadow-2xl overflow-hidden group rounded-xl">
-                        <div class="absolute inset-0 z-20 pointer-events-none p-4 flex flex-col justify-between">
-                            <div class="flex justify-between items-start">
-                                <div class="text-xs font-mono text-red-500 animate-pulse flex items-center gap-1">
-                                    <div class="w-2 h-2 rounded-full bg-red-500"></div> REC
-                                </div>
-                                <div class="text-xs font-mono text-white">
-                                    [ 1080p // 60fps ]
-                                </div>
-                            </div>
-                            <!-- Crosshair -->
-                            <div
-                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center opacity-50">
-                                <div class="w-full h-[1px] bg-white"></div>
-                                <div class="h-full w-[1px] bg-white absolute"></div>
-                            </div>
-                            <!-- Corners -->
-                            <div class="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-white"></div>
-                            <div class="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-white"></div>
-                            <div class="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-white"></div>
-                            <div class="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-white"></div>
-                        </div>
-
-                        <div class="w-full h-full relative">
-                            <img alt="Video Cover"
-                                class="w-full h-full object-cover transform transition duration-700 group-hover:scale-110 filter brightness-90"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmZQ5b2GzH605lcLP5DT6EPaOywzhzyzWJDnsFRNzPJXF68wNj1wzVZmiw7Oga8SOLTmq7H0eqI_zc_Ufer-dpG6-sO0v6Ci62oWWJiTZXYPSS4fHQYkpnB41bS-nL5lMXI0KT10b0siRXPxIJxljQGU6otGS1Rzj6Gole1YaGlWB4U5qhLdXJs8Bij-YSSZjM83Q_JqcGnNyb6ZyMAQOQlaqI0DFKBchbSl8-d1P8_Ol4lmBb73uqAWbNAhy-C_oHdKPOFfaXqRU" />
-                            <div class="absolute inset-0 flex items-center justify-center z-10">
-                                <button
-                                    class="w-16 h-16 rounded-full bg-sky-500/90 text-white flex items-center justify-center shadow-lg transform transition hover:scale-110 hover:bg-sky-400 group-hover:animate-none animate-pulse">
-                                    <span class="material-symbols-rounded text-4xl">play_arrow</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pass Stub -->
-                    <div
-                        class="absolute -bottom-6 right-8 md:right-20 w-32 bg-sky-600 text-white p-2 rounded transform rotate-12 shadow-lg z-40 border-2 border-white/50">
-                        <div class="flex justify-between items-center border-b border-white/30 pb-1 mb-1">
-                            <span class="text-[0.6rem] uppercase font-bold tracking-wider">Gulmarg</span>
-                            <span class="material-symbols-rounded text-sm">ac_unit</span>
-                        </div>
-                        <div class="text-center font-display font-bold text-xl leading-none py-1">LIFT PASS</div>
-                        <div class="flex justify-between items-end mt-1">
-                            <div class="w-8 h-8 bg-white p-0.5">
-                                <img alt="QR" class="w-full h-full object-contain mix-blend-multiply"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYLlcchbGTICr9K504HE2y4rVxQiJIRf43sYQHSsz98Br1yhtRQ__dmM2MputwpVbrEXkCq7tZz5RCeBsCHsinyyLJs6jdwxWX1Q847W6m6GIWRfjAJBUgSbSY1Nd43of7rkWkSBovqwFbcVf_3S9dac_AJkuGYolZC8ae4Nd4HZnvWtYJ8elKioBMpfRsXoO5yEOKXzs1qM6sB7DOKA2oTNUjEsXs0zxclwKikV_l8tSlm3_Q0pp_rvM-QFAKhxmH5xTkMeuwTxI" />
-                            </div>
-                            <span class="text-[0.5rem] font-mono">ADMIT ONE</span>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
+            <!-- Image Grid -->
+            <div
+                class="relative flex justify-center items-center h-[600px] md:h-[900px] w-full mt-12 lg:-mt-20 fade-in-up delay-300">
 
+                <!-- Orbit Rings -->
+                <div
+                    class="absolute inset-0 border border-slate-100 dark:border-slate-800 rounded-full opacity-50 scale-75 animate-pulse">
+                </div>
+                <div
+                    class="absolute inset-0 border border-slate-100 dark:border-slate-800 rounded-full opacity-30 scale-90">
+                </div>
 
+                <!-- Center Image (Video Thumbnail) -->
+                <div
+                    class="relative z-20 w-[400px] h-[400px] md:w-[700px] md:h-[700px] rounded-full border-2 border-dashed border-sky-300/30 p-6">
+                    <div
+                        class="w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl relative group cursor-pointer hover:shadow-sky-200/50 transition-all duration-500">
+                        <video src="images/Gallery/gulll.mp4"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            autoplay muted loop playsinline></video>
+                    </div>
+                </div>
 
+                <!-- Top Left (Mubashir) -->
+                <div
+                    class="absolute top-0 left-0 z-30 w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white shadow-xl group hover:scale-105 transition-transform duration-300">
+                    <img src="images/home/guides/mubashir.webp" alt="Mubashir Riyaz"
+                        class="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div
+                        class="absolute bottom-0 right-0 bg-sky-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Founder</div>
+                </div>
 
+                <!-- Bottom Left (Shafqat) -->
+                <div
+                    class="absolute bottom-10 left-0 z-40 w-28 h-28 md:w-40 md:h-40 rounded-full border-4 border-white shadow-xl group hover:scale-105 transition-transform duration-300">
+                    <img src="images/home/guides/shafqat.webp" alt="Shafqat Shah"
+                        class="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div
+                        class="absolute bottom-0 left-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Lead Guide</div>
+                </div>
 
+                <!-- Decorative Elements -->
+                <div
+                    class="absolute top-20 left-4 w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center shadow-lg animate-float">
+                    <span class="text-2xl">❄️</span>
+                </div>
 
+            </div>
+        </div>
 
-
+        <!-- Scroll Indicator -->
+        <div
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 opacity-60">
+            <span class="text-[10px] uppercase tracking-[0.2em] font-bold">Discover More</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-sky-400 to-transparent"></div>
         </div>
     </section>
 
