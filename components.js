@@ -13,6 +13,7 @@ const HEADER_HTML = `
             <a href="index.html" class="hover:text-alpine-blue transition-colors">Home</a>
             <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
             <a href="packages.html" class="hover:text-alpine-blue transition-colors">Packages</a>
+            <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
             <a href="gallery.html" class="hover:text-alpine-blue transition-colors">Gallery</a>
             <a href="policies.html" class="hover:text-alpine-blue transition-colors">Policies</a>
         </div>
@@ -37,12 +38,12 @@ const HEADER_HTML = `
     <div id="mobile-menu-overlay"
         class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-center font-sans px-6">
         
-        <div class="w-full max-w-sm mx-auto flex flex-col gap-3">
+        <div class="w-full max-w-sm mx-auto flex flex-col gap-2">
             
             <!-- Home -->
             <a href="index.html" onclick="toggleMobileMenu()"
                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
                     <span class="material-symbols-rounded">home</span>
                 </div>
                 <span class="text-lg font-bold text-slate-800">Home</span>
@@ -51,7 +52,7 @@ const HEADER_HTML = `
             <!-- Accommodations -->
             <a href="stays.html" onclick="toggleMobileMenu()"
                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
                     <span class="material-symbols-rounded">bed</span>
                 </div>
                 <span class="text-lg font-bold text-slate-800">Accommodations</span>
@@ -60,16 +61,25 @@ const HEADER_HTML = `
             <!-- Packages -->
             <a href="packages.html" onclick="toggleMobileMenu()"
                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
                     <span class="material-symbols-rounded">package_2</span>
                 </div>
                 <span class="text-lg font-bold text-slate-800">Packages</span>
             </a>
 
+            <!-- Curriculum (NEW) -->
+            <a href="index.html#curriculum" onclick="toggleMobileMenu()"
+                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                    <span class="material-symbols-rounded">school</span>
+                </div>
+                <span class="text-lg font-bold text-slate-800">Curriculum</span>
+            </a>
+
             <!-- Gallery -->
             <a href="gallery.html" onclick="toggleMobileMenu()"
                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
                     <span class="material-symbols-rounded">photo_library</span>
                 </div>
                 <span class="text-lg font-bold text-slate-800">Gallery</span>
@@ -78,15 +88,15 @@ const HEADER_HTML = `
             <!-- Policies -->
             <a href="policies.html" onclick="toggleMobileMenu()"
                 class="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-all group">
-                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
                     <span class="material-symbols-rounded">gavel</span>
                 </div>
                 <span class="text-lg font-bold text-slate-800">Policies</span>
             </a>
 
-            <!-- CTA Button -->
+            <!-- CTA Button (Red/Pink to match screenshot) -->
              <a href="booking.html" onclick="toggleMobileMenu()"
-                class="mt-6 w-full py-4 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white font-black text-center shadow-xl shadow-slate-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                class="mt-6 w-full py-4 rounded-2xl bg-[#ff385c] hover:bg-[#d90b3e] text-white font-black text-center shadow-xl shadow-rose-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
                 <span class="material-symbols-rounded">calendar_month</span>
                 Book Your Trip
             </a>
