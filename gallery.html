@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
 <head>
@@ -131,8 +131,8 @@
     <main class="max-w-[1600px] mx-auto px-4 sm:px-6 py-12">
 
         <!-- Category Filter -->
-        <div class="flex justify-center mb-12 overflow-x-auto no-scrollbar py-2">
-            <div class="flex gap-2 bg-white p-1.5 rounded-full border border-slate-200 shadow-sm">
+        <div class="flex justify-start md:justify-center mb-8 md:mb-12 overflow-x-auto no-scrollbar py-2 px-4 md:px-0">
+            <div class="flex gap-2 bg-white p-1.5 rounded-full border border-slate-200 shadow-sm min-w-max">
                 <template x-for="cat in categories" :key="cat.id">
                     <button @click="activeCategory = cat.id"
                         :class="activeCategory === cat.id ? 'bg-alpine-deep text-white shadow-md' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'"
@@ -144,7 +144,7 @@
         </div>
 
         <!-- Masonry Grid -->
-        <div class="masonry-grid" id="gallery-grid">
+        <div class="masonry-grid" id="gallery-grid" x-show="activeCategory !== 'social'">
             <template x-for="(item, index) in filteredItems" :key="item.id">
                 <div class="gallery-item group relative overflow-hidden rounded-2xl cursor-zoom-in break-inside-avoid"
                     @click="openLightbox(index)">
@@ -175,6 +175,66 @@
                     </div>
                 </div>
             </template>
+        </div>
+
+        <!-- Video Grid Section -->
+        <div x-show="activeCategory === 'social'" class="w-full animate-fade-up" style="display: none;">
+            <!-- YouTube Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <template x-for="(video, index) in youtubeVideos" :key="video.id">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl border-4 border-white group transition-transform duration-300 hover:scale-[1.02]"
+                        :class="index === 0 ? 'md:col-span-2 md:row-span-2' : ''">
+                        <!-- Video Container (Aspect Ratio 16:9) -->
+                        <div class="relative w-full aspect-video bg-slate-100">
+                            <!-- Placeholder / Lazy Load Wrapper -->
+                            <iframe :src="'https://www.youtube.com/embed/' + video.videoId" title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen loading="lazy" class="absolute inset-0 w-full h-full"></iframe>
+                        </div>
+                        <!-- Content -->
+                        <!-- Text removed as per request -->
+                    </div>
+            </div>
+            </template>
+        </div>
+
+        <!-- YouTube Channel CTA -->
+        <div class="max-w-4xl mx-auto mb-16 px-4">
+            <a href="https://www.youtube.com/@mubashirkashmirii/featured" target="_blank"
+                class="group relative block w-full overflow-hidden rounded-3xl bg-red-600 shadow-xl transition-transform hover:scale-[1.02]">
+                <div class="absolute inset-0 bg-gradient-to-r from-red-700 to-red-500 opacity-90"></div>
+                <!-- Decorative Circles -->
+                <div
+                    class="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-white/10 blur-3xl transition-transform duration-700 group-hover:scale-150">
+                </div>
+                <div
+                    class="absolute -left-12 -bottom-12 h-64 w-64 rounded-full bg-black/10 blur-3xl transition-transform duration-700 group-hover:scale-150">
+                </div>
+
+                <div
+                    class="relative flex flex-col items-center justify-center py-12 text-center md:flex-row md:justify-between md:px-16 md:text-left">
+                    <div class="mb-6 md:mb-0">
+                        <h2 class="font-display text-3xl font-black text-white uppercase tracking-tight md:text-4xl">
+                            Watch More on YouTube
+                        </h2>
+                        <p class="mt-2 text-red-100 font-medium text-lg">
+                            Subscribe for full runs, daily updates, and powder alerts.
+                        </p>
+                    </div>
+                    <div
+                        class="flex items-center gap-4 bg-white px-8 py-4 rounded-full shadow-lg transition-transform group-hover:shadow-2xl">
+                        <svg class="h-8 w-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                        </svg>
+                        <span class="text-xl font-bold text-slate-900 uppercase tracking-wide">Subscribe</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
         </div>
 
     </main>
@@ -251,18 +311,32 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('galleryApp', () => ({
-                activeCategory: 'all',
+                activeCategory: 'social',
                 lightboxOpen: false,
                 currentIndex: 0,
                 isPlaying: false,
                 isMuted: false,
 
                 categories: [
+                    { id: 'social', name: 'YouTube' },
                     { id: 'all', name: 'All Moments' },
                     { id: 'ski', name: 'Ski Action' },
                     { id: 'landscape', name: 'Landscapes' },
                     { id: 'life', name: 'Resort Life' },
                     { id: 'heli', name: 'Heli-Skiing' }
+                ],
+
+                youtubeVideos: [
+                    { id: 'yt0', videoId: 'MYK5N_Dx1fA' },
+                    { id: 'yt1', videoId: '-L2d59bnkcU' },
+                    { id: 'yt2', videoId: 'uCNMHTcSL-U' },
+                    { id: 'yt3', videoId: 'P7hk4w-qjNQ' },
+                    { id: 'yt4', videoId: '7Zes_WsDB2Q' },
+                    { id: 'yt5', videoId: 'z-BHqIvksP8' },
+                    { id: 'yt6', videoId: 'owOlIPUYJOk' },
+                    { id: 'yt7', videoId: 'OmY-eJkuEWA' },
+                    { id: 'yt8', videoId: '24OvcZ0slfE' },
+                    { id: 'yt9', videoId: 'dRiYy81cQFo' },
                 ],
 
                 items: [
