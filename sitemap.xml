@@ -1,58 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  
-  <!-- Homepage - Highest Priority -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.wolfadventureskashmir.com/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://www.wolfadventureskashmir.com/images/logo.webp</image:loc>
-      <image:title>Wolf Adventures Kashmir Logo</image:title>
-    </image:image>
   </url>
-  
-  <!-- Booking Page - High Priority for Conversions -->
   <url>
     <loc>https://www.wolfadventureskashmir.com/booking.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Packages Page - High Priority for Conversions -->
   <url>
     <loc>https://www.wolfadventureskashmir.com/packages.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Stays/Accommodation Page -->
   <url>
     <loc>https://www.wolfadventureskashmir.com/stays.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Gallery Page - Visual Content -->
   <url>
     <loc>https://www.wolfadventureskashmir.com/gallery.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Policies & Legal Page -->
   <url>
     <loc>https://www.wolfadventureskashmir.com/policies.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-
 </urlset>
