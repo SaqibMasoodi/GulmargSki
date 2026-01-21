@@ -11,9 +11,9 @@ const HEADER_HTML = `
 
         <div class="hidden lg:flex space-x-8 text-sm font-semibold text-slate-500">
             <a href="index.html" class="hover:text-alpine-blue transition-colors">Home</a>
-            <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
-            <a href="packages.html" class="hover:text-alpine-blue transition-colors">Packages</a>
             <a href="index.html#curriculum" class="hover:text-alpine-blue transition-colors">Curriculum</a>
+            <a href="packages.html" class="hover:text-alpine-blue transition-colors">Packages</a>
+            <a href="stays.html" class="hover:text-alpine-blue transition-colors">Accommodations</a>
             <a href="gallery.html" class="hover:text-alpine-blue transition-colors">Gallery</a>
             <a href="policies.html" class="hover:text-alpine-blue transition-colors">Policies</a>
         </div>
@@ -50,13 +50,13 @@ const HEADER_HTML = `
                 <span class="text-sm font-bold text-slate-800">Home</span>
             </a>
 
-            <!-- Accommodations -->
-            <a href="stays.html" onclick="toggleMobileMenu()"
+            <!-- Curriculum (NEW) -->
+            <a href="index.html#curriculum" onclick="toggleMobileMenu()"
                 class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
                 <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded text-xl">bed</span>
+                    <span class="material-symbols-rounded text-xl">school</span>
                 </div>
-                <span class="text-sm font-bold text-slate-800">Accommodations</span>
+                <span class="text-sm font-bold text-slate-800">Curriculum</span>
             </a>
 
             <!-- Packages -->
@@ -68,13 +68,13 @@ const HEADER_HTML = `
                 <span class="text-sm font-bold text-slate-800">Packages</span>
             </a>
 
-            <!-- Curriculum (NEW) -->
-            <a href="index.html#curriculum" onclick="toggleMobileMenu()"
+            <!-- Accommodations -->
+            <a href="stays.html" onclick="toggleMobileMenu()"
                 class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all group">
                 <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-800 group-hover:bg-white group-hover:text-sky-500 group-hover:shadow-md transition-all flex items-center justify-center shrink-0">
-                    <span class="material-symbols-rounded text-xl">school</span>
+                    <span class="material-symbols-rounded text-xl">bed</span>
                 </div>
-                <span class="text-sm font-bold text-slate-800">Curriculum</span>
+                <span class="text-sm font-bold text-slate-800">Accommodations</span>
             </a>
 
             <!-- Gallery -->

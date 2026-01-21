@@ -897,52 +897,30 @@
                         <!-- Vehicle Selection -->
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Sedan -->
+                            <!-- Round Trip -->
                             <div class="bg-white p-4 rounded-xl border border-slate-200 transition shadow-sm hover:shadow-md flex flex-col justify-between h-full"
-                                :class="transfers.sedan > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
+                                :class="transfers.roundTrip > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
                                 <div class="mb-3">
-                                    <div class="font-bold text-slate-900 text-sm mb-1">Airport Pickup (Sedan)</div>
-                                    <p class="text-[11px] text-slate-500 leading-tight">Private sedan for up to 3
-                                        passengers.</p>
+                                    <div class="font-bold text-slate-900 text-sm mb-1">Round Trip Transfer</div>
+                                    <p class="text-[11px] text-slate-500 leading-tight">Comfortable private transport
+                                        for arrival and departure.</p>
                                 </div>
                                 <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
                                     <div
                                         class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue">
-                                        ₹3,200<span class="text-sky-300 font-normal ml-1">/trip</span></div>
+                                        ₹6,000<span class="text-sky-300 font-normal ml-1">/trip</span></div>
                                     <div class="flex items-center gap-2">
                                         <button type="button"
-                                            @click="transfers.sedan = Math.max(0, transfers.sedan - 1)"
+                                            @click="transfers.roundTrip = Math.max(0, transfers.roundTrip - 1)"
                                             class="w-7 h-7 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-bold flex items-center justify-center">−</button>
                                         <span class="w-5 text-center font-bold text-slate-900 text-sm"
-                                            x-text="transfers.sedan"></span>
-                                        <button type="button" @click="transfers.sedan++"
+                                            x-text="transfers.roundTrip"></span>
+                                        <button type="button" @click="transfers.roundTrip++"
                                             class="w-7 h-7 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 font-bold flex items-center justify-center">+</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- SUV -->
-                            <div class="bg-white p-4 rounded-xl border border-slate-200 transition shadow-sm hover:shadow-md flex flex-col justify-between h-full"
-                                :class="transfers.suv > 0 ? 'border-alpine-blue ring-1 ring-alpine-blue' : ''">
-                                <div class="mb-3">
-                                    <div class="font-bold text-slate-900 text-sm mb-1">Airport Pickup (SUV)</div>
-                                    <p class="text-[11px] text-slate-500 leading-tight">Spacious 4x4 for up to 6
-                                        passengers or extra gear.</p>
-                                </div>
-                                <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
-                                    <div
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-sky-50 border-sky-100 text-alpine-blue">
-                                        ₹5,300<span class="text-sky-300 font-normal ml-1">/trip</span></div>
-                                    <div class="flex items-center gap-2">
-                                        <button type="button" @click="transfers.suv = Math.max(0, transfers.suv - 1)"
-                                            class="w-7 h-7 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-bold flex items-center justify-center">−</button>
-                                        <span class="w-5 text-center font-bold text-slate-900 text-sm"
-                                            x-text="transfers.suv"></span>
-                                        <button type="button" @click="transfers.suv++"
-                                            class="w-7 h-7 bg-alpine-blue text-white rounded-lg hover:bg-sky-600 font-bold flex items-center justify-center">+</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -1001,13 +979,14 @@
                                     :class="addons.gondolaPhase2 > 0 ? 'border-emerald-400 ring-1 ring-emerald-400' : ''">
                                     <div class="mb-3">
                                         <div class="font-bold text-slate-900 text-sm mb-1">Phase 2</div>
-                                        <p class="text-[11px] text-slate-500 leading-tight">To Apharwat Peak (Summit).
+                                        <p class="text-[11px] text-slate-500 leading-tight">Base To Apharwat Peak
+                                            (Summit).
                                         </p>
                                     </div>
                                     <div class="flex justify-between items-end border-t border-slate-50 pt-3 mt-auto">
                                         <div
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-lg border text-xs font-bold bg-emerald-50 border-emerald-100 text-emerald-700">
-                                            ₹1,100<span class="text-emerald-400 font-normal ml-1">/tkt</span></div>
+                                            ₹2,000<span class="text-emerald-400 font-normal ml-1">/tkt</span></div>
                                         <div class="flex items-center gap-2">
                                             <button type="button"
                                                 @click="addons.gondolaPhase2 = Math.max(0, addons.gondolaPhase2 - 1)"
@@ -1248,14 +1227,17 @@
                         </div>
 
                         <div class="mb-5 pb-3 border-b border-gray-700 relative z-10">
-                            <h2 class="text-lg font-bold text-white font-sans mb-1">Trip Summary</h2>
-                            <p class="text-gray-400 text-xs mb-4"><span x-text="people"></span> People &bull; <span
-                                    x-text="days + ' Days ' + Math.max(0, days - 1) + ' Nights'"></span></p>
-                            <div class="grid grid-cols-5 items-center">
-                                <div class="col-span-2 text-gray-500 uppercase tracking-widest text-[10px]">Grand Total
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h2 class="text-lg font-bold text-white font-sans mb-1">Trip Summary</h2>
+                                    <p class="text-gray-400 text-xs mb-4"><span x-text="people"></span> People &bull;
+                                        <span x-text="days + ' Days ' + Math.max(0, days - 1) + ' Nights'"></span>
+                                    </p>
                                 </div>
-                                <div class="col-span-3 text-right text-2xl font-bold text-green-400 leading-none">
-                                    <span id="summary-total" x-text="formatMoney(calculateTotal())"></span>
+                                <div class="text-right bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-600">
+                                    <div class="text-green-400 font-bold text-xl leading-none"
+                                        x-text="formatMoney(calculateTotal())"></div>
+                                    <div class="text-[10px] text-slate-400 mt-1">Total Est.</div>
                                 </div>
                             </div>
                         </div>
@@ -1344,14 +1326,25 @@
                             </div>
                         </div>
 
+                        <!-- Transfers Summary -->
+                        <div class="mb-4 relative z-10" x-show="calculateTransfersCost() > 0">
+                            <div class="text-xs uppercase text-sky-400 font-bold tracking-wider mb-2">Transfers</div>
+                            <div class="flex justify-between text-gray-300 text-sm">
+                                <span><span x-text="transfers.roundTrip"></span>x Round Trip Transfer</span>
+                                <span class="font-bold text-sky-200"
+                                    x-text="formatMoney(calculateTransfersCost())"></span>
+                            </div>
+                        </div>
+
                         <!-- Addons Summary -->
                         <div class="mb-4 relative z-10" x-show="calculateAddonsCost() > 0">
                             <div class="text-xs uppercase text-amber-400 font-bold tracking-wider mb-2">Addons &
                                 Activities</div>
                             <div class="space-y-1 text-gray-300 text-sm">
-                                <div class="flex justify-between"><span><span x-text="addons.gondola"></span>x
-                                        Gondola Ph1</span><span
-                                        x-text="formatMoney(addonPrices.gondola * addons.gondola)"></span></div>
+                                <template x-if="addons.gondola > 0">
+                                    <div class="flex justify-between"><span><span x-text="addons.gondola"></span>x
+                                            Gondola Ph1</span><span
+                                            x-text="formatMoney(addonPrices.gondola * addons.gondola)"></span></div>
                                 </template>
                                 <template x-if="addons.gondolaPhase2 > 0">
                                     <div class="flex justify-between"><span><span x-text="addons.gondolaPhase2"></span>x
@@ -1392,12 +1385,7 @@
                                             x-text="formatMoney(addonPrices.heliSunshine * addons.heliSunshine)"></span>
                                     </div>
                                 </template>
-                                <template x-if="addons.airportPickup > 0">
-                                    <div class="flex justify-between"><span><span x-text="addons.airportPickup"></span>x
-                                            Airport Pickup</span><span
-                                            x-text="formatMoney(addonPrices.airportPickup * addons.airportPickup)"></span>
-                                    </div>
-                                </template>
+
                             </div>
                             <div
                                 class="mt-2 pt-2 border-t border-gray-700 border-dashed flex justify-between text-amber-200">
@@ -1406,28 +1394,7 @@
                             </div>
                         </div>
 
-                        <div
-                            class="bg-gray-800 p-3 rounded-lg text-center border border-gray-600 relative z-10 mb-3 mt-3">
-                            <span class="block text-gray-400 text-[10px] uppercase tracking-widest mb-1">Total Estimated
-                                Cost</span>
-                            <span class="block text-2xl font-bold text-white mb-1" id="summary-total"
-                                x-text="formatMoney(calculateTotal())"></span>
-                            <div class="inline-block px-2 py-0.5 bg-gray-700 rounded text-xs text-gray-300">
-                                <span x-text="formatMoney(Math.round(calculateTotal() / people))"></span> per person
-                            </div>
-                        </div>
 
-                        <!-- View Complete Summary Button -->
-                        <div class="relative z-10 mb-3">
-                            <button @click="showModal = true" type="button"
-                                class="w-full py-2 text-xs font-bold uppercase tracking-wider text-alpine-blue bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors flex items-center justify-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
                     </div>
 
 
@@ -1465,351 +1432,6 @@
         </div>
     </div>
 
-    <!-- Detailed Receipt Modal -->
-    <div x-show="showModal" style="display: none;" x-cloak
-        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
-        x-transition.opacity>
-        <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
-            @click.away="showModal = false">
-
-            <!-- Header -->
-            <div class="bg-slate-50 border-b border-slate-100 p-6 flex justify-between items-center">
-                <div>
-                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Trip Receipt</h2>
-                    <p class="text-slate-500 text-sm">Detailed cost breakdown for your selection.</p>
-                </div>
-                <button @click="showModal = false" class="text-slate-400 hover:text-slate-600 transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Content -->
-            <div class="overflow-y-auto p-8 flex-1">
-
-                <!-- Tabular Layout -->
-                <div class="border rounded-lg overflow-hidden border-slate-200">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr
-                                class="bg-slate-50 border-b border-slate-200 text-xs uppercase text-slate-500 font-bold tracking-wider">
-                                <th class="p-4">Item</th>
-                                <th class="p-4 text-right bg-indigo-50/50 text-indigo-900 border-l border-indigo-100">
-                                    Daily Split Cost<br><span
-                                        class="text-[10px] font-normal text-slate-400 normal-case">(Per Person)</span>
-                                </th>
-                                <th class="p-4 text-right bg-indigo-50/50 text-indigo-900 border-l border-indigo-100">
-                                    <span x-text="Math.max(0, days - 1)"></span>-Night Split Cost<br><span
-                                        class="text-[10px] font-normal text-slate-400 normal-case">(Per Person)</span>
-                                </th>
-                                <th
-                                    class="p-4 text-right bg-emerald-50/50 text-emerald-900 border-l border-emerald-100">
-                                    Daily Group Price<br><span
-                                        class="text-[10px] font-normal text-slate-400 normal-case">(For <span
-                                            x-text="people"></span> People)</span></th>
-                                <th
-                                    class="p-4 text-right bg-emerald-50/50 text-emerald-900 border-l border-emerald-100">
-                                    Total Group Price<br><span
-                                        class="text-[10px] font-normal text-slate-400 normal-case">(For <span
-                                            x-text="Math.max(0, days - 1)"></span> Nights)</span></th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm divide-y divide-slate-100">
-
-                            <template x-if="tripType !== 'ski_only'">
-                        <tbody class="contents">
-                            <!-- 5-Star Handling -->
-                            <template x-if="selectedTier === '5star'">
-                                <tr>
-                                    <td class="p-4" colspan="5">
-                                        <div class="text-center py-8">
-                                            <p class="text-lg font-bold text-slate-800 mb-1">Luxury Package On Request
-                                            </p>
-                                            <p class="text-slate-500 italic">We will provide a custom quote for <span
-                                                    x-text="accommodationData['5star'].hotels[0]"></span>.</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </template>
-
-                            <!-- Dorm Row (Flattened) -->
-                            <template x-if="selectedTier === 'dorm'">
-                                <tr class="hover:bg-slate-50/50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-bold text-slate-800">Dormitory</div>
-                                        <div class="text-xs text-slate-500">Shared Bed x <span x-text="people"></span>
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(accommodationData.dorm.pricePerPax)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span
-                                            x-text="formatMoney(accommodationData.dorm.pricePerPax * Math.max(0, days - 1))"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(accommodationData.dorm.pricePerPax * people)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span
-                                            x-text="formatMoney(accommodationData.dorm.pricePerPax * people * Math.max(0, days - 1))"></span>
-                                    </td>
-                                </tr>
-                            </template>
-
-                            <!-- Non-Dorm Standard Rooms (Flattened) -->
-                            <template x-if="selectedTier !== '5star' && selectedTier !== 'dorm'">
-                                <!-- Virtual Loop Container -->
-                        <tbody class="contents">
-
-                            <!-- Triple Rooms -->
-                            <template x-if="rooms.triple > 0">
-                                <tr class="hover:bg-slate-50/50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-bold text-slate-800">Triple Room Package</div>
-                                        <div class="text-xs text-slate-500"><span
-                                                x-text="accommodationData[selectedTier].name"></span> Tier &bull;
-                                            <span x-text="rooms.triple"></span> Room(s)
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(getRoomPrice(3)/3)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney((getRoomPrice(3)/3) * Math.max(0, days - 1))"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(getRoomPrice(3) * rooms.triple)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span
-                                            x-text="formatMoney(getRoomPrice(3) * rooms.triple * Math.max(0, days - 1))"></span>
-                                    </td>
-                                </tr>
-                            </template>
-
-                            <!-- Double Rooms -->
-                            <template x-if="rooms.double > 0">
-                                <tr class="hover:bg-slate-50/50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-bold text-slate-800">Double Room Package</div>
-                                        <div class="text-xs text-slate-500"><span
-                                                x-text="accommodationData[selectedTier].name"></span> Tier &bull;
-                                            <span x-text="rooms.double"></span> Room(s)
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(getRoomPrice(2)/2)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney((getRoomPrice(2)/2) * Math.max(0, days - 1))"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(getRoomPrice(2) * rooms.double)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span
-                                            x-text="formatMoney(getRoomPrice(2) * rooms.double * Math.max(0, days - 1))"></span>
-                                    </td>
-                                </tr>
-                            </template>
-
-                            <!-- Single Rooms -->
-                            <template x-if="rooms.single > 0">
-                                <tr class="hover:bg-slate-50/50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-bold text-slate-800">Single Room Package</div>
-                                        <div class="text-xs text-slate-500"><span
-                                                x-text="accommodationData[selectedTier].name"></span> Tier &bull;
-                                            <span x-text="rooms.single"></span> Room(s)
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(getRoomPrice(1))"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                        <span x-text="formatMoney(getRoomPrice(1) * Math.max(0, days - 1))"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span x-text="formatMoney(getRoomPrice(1) * rooms.single)"></span>
-                                    </td>
-                                    <td
-                                        class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                        <span
-                                            x-text="formatMoney(getRoomPrice(1) * rooms.single * Math.max(0, days - 1))"></span>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                        </template>
-                        </tbody>
-                        </template>
-
-                        <template x-if="selectedTier !== '5star'">
-                            <!-- Instructor Row -->
-                            <tr class="hover:bg-slate-50/50 transition-colors">
-                                <td class="p-4">
-                                    <div class="font-bold text-slate-800">Instructor & Gear</div>
-                                    <div class="text-xs text-slate-500"
-                                        x-text="instructorMode === 'shared' ? 'Shared Group' : 'Dedicated 1:1'">
-                                    </div>
-                                </td>
-                                <!-- C2: Rate PP/Day -->
-                                <td
-                                    class="p-4 text-right font-medium text-slate-600 bg-indigo-50/20 border-l border-indigo-50">
-                                    <span x-text="formatMoney(calculateInstructorCost() / people / days)"></span>
-                                </td>
-                                <!-- C3: Total PP/Trip -->
-                                <td
-                                    class="p-4 text-right font-bold text-indigo-700 bg-indigo-50/20 border-l border-indigo-50">
-                                    <span x-text="formatMoney(calculateInstructorCost() / people)"></span>
-                                </td>
-                                <!-- C4: Group/Day -->
-                                <td
-                                    class="p-4 text-right font-medium text-slate-600 bg-emerald-50/20 border-l border-emerald-50">
-                                    <span x-text="formatMoney(calculateInstructorCost() / days)"></span>
-                                </td>
-                                <!-- C5: Group Total -->
-                                <td
-                                    class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                    <span x-text="formatMoney(calculateInstructorCost())"></span>
-                                </td>
-                            </tr>
-                        </template>
-
-                        </tbody>
-
-                        <!-- Transfers -->
-                        <template x-if="!transfers.own && (transfers.sedan > 0 || transfers.suv > 0)">
-                            <tbody class="contents">
-                                <template x-if="transfers.sedan > 0">
-                                    <tr class="hover:bg-slate-50/50 transition-colors">
-                                        <td class="p-4">
-                                            <div class="font-bold text-slate-800">Airport Transfer (Sedan)</div>
-                                            <div class="text-xs text-slate-500"><span x-text="transfers.sedan"></span>
-                                                Vehicle(s) x <span x-text="formatMoney(transferPrices.sedan)"></span>
-                                            </div>
-                                        </td>
-                                        <td class="p-4 bg-slate-50/30 border-l border-slate-100" colspan="3"></td>
-                                        <td
-                                            class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                            <span x-text="formatMoney(transfers.sedan * transferPrices.sedan)"></span>
-                                        </td>
-                                    </tr>
-                                </template>
-                                <template x-if="transfers.suv > 0">
-                                    <tr class="hover:bg-slate-50/50 transition-colors">
-                                        <td class="p-4">
-                                            <div class="font-bold text-slate-800">Airport Transfer (SUV)</div>
-                                            <div class="text-xs text-slate-500"><span x-text="transfers.suv"></span>
-                                                Vehicle(s) x <span x-text="formatMoney(transferPrices.suv)"></span>
-                                            </div>
-                                        </td>
-                                        <td class="p-4 bg-slate-50/30 border-l border-slate-100" colspan="3"></td>
-                                        <td
-                                            class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                            <span x-text="formatMoney(transfers.suv * transferPrices.suv)"></span>
-                                        </td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </template>
-
-                        <!-- Add-ons -->
-                        <template x-if="calculateAddonsCost() > 0">
-                            <tbody class="contents">
-                                <template x-for="[key, count] in Object.entries(addons)" :key="key">
-                                    <template x-if="count > 0 && addonPrices[key]">
-                                        <tr class="hover:bg-slate-50/50 transition-colors">
-                                            <td class="p-4">
-                                                <div class="font-bold text-slate-800" x-text="addonDisplayNames[key]">
-                                                </div>
-                                                <div class="text-xs text-slate-500"><span x-text="count"></span>
-                                                    Ticket(s) x <span x-text="formatMoney(addonPrices[key])"></span>
-                                                </div>
-                                            </td>
-                                            <td class="p-4 bg-slate-50/30 border-l border-slate-100" colspan="3"></td>
-                                            <td
-                                                class="p-4 text-right font-bold text-emerald-700 bg-emerald-50/20 border-l border-emerald-50">
-                                                <span x-text="formatMoney(addonPrices[key] * count)"></span>
-                                            </td>
-                                        </tr>
-                                    </template>
-                                </template>
-                            </tbody>
-                        </template>
-
-                        <!-- Footer Totals -->
-                        <template x-if="selectedTier !== '5star'">
-                            <tfoot class="bg-slate-900 text-white">
-                                <tr>
-                                    <td
-                                        class="p-4 text-right font-bold uppercase tracking-wider text-xs text-slate-400">
-                                        Totals</td>
-                                    <!-- Empty/Merged -->
-                                    <td class="p-4 bg-slate-800/50 border-l border-slate-700"></td>
-
-                                    <!-- Total PP Trip -->
-                                    <td class="p-4 text-right font-bold text-indigo-300 border-l border-slate-700">
-                                        <div class="text-xs text-slate-500 font-normal mb-1">Per Person</div>
-                                        <span x-text="formatMoney(calculateTotal() / people)"></span>
-                                    </td>
-
-                                    <!-- Total Group Daily -->
-                                    <td class="p-4 text-right font-bold text-emerald-300 border-l border-slate-700">
-                                        <div class="text-xs text-slate-500 font-normal mb-1">Group Daily</div>
-                                        <span x-text="formatMoney(calculateTotal() / days)"></span>
-                                    </td>
-
-                                    <!-- Grand Total -->
-                                    <td
-                                        class="p-4 text-right font-black text-xl text-green-400 border-l border-slate-700 bg-slate-800">
-                                        <div class="text-[10px] text-slate-500 font-normal mb-1 uppercase">Grand Total
-                                        </div>
-                                        <span x-text="formatMoney(calculateTotal())"></span>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </template>
-                    </table>
-                </div>
-
-                <div class="mt-6 text-center text-xs text-slate-400">
-                    * All rates are inclusive of taxes. Instructor rates include equipment rental.
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="bg-slate-50 border-t border-slate-100 p-4 flex justify-end">
-                <button @click="showModal = false"
-                    class="bg-slate-900 text-white font-bold py-3 px-8 rounded-xl hover:bg-slate-800 transition-colors shadow-lg">
-                    Close Receipt
-                </button>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    </div>
-    </div>
-
     <div id="fab-placeholder"></div>
     <script src="pricing_data.js"></script>
     <script src="components.js?v=7"></script>
@@ -1841,8 +1463,7 @@
 
                 transfers: {
                     own: false,
-                    sedan: 0,
-                    suv: 0
+                    roundTrip: 0
                 },
 
                 addons: {
@@ -1938,7 +1559,7 @@
                     };
                 },
 
-                showModal: false,
+
 
                 autoDistributeRooms() {
                     let remainder = this.people;
@@ -2044,7 +1665,7 @@
 
                 calculateTransfersCost() {
                     if (this.transfers.own) return 0;
-                    return (this.transfers.sedan * this.transferPrices.sedan) + (this.transfers.suv * this.transferPrices.suv);
+                    return (this.transfers.roundTrip * this.transferPrices.roundTrip);
                 },
 
 
@@ -2199,7 +1820,7 @@
                     alpineData.days = 5;
                     alpineData.country = 'India';
                     alpineData.addons = { gondola: 0, gondolaPhase2: 0, snowmobile: 0, atv: 0, sledging: 0, heliJoint: 0, heliKongdoori: 0, heliSunshine: 0 };
-                    alpineData.transfers = { own: true, sedan: 0, suv: 0 };
+                    alpineData.transfers = { own: true, sedan: 0 };
 
                     // Show confirmation message
                     document.getElementById('confirmation-msg').classList.remove('hidden');

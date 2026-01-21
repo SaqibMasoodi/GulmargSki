@@ -22,7 +22,7 @@ const SKI_PRICING = {
     },
     addons: {
         gondola: 900,
-        gondolaPhase2: 1100,
+        gondolaPhase2: 2000,
         snowmobile: 2200,
         atv: 2200,
         sledging: 1500,
@@ -31,8 +31,7 @@ const SKI_PRICING = {
         heliSunshine: 15000
     },
     transfers: {
-        sedan: 3200,
-        suv: 5300
+        roundTrip: 6000
     }
 };
 
