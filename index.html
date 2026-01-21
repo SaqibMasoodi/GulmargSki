@@ -204,6 +204,10 @@
         .pause-on-hover:hover .animate-scroll-y {
             animation-play-state: paused;
         }
+
+        .circle-orbit {
+            border: 1px dashed rgba(14, 165, 233, 0.4);
+        }
     </style>
 
 </head>
@@ -520,122 +524,105 @@
         </div>
     </section>
 
-    <section id="safety" class="py-24 px-6 bg-sky-50/50 bg-noise relative overflow-hidden">
-        <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
-            <svg class="absolute bottom-0 left-0 w-full h-[50%] text-slate-200 opacity-40 transform scale-150 origin-bottom"
-                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
-                <path
-                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-            <svg class="absolute bottom-0 left-0 w-full h-[35%] text-slate-300 opacity-30" viewBox="0 0 1440 320"
-                preserveAspectRatio="none" fill="currentColor">
-                <path
-                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-        </div>
+    <section id="safety"
+        class="relative min-h-[600px] flex items-center overflow-hidden border-y border-slate-100 dark:border-slate-900 bg-white">
+        <div
+            class="container mx-auto px-6 py-12 flex flex-col lg:flex-row items-center justify-between gap-16 relative z-10">
+            <div class="w-full lg:w-5/12 relative flex justify-center items-center h-[400px]">
+                <div
+                    class="relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white dark:border-slate-800 shadow-2xl circle-orbit p-1">
+                    <img alt="Safety briefing on the slopes" class="w-full h-full object-cover rounded-full"
+                        src="images/Gallery/DSC03931.webp" />
+                </div>
+                <div
+                    class="absolute -top-4 -right-4 md:right-0 z-20 w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl circle-orbit p-0.5 transform rotate-12">
+                    <img alt="Avalanche transceiver" class="w-full h-full object-cover rounded-full"
+                        src="images/Gallery/DSC04002.webp" />
+                    <div
+                        class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                        Safety Gear
+                    </div>
+                </div>
 
-        <div class="w-[95%] max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-24">
-                <span class="text-alpine-blue font-bold tracking-widest uppercase text-xs mb-3 block">Non-Negotiable
-                    Standards</span>
-                <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">SAFETY PROTOCOLS</h2>
-                <div class="w-24 h-1.5 bg-slate-900 mx-auto rounded-full"></div>
+                <!-- Rotating Dashed Circles -->
+                <div id="safety-orbit-inner"
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full border-4 border-dashed border-sky-500/30 pointer-events-none transition-transform duration-75 ease-linear will-change-transform">
+                </div>
+                <div id="safety-orbit-outer"
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border-8 border-dashed border-sky-500/20 pointer-events-none transition-transform duration-75 ease-linear will-change-transform">
+                </div>
+
+                <script>
+                    document.addEventListener('scroll', () => {
+                        const innerOrbit = document.getElementById('safety-orbit-inner');
+                        const outerOrbit = document.getElementById('safety-orbit-outer');
+
+                        if (innerOrbit && outerOrbit) {
+                            const scrollY = window.scrollY;
+                            // Inner rotates slowly
+                            innerOrbit.style.transform = `translate(-50%, -50%) rotate(${scrollY * 0.1}deg)`;
+                            // Outer rotates faster
+                            outerOrbit.style.transform = `translate(-50%, -50%) rotate(${scrollY * -0.2}deg)`;
+                        }
+                    }, { passive: true });
+                </script>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-12">
-
-                <div
-                    class="group relative bg-slate-50 rounded-[2.5rem] p-8 pb-12 pt-0 border-2 border-slate-300 shadow-xl shadow-slate-200/40 hover:-translate-y-3 hover:bg-white hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-200 transition-all duration-300 ease-out">
-                    <div
-                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-red-50/50 transition-colors duration-500 leading-none select-none z-0 font-serif">
-                        A</div>
-                    <div
-                        class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-red-100 group-hover:shadow-red-200 transition-all duration-500">
-                        <div
-                            class="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-500">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                                </path>
-                            </svg>
+            <div class="w-full lg:w-7/12 flex flex-col">
+                <div class="mb-8">
+                    <h2 class="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] drop-shadow-sm">
+                        <span class="block text-slate-900 dark:text-white">Safety: Our</span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-600">First
+                            Priority</span>
+                    </h2>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="h-0.5 w-10 bg-sky-500"></div>
+                        <h3 class="font-display text-lg uppercase tracking-widest text-slate-800 dark:text-slate-200">
+                            The Wolf Pack Protocol</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 max-w-2xl">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-rounded text-sky-500 text-2xl">verified_user</span>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase tracking-wide">Certified National Pros</h4>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-1">Elite
+                                    instructors with international rescue certifications.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-rounded text-sky-500 text-2xl">ac_unit</span>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase tracking-wide">Avalanche Gear</h4>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-1">Beacons,
+                                    probes, and shovels provided for every session.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-rounded text-sky-500 text-2xl">settings_input_antenna</span>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase tracking-wide">24/7 Radio Support</h4>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-1">Direct
+                                    satellite links to base camp and emergency teams.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-rounded text-sky-500 text-2xl">medical_services</span>
+                            <div>
+                                <h4 class="font-bold text-sm uppercase tracking-wide">On-Site First Aid</h4>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-1">Immediate
+                                    medical support available on all terrains.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="relative z-10 text-center mt-8 px-4">
-                        <h3 class="font-black text-2xl text-slate-900 mb-4 group-hover:text-red-600 transition-colors">
-                            Avalanche Safety</h3>
-                        <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-red-500 transition-colors"></div>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed group-hover:text-slate-600">All
-                            instructors carry beacons, shovels,
-                            and probes. Daily snowpack analysis provided.</p>
+                    <div class="mt-10">
+                        <a href="policies.html#liability"
+                            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-sky-500 transition-colors">
+                            View Full Safety Report
+                            <span class="material-symbols-rounded text-sm">arrow_forward</span>
+                        </a>
                     </div>
                 </div>
-
-                <div
-                    class="group relative bg-slate-50 rounded-[2.5rem] p-8 pb-12 pt-0 border-2 border-slate-300 shadow-xl shadow-slate-200/40 hover:-translate-y-3 hover:bg-white hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-200 transition-all duration-300 ease-out">
-                    <div
-                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-sky-50/50 transition-colors duration-500 leading-none select-none z-0 font-serif">
-                        C</div>
-                    <div
-                        class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-sky-100 group-hover:shadow-sky-200 transition-all duration-500">
-                        <div
-                            class="w-16 h-16 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-500">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="relative z-10 text-center mt-8 px-4">
-                        <h3 class="font-black text-2xl text-slate-900 mb-4 group-hover:text-sky-600 transition-colors">
-                            Certified Instructors</h3>
-                        <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-sky-500 transition-colors"></div>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed group-hover:text-slate-600">Led by
-                            Shafqat (National-Level
-                            Skier) and Mubashir (Advanced Skier). We aren't just running a school; we're opening up our
-                            wild mountain playground.</p>
-                    </div>
-                </div>
-
-                <div
-                    class="group relative bg-slate-50 rounded-[2.5rem] p-8 pb-12 pt-0 border-2 border-slate-300 shadow-xl shadow-slate-200/40 hover:-translate-y-3 hover:bg-white hover:border-sky-500 hover:shadow-2xl hover:shadow-sky-200 transition-all duration-300 ease-out">
-                    <div
-                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-[180px] font-black text-slate-50 group-hover:text-emerald-50/50 transition-colors duration-500 leading-none select-none z-0 font-serif">
-                        S</div>
-                    <div
-                        class="relative z-10 w-24 h-24 mx-auto -mt-12 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-slate-50 group-hover:border-emerald-100 group-hover:shadow-emerald-200 transition-all duration-500">
-                        <div
-                            class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-500">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z">
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="relative z-10 text-center mt-8 px-4">
-                        <h3
-                            class="font-black text-2xl text-slate-900 mb-4 group-hover:text-emerald-600 transition-colors">
-                            24/7 Support</h3>
-                        <div class="w-12 h-1 bg-slate-100 mx-auto mb-6 group-hover:bg-emerald-500 transition-colors">
-                        </div>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed group-hover:text-slate-600">From
-                            airport pickup to emergency
-                            evacuation, we are with you every step.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-20">
-                <a href="policies.html#liability"
-                    class="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-alpine-blue transition-colors uppercase tracking-widest border-b border-transparent hover:border-alpine-blue pb-1">
-                    <span>Read our Participant Liability Waiver & Safety Protocols</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                </a>
             </div>
         </div>
     </section>
@@ -963,183 +950,149 @@
         </script>
     </section>
 
-    <section id="testimonials" class="py-24 px-6 bg-sky-50/80 bg-noise relative overflow-hidden">
-
-        <div
-            class="absolute top-0 left-0 w-full h-[150px] md:h-[200px] pointer-events-none select-none overflow-hidden z-0 transform rotate-180">
-            <svg class="absolute bottom-0 left-0 w-full h-full text-white transform scale-x-150 origin-bottom"
-                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
-                <path fill-opacity="1"
-                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
+    <section id="testimonials"
+        class="py-24 px-6 md:px-12 relative overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+        <!-- Background Paw Print -->
+        <div class="absolute top-0 right-0 p-12 opacity-[0.03] pointer-events-none hidden lg:block select-none">
+            <span class="material-symbols-rounded text-[450px]">pets</span>
         </div>
 
-        <div
-            class="absolute bottom-0 left-0 w-full h-[150px] md:h-[200px] pointer-events-none select-none overflow-hidden z-0">
-            <svg class="absolute bottom-0 left-0 w-full h-full text-white transform scale-x-150 origin-bottom"
-                viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
-                <path fill-opacity="1"
-                    d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-        </div>
+        <div class="max-w-7xl mx-auto relative z-10 w-full">
+            <div class="mb-16 text-center lg:text-left">
+                <h2
+                    class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4 text-slate-900 dark:text-white">
+                    What the <span class="text-sky-500">Pack</span> Says
+                </h2>
+                <div class="w-24 h-1.5 bg-sky-500 mx-auto lg:mx-0 mb-6 rounded-full"></div>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-lg leading-relaxed mx-auto lg:mx-0">
+                    Join hundreds of thrill-seekers who have carved through the legendary deep powder of Gulmarg. Real
+                    stories from real legends.
+                </p>
+            </div>
 
-        <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-dot-pattern z-0"></div>
-
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 h-auto lg:h-[600px]">
-
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-20">
+                <!-- Testimonial 1 -->
                 <div
-                    class="lg:col-span-3 relative rounded-[2.5rem] overflow-hidden group shadow-2xl h-[500px] lg:h-auto">
-                    <img src="images/home/testimonials/content.webp"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        alt="Rider in Powder">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent">
-                    </div>
-
-                    <div class="absolute inset-0 flex flex-col justify-end p-10 md:p-12">
-                        <div class="mb-6 text-amber-400 flex gap-1">
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
+                    class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-2 border border-sky-500/20 relative">
+                    <div class="absolute -top-7 left-8">
+                        <div
+                            class="w-16 h-16 rounded-full overflow-hidden border-2 border-dashed border-sky-500 p-1 bg-white dark:bg-slate-800">
+                            <img alt="User avatar" class="w-full h-full object-cover rounded-full"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKtRBnkNjWgG3h3TpfIwEePvFMA_kzNiEMXMtFCoR1A5JRsJZ03LT5jUdLUTIf0VMpmujuo4u19BhdBh4gGTKbyBnoTrSWPlRHLwc7eA-JL7xP1X7D1hcaJe_YdFu-H-BwkZoKtdiFj91ktuOfYktP-fzQCjjkBch2ZIN3y7J0RCac44x8OoF8hU1FzM8KYkVI-oVit4l-COa5L4Sdrrr_mmbKrIEFLxz-CbGIUj1TBf8yvH2O0E1lx9u5noveW6k0etzhyPeT2-jl" />
                         </div>
-                        <h3 class="text-3xl md:text-4xl font-serif font-medium text-white mb-8 leading-snug italic">
-                            "The instructors knew exactly where to find fresh tracks even three days after the storm.
-                            Unforgettable experience."
-                        </h3>
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-full bg-slate-200 border-2 border-white/50"></div>
-                            <div>
-                                <p class="text-white font-bold text-lg">Rohan</p>
-                                <p class="text-xs uppercase text-slate-300 font-bold tracking-widest">Mumbai, India</p>
-                            </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="flex items-center mb-4 space-x-0.5 text-amber-400">
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                        </div>
+                        <span
+                            class="material-symbols-rounded text-sky-500/30 text-5xl block mb-2 absolute top-8 right-8">format_quote</span>
+                        <p class="text-slate-700 dark:text-slate-300 italic mb-8 leading-relaxed">
+                            "The legendary deep powder of Gulmarg is no joke! The guides turned me from a complete
+                            rookie
+                            into someone who could actually hold their own on the peaks."
+                        </p>
+                        <div class="border-t border-slate-100 dark:border-slate-700 pt-5">
+                            <p class="font-bold text-lg text-slate-900 dark:text-white uppercase tracking-wide">Jameson
+                                Reed
+                            </p>
+                            <p class="text-sky-500 text-sm font-bold tracking-tight">Intermediate Shredder</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-2 flex flex-col h-full">
-                    <div class="mb-6 flex justify-between items-end px-2">
-                        <div>
-                            <span
-                                class="text-alpine-blue font-bold tracking-widest uppercase text-xs block mb-1">Community</span>
-                            <h3 class="text-2xl font-black text-slate-900">Recent Stories</h3>
-                        </div>
-                        <div class="flex gap-2">
-                            <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-alpine-blue"></div>
+                <!-- Testimonial 2 -->
+                <div
+                    class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-2 border border-sky-500/20 relative">
+                    <div class="absolute -top-7 left-8">
+                        <div
+                            class="w-16 h-16 rounded-full overflow-hidden border-2 border-dashed border-sky-500 p-1 bg-white dark:bg-slate-800">
+                            <img alt="User avatar" class="w-full h-full object-cover rounded-full"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuANF54dxcOYGJ08p-1ZLqLiCLQUHQzLcnRhTrvlhNcaThdH4Vrwu5TB5Y35E84ojahFHsci3kbr3ZfrRQwTfFNEd4q9sWgxbyc0aGD1o2wFznqNZSH2sNOET7_JB-UU-Khb7TvzfYPjB72Flj_YN1nd2BCAY2uazpSL4lGH_Q3Mrtin1TMDzVWTj9sqxjzz91XQNxFJZahIjcUmUSWhfKWJDtnnLm4cnWOztqIlPd_KAN-WSg1VAO8ezdkJWUNkQcTrUCza72LpAafu" />
                         </div>
                     </div>
-
-                    <div class="flex-1 overflow-y-auto p-4 space-y-6 no-scrollbar">
-
-                        <div
-                            class="group bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-sm hover:-translate-y-2 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 group-hover:border-sky-200 transition-colors">
-                                </div>
-                                <div>
-                                    <p
-                                        class="text-slate-900 font-bold text-sm group-hover:text-sky-600 transition-colors">
-                                        Alex</p>
-                                    <p
-                                        class="text-[10px] text-slate-400 font-bold uppercase tracking-wide group-hover:text-sky-400 transition-colors">
-                                        Melbourne,
-                                        Australia</p>
-                                </div>
-                            </div>
-                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                                "The logistics were flawless from Srinagar airport pickup to the drop-off. I didn't have
-                                to worry about a thing."
-                            </p>
-                            <div class="flex text-amber-400 gap-0.5">
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
+                    <div class="mt-8">
+                        <div class="flex items-center mb-4 space-x-0.5 text-amber-400">
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
                         </div>
-
-                        <div
-                            class="group bg-white p-6 rounded-2xl border-2 border-slate-100 shadow-sm hover:-translate-y-2 hover:border-sky-500 hover:shadow-xl hover:shadow-sky-200 transition-all duration-300">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 group-hover:border-sky-200 transition-colors">
-                                </div>
-                                <div>
-                                    <p
-                                        class="text-slate-900 font-bold text-sm group-hover:text-sky-600 transition-colors">
-                                        Sarah K.</p>
-                                    <p
-                                        class="text-xs text-slate-400 font-bold uppercase tracking-wide group-hover:text-sky-400 transition-colors">
-                                        London, UK</p>
-                                </div>
-                            </div>
-                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                                "The instructors knew exactly where to find fresh tracks. Unforgettable experience."
+                        <span
+                            class="material-symbols-rounded text-sky-500/30 text-5xl block mb-2 absolute top-8 right-8">format_quote</span>
+                        <p class="text-slate-700 dark:text-slate-300 italic mb-8 leading-relaxed">
+                            "Wolf Adventures isn't just a school; it's a brotherhood. Joining the pack was the best
+                            decision
+                            of my year. The 6-day shred session was intense and epic!"
+                        </p>
+                        <div class="border-t border-slate-100 dark:border-slate-700 pt-5">
+                            <p class="font-bold text-lg text-slate-900 dark:text-white uppercase tracking-wide">Sarah
+                                Chen
                             </p>
-                            <div class="flex text-amber-400 gap-0.5">
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
+                            <p class="text-sky-500 text-sm font-bold tracking-tight">Backcountry Explorer</p>
                         </div>
-
                     </div>
                 </div>
 
+                <!-- Testimonial 3 -->
+                <div
+                    class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-2 border border-sky-500/20 relative">
+                    <div class="absolute -top-7 left-8">
+                        <div
+                            class="w-16 h-16 rounded-full overflow-hidden border-2 border-dashed border-sky-500 p-1 bg-white dark:bg-slate-800">
+                            <img alt="User avatar" class="w-full h-full object-cover rounded-full"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqedj_TTT-47GDprp_FrFZE1aVq2DEqkOZMrTb3jqVol33aK11yiBprIMzePsrQPRpulPJNs-Rd4dZ4ufVa33tZ-Ru1jdy042l_2E_SYrMjgWoxFW88Xr_fCUvza8M0jegCMTUjkTMy2DhyvhEEMuK0zZ7bzzgSZHMQGrO0Llzi14g3eAQGZH3tnao1EKKTrla2yrm8zCALBtntqHnsBXLOBgiWOJ6VKlPXMfselbb3JZAbfPIMGiFy2wOcL1CXhtvPc-nmrAePc3Y" />
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="flex items-center mb-4 space-x-0.5 text-amber-400">
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl">star</span>
+                            <span class="material-symbols-rounded text-xl"
+                                style="font-variation-settings: 'FILL' 0">star</span>
+                        </div>
+                        <span
+                            class="material-symbols-rounded text-sky-500/30 text-5xl block mb-2 absolute top-8 right-8">format_quote</span>
+                        <p class="text-slate-700 dark:text-slate-300 italic mb-8 leading-relaxed">
+                            "The big mountains were calling and Wolf Adventures delivered. The pros know every inch of
+                            those
+                            slopes. I'm officially hooked on the adrenaline."
+                        </p>
+                        <div class="border-t border-slate-100 dark:border-slate-700 pt-5">
+                            <p class="font-bold text-lg text-slate-900 dark:text-white uppercase tracking-wide">Marcus
+                                Vane
+                            </p>
+                            <p class="text-sky-500 text-sm font-bold tracking-tight">National Rookie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-20 flex flex-col md:flex-row items-center justify-between bg-slate-900 dark:bg-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="text-white dark:text-slate-900 mb-8 md:mb-0 relative z-10">
+                    <h3 class="font-black text-3xl uppercase mb-2">Ready to join the pack?</h3>
+                    <p class="font-medium text-slate-300 dark:text-slate-600">Book your 6-day shred session today.</p>
+                </div>
+                <a href="booking.html"
+                    class="bg-sky-500 text-white dark:bg-sky-500 dark:text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:brightness-110 transition-all flex items-center shadow-lg shadow-sky-500/20 relative z-10">
+                    Start Your Journey
+                    <span class="material-symbols-rounded ml-2">trending_flat</span>
+                </a>
+                <!-- Decorative blurred circles for call to action -->
+                <div
+                    class="absolute -bottom-10 -right-10 w-40 h-40 bg-sky-500/20 rounded-full blur-3xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute -top-10 -left-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none">
+                </div>
             </div>
         </div>
     </section>
