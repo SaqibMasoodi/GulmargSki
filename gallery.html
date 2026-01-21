@@ -4,15 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0MP5DQ01T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-X0MP5DQ01T');
+    </script>
     <title>Visual Journey | Wolf Adventures Kashmir</title>
     <meta name="description"
-        content="Frozen moments from Gulmarg. A curated collection of peaks, powder, and pure adrenaline from the slopes.">
+        content="Explore a visual journey of frozen moments from Gulmarg. A curated collection of majestic peaks, deep powder, and pure adrenaline captured from the slopes of Wolf Adventures Kashmir.">
     <link rel="icon" type="image/png" href="images/wolf.png">
+    <link rel="canonical" href="https://www.wolfadventureskashmir.com/gallery.html">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Visual Journey | Wolf Adventures Kashmir">
     <meta property="og:description"
-        content="Frozen moments from Gulmarg. A curated collection of peaks, powder, and pure adrenaline.">
+        content="Explore a visual journey of frozen moments from Gulmarg. A curated collection of majestic peaks, deep powder, and pure adrenaline captured from the slopes of Wolf Adventures Kashmir.">
     <meta property="og:image" content="https://www.wolfadventureskashmir.com/images/logo.webp">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.wolfadventureskashmir.com/gallery.html">
@@ -227,7 +238,7 @@
 
         <!-- YouTube Channel CTA -->
         <div class="max-w-4xl mx-auto mb-16 px-4">
-            <a href="https://www.youtube.com/@mubashirkashmirii/featured" target="_blank"
+            <a href="https://www.youtube.com/@mubashirkashmirii/featured" target="_blank" rel="noopener noreferrer"
                 class="group relative block w-full overflow-hidden rounded-3xl bg-red-600 shadow-xl transition-transform hover:scale-[1.02]">
                 <div class="absolute inset-0 bg-gradient-to-r from-red-700 to-red-500 opacity-90"></div>
                 <!-- Decorative Circles -->
@@ -318,7 +329,7 @@
                 </div>
             </template>
             <template x-if="!filteredItems[currentIndex]?.type || filteredItems[currentIndex]?.type === 'image'">
-                <img :src="filteredItems[currentIndex]?.src"
+                <img :src="filteredItems[currentIndex]?.src" :alt="filteredItems[currentIndex]?.title"
                     class="max-w-full max-h-[80vh] object-contain rounded shadow-2xl animate-fade-up"
                     :key="currentIndex">
             </template>

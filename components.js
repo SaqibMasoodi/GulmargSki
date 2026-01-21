@@ -111,8 +111,8 @@ const FOOTER_HTML = `
         <div class="w-[95%] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
 
             <div class="col-span-1 md:col-span-2 pr-8">
-                <h2 class="text-3xl font-black tracking-tighter mb-6">WOLF<span class="text-alpine-blue">.ADV</span>
-                </h2>
+                <div class="text-3xl font-black tracking-tighter mb-6">WOLF<span class="text-alpine-blue">.ADV</span>
+                </div>
                 <p class="max-w-sm text-slate-400 mb-8 leading-relaxed text-sm">
                     Experience the raw beauty of the Himalayas with certified instructors, premium logistics, and local
                     expertise.
