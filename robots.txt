@@ -1,0 +1,24 @@
+# Wolf Adventures Kashmir - Robots.txt
+# https://www.wolfadventureskashmir.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.wolfadventureskashmir.com/sitemap.xml
+
+# Crawl Delay (optional, helps prevent server overload)
+Crawl-delay: 1
+
+# Disallow common directories (add more as needed)
+Disallow: /cgi-bin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Allow all images
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Allow all videos
+User-agent: Googlebot-Video
+Allow: /images/Gallery/
