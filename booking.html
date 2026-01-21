@@ -1235,7 +1235,7 @@
                                     </p>
                                 </div>
                                 <div class="text-right bg-slate-800/80 px-3 py-2 rounded-lg border border-slate-600">
-                                    <div class="text-green-400 font-bold text-xl leading-none"
+                                    <div id="summary-total" class="text-green-400 font-bold text-xl leading-none"
                                         x-text="formatMoney(calculateTotal())"></div>
                                     <div class="text-[10px] text-slate-400 mt-1">Total Est.</div>
                                 </div>
@@ -1433,9 +1433,9 @@
     </div>
 
     <div id="fab-placeholder"></div>
-    <script src="pricing_data.js"></script>
-    <script src="components.js?v=7"></script>
-    <script src="script.js?v=2"></script>
+    <script src="pricing_data.js?v=8"></script>
+    <script src="components.js?v=8"></script>
+    <script src="script.js?v=8"></script>
     <script>
         function skiCalculator() {
             return {
@@ -1665,7 +1665,8 @@
 
                 calculateTransfersCost() {
                     if (this.transfers.own) return 0;
-                    return (this.transfers.roundTrip * this.transferPrices.roundTrip);
+                    const price = this.transferPrices.roundTrip || 0;
+                    return (this.transfers.roundTrip * price);
                 },
 
 
