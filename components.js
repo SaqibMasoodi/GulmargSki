@@ -178,7 +178,7 @@ const FOOTER_HTML = `
 
         <div
             class="w-[95%] max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-medium">
-            <p>© 2025 Wolf Adventure Gulmarg. <span class="mx-2 opacity-50">|</span> Developed by <a href="https://linktr.ee/Devlynx_" target="_blank" class="hover:text-white transition-colors font-bold">DevLynx_</a></p>
+            <p>© 2025 Wolf Adventure Gulmarg. <span class="mx-2 opacity-50">|</span> <span class="text-slate-400">Developed by</span> <a href="https://linktr.ee/webrion" target="_blank" class="text-sky-400 hover:text-sky-300 font-black tracking-wide uppercase transition-all hover:tracking-widest relative">WEBRION</a></p>
             <div class="flex gap-6 mt-4 md:mt-0">
                 <a href="policies.html#privacy" class="hover:text-white transition-colors">Privacy Policy</a>
                 <a href="policies.html#refunds" class="hover:text-white transition-colors">Cancellation Policy</a>
