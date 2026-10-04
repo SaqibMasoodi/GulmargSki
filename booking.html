@@ -1804,7 +1804,7 @@
                     let details = `${payload.tripType}`;
                     if (payload.tripType === 'stay_ski') details += ` @ ${payload.selectedHotel}`;
 
-                    const message = `*New Booking Request*\n\nName: ${payload.name}\nDates: ${payload.date} (${payload.days} Days)\nPax: ${payload.people}\nDetails: ${details}\nTotal: ${payload.totalCost}\n\nPlease confirm availability.`;
+                    const message = `*New Booking Request from https://www.wolfadventureskashmir.com/*\n\nName: ${payload.name}\nDates: ${payload.date} (${payload.days} Days)\nPax: ${payload.people}\nDetails: ${details}\nTotal: ${payload.totalCost}\n\nPlease confirm availability.`;
 
                     const waNumber = "916005806856";
                     const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;

@@ -696,7 +696,7 @@ function submitBooking(e) {
     const dateVal = formData.get('date'); // YYYY-MM-DD
 
     // --- WHATSAPP MESSAGE ---
-    let msg = `*New Booking Request from Skigulmarg.com*\n\n`;
+    let msg = `*New Booking Request from https://www.wolfadventureskashmir.com/*\n\n`;
 
     msg += `*Customer*\n`;
     msg += `Name: ${formData.get('name')}\n`;
